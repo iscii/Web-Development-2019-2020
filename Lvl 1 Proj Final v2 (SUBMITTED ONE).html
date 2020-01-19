@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+		<title></title>
+		
+		<style></style>
+		
+		<script>
+		
+			//variables with no initial value
+			var resetTimer;
+			var eventTimer;
+			var entryStr;
+			
+			var eventUp = false;
+			var score = 0;
+			
+			function start()
+			{
+				//element ids
+				c1Output = document.getElementById("c1");
+				c2Output = document.getElementById("c2");
+				c3Output = document.getElementById("c3");
+				resetOutput = document.getElementById("confirmReset");
+				confirmResetOutput = document.getElementById("confirmResetY");
+				cancelResetOutput = document.getElementById("confirmResetN");
+				turnsOutput = document.getElementById("turns");
+				logOutput = document.getElementById("entryLog");
+				vaultOutput = document.getElementById("vaultUnlocked");
+				hintOutput = document.getElementById("hintText");
+				eventOutput = document.getElementById("randomEvent");
+				scoreOutput = document.getElementById("score");
+				
+				//turns
+				turnNum = 7;
+				attemptsDisplay = false;
+				loss = false;
+				won = false;
+				
+				//check for entries
+				c1check = false;
+				c2check = false;
+				c3check = false;
+				
+				//variable for each digit entered
+				c1EnteredDigit = 0;
+				c2EnteredDigit = 0;
+				c3EnteredDigit = 0;
+				
+				//boolean to prevent multiple entries
+				c1Turn = true;
+				c2Turn = true;
+				c3Turn = true;
+
+				//text variables
+				v1Text = "Vault 1 : &nbsp ";
+				v2Text = "Vault 2 : &nbsp ";
+				v3Text = "Vault 3 : &nbsp ";
+				//random events
+				trafficJam = "Traffic jam! The police will be held up by a turn"
+				inTheArea = "In the area. The police will show up a turn sooner"
+				carFires = "Some cars have caught fire three blocks down. The police will show up two turns later"
+				eyeWitness = "A passerby sees and reports your location. The police will show up two turns sooner"
+				carAccident = "It appears a cop was drunk driving and has rammed their car into a building. They will show up three turns later"
+				lightningEvent = "Zeus Almighty! The police have been struck by lightning and will show up four turns later"
+				meteoriteEvent = "Aliens? The police have been hit by an undetected meteorite! They will show up five turns later"
+				lotteryWinner = "What? You've won the lottery! This makes no sense, but the police will show up six turns later"
+				
+				generateCode();
+				displayDefaults();
+			}
+		
+			function generateCode()
+			{
+				//arrays?
+				cDigit1 = (((Math.random() * 10) % 3) + 1);
+				cDigit1 = parseInt(cDigit1);
+				cDigit2 = (((Math.random() * 10) % 3) + 1);
+				cDigit2 = parseInt(cDigit2);
+				cDigit3 = (((Math.random() * 10) % 3) + 1);
+				cDigit3 = parseInt(cDigit3);
+				
+				console.log("The code is [" + cDigit1 + " " + cDigit2 + " " + cDigit3 + "]");
+			}
+			
+			function enterEntry()
+			{
+				//make it say "attempt limit. email alert sent. please confirm identity" or somethin
+				turnNum -= 1;
+				
+				if(c1EnteredDigit == cDigit1)
+				{
+					c1check = true;
+					//console.log("c1")
+				}
+				if(c2EnteredDigit == cDigit2)
+				{
+					c2check = true;
+					//console.log("c2");
+				}
+				if(c3EnteredDigit == cDigit3)
+				{
+					c3check = true;
+					//console.log("c3");
+				}
+				
+				checkForWin();
+				checkForLoss();
+			}
+			
+			function checkForEntry()
+			{
+				if(!c1Turn && !c2Turn && !c3Turn)
+				enterEntry();
+			}
+			
+			function checkForWin()
+			{
+				logEntry();
+				if(c1check & c2check & c3check)
+				{
+					//make it reveal the gold
+					//console.log("you've broken the vault code")
+					displayVault();
+					addScore();
+					won = true;
+				}
+				else
+				{
+					if(!loss)
+					{
+						//yes, the dice has a couple million sides.
+						rollDiceOfFate();
+						//console.log("display");
+						displayTurns();
+						giveHint();
+					}
+				}
+			}
+			
+			function checkForLoss()
+			{
+				if(turnNum < 1 && !won)
+				{
+					loss = true;
+					displayAlert();
+				}
+			}
+			
+			function rollDiceOfFate()
+			{
+				//make it break a line and say "+X Turns"	
+				var godDoesntAllowForMultipleNormalEventsToHappen = false;
+				//console.log(fivePercentEvents);
+				var coinflip;
+				
+				if(Math.random() < 0.5)
+					coinflip = true;
+				else
+					coinflip = false;
+				//console.log(coinflip);
+				
+				//-------special events-------
+				//allowing for multiple rare events to happen makes it exciting :DD. If multiple ever do happen, then you're lucky af. It's great
+				//1/292,200,000 event (lottery)
+				if(eventChance(292200000) == 1)
+				{
+					//prevents normal events from occuring with a special event
+					godDoesntAllowForMultipleNormalEventsToHappen = true;
+					displayEvent(lotteryWinner, "+6 Turns");
+					turnNum += 6;
+				}
+				//1/1,600,000 event (meteorite)
+				if(eventChance(1600000) == 1)
+				{
+					godDoesntAllowForMultipleNormalEventsToHappen = true;
+					displayEvent(meteoriteEvent, "+5 Turns");
+					turnNum += 5;
+				}
+				//1/600,000 event (lightning)
+				if(eventChance(600000) == 1)
+				{
+					godDoesntAllowForMultipleNormalEventsToHappen = true;
+					displayEvent(lightningEvent, "+4 Turns");
+					turnNum += 4;
+				}
+				//-------normal events-------
+				//lower chance events are run first; prevents multiple high-chance events from happening.	
+				//1% events
+				if(eventChance(100) <= 1 && !godDoesntAllowForMultipleNormalEventsToHappen)
+				{
+					godDoesntAllowForMultipleNormalEventsToHappen = true;
+					if(coinflip)
+					{	
+						displayEvent(carFires, "+2 Turns");
+						turnNum += 2;
+					}
+					else
+					{
+						displayEvent(eyeWitness, "-2 Turns");
+						turnNum -= 2;
+					}
+				}
+				//1/90 event
+				if(eventChance(90) <= 1 && !godDoesntAllowForMultipleNormalEventsToHappen)
+				{
+					godDoesntAllowForMultipleNormalEventsToHappen = true;
+					displayEvent(carAccident, "+3 Turns");
+					turnNum += 3;
+				}
+				//5% events (which happen a lot more often than i expected)
+				if(eventChance(20) <= 1 && !godDoesntAllowForMultipleNormalEventsToHappen)
+				{
+					godDoesntAllowForMultipleNormalEventsToHappen = true;
+					if(coinflip)
+					{
+						displayEvent(trafficJam, "+1 Turn");
+						turnNum += 1;
+					}
+					else
+					{
+						displayEvent(inTheArea, "-1 Turn");
+						turnNum -= 1;
+					}
+				}
+			}
+			
+			function eventChance(max)
+			{
+				var percentEvents = (Math.random() * max);
+				percentEvents = parseInt(percentEvents);
+				//console.log(percentEvents);
+				return percentEvents;
+			}
+			
+			function giveHint()
+			{
+				var codeStr;
+				
+				codeStr = (cDigit1 * 100 + cDigit2 * 10 + cDigit3);
+				//console.log("give hint");
+				
+				//gives a hint based on numerical value of code/entry. if the code is 321 and the entry is 233, it'll say it's slightly higher since the difference is... well... higher than 10, but lower than 100.
+				if(entryStr > codeStr)
+				{
+					if(entryStr - codeStr >= 100)
+					{
+						displayHintBig("lower");
+						//console.log("psst! it's much lower~");
+					}
+					else if(entryStr - codeStr >= 10)
+					{
+						displayHintMed("lower");
+						//console.log("psst! it's slightly lower~");
+					}
+					else if(entryStr - codeStr >= 1)
+					{
+						displayHintSmall("lower");
+						//console.log("psst! it's juuuuust a bit lower~");
+					}
+				}
+				if(entryStr < codeStr)
+				{
+					if(codeStr - entryStr >= 100)
+					{
+						displayHintBig("higher");
+						//console.log("psst! it's much higher~");
+					}
+					else if(codeStr - entryStr >= 10)
+					{
+						displayHintMed("higher");
+						//console.log("psst! it's slightly higher~");
+					}
+					else if(codeStr - entryStr >= 1)
+					{
+						displayHintSmall("higher");
+						//console.log("psst! it's juuuuust a bit higher~");
+					}
+				}
+			}
+			
+			function logEntry()
+			{
+				entryStr = (c1EnteredDigit * 100 + c2EnteredDigit * 10 + c3EnteredDigit);
+				
+				displayLog(entryStr);
+			}
+			
+			function addScore()
+			{
+				score += (turnNum * 10) + 10;
+				
+				displayScore();
+			}
+			
+			//all button functions. very long and redundant. I'll have to look into how to simplify it
+			function b1()
+			{
+				if(c1Turn)
+				{
+					//cancel event timer before displaying event so that it doesnt remove the event text right after it is shown.
+					if(eventUp)
+						cancelEventTimer();
+					c1EnteredDigit = 1;
+					displayV1();
+					c1Turn = false;
+					checkForEntry();
+				}
+			}
+			function b2()
+			{
+				if(c1Turn)
+				{
+					if(eventUp)
+						cancelEventTimer();
+					c1EnteredDigit = 2;
+					displayV1();
+					c1Turn = false;
+					checkForEntry();
+					
+				}
+			}
+			function b3()
+			{
+				if(c1Turn)
+				{
+					if(eventUp)
+						cancelEventTimer();
+					c1EnteredDigit = 3;
+					displayV1();
+					c1Turn = false;
+					checkForEntry();
+				}
+			}
+			function b4()
+			{
+				if(c2Turn)
+				{
+					if(eventUp)
+						cancelEventTimer();
+					c2EnteredDigit = 1;
+					displayV2();
+					c2Turn = false;
+					checkForEntry();
+				}
+			}
+			function b5()
+			{
+				if(c2Turn)
+				{
+					if(eventUp)
+						cancelEventTimer();
+					c2EnteredDigit = 2;
+					displayV2();
+					c2Turn = false;
+					checkForEntry();
+				}
+			}
+			function b6()
+			{
+				if(c2Turn)
+				{
+					if(eventUp)
+						cancelEventTimer();
+					c2EnteredDigit = 3;
+					displayV2();
+					c2Turn = false;
+					checkForEntry();
+				}
+			}
+			function b7()
+			{
+				if(c3Turn)
+				{
+					if(eventUp)
+						cancelEventTimer();
+					c3EnteredDigit = 1;
+					displayV3();
+					c3Turn = false;
+					checkForEntry();
+				}
+			}
+			function b8()
+			{
+				if(c3Turn)
+				{
+					if(eventUp)
+						cancelEventTimer();
+					c3EnteredDigit = 2;
+					displayV3();
+					c3Turn = false;
+					checkForEntry();
+				}
+			}
+			function b9()
+			{
+				if(c3Turn)
+				{
+					if(eventUp)
+						cancelEventTimer();
+					c3EnteredDigit = 3;
+					displayV3();
+					c3Turn = false;
+					checkForEntry();
+				}
+			}
+			function clearEntry()
+			{
+				if(!loss && !won)
+				{
+					c1Output.innerHTML = v1Text;
+					c1EnteredDigit = 0;
+					c1Turn = true;
+					c2Output.innerHTML = v2Text;
+					c2EnteredDigit = 0;
+					c2Turn = true;
+					c3Output.innerHTML = v3Text;
+					c3EnteredDigit = 0;
+					c3Turn = true;
+				
+					c1check = false;
+					c2check = false;
+					c3check = false;
+				}
+			}
+			
+			//all display scripts
+			function displayDefaults()
+			{
+				c1Output.innerHTML = v1Text;
+				c2Output.innerHTML = v2Text;
+				c3Output.innerHTML = v3Text;
+				turnsOutput.innerHTML = "";
+				logOutput.innerHTML = " Entry Log ";
+				vaultOutput.style.display = "none";
+				hintOutput.style.display = "none";
+				
+				resetCancel();
+			}
+			function displayV1()
+			{
+				c1Output.innerHTML = v1Text + c1EnteredDigit;
+			}
+			function displayV2()
+			{
+				c2Output.innerHTML = v2Text + c2EnteredDigit;
+			}
+			function displayV3()
+			{
+				c3Output.innerHTML = v3Text + c3EnteredDigit;
+			}
+			function displayTurns()
+			{
+				turnsOutput.innerHTML = "YOU HAVE &nbsp " + turnNum + " &nbsp ATTEMPTS LEFT";	
+				//console.log("turn display");
+			}
+			function displayAlert()
+			{
+				//console.log("alert");
+				turnsOutput.innerHTML = "<center> -----------ATTEMPT LIMIT REACHED. EMAIL ALERT SENT. PLEASE CONFIRM IDENTITY BEFORE PROCEEDING----------- <center/>";
+				//[FIXED] error: last digit entered wouldn't turn to "x" at loss. (had to move the display function up in each button function(still below variable updates))
+				c1Output.innerHTML = v1Text + "X";
+				c2Output.innerHTML = v2Text + "X";
+				c3Output.innerHTML = v3Text + "X";
+				scoreOutput.innerHTML = "0";
+				
+				//"f" to pay respects (a meme)
+				hintOutput.innerHTML = "<i>f</i>";
+			}
+			function displayLog(eValue)
+			{
+				logOutput.innerHTML += "<br/> [ " + eValue + " ]";
+			}
+			function displayVault()
+			{
+				vaultOutput.style.display = "block";
+				turnsOutput.innerHTML = "";
+				hintOutput.innerHTML = "<i>you're welcome :)</i>";
+			}
+			function displayHintBig(string)
+			{
+				//reveals the hint text
+				hintOutput.style.display = "block";
+				//you can italicize variable strings by surrounding it with "<i>" "</i>";
+				hintOutput.innerHTML = "<i>psst! it's much " + string + "~</i>";
+			}
+			function displayHintMed(string)
+			{
+				hintOutput.style.display = "block";
+				hintOutput.innerHTML = "<i>psst! it's slightly " + string + "~</i>";
+			}
+			function displayHintSmall(string)
+			{
+				hintOutput.style.display = "block";
+				hintOutput.innerHTML = "<i>psst! it's juuust a bit " + string + "~</i>";
+			}
+			function displayEvent(event, turnsStr)
+			{
+				//console.log("display event");
+				eventOutput.style.display = "block";
+				eventTimer = setTimeout(eventTimeout, 5000);
+				
+				eventOutput.innerHTML = event + "<br/>" + turnsStr;
+				eventUp = true;
+			}
+			function eventTimeout()
+			{
+				//console.log("event timeout");
+				eventOutput.style.display = "none";
+				eventUp = false;
+			}
+			function cancelEventTimer()
+			{
+				//console.log("cancel event timer");
+				eventTimeout();
+				clearTimeout(eventTimer);
+			}
+			function resetCode()
+			{
+				//reset button timeout is put before reset timer so that it doesn't cancel it, unless it has been initiated prior to the click.
+				resetButtonClicked();
+				resetOutput.innerHTML = "Reset?";
+				confirmResetOutput.style.display = "block";
+				cancelResetOutput.style.display = "block";
+				//timeout for reset button after 3 seconds
+				resetTimer = setTimeout(resetCancel, 3000);
+			}
+			function resetButtonClicked()
+			{
+				//if a button is clicked, clear the timeout timer
+				clearTimeout(resetTimer);
+				//console.log("cancel timer");
+			}
+			function resetCancel()
+			{
+				resetOutput.innerHTML = "";
+				confirmResetOutput.style.display = "none";
+				cancelResetOutput.style.display = "none";
+			}
+			function displayScore()
+			{
+				scoreOutput.innerHTML = score;
+			}
+		
+		</script>
+	</head>
+	<body onload = "start();">
+	
+		<h1> T H E &nbsp V A U L T &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  <span id = "score">0</span></h1>
+		
+		<div>
+		
+			<span hidden id = "hintText"></span>
+			
+			<br/><br/>
+		
+			<!-- first button layer -->
+			<button onclick = "b1();">1</button> 
+			<button onclick = "b2();">2</button> 
+			<button onclick = "b3();">3</button> <br/><br/>
+			<span id = "c1"> Vault 1 : &nbsp </span>
+				
+			<hr/>
+			
+			<!-- second button layer -->
+			<button onclick = "b4();">1</button> 
+			<button onclick = "b5();">2</button> 
+			<button onclick = "b6();">3</button> <br/><br/>
+			<span id = "c2"> Vault 2 : &nbsp </span>
+			
+			<hr/>
+			
+			<!-- third button layer -->
+			<button onclick = "b7();">1</button> 
+			<button onclick = "b8();">2</button> 
+			<button onclick = "b9();">3</button> <br/><br/>
+			<span id = "c3"> Vault 3 : &nbsp </span>
+			
+			<br/><br/>
+			
+			<button onclick = "clearEntry();"> <b>CLEAR<b/> </button>
+			
+			<br/><br/>
+			
+			<span id = "turns"></span>
+			
+			<br/><br/>
+			
+			<span hidden id = "randomEvent"></span>
+		
+			<!-- ************make it confirm yes/no to reset. you might need another elementbyid. -->
+			<button onclick = "resetCode();"> <b><i> REWIND TIME </i></b> </button>
+			<div id = "confirmReset"></div>
+			<button hidden id = "confirmResetY" onclick = "start(); resetButtonClicked();">Y</button><button hidden id = "confirmResetN" onclick = "resetCancel(); resetButtonClicked();">N</button>
+			
+			<br/><br/>
+			
+			<div id = "entryLog"> Entry Log <br/> </div>
+			
+			<pre hidden id = "vaultUnlocked">
+										<!-- THIS IS MADE FOR A 1920 x 1080 MONITOR. IT IS OFF PLACE IN THESE SQUARE MONITORS. PLS EXCUSE -->
+										YOU HAVE UNLOCKED THE VAULT
+										!!!
+										 ___________________________________________________________________________________________
+										|                                                                                           |
+										|                                                                                           |
+										|                                                *                                          |
+										|                                                   ______      ______    *                 |
+										|                                                  /      \    /      \                     |
+										|                                                 /     *  \  /        \                    |
+										|         _____                               ___/__________\/__________\___           *    |
+										|     *  /    /\                             / *    \    /      \    /      \               |
+										|       /    /  \                           /        \  /      * \  /        \              |
+										|      /    /  /__*_____                ___/__________\/__________\/__________\___          |
+										|     /___ /  /________/\       *      /      \    /      \    /      \    /      \         |
+										|   */    \  /        | /             /        \  / *      \  /        \  /        \        |
+										|   |______\/_____*___|/     *       /__________\/__________\/__________\/_______*__\       |
+										|___________________________________________________________________________________________|
+										                                            ^^(gold bars btw)
+			</pre>
+
+		</div>
+		
+	</body>
+	
+	<!--
+	
+	GOLD
+                                                 *
+                                                    ______      ______   *
+                                                   /      \    /      \
+	        .                                     /     *  \  /        \       
+	       ____                               ___/__________\/__________\___            *
+	 *   /    /\                             / *    \    /      \    /      \
+	    /    /  \                           /        \  /      * \  /        \
+	   /    /  /__*_____                ___/__________\/__________\/__________\___
+	  /___ /  /________/\       *      /      \    /      \    /      \    /      \
+	*/    \  /        | /             /        \  / *      \  /        \  /        \
+	|______\/_____*___|/   *         /__________\/__________\/__________\/_______*__\
+	
+	-->
+	
+	<!--
+	
+	vault prize?
+	MAKE IT BIGGER
+	
+	 *                *__  __    *
+	   __*          *_/__\/_*\_
+	  /  /_*__     _/__\/_*\/__\_ *
+	*|__/_____\*  /__\/__\/__\/__\
+	
+	-->
+	
+	<!--
+		CHECKLIST
+		
+		>X-buttons
+		>X-vault code display
+		>X-clear button
+		>X-turns
+		>X-log
+		>X-reset code button
+			>X-confirmation
+		>X-hints
+		>X-winning art
+		>X-win screen
+			-see if you can wipe everything and make it only show the win screen
+		>X-lose screen
+			-see if you can wipe everything and make it only show the lose screen
+		>-enhancements?
+			>-scoring
+				-when win, take turnNum and multiply by 10. Do not reset score with start()
+				-when loss, reset score to 0.
+			>X-random event
+				>X-5% random event
+					-traffic jam
+					-in the area
+				>X-1% random event
+					-eye witness (lose 2 turns)
+					-car fire a couple blocks down(gain 2 turns)
+				>X-other random events
+					-1/90 police car accident (gain 3 turns)
+				>X-very rare events
+					-1/600,000 chance (lightning)
+						-police car gets struck by lightning (gain 4 turns)
+					-1/1,600,000 chance (meteorite)
+						-police car gets hit by a meteorite (gain 5 turns)
+					-1/292,200,000 chance (lottery)
+						-luck of a lottery winner! (gain 6 turns for being lucky)
+		-digit-based hints (maybe a button to choose which one?)
+		
+	-->
+	
+</html>
