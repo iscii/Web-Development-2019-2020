@@ -1,4 +1,0 @@
-https://itnext.io/settings-sync-with-vs-code-c3d4f126989
-
-Github Personal Token: 3b38e800e6be02496dbad1e9a679940fd636b846
-Github Gist ID: ebda658ea59b4b7f82c837eb65eedae8
