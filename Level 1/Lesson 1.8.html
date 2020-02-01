@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style></style>
+		<script>
+			
+			function initialize()
+			{
+				numberOutput = document.getElementById("numberout");
+				negativeButton = document.getElementById("negativebtn");
+				
+				num = 0;
+				negativesAllowed = false;
+				
+				display();
+			}
+			
+			function addOne()
+			{
+				num++;
+				display();
+			}
+			
+			function subtractOne()
+			{
+				num--;
+				if (num < 0 && !negativesAllowed)
+				{
+					num = 0;
+				}
+				
+				display();
+			}
+			
+			function display()
+			{
+				numberOutput.innerHTML = num;
+				
+				if(negativesAllowed)
+				{
+					negativeButton.innerHTML = "Toggle Negatives (ON)";
+				}
+				else
+				{
+					negativeButton.innerHTML = "Toggle Negatives (OFF)";
+				}
+			}
+			
+			function toggleNegatives()
+			{
+				if(negativesAllowed)
+				{
+					negativesAllowed = false;
+					
+					<!-- the challenge -->
+					if(num < 0)
+					num = 0;
+					<!-- end of challenge -->
+				} 
+				else
+				{
+					negativesAllowed = true;
+				}
+				
+				<!-- (a much more efficient way to do this) negativesAllowed = !negativesAllowed; -->
+				
+				display();
+			}
+		</script>
+	</head>
+	<body onload = "initialize();">
+	
+		<h1 id = "numberout"></h1>
+		
+		<hr/>
+		
+		<button onclick = "addOne();"> Add </button>
+		<button onclick = "subtractOne();"> Subtract </button>
+		
+		<!-- btn stands for button fyi	 -->
+		<button onclick = "toggleNegatives();" id = "negativebtn"> Toggle Negatives (OFF) </button>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Moo Baa La La La</title>
+		<link rel = "stylesheet" href = "moo baa.css" />
+		
+		<!--
+			This is the only page in the story that has CSS in the style tag.
+			
+			Since the image for the cover is a different shape than the rest of the images, and I wanted to give the cover page a different look, I overrode the style for img here.
+			
+			The reason the page will use this style instead of the one from the CSS file is because it comes afterwards.  Remember that your browser is a top-down interpreter.  That means it sees and executes the code from the style sheet linked above before it sees and executes the code in the style tag below.  Whatever comes last gets priority.
+		-->
+		<style>
+			img
+			{
+				width:500px;
+				padding-right:50px;;
+				padding-left:50px;
+				float:left;
+			}
+		</style>
+		
+		<script></script>
+	</head>
+	
+	<body onload = "initialize();">
+		<img src = "images/cover.jpg" />
+		<h1>Moo, Baa, La La La!</h1>
+		<h3>by</h3>
+		<h2>Sandra Boynton</h2>
+		<h5><a href = "page1.html">Next Page</a></h5>
+	</body>
+</html>

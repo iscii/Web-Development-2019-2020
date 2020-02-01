@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+			Arrays
+		</title>
+		<style>
+			body
+			{
+				font: bold 18pt cailibri;
+			}
+		</style>
+		<script src = "utilities.js"></script>
+		<script>
+			function initialize()
+			{
+				opArray = document.getElementById("divout");
+
+				randomList = [];
+
+				var randomLength = getRandomInteger(50,100);
+
+				for (var i = 0; i < randomLength; i++)
+				{
+					randomList[randomList.length] = getRandomInteger(-10, 10);
+				}
+				displayList();
+
+				//opArray.innerHTML = randomList;
+
+				/*
+				theList = ["1", "2", "3", "4", "5"];
+
+				opArray.innerHTML = randomLength;
+				*/
+			}
+
+			function displayList()
+			{
+				opArray.innerHTML = "";
+
+				for (var i = 0; i < randomList.length; i++)
+				{
+					opArray.innerHTML += i + ": " + randomList[i] + "<br/>";
+				}
+			}
+		</script>
+	</head>
+	<body onload = "initialize();">
+		<div id = "divout"></div>
+	</body>
+</html>

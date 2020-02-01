@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel = "stylesheet" href = "css/matchgame-light.css" />
+    <script src = "js/functions.js"></script>
+</head>
+
+<body onload="start();">
+
+    <h1>
+        <b>Match Game</b>
+    </h1>
+
+    <div id="matchBox">
+
+        <br />
+
+        <img src="images/logo.png" id="img1.1" onclick="flip('op1')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img1.2" onclick="flip('op2')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img1.3" onclick="flip('op3')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img1.4" onclick="flip('op4')" width=150 height=150 />
+
+        <br />
+
+        <img src="images/logo.png" id="img2.1" onclick="flip('op5')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img2.2" onclick="flip('op6')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img2.3" onclick="flip('op7')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img2.4" onclick="flip('op8')" width=150 height=150 />
+
+        <br />
+
+        <img src="images/logo.png" id="img3.1" onclick="flip('op9')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img3.2" onclick="flip('op10')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img3.3" onclick="flip('op11')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img3.4" onclick="flip('op12')" width=150 height=150 />
+
+        <br />
+
+        <img src="images/logo.png" id="img4.1" onclick="flip('op13')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img4.2" onclick="flip('op14')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img4.3" onclick="flip('op15')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img4.4" onclick="flip('op16')" width=150 height=150 />
+
+        <br />
+
+    </div>
+
+    <button id="reset" onclick="reset();"> Reset </button>
+
+    <br />
+
+    <div id="scoreText"></div>
+
+    <a id="htp" href="Instructions-light.html"> How To Play </a>
+
+    <div id="cpuComment"></div>
+
+    <a id="mode" href="Match Game-dark.html"> Dark Mode </a>
+
+</body>
+
+</html>

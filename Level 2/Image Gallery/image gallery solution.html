@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<!--
+	This activity is designed to allow a user to click on a thumbnail and have the selected image transferred to the larger image.
+-->
+<html>
+	<head>
+		<title>Image Gallery</title>
+		<style>
+			/*
+				By setting the height of the h6 to a very specific 110px and the height of the images to 100%, we force the thumbnails to be a smaller size.
+			*/
+			h6
+			{
+				height:110px;
+				text-align:center;
+				cursor:pointer;
+			}
+
+			/*
+				By setting the height of the h5 to a very specific 500px and the height of the images to 100%, we force the main image to be a larger size.
+			*/
+			h5
+			{
+				height:500px;
+				text-align:center;
+			}
+
+			img
+			{
+				height:100%;
+				padding:10px;
+			}
+
+			span
+			{
+				font:bold 36pt comic sans ms;
+			}
+		</style>
+		<script>
+			/*
+				initialize
+				
+				Creates all of the necessary global variables for the program.
+			*/
+			function initialize()
+			{
+				/*
+					There are 4 variables in this program.  Two of them (viewImage and captionElement) reference HTML objects and are used to update the front end in the display() function.
+					
+					The other two variables (currentImage and caption) are back end variables.  They will keep track of the changing information as the user clicks on images.
+				*/
+				viewImage = document.getElementById("viewimg");
+				currentImage = "";
+
+				captionElement = document.getElementById("capt");
+				caption = "";
+			}
+			
+			/*
+				setImage
+				
+				The purpose of this function is to pass the proper values into the global variables and then call display() so that the screen is updated properly.
+				
+				Parameters:
+					currImg - the selected image
+					cap - the text that goes with the selected image
+			*/
+			function setImage(currImg, cap)
+			{
+				currentImage = currImg;
+				caption = cap;
+				
+				display();
+			}
+			
+			/*
+				display
+				
+				Update the screen to represent the information held in the variables.
+			*/
+			function display()
+			{
+				/*
+					An img element does not have innerHTML because it is a self closing tag.  Therefore, trying to update its innerHTML would be a waste of effort.  Instead, the image is determined by the source (the src attribute).  When working with a Javascript HTML element object, you can access any of its attributes the same way you would access any of its other members.
+					
+					With the dot.
+				*/
+				viewImage.src = currentImage;
+					
+				captionElement.innerHTML = caption;
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<!--
+			In this case, the <h6> is used as a container for all of my thumbnails.  The inherent styling of the <h6> is irrelevant because there's no text, but it can be used to force the sizes of the images down to manageable thumbnails.
+		-->
+		<h6>
+			<img onclick = "setImage('images/aang.jpg', 'Aang');" src = "images/aang.jpg" />
+			<img onclick = "setImage('images/batman.jpg', 'Batman');" src = "images/batman.jpg" />
+			<img onclick = "setImage('images/rey.jpg', 'Rey');" src = "images/rey.jpg" />
+			<img onclick = "setImage('images/indiana jones.jpg', 'Indiana Jones');" src = "images/indiana jones.jpg" />
+			<img onclick = "setImage('images/uhura.jpg', 'Lieutenant Uhura');" src = "images/uhura.jpg" />
+			<img onclick = "setImage('images/ripley.jpg', 'Ripley');" src = "images/ripley.jpg" />
+			<img onclick = "setImage('images/kirk.jpg', 'Captain Kirk');" src = "images/kirk.jpg" />
+		</h6>
+		<hr />
+		<h5>
+			<img id = "viewimg" src = "" /><br />
+			<span id = "capt"></span>
+		</h5>
+	</body>
+</html>

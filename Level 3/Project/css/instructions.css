@@ -1,0 +1,61 @@
+html
+{
+    height: 98.5%;
+    width: 100%;
+    font-family: Andalus;
+}
+body
+{
+    background-color: #181818;
+    text-align: center;
+    color:#FC9D9D;
+    border: 2px solid pink;
+    border-radius: 5%;
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 0.2%;
+}
+h1#head1
+{
+    padding-top: 2%; 
+    border-bottom: 2px solid pink; 
+    width: 70%; 
+    margin: 0 auto
+}
+h2#head2
+{
+    font-size: 100%;
+    border-bottom: 2px solid pink; 
+    width: 20%; 
+    margin: 0 auto; 
+    margin-top: 1%; 
+    padding-bottom: 1%
+}
+h3#description
+{
+    margin: 0 auto;
+    margin-top: 2%;
+    width: 80%;
+    border-top: 2px solid pink;
+    border-bottom: 2px solid pink;
+    text-align: left;
+    line-height: 120%;
+}
+h3#rules
+{
+    margin: 0 auto;
+    width: 80%;
+    border-bottom: 2px solid pink;
+    text-align: left;
+    line-height: 120%;
+}
+a
+{
+    margin: 0 auto;
+    width: 100%;
+    float: left;
+    color:rgb(122, 92, 255);
+    padding-top: 0.4%;
+    text-decoration: none;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+		</title>
+		<link rel = "stylesheet" href = "css file.css" />
+		<style>
+		</style>
+		<script src = "utilities.js"></script>
+		<script>
+			
+			function initialize()
+			{
+				numberOutput = document.getElementById("numout")
+				rndNum = 0;
+				
+				display();
+			}
+		
+			function changeNumber()
+			{
+				rndNum = getRandomInteger(1,10);
+				display();
+			}
+			
+			function display()
+			{
+				numberOutput.innerHTML = rndNum;
+			}
+			
+		</script>
+	</head>
+	<body onload = "initialize();">
+	
+		<h1> This is external file, yes </h1>
+		
+		<p id = "numout"></p>
+		
+		<button onclick = "changeNumber();">Change the number</button>
+		
+	</body>
+</html>

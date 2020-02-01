@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style></style>
+		<script>
+
+			function initialize()
+			{
+				rndNumOutput = document.getElementById("rndNum");
+			}
+
+			function generateRandomNumber()
+			{
+				rndNum = Math.random();
+				rndNum *= 10;
+				rndNum = parseInt(rndNum);
+				console.log(rndNum);
+				display();
+			}
+			
+			function display()
+			{
+				rndNumOutput.innerHTML = rndNum
+			}
+			
+		</script>
+	</head>
+	<body onload = "initialize();">
+		Your new random number is <span id = "rndNum">0</span>
+		<button onclick = "generateRandomNumber();"> 
+			Generate a Random Number 
+		</button>
+	</body>
+</html>

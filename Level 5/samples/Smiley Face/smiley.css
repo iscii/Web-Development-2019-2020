@@ -1,0 +1,110 @@
+body
+{
+	text-align:center;
+}
+
+.head
+{
+	margin:auto;
+	width:550px;
+	height:450px;
+	border:thin solid black;
+	border-radius:80px;
+	text-align:center;
+}
+
+.head:hover
+{
+	background-color:red;
+}
+
+.head:hover *
+{
+	background-color:white;
+}
+
+.head:hover hr
+{
+	opacity:1.0;
+}
+
+.eye
+{
+	margin:auto;
+	border:thin solid black;
+	border-radius:80px;
+	padding:80px 80px;
+	width:15px;
+	display:inline-block;
+}
+
+.nose
+{
+	border:thin solid black;
+	width:15px;
+	padding:40px 8px;
+	border-radius:30px;
+}
+
+hr
+{
+	width:70%;
+	border:thick solid black;
+	margin-top:50px;
+	opacity:0;
+}
+
+.mouth
+{
+	margin:auto;
+	margin-top:50px;
+	border:thin solid black;
+	width:350px;
+	border-radius:20px;
+}
+
+
+/*
+	SURPRSIED
+.head:hover .eye
+{
+	padding:100px 100px;
+	border-radius:100px;
+}
+
+.head:hover .mouth
+{
+	width:50px;
+	padding:20px;
+	border-radius:50px;
+}
+*/
+
+/*
+	EYEROLL
+.head:hover .eye
+{
+	padding:3px 50px 100px;
+}
+
+.head:hover .nose, .head:hover .mouth
+{
+	position:relative;
+	top:77px;
+}
+
+*/
+
+/*
+	SUSPICIOUS
+.head:hover .eye
+{
+	padding:3px 3px 3px 100px;
+}
+
+.head:hover .nose, .head:hover .mouth
+{
+	position:relative;
+	top:77px;
+}
+*/

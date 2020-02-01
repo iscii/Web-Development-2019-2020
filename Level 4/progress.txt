@@ -1,0 +1,4 @@
+12/3 - Lesson 4.2 beginning
+12/8 - Lesson 4.3 beginning
+12/9 - Lesson 4.4 lesson 11(finished copying, but read the thing)
+12/11 - Lesson 4.4 25, there's an error for the getOrganismData() function. debug it.

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style></style>
+		<script>
+			<!-- a function for initialization. put script variables here. -->
+			function initialize()
+			{
+				<!-- including "var" makes the variable local (private). leaving it out makes it global (public). -->
+				num1 = 3;
+				num2 = 7;
+			}
+			<!-- remember to call the initialize function to create the variables -->
+			
+			function addNumbers()
+			{
+				var result = num1 + num2;
+				console.log(result);
+			}
+			
+			function subtractNumbers()
+			{
+				
+			}
+			
+			function multiplyNumbers()
+			{
+			
+			}
+			
+			function divideNumbers()
+			{
+			
+			}
+		</script>
+	</head>
+	<body onload = "initialize();">
+		<button onclick = "addNumbers();"> Add the two numbers </button>
+		<!-- 
+			Notes:
+				+ is for addition
+				- is for subtraction
+				* is for multiplication
+				/ is for division
+				% is for modulus (returns remainder after division)
+		-->
+	</body>
+</html>

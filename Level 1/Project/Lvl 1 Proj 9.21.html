@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+		<title></title>
+		
+		<style></style>
+		
+		<script>
+		
+			var resetTimer;
+			
+			function start()
+			{
+				//element ids
+				c1Output = document.getElementById("c1");
+				c2Output = document.getElementById("c2");
+				c3Output = document.getElementById("c3");
+				resetOutput = document.getElementById("confirmReset");
+				confirmResetOutput = document.getElementById("confirmResetY");
+				cancelResetOutput = document.getElementById("confirmResetN");
+				turnsOutput = document.getElementById("turns");
+				logOutput = document.getElementById("entryLog");
+				vaultOutput = document.getElementById("vaultUnlocked");
+				
+				//turns
+				turnNum = 7;
+				attemptsDisplay = false;
+				loss = false;
+				won = false;
+				
+				//check for entries
+				c1check = false;
+				c2check = false;
+				c3check = false;
+				
+				//variable for each digit entered
+				c1EnteredDigit = 0;
+				c2EnteredDigit = 0;
+				c3EnteredDigit = 0;
+				
+				//boolean to prevent multiple entries
+				c1Turn = true;
+				c2Turn = true;
+				c3Turn = true;
+
+				//text variables
+				v1Text = "Vault 1 : &nbsp ";
+				v2Text = "Vault 2 : &nbsp ";
+				v3Text = "Vault 3 : &nbsp ";
+				
+				generateCode();
+				displayDefaults();
+			}
+		
+			function generateCode()
+			{
+				//arrays?
+				cDigit1 = (((Math.random() * 10) % 3) + 1);
+				cDigit1 = parseInt(cDigit1);
+				cDigit2 = (((Math.random() * 10) % 3) + 1);
+				cDigit2 = parseInt(cDigit2);
+				cDigit3 = (((Math.random() * 10) % 3) + 1);
+				cDigit3 = parseInt(cDigit3);
+				
+				console.log(cDigit1 + " " + cDigit2 + " " + cDigit3);
+			}
+			
+			function enterEntry()
+			{
+				//***********make it say "attempt limit. email alert sent. please confirm identity"
+				turnNum -= 1;
+				checkForLoss();
+				
+				if(c1EnteredDigit == cDigit1)
+				{
+					c1check = true;
+					//console.log("c1")
+				}
+				if(c2EnteredDigit == cDigit2)
+				{
+					c2check = true;
+					//console.log("c2");
+				}
+				if(c3EnteredDigit == cDigit3)
+				{
+					c3check = true;
+					//console.log("c3");
+				}
+				
+				checkForWin();
+			}
+			
+			function checkForEntry()
+			{
+				if(!c1Turn && !c2Turn && !c3Turn)
+				enterEntry();
+			}
+			function checkForWin()
+			{
+				if(c1check & c2check & c3check)
+				{
+					//make it reveal a stash of coins or somethin
+					//console.log("you've broken the vault code")
+					displayVault();
+					won = true;
+				}
+				else
+				{
+					if(!loss)
+						displayTurns();
+					giveHint();
+				}
+				logEntry();
+			}
+			
+			function giveHint()
+			{
+				
+			}
+			
+			function logEntry()
+			{
+				var entryStr;
+				
+				entryStr = (c1EnteredDigit * 100 + c2EnteredDigit * 10 + c3EnteredDigit);
+				
+				displayLog(entryStr);
+			}
+			
+			function checkForLoss()
+			{
+				if(turnNum < 1)
+				{
+					loss = true;
+					displayAlert();
+				}
+			}
+			
+			//all button functions. very long and redundant. I'll have to look into how to simplify it
+			function b1()
+			{
+				if(c1Turn)
+				{
+					c1EnteredDigit = 1;
+					displayV1();
+					c1Turn = false;
+					checkForEntry();
+				}
+			}
+			
+			function b2()
+			{
+				if(c1Turn)
+				{
+					c1EnteredDigit = 2;
+					displayV1();
+					c1Turn = false;
+					checkForEntry();
+				}
+			}
+			function b3()
+			{
+				if(c1Turn)
+				{
+					c1EnteredDigit = 3;
+					displayV1();
+					c1Turn = false;
+					checkForEntry();
+				}
+			}
+			function b4()
+			{
+				if(c2Turn)
+				{
+					c2EnteredDigit = 1;
+					displayV2();
+					c2Turn = false;
+					checkForEntry();
+				}
+			}
+			function b5()
+			{
+				if(c2Turn)
+				{
+					c2EnteredDigit = 2;
+					displayV2();
+					c2Turn = false;
+					checkForEntry();
+				}
+			}
+			function b6()
+			{
+				if(c2Turn)
+				{
+					c2EnteredDigit = 3;
+					displayV2();
+					c2Turn = false;
+					checkForEntry();
+				}
+			}
+			function b7()
+			{
+				if(c3Turn)
+				{
+					c3EnteredDigit = 1;
+					displayV3();
+					c3Turn = false;
+					checkForEntry();
+				}
+			}
+			function b8()
+			{
+				if(c3Turn)
+				{
+					c3EnteredDigit = 2;
+					displayV3();
+					c3Turn = false;
+					checkForEntry();
+				}
+			}
+			function b9()
+			{
+				if(c3Turn)
+				{
+					c3EnteredDigit = 3;
+					displayV3();
+					c3Turn = false;
+					checkForEntry();
+				}
+			}
+			function clearEntry()
+			{
+				if(!loss && !won)
+				{
+					c1Output.innerHTML = v1Text;
+					c1EnteredDigit = 0;
+					c1Turn = true;
+					c2Output.innerHTML = v2Text;
+					c2EnteredDigit = 0;
+					c2Turn = true;
+					c3Output.innerHTML = v3Text;
+					c3EnteredDigit = 0;
+					c3Turn = true;
+				
+					c1check = false;
+					c2check = false;
+					c3check = false;
+				}
+			}
+			
+			//all display scripts
+			function displayDefaults()
+			{
+				c1Output.innerHTML = v1Text;
+				c2Output.innerHTML = v2Text;
+				c3Output.innerHTML = v3Text;
+				turnsOutput.innerHTML = "";
+				logOutput.innerHTML = " Entry Log ";
+				vaultOutput.style.display = "none";
+				
+				resetCancel();
+			}
+			function displayV1()
+			{
+				c1Output.innerHTML = v1Text + c1EnteredDigit;
+			}
+			function displayV2()
+			{
+				c2Output.innerHTML = v2Text + c2EnteredDigit;
+			}
+			function displayV3()
+			{
+				c3Output.innerHTML = v3Text + c3EnteredDigit;
+			}
+			function displayTurns()
+			{
+				turnsOutput.innerHTML = "YOU HAVE &nbsp " + turnNum + " &nbsp ATTEMPTS LEFT"
+			}
+			function displayAlert()
+			{
+				//console.log("alert");
+				turnsOutput.innerHTML = "<center> -----------ATTEMPT LIMIT REACHED. EMAIL ALERT SENT. PLEASE CONFIRM IDENTITY BEFORE PROCEEDING----------- <center/>";
+				//[FIXED] error: last digit entered wouldn't turn to "x" at loss. (had to move the display function up in each button function(still below variable updates))
+				c1Output.innerHTML = v1Text + "X";
+				c2Output.innerHTML = v2Text + "X";
+				c3Output.innerHTML = v3Text + "X";
+			}
+			function displayLog(eValue)
+			{
+				logOutput.innerHTML += "<br/> [ " + eValue + " ]";
+			}
+			function displayVault()
+			{
+				vaultOutput.style.display = "block";
+				turnsOutput.innerHTML = "";
+			}
+			function resetCode()
+			{
+				resetOutput.innerHTML = "Reset Code?";
+				confirmResetOutput.style.display = "block";
+				cancelResetOutput.style.display = "block";
+				//timeout for reset button after 3 seconds
+				resetTimer = setTimeout(resetCancel, 3000);
+			}
+			function resetButtonClicked()
+			{
+				//if a button is clicked, clear the timeout timer
+				clearTimeout(resetTimer);
+				//console.log("cancel timer");
+			}
+			function resetCancel()
+			{
+				resetOutput.innerHTML = "";
+				confirmResetOutput.style.display = "none";
+				cancelResetOutput.style.display = "none";
+			}
+		
+		</script>
+	</head>
+	<body onload = "start();">
+	
+		<h1> T H E &nbsp V A U L T </h1>
+		
+		<div>
+		
+			<!-- first button layer -->
+			<button onclick = "b1();">1</button> 
+			<button onclick = "b2();">2</button> 
+			<button onclick = "b3();">3</button> <br/><br/>
+			<span id = "c1"> Vault 1 : &nbsp </span>
+				
+			<hr/>
+			
+			<!-- second button layer -->
+			<button onclick = "b4();">1</button> 
+			<button onclick = "b5();">2</button> 
+			<button onclick = "b6();">3</button> <br/><br/>
+			<span id = "c2"> Vault 2 : &nbsp </span>
+			
+			<hr/>
+			
+			<!-- third button layer -->
+			<button onclick = "b7();">1</button> 
+			<button onclick = "b8();">2</button> 
+			<button onclick = "b9();">3</button> <br/><br/>
+			<span id = "c3"> Vault 3 : &nbsp </span>
+			
+			<br/><br/>
+			
+			<button onclick = "clearEntry();"> <b>CLEAR<b/> </button>
+			
+			<br/><br/>
+			
+			<span id = "turns"> <b></b> </span>
+			
+			<br/><br/>
+			
+			<!-- ************make it confirm yes/no to reset. you might need another elementbyid. -->
+			<button onclick = "resetCode();"> <b><i> RESET CODE </i></b> </button>
+			<div id = "confirmReset"></div>
+			<button hidden id = "confirmResetY" onclick = "start(); resetButtonClicked();">Y</button><button hidden id = "confirmResetN" onclick = "resetCancel(); resetButtonClicked();">N</button>
+			
+			<br/><br/>
+			
+			<div id = "entryLog"> Entry Log <br/> </div>
+			
+			<pre hidden id = "vaultUnlocked">
+										YOU HAVE UNLOCKED THE VAULT
+										!!!
+									
+										 ___________________________________________________________________________________________
+										|                                                                                           |
+										|                                                                                           |
+										|                                                *                                          |
+										|                                                   ______      ______    *                 |
+										|                                                  /      \    /      \                     |
+										|                                                 /     *  \  /        \                    |
+										|         _____                               ___/__________\/__________\___           *    |
+										|     *  /    /\                             / *    \    /      \    /      \               |
+										|       /    /  \                           /        \  /      * \  /        \              |
+										|      /    /  /__*_____                ___/__________\/__________\/__________\___          |
+										|     /___ /  /________/\       *      /      \    /      \    /      \    /      \         |
+										|   */    \  /        | /             /        \  / *      \  /        \  /        \        |
+										|   |______\/_____*___|/     *       /__________\/__________\/__________\/_______*__\       |
+										|___________________________________________________________________________________________|
+			</pre>
+
+		</div>
+		
+	</body>
+	
+	<!--
+	
+	GOLD
+                                                 *
+                                                    ______      ______   *
+                                                   /      \    /      \
+	        .                                     /     *  \  /        \       
+	       ____                               ___/__________\/__________\___            *
+	 *   /    /\                             / *    \    /      \    /      \
+	    /    /  \                           /        \  /      * \  /        \
+	   /    /  /__*_____                ___/__________\/__________\/__________\___
+	  /___ /  /________/\       *      /      \    /      \    /      \    /      \
+	*/    \  /        | /             /        \  / *      \  /        \  /        \
+	|______\/_____*___|/   *         /__________\/__________\/__________\/_______*__\
+	
+	-->
+	
+	<!--
+	vault prize?
+	
+	 *                *__  __    *
+	   __*          *_/__\/_*\_
+	  /  /_*__     _/__\/_*\/__\_ *
+	*|__/_____\*  /__\/__\/__\/__\
+	-->
+	
+</html>

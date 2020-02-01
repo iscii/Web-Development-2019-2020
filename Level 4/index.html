@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<!-- Ivan Turner -->
+<html>
+	<head>
+		<title>Level 4</title>
+		<link rel = "stylesheet" href = "columns.css" />
+		<link rel = "stylesheet" href = "levels.css" />
+		<script src = "datafiles/datafile.js"></script>
+		<script src = "utilities.js"></script>
+		<script src = "levels.js"></script>
+		
+		<style></style>
+		<script>
+			const CONSTRUCTION = "Use the NEXT and PREVIOUS buttons to go through this tutorial's construction.<br /><br />Create a folder somewhere on your drive and label it appopriately.<br /><br />Open up notepad++.<br /><br />Save the empty file to your folder and name the file 'index.html'.<br /><br />All first pages on a website are called index.<br /><br />As you go through the images of the construction, add to your code. The text will tell you when to run the code so that you can see how the program is developing."
+			
+			const MENU = [LESSONS, SAMPLES, FAQ, PROJECTS];
+			const MENU_DISPLAY = [displayLessons, displaySamples, displayFAQ, displayProjects];
+
+			function initialize()
+			{
+				contentLinks = document.getElementById("contentlinks");
+				contentDisplay = document.getElementById("contentdisplay");
+				objectiveText = document.getElementById("objective");
+				introText = document.getElementById("intro");
+				contentText = document.getElementById("contenttext");
+				contentImage = document.getElementById("contentimage");
+				buttons = document.getElementsByTagName("button");
+				
+				menuID = 0;
+				currentMenuIdx = 0;
+				
+				menuElements = [];
+				steps = [];
+				for (let i = 0; i < LESSONS.length; i++)
+					steps[i] = 0;
+				
+				display();
+			}
+			
+			function moveStep(modifier)
+			{
+				steps[menuID] += modifier;
+				
+				if (steps[menuID] < -1)
+					steps[menuID] = -1;
+					
+				if (steps[menuID] >= MENU[currentMenuIdx][menuID].steps.length)
+					steps[menuID] = MENU[currentMenuIdx][menuID].steps.length - 1;
+					
+				display();
+			}
+			
+			function setMenuIdx(idx)
+			{
+				currentMenuIdx = idx;
+				menuID = 0;
+				//steps[menuID] = 0;
+				display();
+			}
+			
+			function displayLinks()
+			{
+				/*
+					Create new menu elements as necessary and then alter the innerHTML to represent the new menu.  Since the indices are universal, the code uses a generic index for all of the different menu items.
+				*/
+				contentLinks.style.display = "inline-block";
+				for (var i = 0; i < MENU[currentMenuIdx].length; i++)
+				{
+					if (i >= menuElements.length)
+					{
+						let li = document.createElement("li");
+						li.style.listStyleType = "decimal";
+						li.menuIdx = i;
+						li.addEventListener("click", function()
+						{
+							menuID = this.menuIdx;
+							//steps[menuID] = 0;
+							display();
+						});
+						contentLinks.appendChild(li);
+						contentLinks.appendChild(document.createElement("br"));
+						menuElements.push(li);
+					}
+					
+					menuElements[i].innerHTML = MENU[currentMenuIdx][i].tTitle;
+					menuElements[i].style.display = "list-item";
+				}
+				
+				/*
+					If there are more li tags than there are menu items, make sure to hide them.
+				*/
+				for (var j = i; j < menuElements.length; j++)
+					menuElements[j].style.display = "none";
+			}
+			
+			function display()
+			{
+				objectiveText.style.display = "none";
+				contentText.style.display = "none";
+				contentImage.style.display = "none";
+				contentLinks.style.display = "none";
+				for (let i = 0; i < buttons.length; i++)
+					buttons[i].style.display = "none";
+				
+				introText.innerHTML = MENU[currentMenuIdx][menuID].tDescription;
+				MENU_DISPLAY[currentMenuIdx]();
+			}
+			
+			function displayLessons()
+			{
+				objectiveText.style.display = "initial";
+				contentText.style.display = "inline-block";
+				contentImage.style.display = "inline-block";
+				displayLinks();
+				
+				for (let i = 0; i < buttons.length; i++)
+				{
+					buttons[i].style.display = "initial";
+					buttons[i].style.visibility = "visible";
+				}
+					
+				objectiveText.innerHTML = `(${steps[menuID] + 1}) ${MENU[currentMenuIdx][menuID].objective}`;
+				contentText.innerHTML = MENU[currentMenuIdx][menuID].steps[steps[menuID]].stepText;
+				contentImage.src = "lessons/" + MENU[currentMenuIdx][menuID].tTitle + "/" + MENU[currentMenuIdx][menuID].steps[steps[menuID]].stepImage;
+					
+				if (steps[menuID] == 0)
+					buttons[0].style.visibility = "hidden";
+				if (steps[menuID] == MENU[currentMenuIdx][menuID].steps.length - 1)
+					buttons[1].style.visibility = "hidden";
+			}
+			
+			function displaySamples()
+			{
+				displayLinks();
+				contentText.style.display = "inline-block";
+				contentText.innerHTML = MENU[currentMenuIdx][menuID].relatedLesson + ": ";
+				
+				el = document.createElement("a");
+				el.href = "samples/" + MENU[currentMenuIdx][menuID].tTitle + ".zip";
+				el.innerHTML = MENU[currentMenuIdx][menuID].tTitle;
+				contentText.appendChild(el);
+			}
+			
+			function displayFAQ()
+			{
+				introText.innerHTML = "";
+				introText.style.display = "inline-block";
+				for (let i = 0; i < FAQ.length; i++)
+				{
+					let el = document.createElement("p");
+					el.style.fontWeight = "bold";
+					el.style.fontStyle = "italic";
+					el.innerHTML = FAQ[i].question;
+					introText.appendChild(el);
+					el = document.createElement("p");
+					el.innerHTML = FAQ[i].answer;
+					introText.appendChild(el);
+					
+					if (i != FAQ.length - 1)
+						introText.appendChild(document.createElement("hr"));
+				}
+			}
+			
+			function displayProjects()
+			{
+				contentText.style.display = "inline-block";
+				contentText.innerHTML = "<a target = '_blank' href = 'spec sheets/Level Assessment Form.xlsx'>Teacher Assessment Form</a><br /><br /><a target = '_blank' href = 'spec sheets/Peer Assessment Form.docx'>Peer Assessment Form</a><br /><br />";
+				displayLinks();
+				
+				el = document.createElement("a");
+				el.href = "spec sheets/" + MENU[currentMenuIdx][menuID].tTitle + ".docx";
+				el.target = "_blank";
+				el.innerHTML = MENU[currentMenuIdx][menuID].tTitle;
+				contentText.appendChild(el);
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<div class = "topbar">
+			<h2>T<span>u</span>rn<span>e</span>r's T<span>u</span>t<span>o</span>r<span>ia</span>ls</h2>
+			<ul id = "menu">
+				<li>
+					<span onclick = "setMenuIdx(0);">Lessons</span>
+				</li>
+				<li>
+					<span onclick = "setMenuIdx(1);">Samples</span>
+				</li>
+				<li>
+					<span onclick = "setMenuIdx(2);">FAQ</span>
+				</li>
+				<li>
+					<span onclick = "setMenuIdx(3);">Projects</span>
+				</li>
+			</ul>
+		</div>
+		<h1><span id = "title">Level 4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id = "previous" onclick = "moveStep(-1);">Previous</button> <button id = "next" onclick = "moveStep(1);">Next</button>
+</h1>
+		<div class = "columncontainer" id = "pagecontent">
+			<ol class = "column sidebar" id = "contentlinks"></ol>
+			<div class = "column" id = "contentdisplay">
+				<p id = "objective"></p><br /><br />
+				<p id = "intro"></p><br />
+				<div class = "columncontainer">
+					<div class = "column fulltxt" id = "faqtext"></div>
+					<div class = "column txtcol" id = "contenttext"></div>
+					<img class = "column" id = "contentimage"></div>
+					<br /><br /><br />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

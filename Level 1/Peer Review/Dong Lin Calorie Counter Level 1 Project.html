@@ -1,0 +1,554 @@
+<!Doctype>
+<html>
+	<head>
+		<title>Calorie Counter</title>
+		<style></style>
+		<script>
+			function initialize()
+			{	
+				ProteinAppetizerNUM = document.getElementById("ProteinAppetizer");
+				FatAppetizerNUM = document.getElementById("FatAppetizer");
+				CarbohydrateAppetizerNUM = document.getElementById("CarbohydrateAppetizer");
+				CaloriesAppetizerNUM = document.getElementById("CaloriesAppetizer");
+				ProteinEntreeNUM = document.getElementById("ProteinEntree");
+				FatEntreeNUM = document.getElementById("FatEntree");
+				CarbohydrateEntreeNUM = document.getElementById("CarbohydrateEntree");
+				CaloriesEntreeNUM = document.getElementById("CaloriesEntree");
+				ProteinDessertNUM = document.getElementById("ProteinDessert");
+				FatDessertNUM = document.getElementById("FatDessert");
+				CarbohydrateDessertNUM = document.getElementById("CarbohydrateDessert");
+				CaloriesDessertNUM = document.getElementById("CaloriesDessert");
+				TotalCaloriesNUM = document.getElementById("TotalCalories");
+				negativeButton = document.getElementById("negativebtn");
+				ResetAppetizerNUM = document.getElementById("ResetAppetizer");
+				ResetEntreeNUM = document.getElementById("ResetEntree");
+				ResetDessertNUM = document.getElementById("ResetDessert");
+				ResetAllNUM = document.getElementById("ResetAll");
+				
+				appetizer1 = 0;
+				proteinAppetizer1 = 0;
+				fatAppetizer1 = 0;
+				carbohydrateAppetizer1 = 0;
+				
+				entree1 = 0;
+				proteinEntree1 = 0;
+				fatEntree1 = 0;
+				carbohydrateEntree1 = 0;
+	
+				dessert1 = 0;
+				proteinDessert1 = 0;
+				fatDessert1 = 0;
+				carbohydrateDessert1 = 0;
+				
+				totalCalories1 = 0;
+				negativesAllowed = false;
+				display();
+			}
+			//Add 1 unit
+			//Add 1 unit Appetizer
+			function addOneproteinAppetizer()
+			{
+				proteinAppetizer1+=1;
+				display();
+			}
+			
+			function addOnefatAppetizer()
+			{
+				fatAppetizer1+=1;
+				display();
+			}
+			
+			function addOnecarbohydrateAppetizer()
+			{
+				carbohydrateAppetizer1+=1;
+				display();
+			}
+			//--Add 1 unit, Entree
+			function addOneproteinEntree()
+			{
+				proteinEntree1+=1;
+				display();
+			}
+			
+			function addOnefatEntree()
+			{
+				fatEntree1+=1;
+				display();
+			}
+			
+			function addOnecarbohydrateEntree()
+			{
+				carbohydrateEntree1+=1;
+				display();
+			}
+			//Add 1 unit, Dessert
+			function addOneproteinDessert()
+			{
+				proteinDessert1+=1;
+				display();
+			}
+			
+			function addOnefatDessert()
+			{
+				fatDessert1+=1;
+				display();
+			}
+			
+			function addOnecarbohydrateDessert()
+			{
+				carbohydrateDessert1+=1;
+				display();
+			}
+			//Add five unit
+			//Add 5 unit Appetizer
+			function addFiveproteinAppetizer()
+			{
+				proteinAppetizer1+=5;
+				display();
+			}
+			
+			function addFivefatAppetizer()
+			{
+				fatAppetizer1+=5;
+				display();
+			}
+			
+			function addFivecarbohydrateAppetizer()
+			{
+				carbohydrateAppetizer1+=5;
+				display();
+			}
+			//Add 5 unit Entree
+			function addFiveproteinEntree()
+			{
+				proteinEntree1+=5;
+				display();
+			}
+			
+			function addFivefatEntree()
+			{
+				fatEntree1+=5;
+				display();
+			}
+			
+			function addFivecarbohydrateEntree()
+			{
+				carbohydrateEntree1+=5;
+				display();
+			}
+			//Add 1 unit Dessert
+			function addFiveproteinDessert()
+			{
+				proteinDessert1+=5;
+				display();
+			}
+			
+			function addFivefatDessert()
+			{
+				fatDessert1+=5;
+				display();
+			}
+			
+			function addFivecarbohydrateDessert()
+			{
+				carbohydrateDessert1+=5;
+				display();
+			}
+			//Subtract 1 unit Appetizer
+			function subtractOneproteinAppetizer()
+			{
+					proteinAppetizer1--;
+					if (proteinAppetizer1 < 0 && !negativesAllowed)
+				{
+					proteinAppetizer1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractOnefatAppetizer()
+			{
+					fatAppetizer1--;
+					if (fatAppetizer1 < 0 && !negativesAllowed)
+				{
+					fatAppetizer1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractOnecarbohydrateAppetizer()
+			{
+					carbohydrateAppetizer11--;
+					if (carbohydrateAppetizer1 < 0 && !negativesAllowed)
+				{
+					carbohydrateAppetizer1 = 0;
+				}
+				
+				display();
+			}
+			//Subtract 1 unit Entree
+			function subtractOneproteinEntree()
+			{
+					proteinEntree1--;
+					if (proteinEntree1 < 0 && !negativesAllowed)
+				{
+					proteinEntree1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractOnefatEntree()
+			{
+					fatEntree1--;
+					if (fatEntree1 < 0 && !negativesAllowed)
+				{
+					fatEntree1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractOnecarbohydrateEntree()
+			{
+					carbohydrateEntree1--;
+					if (proteinEntree1 < 0 && !negativesAllowed)
+				{
+					proteinEntree1 = 0;
+				}
+				
+				display();
+			}
+			//Subtract 1 unit Dessert
+			function subtractOneproteinDessert()
+			{
+					proteinDessert1--;
+					if (proteinDessert1 < 0 && !negativesAllowed)
+				{
+					proteinDessert1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractOnefatDessert()
+			{
+					fatDessert1--;
+					if (fatDessert1 < 0 && !negativesAllowed)
+				{
+					fatDessert1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractOnecarbohydrateDessert()
+			{
+					carbohydrateDessert1--;
+					if (carbohydrateDessert1 < 0 && !negativesAllowed)
+				{
+					carbohydrateDessert1 = 0;
+				}
+				
+				display();
+			}
+			//Subtract 5 units
+			//Subtract 5 unit Appetizer-->
+			function subtractFiveproteinAppetizer()
+			{
+					proteinAppetizer1-=5;
+					if (proteinAppetizer1 < 0 && !negativesAllowed)
+				{
+					proteinAppetizer1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractFivefatAppetizer()
+			{
+					fatAppetizer1-=5;
+					if (fatAppetizer1 < 0 && !negativesAllowed)
+				{
+					fatAppetizer1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractFivecarbohydrateAppetizer()
+			{
+					carbohydrateAppetizer1-=5;
+					if (carbohydrateAppetizer1 < 0 && !negativesAllowed)
+				{
+					carbohydrateAppetizer1 = 0;
+				}
+				
+				display();
+			}
+			//Subtract 5 unit Entree
+			function subtractFiveproteinEntree()
+			{
+					proteinEntree1-=5;
+					if (proteinEntree1 < 0 && !negativesAllowed)
+				{
+					proteinEntree1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractFivefatEntree()
+			{
+					fatEntree1-=5;
+					if (fatEntree1 < 0 && !negativesAllowed)
+				{
+					fatEntree1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractFivecarbohydrateEntree()
+			{
+					carbohydrateEntree1-=5;
+					if (carbohydrateEntree1 < 0 && !negativesAllowed)
+				{
+					carbohydrateEntree1 = 0;
+				}
+				
+				display();
+			}
+			//Subtract 5 unit Dessert
+			function subtractFiveproteinDessert()
+			{
+					proteinDessert1-=5;
+					if (proteinDessert1 < 0 && !negativesAllowed)
+				{
+					proteinDessert1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractFivefatDessert()
+			{
+					fatDessert1-=5;
+					if (fatDessert1 < 0 && !negativesAllowed)
+				{
+					fatDessert1 = 0;
+				}
+				
+				display();
+			}
+			
+			function subtractFivecarbohydrateDessert()
+			{
+					carbohydrateDessert1-=5;
+					if (carbohydrateDessert1 < 0 && !negativesAllowed)
+				{
+					carbohydrateDessert1 = 0;
+				}
+				
+				display();
+			}
+			
+			//Toggle Negative
+			function toggleNegatives()
+			{	
+				negativesAllowed = !negativesAllowed;
+				display();
+			}
+			
+			function appetizercaloriesFUNCTION()
+			{
+				appetizer1 = 4*carbohydrateAppetizer1 + 4*proteinAppetizer1 + 9*fatAppetizer1
+				display();
+			}
+			
+			function entreecaloriesFUNCTION()
+			{
+				entree1 = 4*carbohydrateEntree1 + 4*proteinEntree1 + 9*fatEntree1
+				display();
+			}
+			
+			function dessertcaloriesFUNCTION()
+			{
+				dessert1 = 4*carbohydrateDessert1 + 4*proteinDessert1 + 9*fatDessert1
+				display();
+			}
+			
+			function totalCaloriesFUNCTION()
+			{
+				totalCalories1 = appetizer1 + entree1 + dessert1
+				display();
+			}
+			
+			function resetAppetizer1()
+			{
+				proteinAppetizer1 = 0;
+				fatAppetizer1 = 0;
+				carbohydrateAppetizer1 = 0;
+				display();
+			}
+			
+			function resetEntree1()
+			{
+				proteinEntree1 = 0;
+				fatEntree1 = 0;
+				carbohydrateEntree1 = 0;
+				display();
+			}
+			
+			function resetDessert1()
+			{
+				proteinDessert1 = 0;
+				fatDessert1 = 0;
+				carbohydrateDessert1 = 0;
+				display();
+				
+			} 
+			
+			function resetAll1()
+			{
+				proteinAppetizer1 = 0;
+				fatAppetizer1 = 0;
+				carbohydrateAppetizer1 = 0;
+				proteinEntree1 = 0;
+				fatEntree1 = 0;
+				carbohydrateEntree1 = 0;
+				proteinDessert1 = 0;
+				fatDessert1 = 0;
+				carbohydrateDessert1 = 0;
+				display();
+			}
+			
+			function display()
+			{
+				appetizer1 = 4*carbohydrateAppetizer1 + 4*proteinAppetizer1 + 9*fatAppetizer1
+				entree1 = 4*carbohydrateEntree1 + 4*proteinEntree1 + 9*fatEntree1
+				dessert1 = 4*carbohydrateDessert1 + 4*proteinDessert1 + 9*fatDessert1
+				totalCalories1 = appetizer1 + entree1 + dessert1
+				
+				ProteinAppetizerNUM.innerHTML = proteinAppetizer1;
+				FatAppetizerNUM.innerHTML = fatAppetizer1;
+				CarbohydrateAppetizerNUM.innerHTML = carbohydrateAppetizer1;
+				CaloriesAppetizerNUM.innerHTML = appetizer1;
+				ProteinEntreeNUM.innerHTML = proteinEntree1;
+				FatEntreeNUM.innerHTML = fatEntree1;
+				CarbohydrateEntreeNUM.innerHTML = carbohydrateEntree1;
+				CaloriesEntreeNUM.innerHTML = entree1;
+				ProteinDessertNUM.innerHTML = proteinDessert1;
+				FatDessertNUM.innerHTML = fatDessert1;
+				CarbohydrateDessertNUM.innerHTML = carbohydrateDessert1;
+				CaloriesDessertNUM.innerHTML = dessert1;
+				TotalCaloriesNUM.innerHTML = totalCalories1;
+				ResetAppetizerNum.innerHTML = reset;
+				ResetEntreeNum.innerHTML = reset;
+				ResetDessertNum.innerHTML = reset;
+				ResetAllNum.innerHTML = reset;
+			}
+				//*RESET
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<!--Add 1-->
+		<h1>Calorie Counter</h1>
+		</hr>
+		<h2>Please enter the amount of protein, fat and carbohydrate in the food using the button below.</h2>
+		<h2>Appetizer</h2>
+		<h3>Add 1</h3>
+		<button onclick = "addOneproteinAppetizer();">Protein</button> 
+		<button onclick = "addOnefatAppetizer();">Fat</button>
+		<button onclick = "addOnecarbohydrateAppetizer();">Carbohydrate</button>
+		<h3>Add 5</h3>
+		<button onclick = "addFiveproteinAppetizer();">Protein</button> 
+		<button onclick = "addFivefatAppetizer();">Fat</button>
+		<button onclick = "addFivecarbohydrateAppetizer();">Carbohydrate</button>
+		<h3>Subtract 1</h3>
+		<button onclick = "subtractOneproteinAppetizer();">Protein</button> 
+		<button onclick = "subtractOnefatAppetizer();">Fat</button>
+		<button onclick = "subtractOnecarbohydrateAppetizer();">Carbohydrate</button>
+		<h3>Subtract 5</h3>
+		<button onclick = "subtractFiveproteinAppetizer();">Protein</button> 
+		<button onclick = "subtractFivefatAppetizer();">Fat</button>
+		<button onclick = "subtractFivecarbohydrateAppetizer();">Carbohydrate</button>
+		<!--Add 5-->
+		</hr>
+		<h2>Entree</h2>
+		<h3>Add 1</h3>
+		<button onclick = "addOneproteinEntree();">Protein</button>
+		<button onclick = "addOnefatEntree();">Fat</button>
+		<button onclick = "addOnecarbohydrateEntree();">Carbohydrate</button>
+		<h3>Add 5</h3>
+		<button onclick = "addFiveproteinEntree();">Protein</button>
+		<button onclick = "addFivefatEntree();">Fat</button>
+		<button onclick = "addFivecarbohydrateEntree();">Carbohydrate</button>
+		<h3>Subtract</h3>
+		<button onclick = "subtractOneproteinEntree();">Protein</button>
+		<button onclick = "subtractOnefatEntree();">Fat</button>
+		<button onclick = "subtractOnecarbohydrateEntree();">Carbohydrate</button>
+		<h3>Subtract 5</h3>
+		<button onclick = "subtractFiveproteinEntree();">Protein</button>
+		<button onclick = "subtractFivefatEntree();">Fat</button>
+		<button onclick = "subtractFivecarbohydrateEntree();">Carbohydrate</button>
+		</hr>
+		<h2>Dessert</h2>
+		<h3>Add 1</h3>
+		<button onclick = "addOneproteinDessert();">Protein</button>
+		<button onclick = "addOnefatDessert();">Fat</button>
+		<button onclick = "addOnecarbohydrateDessert();">Carbohydrate</button>
+		<h3>Add 5</h3>
+		<button onclick = "addFiveproteinDessert();">Protein</button>
+		<button onclick = "addFivefatDessert();">Fat</button>
+		<button onclick = "addFivecarbohydrateDessert();">Carbohydrate</button>
+		<h3>Subtract 1</h3>
+		<button onclick = "subtractOneproteinDessert();">Protein</button>
+		<button onclick = "subtractOnefatDessert();">Fat</button>
+		<button onclick = "subtractOnecarbohydrateDessert();">Carbohydrate</button>
+		<h3>Subtract 5</h3>
+		<button onclick = "subtractFiveproteinDessert();">Protein</button>
+		<button onclick = "subtractFivefatDessert();">Fat</button>
+		<button onclick = "subtractFivecarbohydrateDessert();">Carbohydrate</button>
+		</hr>
+		<h2>Reset</h2>
+		<button onclick = "resetAppetizer1();">Reset Appetizer</button> 
+		<button onclick = "resetDessert1();">Reset Dessert</button>
+		<button onclick = "resetEntree1();">Reset Entree</button>
+		<button onclick = "resetAll1();">Reset All</button>
+		<h2>Data</h2>
+		
+		Protein Appetizer<div id = "ProteinAppetizer">0</div>
+		
+		Fat Appetizer<div id = "FatAppetizer">0</div>
+		
+		Carbohydrate Appetizer<div id = "CarbohydrateAppetizer">0</div>
+		
+		Protein Entree<div id = "ProteinEntree">0</div>
+		
+		Fat Entree<div id = "FatEntree">0</div>
+		
+		Carbohydrate Entree<div id = "CarbohydrateEntree">0</div>
+		
+		Protein Dessert<div id = "ProteinDessert">0</div>
+		
+		Fat Dessert<div id = "FatDessert">0</div>
+		
+		Carbohydrate Dessert<div id = "CarbohydrateDessert">0</div>
+		
+		Calorie Appetizer<div id = "CaloriesAppetizer">0</div>
+		
+		Calorie Entree<div id = "CaloriesEntree">0</div>
+		
+		Calories Dessert<div id = "CaloriesDessert">0</div>
+		
+		Total Calories<div id = "TotalCalories">0</div>
+		<div id = "resetAppetizer1"></div>
+		<div id = "resetEntree1"></div>
+		<div id = "resetDessert1"></div>
+		<div id = "resetAll1"></div>
+	</body>
+	
+</html>

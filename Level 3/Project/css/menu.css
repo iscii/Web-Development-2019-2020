@@ -1,0 +1,96 @@
+html
+{
+    height: 98.25%;
+    width: 100%;
+}
+body
+{
+    background-color: #181818;
+    color:aqua;
+    text-align: center;
+    height: 100%;
+    box-shadow: inset 0 0 100px black;
+}
+div#heading
+{
+    padding-top: 1%;
+    font-size: 800%;
+}
+div#gameDiv
+{
+    margin-top: 4%;
+}
+div#howToDiv
+{
+    margin-top: 6%;
+}
+a#howTo
+{
+    text-align: center;
+    font-size: 300%;
+    color: rgb(255, 121, 121);
+    text-decoration: none;
+}
+div#optionsDiv
+{
+    padding-top: 2%;
+}
+input
+{
+    vertical-align: middle;
+    width: 2%;
+    border: 2px solid rgb(255, 121, 121);
+    outline: none;
+    background: none;
+    color: white;
+    text-align: center;
+}
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button 
+{ 
+-webkit-appearance: none; 
+margin: 0; 
+}
+button#submit
+{
+    text-align: center;
+    font-size: 200%;
+    color: rgb(255, 121, 121);  
+    text-decoration: none;
+    background: none;
+    margin-top: 3%;
+    border: none;
+}
+button#playButton
+{
+    text-align: center;
+    font-size: 200%;
+    color: rgb(255, 121, 121);  
+    text-decoration: none;
+    background: none;
+}
+div#enemy
+{
+    color: rgb(81, 107, 255);
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 200%;
+    border-bottom: 2px solid plum;
+    border-top: 2px solid plum;
+    width: 20%;
+    margin: 0 auto;
+}
+div#player
+{
+    color: rgb(81, 107, 255);
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 200%;
+    border-bottom: 2px solid plum;
+    border-top: 2px solid plum;
+    width: 20%;
+    margin: 0 auto;
+    margin-top: 1%;
+}
+img
+{
+    width: 3%;
+    vertical-align: middle;
+}

@@ -1,0 +1,158 @@
+
+.mtk5 {
+    color: #48abff;
+    text-shadow: 0 0 2px #000, 0 0 10px #48abff6b, 0 0 5px #48abff85, 0 0 25px #48abff52;
+}
+
+.mtk6 { /*numbers, units, symbols pertaining to numbers*/
+    color: #fdfdfd;
+    text-shadow: 0 0 2px #001716, 0 0 3px #03edf975, 0 0 5px #03edf975, 0 0 8px #03edf975;
+}
+
+.mtk11  {
+    color: #4ec9b0;
+    text-shadow: 0 0 2px #100c0f, 0 0 5px #38a992, 0 0 10px #fff3;
+}
+
+.mtk12 {
+    color: #ffdda9;
+    text-shadow: 0 0 2px #100c0f, 0 0 5px #ffdda926, 0 0 10px #fff3;
+}
+
+.mtk13 {
+    color: #9cdcfe;
+    text-shadow: 0 0 2px #100c0f, 0 0 5px #ffdda926, 0 0 10px #fff3;
+}
+
+.mtk15 { /*functions*/
+    color: #e67ede;
+}
+
+.mtk16 {
+    color: #c586c0;
+    letter-spacing: -0.4px;
+    font-weight: 500;
+}
+
+.panel-header {
+    background-color: rgba(106, 95, 134, 0.2) !important;
+}
+
+#workbench.parts.sidebar {
+    background: rgb(25, 25, 25) !important;
+}
+
+.part.sidebar.left {
+    background-color: rgb(25, 25, 25) !important;
+}
+
+.part.activitybar.left {
+    background-color: rgb(19, 19, 19) !important;
+}
+
+/* Tab stripe */
+.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab.sizing-fit.active { /*tab block color*/
+    box-shadow: inset 0 -5px 25px #07050625;
+    position: relative;
+}
+
+.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab.sizing-fit.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, #fc28a8, #03edf9) !important;
+    opacity: 1;
+    z-index: 6;
+}
+
+.monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab.sizing-fit::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 0px;
+    transition: opacity 1s;
+    opacity: 0;
+    z-index: 6;
+}
+
+.monaco-list .monaco-list-row.selected {
+    background-color: rgba(138, 138, 138, 0.2);
+}
+
+.monaco-workbench .part.statusbar {
+    background-color: rgb(100, 50, 125) !important;
+}
+
+/* Sidebar item */
+.monaco-workbench .activitybar>.content .monaco-action-bar .badge .badge-content {
+    background: linear-gradient(to bottom, #fff951 25%, #fc28a8);
+  }
+  
+.monaco-workbench .activitybar>.content .monaco-action-bar .action-item.checked { /*sidebar tab block color*/
+    box-shadow: inset 0 -5px 25px #07050625;
+    position: relative;
+}
+
+.monaco-workbench .activitybar>.content .monaco-action-bar .action-item.checked::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    top: 0px;
+    left: 0px;
+    width: 4px;
+    background: linear-gradient(to bottom, #fc28a8, #03edf9) !important;
+    opacity: 1;
+}
+
+.monaco-workbench .activitybar>.content .monaco-action-bar .action-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    top: 0px;
+    left: 0px;
+    width: 0px;
+    transition: opacity 1s;
+    opacity: 0;
+}
+
+.cdr.squiggly-error:after { /*highlights errors*/
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #a52e2e;
+    filter: blur(10px);
+}
+
+.monaco-editor .view-overlays .current-line {
+    background: #1f1f1f;
+    transform: translateY(-3px);
+    background: #1b1b1b;
+    height: 25px !important;
+    z-index: -1;
+}
+
+.showUnused .monaco-editor .squiggly-inline-unnecessary {
+    opacity: 0.8;
+    filter: contrast(0.7);
+}
+
+.monaco-editor-background { /*background image and transparency*/
+    background-image: url('background.png');
+    left: 0px;
+    top: 0px;
+    background-blend-mode: overlay;
+    background-repeat: repeat-y;
+    background-size: 1500px;
+}
+
+/*notes
+
+1)  F1 => Toggle Developer Tools
+
+*/

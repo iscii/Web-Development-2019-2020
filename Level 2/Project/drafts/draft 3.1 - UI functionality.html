@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+			Ivan Turner: Match Game // Issac Zheng
+		</title>
+		<style>
+			div
+			{
+				text-align: center;
+				line-height: 35px;
+			}
+		</style>
+		<script>
+		
+			function start()
+			{
+				op1 = document.getElementById("img1.1");
+				op2 = document.getElementById("img1.2");
+				op3 = document.getElementById("img1.3");
+				op4 = document.getElementById("img1.4");
+				op5 = document.getElementById("img2.1");
+				op6 = document.getElementById("img2.2");
+				op7 = document.getElementById("img2.3");
+				op8 = document.getElementById("img2.4");
+				op9 = document.getElementById("img3.1");
+				op10 = document.getElementById("img3.2");
+				op11 = document.getElementById("img3.3");
+				op12 = document.getElementById("img3.4");
+				op13 = document.getElementById("img4.1");
+				op14 = document.getElementById("img4.2");
+				op15 = document.getElementById("img4.3");
+				op16 = document.getElementById("img4.4");
+				
+				imgTBF = "0";
+				flippedimgF = "0";
+				flipNum = 0;
+            }
+
+            function assignVariables()
+            {
+                pair1;
+                pair2;
+                pair3;
+                pair4;
+                pair5;
+                pair6;
+                pair7;
+                pair8;
+            }
+
+			function flip(front, img)
+			{
+				if(flipNum == 2)
+				{
+                    checkforMatch();
+				}
+				else
+				{
+                    flipNum += 1;
+                    console.log("flip");
+                }
+
+				imgTBF = img;
+				flippedimgF = front;
+				
+				display();
+            }
+
+            function checkForMatch()
+            {
+
+            }
+			
+			function display()
+			{
+				imgTBF.src = flippedimgF;
+			}
+			
+		</script>
+	</head>
+	<body onload = "start();">
+		<div id = "matchBox">
+			
+			<br/><br/><br/>
+			
+			<img src = "images/dark-blue-square.jpg" id = "img1.1" onclick = "flip('images/logo.png', op1)" width = 150 height = 150/> &nbsp 
+			<img src = "images/dark-blue-square.jpg" id = "img1.2" onclick = "flip('images/logo.png', op2)" width = 150 height = 150/> &nbsp 
+			<img src = "images/dark-blue-square.jpg" id = "img1.3" onclick = "flip('images/logo.png', op3)" width = 150 height = 150/> &nbsp
+			<img src = "images/dark-blue-square.jpg" id = "img1.4" onclick = "flip('images/logo.png', op4)" width = 150 height = 150/> &nbsp
+			
+			<br/>
+		
+			<img src = "images/dark-blue-square.jpg" id = "img2.1" onclick = "flip('images/logo.png', op5)" width = 150 height = 150/> &nbsp 
+			<img src = "images/dark-blue-square.jpg" id = "img2.2" onclick = "flip('images/logo.png', op6)" width = 150 height = 150/> &nbsp
+			<img src = "images/dark-blue-square.jpg" id = "img2.3" onclick = "flip('images/logo.png', op7)" width = 150 height = 150/> &nbsp 
+			<img src = "images/dark-blue-square.jpg" id = "img2.4" onclick = "flip('images/logo.png', op8)" width = 150 height = 150/> &nbsp 
+			
+			<br/>
+			
+			<img src = "images/dark-blue-square.jpg" id = "img3.1" onclick = "flip('images/logo.png', op9)" width = 150 height = 150/> &nbsp
+			<img src = "images/dark-blue-square.jpg" id = "img3.2" onclick = "flip('images/logo.png', op10)" width = 150 height = 150/> &nbsp
+			<img src = "images/dark-blue-square.jpg" id = "img3.3" onclick = "flip('images/logo.png', op11)" width = 150 height = 150/> &nbsp 
+			<img src = "images/dark-blue-square.jpg" id = "img3.4" onclick = "flip('images/logo.png', op12)" width = 150 height = 150/> &nbsp 
+			
+			<br/>
+			
+			<img src = "images/dark-blue-square.jpg" id = "img4.1" onclick = "flip('images/logo.png', op13)" width = 150 height = 150/> &nbsp 
+			<img src = "images/dark-blue-square.jpg" id = "img4.2" onclick = "flip('images/logo.png', op14)" width = 150 height = 150/> &nbsp 
+			<img src = "images/dark-blue-square.jpg" id = "img4.3" onclick = "flip('images/logo.png', op15)" width = 150 height = 150/> &nbsp 
+			<img src = "images/dark-blue-square.jpg" id = "img4.4" onclick = "flip('images/logo.png', op16)" width = 150 height = 150/> &nbsp 
+			
+		</div>
+	</body>
+	<!--
+		
+		Checklist:
+			>X-box outline
+			>-flip when clicked
+				>-when two are face up, check if match.
+					-if match, leave face up and score.
+                        -match = check if both cards have the same variable assignment.
+					-if no match, flip back.
+			-reset button
+			-randomizer
+				-in initialize
+                -have variables that store images individually.
+				-assign a variable to each img id randomly, correspond to img src
+                    -the same image src wil have the same variable
+			
+	-->
+</html>

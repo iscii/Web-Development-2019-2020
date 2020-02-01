@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Xtreme Rock Paper Scissors
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel = "stylesheet" href = "css/game.css" />
+        <script src="js/utilities.js"></script>
+        <script src="js/game.js"></script>
+    </head>
+    <body onload="initialize();">
+            
+            <div id = "resetDiv">
+                <b>Reset</b> <br/>
+                <button id = "resetGame" onclick = "resetGame()"><b>Game</b></button>
+                <button id = "resetLog" onclick = "resetLog()"><b>Log</b></button>
+                <button id = "resetBoth" onclick = "resetBoth()"><b>Both</b></button>
+            </div>
+            
+            <div id = "indexDiv">
+                <a id = "mainMenu" href = "index.html"><b>Main Menu</b></a>
+            </div>
+            
+            <div id="p2A">
+                <div class = "p2dWCounts">
+                    <span class = "dWCounts" id = "p2rock"></span> 
+                    <span class = "dWCounts" id = "p2paper" style="padding-left: 26%;"></span> 
+                    <span class = "dWCounts" id = "p2scissor" style="padding-left: 26%;"></span>    
+                </div>
+                <img src="images/rock.png" />
+                <img src="images/paper.png" style="padding-left:4%;"/>
+                <img src="images/scissor.png" style="padding-left:4%;"/>
+            </div>
+            
+        <table id = "log">
+            <tr> 
+                <td colspan = '3'>
+                    <c> Log </c>
+                </td>
+            </tr>
+        </table>
+        
+        <div id="c">
+            <span id="cUIText1">P1</span>
+            
+            <img src="images/empty.png" id="cBox1" /> &nbsp &nbsp
+            <img src="images/empty.png" id="cBox2" />
+            
+            <div id="cUIText2">&nbsp</div>
+        </div>
+        
+        <div id="p1A">
+            <img src="images/rock.png" onclick="play('Rock')" />
+            <img src="images/paper.png" onclick="play('Paper')" style="padding-left:4%;"/>
+            <img src="images/scissor.png" onclick="play('Scissor')" style="padding-left:4%;"/>
+            <div class = "p1dWCounts">
+                <span class = "dWCounts" id = "p1rock"></span> 
+                <span class = "dWCounts" id = "p1paper" style="padding-left: 26%;"></span> 
+                <span class = "dWCounts" id = "p1scissor" style="padding-left: 26%;"></span>    
+            </div>
+        </div>
+        
+        <div hidden id="endText"></div> 
+    </body>
+</html>
+                

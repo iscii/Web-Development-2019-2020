@@ -1,0 +1,44 @@
+	<!DOCTYPE HTML>
+	<html>
+		<head>
+			<title>The Haunted House</title>
+			<style>
+			</style>
+			<link rel = "stylesheet" href = "Haunted House CSS.css"/>
+			<script src = "utilities.js"></script>
+			<script>
+				function initialize()
+				{
+					doorLock = document.getElementById("hasKey");
+				}
+				
+				
+				function checkKey()
+				{
+					if (sessionStorage.keyTrue == 0)
+					{
+						doorLock.innerHTML = "This door needs a key"
+					}
+					else
+					{
+						location.href = "mainBedroom.html"
+					}
+				}
+			</script>
+		</head>
+		
+		<body onload = "initialize();">
+			
+			<h4> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			
+			You leave the room that you were and enter a hallway. You now approach an ornate 
+			wooden staircase that could lead you to your salvation, while noticing a door at 
+			the end of the hallway as well as a closed window.<br />
+			What will you do?</h4>
+			<button onclick = "checkKey();" id = "hasKey">Open Bedroom</button>
+			<a href = "exit.html">Go Down the Stairs</a>
+			<a href = "window.html">Open window</a>
+			<a href = "Die Page.html">Commit Die</a>
+		</body>
+	</html>

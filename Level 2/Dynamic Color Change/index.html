@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Dynamic Color Change</title>
+		<style></style>
+		<script>
+			/*
+				initialize
+				
+				Declare and define all of the global variables necessary for the program.
+			*/
+			function initialize()
+			{
+				redValueOut = document.getElementById("redval");
+				greenValueOut = document.getElementById("greenval");
+				blueValueOut = document.getElementById("blueval");
+				
+				/*
+					All of the color values have been set to 255, creating a white background.
+				*/
+				redValue = 255;
+				greenValue = 255;
+				blueValue = 255;
+				
+				display();
+			}
+		
+			/*
+				modifyRed
+				
+				Changes the value of the amount of red in the background color.
+				
+				Parameters:
+					mod - the value by which the global variable is being modified.
+			*/
+			function modifyRed(mod)
+			{
+				redValue += mod;
+				
+				/*
+					The value of the global has already been modified.  These two if conditionals check to make sure it hasn't gone out of bounds.  If it has, it's automatically brought back in.
+				*/
+				if (redValue < 0)
+					redValue = 0;
+					
+				if (redValue > 255)
+					redValue = 255;
+					
+				display();
+			}
+
+			function modifyGreen(mod)
+			{
+				greenValue += mod;
+				
+				if (greenValue < 0)
+					greenValue = 0;
+					
+				if (greenValue > 255)
+					greenValue = 255;
+					
+				display();
+			}
+			
+			function modifyBlue(mod)
+			{
+				blueValue += mod;
+				
+				if (blueValue < 0)
+					blueValue = 0;
+					
+				if (blueValue > 255)
+					blueValue = 255;
+					
+				display();
+			}
+			
+			/*
+				display
+				
+				Updates the screen based on the values of the back end variables.
+			*/
+			function display()
+			{
+				redValueOut.innerHTML = redValue;
+				greenValueOut.innerHTML = greenValue;
+				blueValueOut.innerHTML = blueValue;
+				
+				/*
+					The first output statement uses standard concatenation, building a string that looks like "rgb(r, g, b)" from literals and variables.
+					The second output statement uses template literals, which allow you to mix variables and literals in a single expression.  A template literal uses backslashes (`) instead of quotes and the variable portions must begin with a dollar sign ($) and be surrounded by braces ({}).
+					
+					Only one of these statements is necessary for output, which is why the template literal version is commented out.  If you'd like to test the template literal version, remove the comments and add comments to the standard concatenation version.
+				*/
+				document.body.style.backgroundColor = "rgb(" + redValue + ", " + greenValue + ", " + blueValue + ")";
+				//document.body.style.backgroundColor = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<h1>Change the background color by clicking the buttons.</h1>
+		<hr />
+		<h2>
+			Red (<span id = "redval"></span>): <button onclick = "modifyRed(1)">+1</button> 
+			 <button onclick = "modifyRed(-1)">-1</button> 
+			 <button onclick = "modifyRed(5)">+5</button> 
+			 <button onclick = "modifyRed(-5)">-5</button> 
+			 <button onclick = "modifyRed(10)">+10</button> 
+			 <button onclick = "modifyRed(-10)">-10</button>
+		</h2>
+		<h2>
+			Green (<span id = "greenval"></span>): <button onclick = "modifyGreen(1)">+1</button> 
+			 <button onclick = "modifyGreen(-1)">-1</button> 
+			 <button onclick = "modifyGreen(5)">+5</button> 
+			 <button onclick = "modifyGreen(-5)">-5</button> 
+			 <button onclick = "modifyGreen(10)">+10</button> 
+			 <button onclick = "modifyGreen(-10)">-10</button>
+		</h2>
+		<h2>
+			Blue (<span id = "blueval"></span>): <button onclick = "modifyBlue(1)">+1</button> 
+			 <button onclick = "modifyBlue(-1)">-1</button> 
+			 <button onclick = "modifyBlue(5)">+5</button> 
+			 <button onclick = "modifyBlue(-5)">-5</button> 
+			 <button onclick = "modifyBlue(10)">+10</button> 
+			 <button onclick = "modifyBlue(-10)">-10</button>
+		</h2>
+	</body>
+</html>

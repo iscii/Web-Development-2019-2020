@@ -1,0 +1,43 @@
+/*
+	columns.css
+	
+	This file sets up a template for creating flowing columns on a web page.  In order use this file, you will need to define a column layout built within containers in the format:
+
+		<tag class = "columncontainer">
+			<tag class = "column">
+				Content
+			</tag>
+		</tag>
+	
+	The tags that you use for your design are unimportant as the css will redefine their styling.  Make sure they have the proper classnames.
+
+	You may include as many columns as you like, or as many rows of columns as you like.  When defining a new row, you have the option of inserting a column divider (usually a styled <hr />).
+*/
+
+/*
+	.columncontainer
+	
+	This class represents the overall container for the entire column layour.
+	
+	The container needs to be a centered block element with all items inside centered.  Setting a custom width for the individual file is encouraged.
+*/
+.column
+{
+	display:inline-block;
+	width:25%;
+	vertical-align:top;
+}
+
+/*
+	.column
+	
+	This class defines the basic column.  The inline-block display gives us the flexibility to set a width for it and ensure that our columns will appear side by side in any resolution.  This is set for a 3 column display.
+	
+	The vertical-align brings all of the text within to the top of the column so there isn't a jagged edge up there.
+*/
+.columncontainer
+{
+	display:block;
+	margin:auto;
+	text-align:center;
+}

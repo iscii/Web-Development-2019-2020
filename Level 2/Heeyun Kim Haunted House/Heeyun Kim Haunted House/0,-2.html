@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Haunted House!</title>
+		<link rel = "stylesheet" href = "css/forAll.css" />
+
+		<style>
+			body
+			{ 
+				background-image: url("image/basement1.jpg");
+
+			}
+			#keyButton
+			{
+				position:absolute;
+				bottom:3px;
+				left:260px;
+				text-decoration: none;
+				color: white;
+				background-color: rgba(0, 0, 0, 0);
+				border-style: none;
+				
+				
+			}
+
+		</style>
+		
+		
+		<script>
+			function initialize()
+			{
+				doorButton = document.getElementById("openDoor");
+				narration = document.getElementById("narrate");
+				keyImage = document.getElementById("keyButton");
+				keyImage.style.visibility = "visible";
+				doorOpened = false;
+				buttonWalkRoom = document.getElementById("walkIntoRoom");
+				buttonWalkRoom.style.visibility = "hidden";
+			}
+			//This runs when the user finds the hidden key. 
+			//unlockes the white door. 
+			function unlockDoor()
+			{
+				doorOpened = true;
+				keyImage.style.visibility = "hidden";
+				narration.innerHTML = "This is a old key! I wonder which door it would fit.";
+			}
+			//This runs when user tries to open the door. 
+			//It changes the innerHTML depending on if the user found the key or not.
+			function tryOpening()
+			{
+				if (doorOpened == true)
+				{
+					narration.innerHTML = "This door is locked. But I think this key that I found will fit in here. <br /> ! <br /> The door opened."
+					doorButton.style.visibility = "hidden";
+					buttonWalkRoom.style.visibility = "visible";
+					
+				}
+				
+				if (doorOpened == false)
+				{
+					narration.innerHTML = "This door is locked."
+				}
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>Basement</h1>
+		<p id = "narrate">This basement smells like dust, and the painting of the wall is all falling apart. I guess no one lived here for a long time.</p>
+		<div>
+			<a id = "walkIntoRoom" href = "1,-2.html"> Go inside the room </a>
+			<br />
+			<button id = "openDoor" onclick = "tryOpening();">Go into the while door</button>
+			&nbsp
+			<a href = "2,-2.html">Walk forward</a>			
+			<br />
+			
+			<a href = "0,0.html">Home</a>
+		</div>
+		<button id = "keyButton" onclick = "unlockDoor();"><img src = "image/key.png"/></button>
+	</body>
+</html>

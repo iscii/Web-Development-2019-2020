@@ -1,0 +1,71 @@
+Functions
+	checkIfPlayable()
+		-When a player clicks a grid, call to check if the play is able to be made (grid is not locked or game is not over)
+			-if array[gridCode];
+				gridLock();
+			else
+				return;
+		-If not playable, make sure no other functions are called and nothing changes.
+		-If it is playable:
+			-I feel like I can compact my code much more and not have to make a separate function for the check and the actual call.
+	gridLock()
+		-array[gridCode] = false;
+	checkforWin()
+		//Variable to hold in-row things
+		-var Ro
+		//indexCount sets the index at which the search starts. 
+		-var indexCount;
+		-var scrollCount = 1;
+		//checkVerticals() 
+		//start at the first grid, check the 4th and 7th grid for true. start at the second grid, check the 5th and 8th grid. start at the third grid, check the 6th and 9th grid
+		//redo this: make a for function for the index start, and then another for function for the row/column/diagonal check. fuck lmao
+		like this:
+			for(var indexCount = 0, indexCount < array.length, indexCount++)
+				for (var i = indexCount; i < (indexCount += 6); i += 3)
+					check();
+
+		/* this probably doesn't work lol use the one above
+		   keep the scrollCount thing tho that'll work fine i think.
+		if(scrollCount > 1)
+			Row = 0;
+			//indexCount = 0;
+			for (var i = indexCount; i < array.length; i += 3)
+				If array[i] = true
+					Row++;
+					if(Row == 3)
+						return win;
+				else
+					//indexCount might not be useful lmao oops
+					//indexCount++;
+					scrollCount++;
+
+		//checkHorizontals()
+		//start at the first grid, check the 2nd and 3rd grid for true. start at the 4th grid, check the 5th and 6th grid. start and the 7th grid, check the 8th and 9th.
+		/else/ if(scrollCount > 3)
+			Row = 0;
+			//indexCount = 0;
+			for (var i = indexCount; i < array.length; i++)
+				If(array[i] = true)
+					Row++;
+					if(Row == 3)
+						return win;
+				else
+					//indexCount += 3;
+					scrollCount++;
+		//checkDiagonals()
+		/else/ if(scrollCount > 6)
+			Row = 0;
+			//indexCount = 0;
+			for (var i = indexCount; i < array.length; i += 5)
+				If array[i] = true
+					Row++;
+					if(Row == 3)
+						return win;
+				else
+					//indexCount += 5;
+					scrollCount++
+					
+		/else/ if(scrollCount >= 9)
+			return;
+		
+		*/

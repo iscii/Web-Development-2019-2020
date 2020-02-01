@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<!-- goblin stoNe gaMe -->
+<html>
+	<head>
+		<title>Stone Game</title>
+		<style></style>
+		<script>
+			function initialize()
+			{
+				titleName=document.getElementById("gameTitle");
+				speechText=document.getElementById("speech");
+				startText=document.getElementById("startBtn");
+				htpText=document.getElementById("htpBtn");
+				pile1Num=document.getElementById("pile1");
+				pile2Num=document.getElementById("pile2");
+				pile3Num=document.getElementById("pile3");
+				t1r1T=document.getElementById("t1r1");
+				t1r2T=document.getElementById("t1r2");
+				t1r3T=document.getElementById("t1r3");
+				t2r1T=document.getElementById("t2r1");
+				t2r2T=document.getElementById("t2r2");
+				t2r3T=document.getElementById("t2r3");
+				t3r1T=document.getElementById("t3r1");
+				t3r2T=document.getElementById("t3r2");
+				t3r3T=document.getElementById("t3r3");
+				canTake = 0;
+				enemyT = 0;
+				pT1 = "Rocks in pile 1: ";
+				pT2 = "Rocks in pile 2: ";
+				pT3 = "Rocks in pile 3: ";
+				p1 = 3;
+				p2 = 3;
+				p3 = 3;
+				instruct1 = 0;
+				randomNum1 = 0;
+				randomNum2 = 0;
+				gameEnd = 1;
+				titleText();
+			}
+			
+			function howToPlay()
+			{
+				if(instruct1 == 0)
+				{
+					sText = "In this game, there are 3 piles of stones, with 3 stones per pile. The goal is to not be the one to take the last stone from the last pile remaining. On your turn, you can take as many stones as you want in any one pile. You and your opponent take turns taking stones until there is one stone left. The person who takes that last stone loses. Good Luck!"
+					displayS();
+					instruct1 = 1;
+				}
+				else
+				{
+					if(instruct1 == 1) <!--How to play button logic. The button will only work before you begin the game.-->
+					{
+						sText = "";
+						console.log("closed");
+						displayS();
+						instruct1 = 0;
+					}
+				}
+			}
+			
+			<!--Title Effect-->
+			function titleText()
+			{
+				function addS()
+				{tText += "s"; displayT();}
+				function addT()
+				{tText += "t"; displayT();}
+				function addO()
+				{tText += "o"; displayT();}
+				function addN()
+				{tText += "N"; displayT();}
+				function addE()
+				{tText += "e"; displayT();}
+				function addSpace()
+				{tText += " "; displayT();}
+				function addG()
+				{tText += "g"; displayT();}
+				function addA()
+				{tText += "a"; displayT();}
+				function addM()
+				{tText += "M"; displayT();}
+				tText = " ";
+				setTimeout(addS, 0);
+				setTimeout(addT, 200);
+				setTimeout(addO, 400);
+				setTimeout(addN, 600);
+				setTimeout(addE, 800);
+				setTimeout(addSpace, 1400);
+				setTimeout(addG, 1600);
+				setTimeout(addA, 1800);
+				setTimeout(addM, 2000);
+				setTimeout(addE, 2200);
+			}
+			
+			<!--Helps randomize speech text.-->
+			function getRndNum()
+			{
+				randomNum1 = Math.random();
+				randomNum1 *= 5;
+				randomNum1 = parseInt(randomNum1);
+				randomNum1 += 1;
+			}
+			
+			<!--unK will say one of these 5 texts when the game is started (enhancement).-->
+			function startGameText()
+			{
+				if(randomNum1 == 1)
+				{
+					sText = sText + "so yOu've deCidEd to chAllengE uS..."
+				}
+				if(randomNum1 == 2)
+				{
+					sText = sText + "yoU reaLly waNt To fight uS?"
+				}
+				if(randomNum1 == 3)
+				{
+					sText = sText + "yOur conFidencE leVels arE peaKing..."
+				}
+				if(randomNum1 == 4)
+				{
+					sText = sText + "chaLlengiNg thE bEst in tHe univeRse, hUh?"
+				}
+				if(randomNum1 == 5)
+				{
+					sText = sText + "bRinG it oN, humAn!"
+				}
+				displayS();
+				sText = "unK: ";
+			}
+			
+			<!--A text to let the player know the game began - it doesn't work but it doesn't affect the game.-->
+			function beginGameText()
+			{
+				sText = sText + "lEt us beGin...";
+				displayS();
+				sText = "unK: ";
+			}
+			
+			<!--Lets you take a rock and detects if you've won.-->
+			function yourTurn()
+			{
+				if(p1 == 0 && p2 == 0 && p3 == 0)
+				{
+					sText = "unK: whAt!? hoW couLd A punY hUman beAt ouR Race!?! yoU aRe A FilthY cHeater!!!"
+					displayS();
+					sText = "unK: ";
+					gameEnd = 1;
+					stText = "Reset Game";
+					displaySt();
+				}
+				else
+				{
+					displayButtons();
+					sText = sText + "maKe yoUr mOve, humaN.";
+					displayS();
+					sText = "unk: "
+					canTake = 1;
+					enemyT = 0;
+				}
+			}
+			
+			<!--unK's speech after you make your move (enhancement). Also detects if you've lost.-->
+			function enemyTurnText()
+			{
+				clearButtons();
+				if(p1 > 0 || p2 > 0 || p3 > 0)
+				{
+					getRndNum();
+					if(randomNum1 == 1)
+					{
+						sText = sText + "bAh! wHat a duMb movE!"
+					}
+					if(randomNum1 == 2)
+					{
+						sText = sText + "mEdiocRe agaiN... patHetic."
+					}
+					if(randomNum1 == 3)
+					{
+						sText = sText + "as eXpecteD froM tHe hUman racE."
+					}
+					if(randomNum1 == 4)
+					{
+						sText = sText + "yoUr movE diSgusts mE."
+					}
+					if(randomNum1 == 5)
+					{
+						sText = sText + "yoU calL tHat a gooD mOve?"
+					}
+					displayS();
+					sText = "unK: ";
+					setTimeout(enemyTurn, 3000);
+				}
+				else
+				{
+					sText = sText + "hHAHhahAaAHHAHA! yoU wIll neVer bEst thE gobliN racE!!!"
+					displayS();
+					gameEnd = 1;
+					stText = "Reset Game";
+					displaySt();
+				}
+					
+			}
+			
+			<!--1/10 chance of choosing smallest pile generator.-->
+			function randChanceSmall()
+			{
+				randomNum2 = Math.random();
+				randomNum2 *= 10;
+				randomNum2 = parseInt(randomNum2);
+				randomNum2 += 1;
+				console.log(randomNum2);
+			}
+			
+			<!--Function to make glooB take the last rock in a pile (enhancement).-->
+			function takeLastRock()
+			{
+				console.log("takeLastRock");
+				if(p1 == 1)
+				{
+					p1 -= 1;
+					displayP();
+					sText = sText + "i toOk thE lAst stoNe fRoM pilE 1. ";
+				}
+				else
+				{
+					if(p2 == 1)
+					{
+						p2 -= 1;
+						displayP();
+						sText = sText + "i toOk thE lAst stoNe fRoM pilE 2. ";
+					}
+					else
+					{
+						if(p3 == 1)
+						{
+							p3 -= 1;
+							displayP();
+							sText = sText + "i toOk thE lAst stoNe fRoM pilE 3. ";
+						}
+					}
+				}
+				yourTurn();
+			}
+			
+			<!--Function to start the enemy turn.-->
+			function enemyTurn()
+			{
+				console.log("enemy turn");
+				if(p1 == 1 || p2 == 1 || p3 == 1)
+				{
+					takeLastRock();
+				}
+				else
+				{
+					randChanceSmall();
+					if(randomNum2 > 1) <!--Taking from largest pile-->
+					{
+						console.log("large take");
+						if(p1 >= p2 && p1 >= p3)
+						{p1 -= 1; displayP(); sText = sText + "i toOk a sTone fRoM pilE 1. ";}
+						else{
+						if(p2 >= p1 && p2 >= p3)
+						{p2 -= 1; displayP(); sText = sText + "i toOk a sTone fRoM pilE 2. ";}
+						else{
+						if(p3 >= p1 && p3 >= p2)
+						{p3 -= 1; displayP(); sText = sText + "i toOk a sTone fRoM pilE 3. ";}
+						}
+						}
+						yourTurn();
+					}
+					else <!--Taking from smallest pile-->
+					{
+						console.log("small take");
+						if(p3 <= p2 && p3 <= p1 && p3 > 0)
+						{p3 -= 1; displayP(); sText = sText + "i toOk a sTone fRoM pilE 3. ";}
+						else{
+						if(p2 <= p1 && p2 <= p3 && p2 > 0)
+						{p2 -= 1; displayP(); sText = sText + "i toOk a sTone fRoM pilE 2. ";}
+						else{
+						if(p1 <= p3 && p1 <= p2 && p1 > 0)
+						{p1 -= 1; displayP(); sText = sText + "i toOk a sTone fRoM pilE 1. ";}
+						}
+						}
+						yourTurn();
+					}
+				}
+			}
+			
+			<!--Code to initialize the game.-->
+			function gameIntro()
+			{
+				if(gameEnd == 1)
+				{
+					gameEnd = 0;
+					p1 = 3;
+					p2 = 3;
+					p3 = 3;
+					stText = ""
+					displaySt();
+					sText = "unK: ";
+					instruct1 = 3;
+					displayS();
+					htpText.innerHTML = " ";
+					getRndNum();
+					startGameText();
+					setTimeout(beginGameText, 3000);
+					setTimeout(yourTurn, 3000);
+					setTimeout(displayP, 3000);
+				}
+			}
+			
+			<!--Take Functions-->
+			function take1Rock1()
+			{
+				if(canTake == 1 && p1 > 0)
+				{
+					p1 -= 1;
+					canTake = 0;
+					displayP();
+					enemyTurnText();
+				}
+			}
+			function take2Rock1()
+			{
+				if(canTake == 1 && p1 > 1)
+				{
+					p1 -= 2;
+					canTake = 0;
+					displayP();
+					enemyTurnText();
+				}
+			}
+			function take3Rock1()
+			{
+				if(canTake == 1 && p1 > 2)
+				{
+					p1 -= 3;
+					canTake = 0;
+					displayP();
+					enemyTurnText();
+				}
+			}
+			function take1Rock2()
+			{
+				if(canTake == 1 && p2 > 0)
+				{
+					p2 -= 1;
+					canTake = 0;
+					displayP();
+					enemyTurnText();
+				}
+			}
+			function take2Rock2()
+			{
+				if(canTake == 1 && p2 > 1)
+				{
+					p2 -= 2;
+					canTake = 0;
+					displayP();
+					enemyTurnText();
+				}
+			}
+			function take3Rock2()
+			{
+				if(canTake == 1 && p2 > 2)
+				{
+					p2 -= 3;
+					canTake = 0;
+					displayP();
+					enemyTurnText();
+				}
+			}
+			function take1Rock3()
+			{
+				if(canTake == 1 && p3 > 0)
+				{
+					p3 -= 1;
+					canTake = 0;
+					displayP();
+					enemyTurnText();
+				}
+			}
+			function take2Rock3()
+			{
+				if(canTake == 1 && p3 > 1)
+				{
+					p3 -= 2;
+					canTake = 0;
+					displayP();
+					enemyTurnText();
+				}
+			}
+			function take3Rock3()
+			{
+				if(canTake == 1 && p3 > 2)
+				{
+					p3 -= 3;
+					canTake = 0;
+					displayP();
+					enemyTurnText();
+				}
+			}
+			
+			<!--Display Functions-->
+			function displayT()
+			{titleName.innerHTML = tText;}
+			function displayS()
+			{speechText.innerHTML = sText;}
+			function displaySt()
+			{startText.innerHTML = stText;}
+			function displayP()
+			{
+				pile1Num.innerHTML = pT1 + p1;
+				pile2Num.innerHTML = pT2 + p2;
+				pile3Num.innerHTML = pT3 + p3;
+			}
+			
+			function displayButtons()
+			{
+				if(p1 > 0)
+				{t1r1T.innerHTML = "Take 1 Rock";}
+				else{t1r1T.innerHTML = " ";}
+				if(p2 > 0)
+				{t1r2T.innerHTML = "Take 1 Rock";}
+				else{t1r2T.innerHTML = " ";}
+				if(p3 > 0)
+				{t1r3T.innerHTML = "Take 1 Rock";}
+				else{t1r3T.innerHTML = " ";}
+				if(p1 > 1)
+				{t2r1T.innerHTML = "Take 2 Rocks";}
+				else{t2r1T.innerHTML = " ";}
+				if(p2 > 1)
+				{t2r2T.innerHTML = "Take 2 Rocks";}
+				else{t2r2T.innerHTML = " ";}
+				if(p3 > 1)
+				{t2r3T.innerHTML = "Take 2 Rocks";}
+				else{t2r3T.innerHTML = " ";}
+				if(p1 > 2)
+				{t3r1T.innerHTML = "Take 3 Rocks";}
+				else{t3r1T.innerHTML = " ";}
+				if(p2 > 2)
+				{t3r2T.innerHTML = "Take 3 Rocks";}
+				else{t3r2T.innerHTML = " ";}
+				if(p3 > 2)
+				{t3r3T.innerHTML = "Take 3 Rocks";}
+				else{t3r3T.innerHTML = " ";}
+			}
+			
+			function clearButtons()
+			{
+				t1r1T.innerHTML = " ";
+				t1r2T.innerHTML = " ";
+				t1r3T.innerHTML = " ";
+				t2r1T.innerHTML = " ";
+				t2r2T.innerHTML = " ";
+				t2r3T.innerHTML = " ";
+				t3r1T.innerHTML = " ";
+				t3r2T.innerHTML = " ";
+				t3r3T.innerHTML = " ";
+			}
+		</script>
+	</head>
+	<body onload = "initialize();">
+	<center><h3>Welcome to the...</h3></center>
+	<center><h1 id = gameTitle></h1></center>
+	<center><div><button onclick = "gameIntro();" id = startBtn>Start Game!</button></div></center>
+	<center><div><button onclick = "howToPlay();" id = htpBtn>How do I play?</button></div></center>
+	<center><h2 id = speech></h2></center>
+	<center><div><h3 id = pile1></h3><button onclick = "take1Rock1();" id = t1r1></button><button onclick = "take2Rock1();" id = t2r1></button><button onclick = "take3Rock1();" id = t3r1></button></div></center>
+	<center><div><h3 id = pile2></h3><button onclick = "take1Rock2();" id = t1r2></button><button onclick = "take2Rock2();" id = t2r2></button><button onclick = "take3Rock2();" id = t3r2></button></div></center>
+	<center><div><h3 id = pile3></h3><button onclick = "take1Rock3();" id = t1r3></button><button onclick = "take2Rock3();" id = t2r3></button><button onclick = "take3Rock3();" id = t3r3></button></div></center>
+	</body>
+</html>

@@ -1,0 +1,2 @@
+THERE IS A BUG IN THE GAME: When you choose numbers (over 5) for the enemy, play a lil bit
+and then reset the game only, one of the enemy arsenal counts adds 1. I think it has to do with the timing. 

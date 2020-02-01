@@ -1,0 +1,64 @@
+
+body
+{
+    border-radius: 25px;
+    border: 2px solid black;
+    font-family: Andalus;
+    font-size: 12px;
+    margin: 10px 0px 0px 400px;
+    padding: 30px 30px 20px 30px;
+    text-align: center;
+    width: 1000px;
+    height: 850px;
+    line-height: 45px;
+    background-color: azure;
+}
+
+h1
+{
+    border-bottom: solid;
+    font-size: 40px;
+    width: 550px;
+    margin: auto;
+}
+
+h2
+{
+    font-size: 15px;
+    border-bottom: 2px solid black;
+    width: 125px;
+    margin: auto;
+    text-align: center;
+}
+
+h3
+{
+    font-size: 20px;
+    border-top: solid;
+    border-bottom: solid;
+}
+
+h4
+{
+    font-size: 20px;
+    text-align: left;
+}
+
+div#main
+{
+    font: bold;
+    text-align: left;
+    font-family: Andalus;
+    font-size: 23px;
+    border-bottom: solid;
+    padding: 0px 20px 0px 20px;
+    background-color: aliceblue;
+}
+
+a#back
+{
+    font-family: Bastion;
+    font-size: 18px;
+    text-decoration: none;
+    line-height: 50px;
+}

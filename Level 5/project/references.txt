@@ -1,0 +1,23 @@
+Continue/Break out of a nested for loop
+https://stackoverflow.com/questions/183161/whats-the-best-way-to-break-from-nested-loops-in-javascript
+
+Flag variables
+http://www.javascriptkit.com/javatutors/valid2.shtml
+
+While loop
+https://www.w3schools.com/js/js_loop_while.asp
+
+List styling
+https://www.w3schools.com/css/css_list.asp
+
+Div scrollbar // Overflow
+https://stackoverflow.com/questions/42825869/how-to-make-a-scroll-bar-in-separate-div-in-body-of-html
+
+Custom scrollbar
+https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp
+
+Set width of element equal to content
+https://stackoverflow.com/questions/20383622/width-equal-to-content
+
+Editing class styles from javascript
+https://stackoverflow.com/questions/9436123/javascript-changing-a-class-style

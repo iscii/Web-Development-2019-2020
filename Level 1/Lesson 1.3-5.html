@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style></style>
+		<script>
+
+			<!-- this is what creates a function/method (similar to void) -->
+			function greet()
+			{
+				console.log("Hello World");
+			}
+			<!-- greet(); to call the function -->
+			
+			function shout10()
+			{
+				console.log("10!");
+			}
+		</script>
+	</head>
+	
+	<!-- calls greet(); when this body is loaded -->
+	<body onload = "greet();">
+		<!-- this creates a button with the text "Shout 10", which runs the function
+		shout10(); on click-->
+		<button onclick = "shout10();"> Shout 10 </button>
+	</body>
+</html>

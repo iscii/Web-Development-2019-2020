@@ -1,0 +1,62 @@
+body{
+    background-image: url('images/candleside.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-attachment: fixed;
+    background-color: #242424;
+
+    color: antiquewhite;
+}
+
+ul{
+    font: 14pt calibri;
+    list-style-type: none; /*removes bullet points */
+
+    margin-left: 85px;
+    margin-top: 150px;
+}
+
+a{
+    color: antiquewhite;
+}
+
+p{
+    font: 12pt calibri;
+    text-align: justify;
+    margin-left: 400px;
+    margin-right: 150px;
+
+    margin-top: -200px;
+}
+
+p span{
+    color: #FF9933;
+}
+
+div + div{
+    margin-top: 150px;
+    text-align: center;
+    font: italic 10pt arial;
+}
+
+h1, h2, h3{
+    text-align: center;
+    font-family: copperplate gothic;
+}
+
+h1{
+    font: 36pt;
+}
+
+h1 span{
+    background-color:rgb(71,74,56);
+    padding: 0px 8px;
+}
+
+h2{
+    font-size: 20pt;
+}
+
+h3{
+    font-size: 15pt;
+}

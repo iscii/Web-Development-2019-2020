@@ -1,0 +1,64 @@
+body{
+    background-image: url(../images/wooden.jpg);
+    background-repeat: repeat-y;
+    background-size: 100vw 100vh;
+    margin: 0 auto;
+}
+button{
+    height: 100px;
+    width: 100px;
+    margin-top: 20%;
+}
+div#log{
+    border: 2px solid #888;
+    border-radius: 15px;
+    background: #181818;
+    width: 30%;
+    height: 80vh;
+    float: right;
+    margin-top: 5%;
+    margin-right: 2%;
+    color:#FC3939;
+    font: Aharoni;
+    font-size: 200%;
+    overflow: scroll;
+}
+/*scrollbar customization*/
+::-webkit-scrollbar{
+    width: 10px;
+  }
+::-webkit-scrollbar-track{
+    background: #181818;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-thumb{
+    background: #888;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #555;
+}
+::-webkit-scrollbar-corner{
+    background: #181818;
+    border-radius: 15px;
+}
+
+.cOrders{
+    /*width: 600%;*/
+    display: inline-block;
+    position: relative;
+    top: 2%;
+    left: 2%;
+}
+/*work on the appearance of receipts -- USE DIVS AND SPANS INSTEAD OF TABLES AND LISTS COS THESE SUCK EE*/
+.receipts{
+    background: rgb(108, 208, 255);
+    border: 2px solid white;
+    padding: 10px 10px 10px 10px;
+    display: inline-block;
+    margin-right: 0.05%;
+}
+.simHead{
+   border: 2px solid white;
+   display: inline-block;
+}

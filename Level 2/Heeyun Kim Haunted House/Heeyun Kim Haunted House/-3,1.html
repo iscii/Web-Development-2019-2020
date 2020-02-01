@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Haunted House!</title>
+		<link rel = "stylesheet" href = "css/forAll.css" />
+
+		<style>
+			body
+			{ 
+				background-image: url("image/bedroom.jpg");
+			}
+
+		</style>
+		
+		
+		<script>
+			//stores the element of html into a variable for innerHTML in later codes.
+			//set number of clicking the opening door button 0
+			//hides the ghost image so that it pops out when the user openes the door. 
+			//hides the hyperlink that leads to death when the user decides to talk to the ghost. This should be hidden in the beginning and come out as the ghost appears. 
+			function initialize()
+			{
+				narrateText = document.getElementById("narrate");
+				doorButton = document.getElementById("doorOut");
+				ghost = document.getElementById("ghostTalk");
+				ghost.style.visibility = "hidden";
+				numClick = 0;
+				ghostImage = document.getElementById("ghostImg");
+				ghostImage.style.visibility = "hidden";
+			}	
+			//runs when the user attempts to open the door
+			function goOut()
+			{
+				numClick+=1;
+				display();
+				changeButton();
+			}
+			//This changes the innerHTML of the button to open the door with the flow of the story.
+			function changeButton()
+			{
+				doorButton.innerHTML = "Try opening!";
+				if (numClick == 4)
+				{
+					doorButton.innerHTML = "Look towards the sound";
+				}
+			
+			}
+			
+			//This changes the narration. It changes everytime when user decides to do an action regards of the ghost. 	
+			function display()
+			{
+				if (numClick == 1)
+				{
+					narrateText.innerHTML = "Huh? The door is locked! Should I try open using force?";
+				}
+				if (numClick ==2)
+				{
+					narrateText.innerHTML = "It doesn't work! Should I try one more time?";
+				}
+				if (numClick ==3)
+				{
+					narrateText.innerHTML = "Ugh! It doesn't work!! <br /> Wait... I heard something! A foot step";
+				}
+				if (numClick ==4)
+				{
+					narrateText.innerHTML = "The footstep is getting closer...Yay! The door opened...! <br /> Huh? I heard something again!";
+				}
+				if (numClick ==5)
+				{
+					narrateText.innerHTML = "AHHH!! <br /> It is a GHOST!!!"
+					imageVisible();
+					buttonAppearAndDisappear();
+				}
+			}
+			
+			function imageVisible()
+			{
+				ghostImage.style.visibility = "visible";
+			}
+			
+			function buttonAppearAndDisappear()
+			{
+				ghost.style.visibility = "visible";
+				doorButton.style.visibility = "hidden";
+			}
+			
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>Bedroom</h1>
+		
+		<p id = "narrate">
+			Just a normal room. Nothing special! Let's go out of the room!
+		</p>
+		
+		<div>
+			<a id = "ghostTalk" href = "gameover.html">Try talk to the ghost</a>
+			<br />
+			
+			<!--This button changes the innerHTML when the user first tries to open the door and founds out that the door is locked.-->
+			<button id = "doorOut" onclick = "goOut();"> Get out of the room </button>
+			<br />
+			<a href = "0,0.html">Home</a>
+		</div>
+		<img id = "ghostImg" src = "image/ghost.png"/>
+	</body>
+</html>

@@ -1,0 +1,5 @@
+5.1.12: all top left corners are (0,0) regardless of resolution
+
+5.1.15: css descendant selectors
+
+5.1.18: css immediate sibling selectors

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Haunted House!</title>
+		<link rel = "stylesheet" href = "css/forAll.css" />
+		<style>
+			body
+			{ 
+				background-image: url("image/farfarCorridor.jpg");
+				
+			}
+			
+		</style>
+		
+		
+		<script>
+		
+			function initialize()
+			{
+				narration = document.getElementById("narrate");
+				observateButton = document.getElementById("observate");
+				goToRoom = document.getElementById("escape");
+				readMessage = document.getElementById("secret");
+				readMessage.style.visibility = "hidden";
+				ghostImage = document.getElementById("ghostImg");
+				ghostImage.style.visibility = "hidden";
+				numClick =0
+			}
+			
+			//This runs when the user click the button regarding the ghost.
+			function talkGhost()
+			{
+				numClick +=1;
+				display();
+				changeButton();
+			}
+			
+			//This changes the innerHTML of narration as the user do an action (clicking the button)
+			function display()
+			{
+				if (numClick ==1)
+				{
+					narrate.innerHTML = "AHHH! GHOST! <br /> Should I talk to it?";
+					imageVisible();
+
+				}
+				if (numClick ==2)
+				{
+					narrate.innerHTML = "Hmm... I don't think it is good idea to talk to him. Should I really talk to the ghost?";
+				}
+				if (numClick ==3)
+				{
+					narrate.innerHTML = "...Hello? <br /> Huh? It disappeared! <br/ > Oh! What is that? A piece of paper!";
+					imageHidden();
+				}
+			}
+			
+			function imageVisible()
+			{
+				ghostImage.style.visibility = "visible";
+			}
+			function imageHidden()
+			{
+				ghostImage.style.visibility = "hidden";
+			}
+			
+			//This changes the innerHTML of button as the flow of the story.
+			function changeButton()
+			{
+				if (numClick ==1)
+				{
+					observateButton.innerHTML = "Talk to the ghost";
+				}
+				if (numClick ==2)
+				{
+					observateButton.innerHTML = "YES!"
+					goToRoom.innerHTML = "No..Run into a room!"
+				}
+				if (numClick ==3)
+				{
+					observateButton.style.visibility = "hidden";
+					goToRoom.style.visibility = "hidden";
+					secret.style.visibility = "visible";
+				}
+			}
+					
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>Far Far Corridor</h1>
+		
+		<p id = "narrate">I can't still see the end!!! <br />Also, it is freezing! I don't want to go any farther. <br />Wait... Huh? I hear something! </p>
+			
+		
+		<div>
+			<button id = "observate" onclick = "talkGhost();">Go towards the sound</button>
+			<a id = "escape" href = "-3,1.html">Go into a room</a>
+			<br />
+			<a id = "secret" href = "secretMessage2.html" target = "_black">Read the paper</a>
+			<br />
+			<a href = "0,0.html">Home</a>
+		</div>
+		<img id = "ghostImg" src = "image/ghost.png"/>
+
+	</body>
+</html>

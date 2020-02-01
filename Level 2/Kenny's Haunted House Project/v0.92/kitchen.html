@@ -1,0 +1,47 @@
+	<!DOCTYPE HTML>
+	<html>
+		<head>
+			<title>The Haunted House</title>
+			<style>
+			</style>
+			<link rel = "stylesheet" href = "Haunted House CSS.css"/>
+			<script src = "utilities.js"></script>
+			<script>
+			function initialize()
+			{
+			basementKey = document.getElementById("BKey")
+			}
+			function checkBKey()
+			{
+				if (sessionStorage.keyToBasement == 0)
+					{
+						basementKey.innerHTML = "This door needs a key"
+					}
+					else
+					{
+						location.href = "basement.html"
+					}
+			}
+			</script>
+		</head>
+		
+		<body onload = "initialize();" background = "images/Kitchen.png">
+			
+			<h4> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			
+			You arrive in the kitchen, which has a minimalistic design. It appears to be older that you might
+			think, with subtle spiderwebs and dust populating the wood. There appears to be many cupboards that
+			could hold clues, while there is also an entrance to the living room. In addition, there is an
+			ancient-looking door that's locked in every possible way, which you feel a strange attaction towards.<br />
+			What will you do?
+			</h4>
+			<a href = "exit.html">Return to the front door</a>
+			<a href = "Cupboard1.html"> Open the first cupboard</a>
+			<a href = "Cupboard2.html"> Open the second cupboard</a>
+			<a href = "Cupboard3.html">Open the third cupboard</a>
+			<button onclick = "checkBKey();" id = "BKey">Enter basement</button>
+			<a href = "HS.html"> Sneak into the living room</a>
+			<a href = "Die Page.html">Commit Die</a>
+		</body>
+	</html>

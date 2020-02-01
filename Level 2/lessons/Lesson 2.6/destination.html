@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+		
+		</title>
+		<style>
+		
+			a
+			{
+				font:24pt arial;
+				color:blue;
+				text-decoration:none;
+			}
+		
+		</style>
+		<script>
+		
+			function initialize()
+			{
+				visitsOut = document.getElementById("visits");
+				
+				if(!sessionStorage.numVisits)
+					sessionStorage.numVisits = 0;
+				else
+					sessionStorage.numVisits++;
+					
+				display();
+			}
+
+			function display()
+			{
+				visitsOut.innerHTML = sessionStorage.numVisits;
+			}
+			
+		</script>
+	</head>
+	<body onload = "initialize();">
+		
+		<h1>Kore wa desutinaashun</h1>
+		<h2>I have visited here <span id = "visits"></span> times. </h2>
+		
+		<a href = "home.html">Return home</a>
+		
+		<br/><br/>
+		
+		<!-- the <target = "_blank"> opens a new tab when the link is clicked -->
+		<a href = "http://google.com" target = "_blank">Google</a>
+		
+	</body>
+</html>

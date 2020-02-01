@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style></style>
+		<script>
+		
+			function initialize()
+			{
+				messageOutput = document.getElementById("output");
+				
+				message = "";
+			}
+			
+			function addCharacter(letter)
+			{
+				message += letter;
+				display();
+			}
+		
+			function display()
+			{
+				messageOutput.innerHTML = message;
+			}
+			
+		</script>
+	</head>
+	<body onload = "initialize();">
+	
+		<!-- LETTERS -->
+		
+		<!-- you add '' to the string parameters since it is inside an onclick = "" event. -->	
+		<button onclick = "addCharacter('A');"> A </button>
+		<button onclick = "addCharacter('B');"> B </button>
+		<button onclick = "addCharacter('C');"> C </button>
+		<button onclick = "addCharacter('D');"> D </button>
+		<button onclick = "addCharacter('E');"> E </button>
+		<button onclick = "addCharacter('F');"> F </button>
+		<button onclick = "addCharacter('G');"> G </button>
+		<button onclick = "addCharacter('H');"> H </button>
+		<button onclick = "addCharacter('I');"> I </button>
+		<button onclick = "addCharacter('J');"> J </button>
+		<button onclick = "addCharacter('K');"> K </button>
+		<button onclick = "addCharacter('L');"> L </button>
+		<button onclick = "addCharacter('M');"> M </button>
+		<button onclick = "addCharacter('N');"> N </button>
+		<button onclick = "addCharacter('O');"> O </button>
+		<button onclick = "addCharacter('P');"> P </button>
+		<button onclick = "addCharacter('Q');"> Q </button>
+		<button onclick = "addCharacter('R');"> R </button>
+		<button onclick = "addCharacter('S');"> S </button>
+		<button onclick = "addCharacter('T');"> T </button>
+		<button onclick = "addCharacter('U');"> U </button>
+		<button onclick = "addCharacter('V');"> V </button>
+		<button onclick = "addCharacter('W');"> W </button>
+		<button onclick = "addCharacter('X');"> X </button>
+		<button onclick = "addCharacter('Y');"> Y </button>
+		<button onclick = "addCharacter('Z');"> Z </button>
+		<hr/>
+		
+		<!-- NUMBERS -->
+		
+		<button onclick = "addCharacter('0');"> 0 </button>
+		<button onclick = "addCharacter('1');"> 1 </button>
+		<button onclick = "addCharacter('2');"> 2 </button>
+		<button onclick = "addCharacter('3');"> 3 </button>
+		<button onclick = "addCharacter('4');"> 4 </button>
+		<button onclick = "addCharacter('5');"> 5 </button>
+		<button onclick = "addCharacter('6');"> 6 </button>
+		<button onclick = "addCharacter('7');"> 7 </button>
+		<button onclick = "addCharacter('8');"> 8 </button>
+		<button onclick = "addCharacter('9');"> 9 </button>
+		<hr/>
+		
+		<!-- SYMBOLS etc -->
+		
+		<button onclick = "addCharacter(' ');"> SPACE </button>
+		<hr/>
+		
+		<!-- OUTPUT -->
+		
+		<div id = "output"></div>
+		
+	</body>
+</html>

@@ -1,0 +1,11 @@
+body{ /*dark theme*/
+    /*text colors can be used for borders*/
+    color:#181818; /*background*/
+    color:#FC3939; /*text*/
+    color:lightcoral; /*text*/
+    color:rgb(99, 99, 241); /*text*/
+    color:rgb(47, 171, 187); /*text*/
+    color:rgba(255, 56, 56, 0.801); /*reset button*/
+    font: Andalus; /*Basic*/
+    font: Aharoni; /*Smooth*/
+}

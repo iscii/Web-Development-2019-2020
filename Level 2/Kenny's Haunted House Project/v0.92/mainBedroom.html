@@ -1,0 +1,54 @@
+	<!DOCTYPE HTML>
+	<html>
+		<head>
+			<title>The Haunted House</title>
+			<style>
+			</style>
+			<link rel = "stylesheet" href = "Haunted House CSS.css"/>
+			<script src = "utilities.js"></script>
+			<script>
+				function initialize()
+				{
+					safeCombo = document.getElementById("haveCombo");
+					boxOpen = document.getElementById("boxOpened");
+				}
+				
+				
+				function openSafe()
+				{
+					if (sessionStorage.strangeCombination == 0)
+					{
+						safeCombo.innerHTML = "This safe needs a combination"
+					}
+					else
+					{
+						sessionStorage.exitKeyTrue++;
+						safeCombo.innerHTML = "You find a shiny key inside the safe"	
+					}
+				
+				}
+				
+				function openBox()
+				{
+					sessionStorage.keyToBasement++;
+					boxOpen.innerHTML = "You find an ancient-looking key inside the box."
+				}
+			</script>
+		</head>
+		
+		<body onload = "initialize();" background = "images/bedroom.jpg">
+			
+			<h4> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			
+			You unlock this door with the key in your hand, rather than your imagination. The door
+			leads to a fancy bedroom fit for an aristocrat. You notice a wardrobe, a jewelry box,
+			and a safe.<br />
+			What will you do?</h4>
+			<button onclick = "openSafe();" id = "haveCombo"> Open safe</button>
+			<button onclick = "openBox();" id = "boxOpened">Open the box</button>
+			<a href = "Staircase.html">Go back to the staircase</a>
+			<a href = "Wardrobe.html">Open the Wardrobe</a>
+			<a href = "Die Page.html">Commit Die</a>
+		</body>
+	</html>

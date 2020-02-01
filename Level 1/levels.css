@@ -1,0 +1,188 @@
+@font-face
+{
+	font-family:neuropolitical;
+	src: url("fonts/neuropolitical.ttf");
+}
+
+body
+{
+	font:13pt calibri;
+	background-color:#b9e8e5;
+	
+	background-image:url("images/code back.png");
+	background-attachment:fixed;
+	background-size:cover;
+	/*color:#5b81a7;*/
+	
+}
+
+button
+{
+	font:16pt neuropolitical;
+	background-color:#9dc2c0;
+}
+
+#intro
+{
+	margin:auto;
+	width:90%;
+	text-align:justify;
+}
+
+h1
+{
+	text-align:center;
+	font:24pt neuropolitical;
+	font-weight:900;
+	margin-top:100px;
+}
+
+#title
+{
+	opacity:0.95;
+	border:2px solid #72908e;
+	border-radius:12px;
+	box-shadow:8px 8px 5px darkgrey;
+	background-color:#9dc2c0;
+	padding:8px;
+}
+
+#objective
+{
+	text-align:center;
+	font:14pt arial;
+	font-weight:900;
+}
+
+h2
+{
+	opacity:0.95;
+	border:2px solid #72908e;
+	border-radius:12px;
+	box-shadow:8px 8px 5px darkgrey;
+	font-family:neuropolitical;
+	background-color:#9dc2c0;
+	font-size:12pt;
+	display:inline-block;
+	width:15%;
+	padding:8px;
+	text-align:center;
+}
+
+h2 span
+{
+	color:#a61919;
+}
+
+.columncontainer
+{
+	margin-top:20px;
+}
+
+#contentdisplay
+{
+	opacity:0.95;
+	border:2px solid #72908e;
+	border-radius:12px;
+	box-shadow:8px 8px 5px darkgrey;
+	height:70vh;
+	overflow-y:scroll;
+	background-color:#9dc2c0;
+}
+
+.topbar
+{
+	position:fixed;
+	height:75px;
+	width:100%;
+	top:10px;
+	z-index:1;
+}
+
+.column
+{
+	width:75%;
+}
+
+.sidebar
+{
+	width:15%;
+	overflow-y:scroll;
+	height:67vh;
+}
+
+.txtcol
+{
+	width:25%;
+	text-align:justify;
+	padding:0px 10px;
+}
+
+.fulltxt
+{
+	width:90%;
+	text-align:left;
+}
+
+img.column
+{
+	width:65%;
+	padding:0px 5px;
+}
+
+ol
+{
+	text-align:left;
+	font-weight:bold;
+}
+
+ol li
+{
+	text-decoration:underline;
+	width:90%;
+	height:40px;
+	padding:8px;
+	
+	background-color:#9dc2c0;
+	opacity:0.85;
+	border:2px solid #72908e;
+	border-radius:12px;
+	box-shadow:8px 8px 5px darkgrey;
+	list-style-position:inside;
+	margin-left:-20px;
+	
+	font-size:1em;
+}
+
+ol li:hover, li span:hover
+{
+	cursor:pointer;
+	background-color:black;
+	color:white;
+}
+
+ul
+{
+	list-style-type:none;
+	display:inline-block;
+	width:75vw;
+	text-align:center;
+	font-weight:bold;
+}
+
+ul li
+{
+	display:inline-block;
+	width:20%;
+	height:25px;
+}
+
+ul li span
+{
+	background-color:#9dc2c0;
+	opacity:0.85;
+	border:2px solid #72908e;
+	border-radius:12px;
+	box-shadow:8px 8px 5px darkgrey;
+	padding:3px 8px;
+}

@@ -1,0 +1,54 @@
+body
+{
+	font-family:Papyrus;
+	background-size:cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+
+}
+h2
+{
+	text-align: center;
+}
+h1
+{
+	color: white;
+	font:bold;
+	font-size:30pt;
+}
+button
+{
+	color: white;
+	font-size: 12pt;
+	background-color: black;
+	border-style: outset;
+	margin: 25px;
+	border-width: 3px;
+	font-family: Papyrus;
+}
+	
+a
+{
+	text-decoration: none;
+	color: white;
+	background-color: black;
+	border-style: outset;
+	border-width:3px;
+	margin: 25px;
+	font-size: 12pt;
+}
+
+div
+{
+	text-align: center;
+	line-height: 300%;
+}
+
+p
+{
+	background-color:black;
+	color: white;
+	font-family: Papyrus;
+	text-align: center;
+	font-size:20pt;
+}

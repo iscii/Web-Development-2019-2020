@@ -1,0 +1,26 @@
+h4
+{
+		font:18pt chiller;
+		font-size:bold;
+}
+a
+{
+		font:bold 13pt chiller;
+		text-align:center;
+}
+
+body
+{
+	background-repeat:no-repeat;
+	background-size:100% 83%;
+}
+
+span
+{
+	font:italic 15pt chiller;
+}
+
+div
+{
+	color:transparent;
+}

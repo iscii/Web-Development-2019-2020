@@ -1,0 +1,18 @@
+Highlight
+shift + up/down: highlight lines up/down
+shift + left/right: highlight text left/right
+ctrl + shift + left/right: highlight full words left/right
+ctrl + shift + L: highlight all matching occurences and modify all
+ctrl + D: highlight the next occurence
+ctrl + K and ctrl + D: skip the next occurence
+
+Move
+highlight + tab: mass tab
+highlight + shit + tab: mass de-tab
+alt + up/down: move code line up/down
+
+Copy
+alt + shift + up/down: copy line and paste above/below
+
+Comments
+highlight, ctrl + q: comment out a set of lines

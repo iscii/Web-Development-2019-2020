@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Haunted House!</title>
+		<link rel = "stylesheet" href = "css/forAll.css" />
+		<style>
+			body
+			{ 
+				background-image: url("image/basement2.png");
+			}
+		</style>
+		
+		
+		<script>
+			function initialize()
+			{
+				narration = document.getElementById("narrate");
+				runButton = document.getElementById("runAway");
+				ghostButton = document.getElementById("ghost");
+				ghostButton.style.visibility = "hidden";
+				ghostImage = document.getElementById("ghostImg");
+				ghostImage.style.visibility = "hidden";
+				tripButton = document.getElementById("trip");
+				ghostTalk = document.getElementById("gOver");
+				ghostTalk.style.visibility = "hidden";
+			}
+			//This runs when the user decides to go forward. The user gets tripped over something.
+			function tripOver()
+			{
+				tripButton.style.visibility = "hidden";
+				narration.innerHTML = "Ouch! I knew I will trip over something!! <br /> But what did I trip over?";
+				ghostButton.style.visibility = "visible";
+				runButton.innerHTML = "Run away";
+			}
+			//This runs whent the user decides to check the object that he got tripped over. 
+			//ghost appears. 
+			function ghostAppear()
+			{
+				ghostButton.style.visibility = "hidden";
+				ghostImage.style.visibility = "visible";
+				ghostTalk.style.visibility = "visible";
+				narration.innerHTML = "AHH!! Ghost!! I tripped over a ghost!!!! <br />Should I talk to the ghost?";
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>Deeper in the Basement</h1>
+		<p id = "narrate">This room is very dark. I can't see anything! <br /> I don't think I can move any farther.</p>
+		<div>
+			<a id = "gOver" href = "gameover.html">Let's talk to the ghost!</a>
+			<br />
+			<button id = "ghost" onclick = "ghostAppear();">Go find what I tripped over</button>
+			<br />
+			<button id = "trip" onclick = "tripOver();">Let's go forward</button>
+			<br />
+			<a id = "runAway" href = "0,-2.html">Go back</a>
+			<a href = "0,0.html">Home</a>
+			<br />
+			<img id = "ghostImg" src = "image/ghost.png"/>
+		</div>
+	</body>
+</html>

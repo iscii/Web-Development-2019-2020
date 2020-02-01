@@ -1,0 +1,15 @@
+<pre> Whitespace values
+https://stackoverflow.com/questions/1702559/ascii-art-in-html/1702568
+
+disable/enable onclick on images
+https://stackoverflow.com/questions/18982642/how-to-disable-and-then-enable-onclick-event-on-div-with-javascript/18983026
+
+horizontally align divs
+https://stackoverflow.com/questions/9277311/how-can-i-horizontally-align-my-divshttps://stackoverflow.com/questions/9277311/how-can-i-horizontally-align-my-divs
+or
+https://stackoverflow.com/questions/15374918/how-to-put-two-divs-side-by-side/55430864
+
+
+
+
+

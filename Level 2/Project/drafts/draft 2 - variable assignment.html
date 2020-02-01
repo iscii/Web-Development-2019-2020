@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+
+    </title>
+    <style>
+    </style>
+    <script>
+
+        function assignIDs()
+        {
+            op1 = document.getElementById("img1.1");
+            op2 = document.getElementById("img1.2");
+            op3 = document.getElementById("img1.3");
+            op4 = document.getElementById("img1.4");
+            op5 = document.getElementById("img2.1");
+            op6 = document.getElementById("img2.2");
+            op7 = document.getElementById("img2.3");
+            op8 = document.getElementById("img2.4");
+            op9 = document.getElementById("img3.1");
+            op10 = document.getElementById("img3.2");
+            op11 = document.getElementById("img3.3");
+            op12 = document.getElementById("img3.4");
+            op13 = document.getElementById("img4.1");
+            op14 = document.getElementById("img4.2");
+            op15 = document.getElementById("img4.3");
+            op16 = document.getElementById("img4.4");
+        }
+        function start()
+        {
+            assignIDs();
+
+            c1 = "images/tanjiro.png";
+            c2 = "images/nezuko.png";
+            c3 = "images/zenitsu.png";
+            c4 = "images/inosuke.png";
+            c5 = "images/tomioka.png";
+            c6 = "images/rengoku.png";
+            c7 = "images/shinobu.png";
+            c8 = "images/kanroji.png";
+
+            cardVar = "0";
+            imgNum = 0;
+
+            //array to track cards already assigned w variables
+            assigned = [];
+            cardPair = [];
+            imgVars = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
+
+            pair1 = [];
+            pair2 = [];
+            pair3 = [];
+            pair4 = [];
+            pair5 = [];
+            pair6 = [];
+            pair7 = [];
+            pair8 = [];
+            pairs = ['pair1', 'pair2', 'pair3', 'pair4', 'pair5', 'pair6', 'pair7', 'pair8'];
+
+            assignCardVars();
+        }
+
+        function assignCardVars()
+        {
+
+            srcVars = ['op1', 'op2', 'op3', 'op4', 'op5', 'op6', 'op7', 'op8', 'op9', 'op10', 'op11', 'op12', 'op13', 'op14', 'op15', 'op16'];
+            var tempVar = srcVars[Math.floor(Math.random() * 16)]
+
+            scramble(tempVar);
+        }
+
+        function scramble(string)
+        {
+            if (assigned.includes(string))
+            {
+                if (assigned.length <= 15)
+                {
+                    assignCardVars();
+                }
+
+                //console.log(assigned.length - 1);
+                //console.log("yes");
+            }
+            else
+            {
+                cardPair.push(string);
+
+                if (cardPair.length == 2)
+                {
+                    assignToImg();
+                }
+
+                assigned.push(string);
+                assignCardVars();
+
+                //console.log(cardPair.toString());
+                //console.log(assigned.toString());
+                //console.log("no");
+            }
+        }
+
+        //when assigning an array variable to the img tags, make sure it assigns to two imgs and then moving on to the next two. perhaps you can use a for each or a simple variable to lock it.
+        function assignToImg()
+        {
+            if (imgNum < 8)
+            {
+                eval(pairs[imgNum]).push(cardPair[0], cardPair[1], imgVars[imgNum]);
+
+                console.log(eval(pairs[imgNum]));
+
+                imgNum++;
+            }
+            cardPair = [];
+        }
+
+
+/**/</script>
+</head>
+<body onload="start();">
+    <div>
+        <!-- test button -->
+        <button onclick="assignCardVars">reset</button>
+    </div>
+    <!-- test image-->
+    <div>
+    </div>
+
+    <!-- here for tests -->
+    <div>
+        <img src="images/dark-blue-square.jpg" id="img1.1" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img1.2" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img1.3" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img1.4" width=150 height=150 /> &nbsp
+
+        <br />
+
+        <img src="images/dark-blue-square.jpg" id="img2.1" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img2.2" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img2.3" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img2.4" width=150 height=150 /> &nbsp
+
+        <br />
+
+        <img src="images/dark-blue-square.jpg" id="img3.1" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img3.2" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img3.3" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img3.4" width=150 height=150 /> &nbsp
+
+        <br />
+
+        <img src="images/dark-blue-square.jpg" id="img4.1" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img4.2" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img4.3" width=150 height=150 /> &nbsp
+        <img src="images/dark-blue-square.jpg" id="img4.4" width=150 height=150 /> &nbsp
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+			
+		</title>
+		<style>
+		
+		</style>
+		<script>
+		
+			function initialize()
+			{
+				opNum = document.getElementById("numT");
+				//modifier = 0;
+				num = 0;
+            }
+
+            function modifyNumber(modifier)
+            {
+                /*
+                var modifier = getRandomInteger(-10, 10);
+                console.log(modifier);
+                num += modifier;
+                */
+                num += modifier
+                display();
+            }
+
+            function getRandomInteger(lower, upper)
+            {
+                var multiplier = upper - (lower - 1);
+                var rnd = parseInt(Math.random() * multiplier) + lower;
+
+                return rnd;
+            }
+
+            function display()  
+            {
+                opNum.innerHTML = num;
+            }
+
+		</script>
+	</head>
+	<body onload = "initialize()">
+		<div id = "numT"> 0 </div>
+		<hr/>
+		<button onclick = "modifyNumber(1);"> Add 1 </button>
+		<button onclick = "modifyNumber(-1);"> Subtract 1 </button>
+		<button onclick = "modifyNumber(5);"> Add 5 </button>
+		<button onclick = "modifyNumber(-5);"> Subtract 5 </button>
+		<button onclick = "modifyNumber(10);"> Add 10 </button>
+		<button onclick = "modifyNumber(-10);"> Subtract 10 </button>
+        <hr/>
+        <button onclick="modifyNumber(getRandomInteger(-10, 10))"> Random Number </button>
+		
+	
+	</body>
+</html>

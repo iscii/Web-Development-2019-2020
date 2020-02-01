@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+		    Form Controls
+		</title>
+		<style>
+		</style>
+		<script>
+
+            function initialize()
+            {
+                inputContainer = document.getElementById("inputform");
+                opGreeting = document.getElementById("greeting");
+
+                firstName = "";
+                lastName = "";
+                eatsPizza = false;
+                nationality = "";
+            }
+
+            function recordData()
+            {
+                firstName = inputContainer.fname.value;
+                lastName = inputContainer.lname.value;
+                eatsPizza = inputContainer.pizza.checked;
+                nationality = inputContainer.origin.value;
+
+                inputContainer.fname.value = "";
+                inputContainer.lname.value = "";
+
+                display();
+            }
+
+            function display()
+            {
+                opGreeting.innerHTML = "Hello " + firstName + " " + lastName + " from " + nationality + "! Welcome to the party";
+                console.log(opGreeting.innerHTML);
+
+                if (!eatsPizza)
+                    opGreeting.innerHTML += ". It looks like you're not a fan of pizza";
+                else
+                    opGreeting.innerHTML += ". It looks like you're a fan of pizza";
+            }
+		
+		</script>
+	</head>
+	<body onload="initialize()">
+
+        <h1 id="greeting"> </h1> <hr/>
+
+        <form id="inputform">
+
+            First Name: <input name="fname" type="text"/>
+            Last Name: <input name="lname" type="text"/>
+            <!-- label allows you to click the text to check the box -->
+            <label>
+                <!-- just add 'checked' (without the apostrophes) for the box to start off checked -->
+                <input name ="pizza" type="checkbox"/> Pizza
+            </label>
+
+            <br/><br/>
+
+            <label>
+                <input type="radio" name="origin" value="Earth"/> Earth
+            </label>
+            <label>
+                <input type="radio" name="origin" value="Moon"/> Moon
+            </label>
+            <label>
+                <input type="radio" name="origin" value="Mars" /> Mars
+            </label>
+
+        </form>
+
+        <hr/>
+
+        <button onclick="recordData();"> Enter </button>
+
+	</body>
+</html>

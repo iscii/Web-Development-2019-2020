@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+			Food List
+		</title>
+		<link rel = "stylesheet" href = "foods.css" />
+		<style>
+		
+		</style>
+		<script src = "arrays.js"></script>
+		<script>
+			function initialize()
+			{
+				opBox = document.getElementById("outbox");
+				opFoodSelec = document.getElementById("foodsel");
+				opDupes = document.getElementById("dupes");
+				opCount = document.getElementById("count");
+
+				foodList = ["pizza", "hamburger", "sushi", "guacamole", "salmon", 
+				"hamburger", "guacamole", "hamburger", "salmon", "sushi", "guacamole",
+				"guacamole", "hamburger", "sushi"];
+				dupesList = [];
+				dupesCount = 0;
+
+				display();
+			}
+
+			function addFood()
+			{
+				foodList.push(opFoodSelec.value);
+				display();	
+			}
+
+			function getDupeList()
+			{
+				dupesList = indexesOf(foodList, opFoodSelec.value);
+				console.log(dupesList);
+				display();
+			}
+
+			function getDupeCount()
+			{
+				dupesCount = countDuplicates(foodList, opFoodSelec.value);
+				console.log(dupesCount);
+				display();
+			}
+
+			function display()
+			{
+				//console.log(foodList);
+				opBox.innerHTML = "0: " + foodList[0];
+				for(var i = 1; i < foodList.length; i++)
+					opBox.innerHTML += "<br/> " + i + ": " + foodList[i];
+				
+				opDupes.innerHTML = dupesList;
+				opCount.innerHTML = dupesCount;
+			}
+		</script>
+	</head>
+	<body onload = "initialize();">
+		<h1>Food List</h1>
+
+		<label>
+			Selection: <input type = "text" id = "foodsel" />
+		</label>
+
+		<hr/>
+
+		<button onclick = "addFood();">
+			Add food
+		</button>
+
+		<button onclick = "getDupeList();">
+			Find Duplicates
+		</button>
+
+		<button onclick = "getDupeCount();">
+			Count Duplicates
+		</button>
+
+		<div>
+			Duplicate Indices: <span id = "dupes"></span>
+		</div>
+
+		<div>
+			Duplicate Count: <span id = "count"></span>
+		</div>
+
+		<hr/>
+
+		<div>
+			<div id = "outbox"></div>
+		</div>
+	</body>
+</html>

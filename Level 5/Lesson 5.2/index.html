@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Into The Woods</title>
+		<link rel = "stylesheet" href = "woods.css"/>
+		<style></style>
+		<script>
+			function initialize(){
+				bigImage = document.getElementById("displayimage");
+			}
+			function toggleImage(image){
+				if(image == ''){
+					bigImage.style.display = "none";
+				}
+				else{
+					bigImage.style.display = "inline";
+					bigImage.src = image;
+				}
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<h1><span>Welcome to the Bamboo Forest</span></h1><br />
+		
+		<ul>
+			<li onmouseover = "toggleImage('images/Usal-Redwood-Forest.jpg');" onmouseout = "toggleImage('');">
+				<img class = "bullet" src = "images/panda wide eyes.png" /> 
+				About Forests
+			</li><br />
+			<li onmouseover = "toggleImage('images/bamboo.jpg');" onmouseout = "toggleImage('');">
+				<img class = "bullet" src = "images/panda wide eyes.png" /> 
+				About Bamboo
+			</li><br />
+			<li onmouseover = "toggleImage('images/panda_thumb.jpg');" onmouseout = "toggleImage('');">
+				<img class = "bullet" src = "images/panda wide eyes.png" /> 
+				About Pandas
+			</li><br />
+		</ul>
+		<img id = "displayimage" /> <!-- empty img element that will display the above images on command ;; no src -->
+	</body>
+</html>

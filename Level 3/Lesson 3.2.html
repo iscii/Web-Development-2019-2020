@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+		
+		</title>
+		<style>
+		
+		</style>
+		<script>
+
+            const twiX = 0, eggS = 1, twizZ = 2, airheadS = 3, popS = 4;
+
+            function initialize()
+            {
+                opTwix = document.getElementById("numTwix");
+                opEggs = document.getElementById("numEggs");
+                opTwizz = document.getElementById("numTwizz");
+                opAirheads = document.getElementById("numAirheads");
+                opPops = document.getElementById("numPops");
+                opCandyLog = document.getElementById("candylog");
+
+                numTwix = parseInt(Math.random() * 11);
+                numEggs = parseInt(Math.random() * 11);
+                numTwizz = parseInt(Math.random() * 11);
+                numAirheads = parseInt(Math.random() * 11);
+                numPops = parseInt(Math.random() * 11);
+
+                candyLog = "";
+
+                display();
+            }
+
+            function giveCandy()
+            {   
+                if ((numTwix + numEggs + numTwizz + numAirheads + numPops) == 0)
+                {
+                    candyLog = "You are out of candy <br/>" + candyLog;
+                }
+                else
+                {
+                    var badSelection = true;
+                    var candyName = "";
+
+                    while (badSelection)
+                    {
+                        var selectedCandy = parseInt(Math.random() * 5);
+
+                        if (selectedCandy == twiX)
+                        {
+                            candyName = "Twix";
+                            if (numTwix > 0)
+                            {
+                                numTwix--;
+                                badSelection = false;
+                            }
+                        }
+                        else
+                        {
+                            if (selectedCandy == eggS)
+                            {
+                                candyName = "Scream Egg";
+                                if (numEggs > 0)
+                                {
+                                    numEggs--;
+                                    badSelection = false;
+                                }
+                            }
+                            else
+                            {
+                                if (selectedCandy == twizZ)
+                                {
+                                    candyName = "Twizzler";
+                                    if (numTwizz > 0)
+                                    {
+                                        numTwizz--;
+                                        badSelection = false;
+                                    }
+                                }
+                                else
+                                {
+                                    if (selectedCandy == airheadS)
+                                    {
+                                        candyName = "Airhead";
+                                        if (numAirheads > 0)
+                                        {
+                                            numAirheads--;
+                                            badSelection = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (numPops > 0)
+                                        {
+                                            candyName = "Ring Pop";
+                                            numPops--;
+                                            badSelection = false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if (badSelection)
+                        {
+                            candyLog = "You tried to give out a(n)" + candyName + ", but you have none left.<br/>" + candyLog;
+                        }
+                        else
+                        {
+                            candyLog = "You gave out a " + candyName + "<br/>" + candyLog;
+                        }
+                    }
+                }
+
+                display();
+            }
+
+            function display()
+            {
+                opTwix.innerHTML = numTwix;
+                opEggs.innerHTML = numEggs;
+                opTwizz.innerHTML = numTwizz;
+                opAirheads.innerHTML = numAirheads;
+                opPops.innerHTML = numPops;
+
+                opCandyLog.innerHTML = candyLog;
+            }
+
+		</script>
+	</head>
+	<body onload="initialize()">
+
+        Twix: <span id="numTwix"></span><br/>
+        Scream Eggs: <span id="numEggs"></span><br/>
+        Twizzlers: <span id="numTwizz"></span><br/>
+        Airheads: <span id="numAirheads"></span><br/>
+        Ring Pops: <span id="numPops"></span><br/>
+        <button onclick="giveCandy();"> Give Candy </button>
+
+        <hr/>
+
+        <div id="candylog"></div>
+	
+	</body>
+</html>

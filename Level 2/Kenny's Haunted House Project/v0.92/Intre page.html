@@ -1,0 +1,89 @@
+	<!DOCTYPE HTML>
+	<html>
+		<head>
+			<title>The Haunted House</title>
+			<style>
+			body
+			{
+				background-color:brown;
+			}
+			
+			h1
+			{
+				font:56pt chiller;
+				color:red;
+				text-decoration:none;
+				text-align:center;
+			}
+			h2
+			{
+				font:29pt chiller;
+				text-align:center;
+				font-size:bold;
+			}
+			h3
+			{
+				font:23pt chiller;
+				text-align:center;
+				font-size:bold;
+			}
+			a
+			{
+				font:29pt chiller;
+				text-align:center;
+				font-size:bold;
+			}
+			</style>
+			<script>
+				function initialize()
+				{
+				randomHint = document.getElementById("RandHint")
+				getRandHint();
+				}
+				
+				
+				function getRandHint()
+				{
+				hint = Math.random();
+				hint = hint*6;
+				hint = parseInt(hint);
+					if (hint == 0)
+					{
+						randomHint.innerHTML = "Tip: Choices will be marked below the story text. Locked doors will appear as buttons, and it's up to you to find the key."
+					} 
+					if (hint == 1) 
+					{
+						randomHint.innerHTML = "Always remember to jump, jump."
+					} 	
+					if (hint == 2)
+					{
+						randomHint.innerHTML = "Tip: There is a phrase I always remember using: Always highlight your ends."
+					}
+					if (hint == 3)
+					{
+						randomHint.innerHTML = "Tip: If you're ever stuck and want to exit this house as fast as possible, there's always my way...."			
+					}			
+					if (hint == 4)
+					{
+						randomHint.innerHTML = "Childhood was great. There was this show I loved called 'Gravity Falls' I might wanna try ciphering my messages one day..."
+					}
+					if (hint == 5)
+					{
+						randomHint.innerHTML = "Tip: There are five other hints in this intro page. Gotta read 'em all."
+					}
+				}
+			</script>
+		</head>
+		
+		<body onload = "initialize();">
+			<h1>The Haunted House</h1>
+			<h2>You have committed an oopsie and ended up trapping yourself in a haunted house!
+			Look around for clues that will aid in your escape, but be warned: certain doors may
+			accelerate your inevitable demise!</h2>
+			
+			<a href = "first room.html">Take the first step</a>
+			
+			<br /><br />
+			<h3 id = "RandHint"></h3>
+		</body>
+	</html>

@@ -1,0 +1,52 @@
+	<!DOCTYPE HTML>
+	<html>
+		<head>
+			<title>The Haunted House</title>
+			<style>
+			</style>
+			<link rel = "stylesheet" href = "Haunted House CSS.css"/>
+			<script src = "utilities.js"></script>
+			<script>
+				function initialize()
+				{
+					finalKey = document.getElementById("exitkey");
+				}
+				
+				
+				function display()
+				{
+					
+				}
+				
+				function checkKey()
+				{
+					if (sessionStorage.exitKeyTrue == 0)
+					{
+						finalKey.innerHTML = "You need a key to unlock this door."
+					}
+					else
+					{
+						location.href = "leave.html"
+					}
+				}
+			</script>
+		</head>
+		
+		<body onload = "initialize();" background = "images/stairs.jpg">
+			
+			<h4> <div>"made you feel it didn't he? Well, you needn't worry.
+			<br><span>The second is.....</span>" yes. considerably...
+			</div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			
+			You walk carefully down the stairs, careful not to make a sound. You approach
+			a door that looks to be the exit, especially with it's fancy exquisite design,
+			as well as other paths that lead to other rooms in the house.<br />
+			What will you do?</h4>
+			<a href = "kitchen.html">Go to the kitchen</a>
+			<a href = "staircase.html">Return to the Stairs</a>
+			<button onclick = "checkKey();" id = "exitkey">Leave the House</button>
+			<a href = "livingRoom.html">Go to the Living Room</a>
+			<a href = "Die Page.html">Commit Die</a>
+		</body>
+	</html>

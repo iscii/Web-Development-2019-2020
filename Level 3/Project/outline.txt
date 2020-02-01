@@ -1,0 +1,135 @@
+﻿Checklist
+
+BUGS:
+	11/25
+	>X-WHEN BOTH PLAYERS HAVE 1 WEAPON, WEAPON BREAK ONLY AFFECTS PLAYER 1
+	most likely due to Checkturn
+	>X-TIEBREAKER IS SCUFFED
+
+Functionality:
+	>X-basic rock paper scissors functionality
+		XX-Three global variables: Rock, Paper, Scissors.
+		>X-Check for both players moved
+		>X-Check for result
+			>X-Paper > Rock, Scissors > Paper, Paper > Rock.
+				XX-Maybe use a for function? Try. Substitute the variables with numbers? Even/Odd/Even. Prob won't work huh.
+				XX-assign numbers to each; rock = 1, paper = 2, scissor = [0,3] or something
+				>X-make a function that returns the beating move of the move moved, and then check if 
+				player 2's move equals the beating move. if not, player 1 wins.
+		
+	11/13/19
+	>X-arsenal/move count.
+		>X-players start with 5 of EACH weapon (15 total)
+			XX-arrays; player1Rock, player1Paper, player1Scissors; cpuRock, cpuPaper, cpuScissors
+				-another array for player2. add a different javascript file for two-player
+			>X|->used a single array for each player, each array representing 3 integers - the number of weapons you have of each category.
+		>X-weapon durability
+			>X-playing a weapon 3 times in a row breaks the weapon; it is deleted from the game.
+		>X-move count
+		>X-add weapon to winner's arsenal
+		>X-display for who's turn it is
+		>X-stop weapon breaks/plays if the player has 0 of the weapon left.
+	>X-cpu
+		(easy)
+		>X-plays a random move a second after the player moves.
+		XX(hard)
+		XX-
+	>-gameplay
+		>X-tiebreaker (all difficulties)
+			>X-if players tie over 3 rounds consecutively, each loses a weapon at random.
+			>X-ends when tie is broken.
+		XX-lost cause (hard)
+			-if the player only has a single weapon type left, move all to opponent's arsenal and end game.
+				-remember to explain what happened lmao
+			-update log
+	>X-reset button
+		>X-reset arsenals, durabilities, move counts, etc...
+		>x-separate reset button for log
+
+Interface:
+
+	>X-main menu
+		>X-name it index.html lmao
+		XX-select difficulty, gamemode
+		>X-how to
+		>X-customizable arsenal weapon counts using text inputs
+
+	>X-basic player vs. cpu interface
+		>X-player is bottom, cpu is top.
+		>X-player selection is to the right-center of screen, upright. cpu selecton is
+		to the left-center of the screen, upside-down.
+		>X-player clicks an image from a row of images.
+		>X-after both players move, flash winner (maybe in center or beside the turn display)
+	
+	XX-button to select difficulty
+		-make variables for difficulty; for each changed function, check for difficulty before calling
+		function (with just an if statement)
+		- so, if easy == true, call statement. or if hard == true, call a different statement.
+		
+
+	XX-button to select vs cpu or 2 player
+		-default to cpu
+		-when button clicked, redirect to another html that includes the 2 player interface and 
+		that references a different .js and .css file
+
+	>X-how to page
+		>X-four (now two lmao) sections:
+			>X-Basic gameplay
+				-explains rock paper scissors lmao
+			XX-Difficulties
+				-explains the difficulties
+			>X-Rules
+				-explains rules and Tie Breakers and stuff
+			XX-Two-player Move
+				-explains the rules for two-player; scrolling
+	>X-log (list)
+		>X-right side
+		>X-updates per round
+		>X-shows winner of previous rounds, numbered in order from down-up. Also shows their move.
+		-reset upon clicking reset button.
+	
+	>X-game end
+		-display winner & round count (center)
+	
+	XX-two player interface
+		-player1 selections are on top of page; scroll down for player2 selections.
+		-moves:
+			-player1 move is left side of screen, image upside down. player2 move is right side of screen.
+			-*revealed only after player2 makes move.
+		-clearly indicate the players
+
+Enhancements:
+	(my own):XX (scrapped for now. Might work on in future)
+		-two player mode: make it so the players have to scroll; top of page is p1, bottom is p2.
+		prevents seeing each other's picks and stuff.
+		-easy, teacher, hard modes.
+	XX-AI (choose at least one)
+		-The computer should recognize when the player is out of a certain weapon and never
+		play the weapon that would lose to it.
+		-The computer will try to empty a player's arsenal of a single weapon by always playing
+		the one that beats it.
+		-The computer will play defensively, using the weapon of which it has the most.
+		-There should always be a chance that the computer will choose at random. This will
+		prevent the user from catching on to any pattern.
+		-The computer will never play a weapon more than 3 times in a row.
+		-The computer will recognize when a weapon has been played 3 times in a row and play
+		accordingly.
+	XX-Builders - The players can build new weapons.
+ 		-A player can sacrifice any 2 different weapons to build one of the 3rd (a rock and a
+		scissor to build paper, etc..)
+			-Must have appropriate resources to build
+		-The player should have buttons that allow him or her to do this.
+		-The computer will automatically do it if it runs out of a weapon.
+	>X-Tie Breakers
+		>X-If the players tie over 3 rounds consecutively, each of them loses a weapon at
+		random.
+	>X-Bigger Games 
+		-Create an interface whereby the user can change the number of weapons in the
+		starting arsenal.
+	XX-Lost Cause 
+		-(Hard mode) Make the program understand that a player with only a single type of weapon
+		cannot win the game. End the game at that point.
+		-Move all of the loser�s remaining weapons to the winner�s arsenal and flash a message
+		explaining what happened.
+		-Update the log appropriately.
+

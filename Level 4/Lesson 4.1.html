@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+		
+		</title>
+		<style>
+            div
+            {
+                border: 2px double black;
+            }
+            textarea
+            {
+                width: 50%;
+            }
+		</style>
+		<script>
+            const invaliD_chars = "<>@!#$%^&*()";
+            function initialize()
+            {
+                logOutputBox = document.getElementById("logoutput");
+                logFormObject = document.getElementById("logform");
+                log = "Log--";
+            }
+            function isValid(msg)
+            {
+                for (var i = 0; i < invaliD_chars.length; i++)
+                {
+                    if(msg.indexOf(invaliD_chars.charAt(i)) >= 0)
+                        return false;
+                } 
+                return true;
+            }
+            function validate(msg)
+            {
+                for (var i = 0; i < invaliD_chars.length; i++)
+                {
+                    //charIndex is the invalid character or smthn
+                    //what valu does it have? why does it return > 0? how does it know where the invalid char is?
+                    //indexOf returns the index of the character in the string. If the character is not found, it returns -1.
+                    var charIndex = msg.indexOf(invaliD_chars.charAt(i));
+                    console.log(charIndex + " [ i = " + i.toString() + " ] ");
+                    while(charIndex >= 0)
+                    {
+                        console.log("charIndex > 0 [ " + charIndex + " ] [ i = " + i.toString() + " ] ");
+                        //from the 0th character to the invalid character, then from the invalid character's position + 1 (so skipping the invalid character) onward.
+                        msg = msg.substring(0, charIndex) + msg.substring(charIndex + 1);
+                        charIndex = msg.indexOf(invaliD_chars.charAt(i));
+                    }
+                }
+                return msg;
+            }
+            function addMessage(msg)
+            {
+                /*
+                //log = msg + log;
+                if(isValid(msg))
+                    log += "<br/>" + msg;
+                else   
+                    log += "<br/> Invalid Character Entered";
+                */
+                log += "<br/>" + validate(msg);
+                display();
+            }
+            function display()
+            {
+                logOutputBox.innerHTML = log;
+            }
+            
+		</script>
+	</head>
+	<body onload = "initialize();">
+        <h2>Log</h2>
+        <form id = "logform">
+            <textarea name = "loginput"></textarea>
+        </form>
+        <button onclick = "addMessage(logFormObject.loginput.value);">
+            Add to Log
+        </button>
+
+        <hr/>
+
+        <div id = "logoutput">Log --</div>
+	</body>
+</html>

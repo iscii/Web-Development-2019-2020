@@ -1,0 +1,43 @@
+body
+{
+	background-color:cornflowerblue;
+}
+
+/*
+	Here, I am using the comma (,) to indicate that I want the font style to apply to both p tags and h5 tags.
+*/
+p, h5
+{
+	font:bold 20pt comic sans ms;
+}
+
+/*
+	The text-align style applies only to h5 tags.
+*/
+h5
+{
+	text-align:right;
+}
+
+img
+{
+	width:700px;
+}
+
+div
+{
+	text-align:center;
+}
+
+/*
+	The color and text-decoration styles will override the normal colors for visited and unvisited links.
+	
+	The cursor property changes the cursor whenever it is on top of the link.  In this case, I am using the pointing finger cursor.  There are several others and you can use custom cursors.
+*/
+a
+{
+	font:bold 16pt comic sans ms;
+	color:blue;
+	text-decoration:none;
+	cursor:pointer;
+}

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    </title>
+    <style>
+        body
+        {
+            /*background-color: white;*/
+            background-color: #181818;
+        }
+
+        div#p2A
+        {
+            /*border: 3px solid black;*/
+            border: 3px solid #FC3939;
+            border-radius: 30px;
+            width: 500px;
+			height: 150px;
+            margin-top: 2%;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 25px;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        div#p1A
+        {
+            /*border: 3px solid black;*/
+            border: 3px solid #FC3939;
+            border-radius: 30px;
+            width: 500px;
+			height: 150px;
+            margin-top: 3%;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 25px;
+            text-align: center;
+            line-height: 20px;
+            float: none;
+        }
+
+        div#cUIBox
+        {
+            /*border: 2px solid black;*/
+            text-align: left;
+            padding: 0px 0px 0px 20px;
+            margin-right: 30%;
+            margin-top: 2%;
+
+            float: right;
+
+            width: 325px;
+            height: 100px;
+            padding: 25px;
+        }
+        div#cUIText1
+        {
+            /*border: 2px solid black;*/
+            /*color: darkred;*/
+            color: lightcoral;
+            font-family: Aharoni;
+            font-size: 100px;
+            margin-top: 4%;
+            margin-left: 28%;
+            
+            float: left;
+
+            width: 100px;
+            height: 100px;
+            padding: 25px;
+        }
+        div#cUIText2
+        {
+            border: 2px solid #FC20A0;
+            border-radius: 50px;
+            color: lightcoral;
+            font-family: Aharoni;
+            text-align: center;
+            font-size: 100px;
+            display: block;
+            margin-top: 20%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 400px;
+            height: 40px;
+            padding: 20px 0px 60px 0px;
+        }
+
+    </style>
+    <script src="js/utilities.js"></script>
+    <script>
+
+        function initialize()
+        {
+            iReferences();
+            iVars();
+            iDisplayVars();
+            iFunctions();
+        }
+        function iReferences()
+        {
+            opp1A = document.getElementById("p1A");
+            opp2A = document.getElementById("p2A");
+            opcB1 = document.getElementById("cBox1");
+            opcB2 = document.getElementById("cBox2");
+            opcUIT1 = document.getElementById("cUIText1");
+            opcUIT2 = document.getElementById("cUIText2");
+        }
+        function iVars()
+        {
+            p1play = "";
+            p2play = "";
+            sResult = "";
+			p1PrevPlay = "";
+			p2PrevPlay = "";
+			
+            arsenal = ["rock", "paper", "scissor"];
+			p1Arsenal = [5, 5, 5]; //[0] = Rock, [1] = Paper, [2] = Scissor//
+			p2Arsenal = [5, 5, 5];
+			
+			p1PlayInRowCount = 1;
+			p2PlayInRowCount = 1;
+			turn = 1;
+			
+			canPlay = true;
+        }
+        function iDisplayVars()
+        {
+            opcB1src = "";
+            opcB2src = "";
+            opcUIT1src = "";
+            opcUIT2src = "";
+        }
+        function iFunctions()
+        {
+            
+        }
+
+//---------------------------------------------------------------------------------------------------
+
+        //main controller; manages turns and selections and calls other functions
+        function play(pick)
+        {
+            if (canPlay)
+            {
+                p1play = pick;
+				
+                setTimeout(p2Move, 1000);
+                canPlay = false;
+
+				checkForBreak(p1play, "p1");
+            }
+
+            //disables and enables image onclicks based on turn
+            updateCenterPlayer1();
+        }
+
+        //basic cpu function - random move
+        function p2Move()
+        {
+            //remember to parseInt cos getRandomInteger returns a string
+            var temp = parseInt(getRandomInteger(0, 2));
+            p2play = arsenal[temp];
+			sResult = shoot(p1play);
+			
+			checkForBreak(p2play, "p2");
+			
+			updateCenterPlayer2();
+        }
+		
+		//Check for weapon break if played thrice in a row
+		function checkForBreak(pick, checkTurn)
+		{
+			if(checkTurn == "p1")
+			{
+				console.log("p1pick = " + pick + ", " + "p1prev = " + p1PrevPlay);
+				
+				if(pick == p1PrevPlay)
+				{
+					p1PlayInRowCount++;
+					console.log("p1rowCount = " + p1PlayInRowCount);
+					
+					if(p1PlayInRowCount >= 3)
+					{
+						//TESTING THIS RN (11/13) -- WORKS!!
+						p1Arsenal[aWeaponPosition(pick)]--;
+						
+						console.log("p1Arsenal = " + p1Arsenal);
+						console.log("p1 " + pick + " break " + "[" + p1PlayInRowCount + "]");
+						//set to 0 since it occurs after p1PlayInRowCount++;
+						p1PlayInRowCount = 0;
+					}
+				}
+				else
+				{
+					//set to 1 since playInRowCount++; doesn't occur beforehand
+					p1PlayInRowCount = 1;
+				}
+				
+				p1PrevPlay = p1play;
+			}
+			if(checkTurn == "p2")
+			{
+				console.log("p2pick = " + pick + ", " + "p2prev = " + p2PrevPlay);
+				
+				if(pick == p2PrevPlay)
+				{
+					p2PlayInRowCount++;
+					console.log("p2rowCount = " + p2PlayInRowCount);
+					
+					if(p2PlayInRowCount >= 3)
+					{
+						//TESTING THIS RN (11/13) -- WORKS!!
+						p2Arsenal[aWeaponPosition(pick)]--;		
+						
+						console.log("p2Arsenal = " + p2Arsenal);
+						console.log("p2 " + pick + " break " + "[" + p2PlayInRowCount + "]");
+						
+						p2PlayInRowCount = 0;
+					}
+				}
+				else
+				{
+					p2PlayInRowCount = 1;
+				}
+				
+				p2PrevPlay = pick;
+			}
+		}
+		
+//---------------------------------------------------------------------------------------------------------		
+		
+        //returns winner of round
+        function shoot(pick)
+        {
+            var result;
+
+            if (p1play == p2play)
+            {
+                result = "tie";
+                //console.log("tie");
+            }
+            else if (p2play == hierarchy(pick))
+            {
+                result = "P2 win";
+                //console.log("p2 win");
+            }
+            else
+            {
+                result = "P1 win";
+                //console.log("p1 win");
+            }
+
+            return result;
+        }
+
+        //returns rock-paper-scissor heirarchy according to first player's pick to check if player 2 beat player 1
+        function hierarchy(rps)
+        {
+            var winner;
+
+            if (rps == "rock")
+            {
+                //console.log("rock");
+                winner = "paper";
+            }
+            if (rps == "paper")
+            {
+                //console.log("paper");
+                winner = "scissor";
+            }
+            if (rps == "scissor")
+            {
+                //console.log("scissor");
+                winner = "rock";
+            }
+
+            return winner;
+        }
+		
+		//yeah this is also badly named. It's supposed to return the position of a pick from the arsenal in order to subtract the weapon counts.
+		function aWeaponPosition(pick)
+		{
+			if(pick == "rock")
+				return 0;
+			if(pick == "paper")
+				return 1;
+			if(pick == "scissor")
+				return 2;
+		}
+		
+//--------------------------------------------------------------------------------------------------------
+
+        //sorry i'm really bad at naming things
+        function updateCenterPlayer1()
+        {
+            opcB1src = "images/" + p1play + ".png";
+            opcUIT1src = "P2";
+            opcB2src = opcB2.src;
+          
+            display();
+        }
+        function updateCenterPlayer2()
+        {
+			opcB2src = "images/" + p2play + ".png";
+			console.log(p2play);
+			
+			setTimeout(updateCenterNotif, 500);
+			
+			setTimeout(autoReset, 1500);
+			
+			display();
+		}
+		function updateCenterNotif()
+		{
+			opcUIT2src = sResult;
+			
+			display();
+		}
+            
+        //I feel like I can squeeze this into updateCenter() but I want to use setTimeout and it's more simplified like this
+        function autoReset()
+        {
+            opcB1src = "images/empty.png";
+            opcB2src = "images/empty.png";
+
+            canPlay = true;
+			p1play = "";
+			p2play = "";
+
+            opcUIT1src = "P1";
+            opcUIT2src = "";
+
+            display();
+        }
+        function display()
+        {
+            opcB1.src = opcB1src;
+			//console.log(opcB1src);
+            opcB2.src = opcB2src;
+			//console.log(opcB2src);
+            opcUIT1.innerHTML = opcUIT1src;
+            opcUIT2.innerHTML = opcUIT2src;
+        }
+
+    </script>
+</head>
+<body onload="initialize();">
+
+    <div id="p2A">
+        <img src="images/rock.png" width=150 /> &nbsp &nbsp
+        <img src="images/paper.png" width=150 /> &nbsp &nbsp
+        <img src="images/scissor.png" width=150 />
+    </div>
+
+    <div id="cUIText1"> P1 </div>
+    <div id="cUIBox">
+        <img src="images/empty.png" id="cBox1" width="150" /> &nbsp &nbsp
+        <img src="images/empty.png" id="cBox2" width="150" />
+    </div>
+
+    <div id="cUIText2"></div>
+
+    <div id="p1A">
+        <img src="images/rock.png" onclick="play('rock')" width=150 /> &nbsp &nbsp
+        <img src="images/paper.png" onclick="play('paper')" width=150 />  &nbsp &nbsp
+        <img src="images/scissor.png" onclick="play('scissor')" width=150 />
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style></style>
+		<script>
+		
+			function initialize()
+			{
+				outputDiv = document.getElementById("divOut");
+			}
+			
+			function clickResponse()
+			{
+				outputDiv.innerHTML = "You have clicked the button.";
+			}
+			
+		</script>
+	</head>
+	<body onload = "initialize();">
+		<div id = "divOut">
+			You have not clicked the button
+		</div>
+		
+		<button onclick = "clickResponse();"> The Button </button>
+	</body>
+</html>

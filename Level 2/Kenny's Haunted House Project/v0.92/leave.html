@@ -1,0 +1,80 @@
+	<!DOCTYPE HTML>
+	<html>
+		<head>
+			<title>The Haunted House</title>
+			<style>
+				h1
+				{
+					font:56pt chiller;
+					color:aqua;
+					text-decoration:none;
+					text-align:center;
+				}
+				h3
+				{
+					font:38pt chiller;
+					color:aqua;
+					text-align:center;
+					font-decoration:bold;
+				}
+				a
+				{
+					font:34pt chiller;
+					color:aqua;
+					text-align:center;
+				}
+				body
+				{
+					background-repeat:no-repeat;
+					background-size: 100%;
+				}
+				button
+				{
+				background:transparent;
+				border:none;
+				color:transparent;
+				}
+			</style>
+			<script>
+				function initialize()
+				{
+					randEnding = document.getElementById("ending");
+					randomEnding();
+				}
+				
+				function randomEnding()
+				{
+					rndEnd = Math.random();
+					rndEnd = rndEnd*2;
+					console.log(rndEnd);
+					rndEnd = parseInt(rndEnd);
+					console.log(rndEnd);
+					
+					if (rndEnd == 0)
+					{
+						randEnding.innerHTML = "With tears in your eyes and triumph in your mind, you step outside the house that held you prisoner into the real world. Stepping out into the pale moonlight, you now search for a way to return home as you have no idea where you are."
+					}
+										
+					if (rndEnd == 1)
+					{
+						randEnding.innerHTML = "With tears in your eyes and triumph in your mind, you step outside the house that held you prisoner into the real world. Stepping out into the pale moonlight, you suddenly come face to face with a terryfing ghost from the house. As it screams into your face, you scream back at it from the sheer terror, before feeling a pain in your chest. You collapse into the road, probably dying of a heart attack."				
+					}
+				}
+				function no()
+				{
+				location.href = "Youshouldn'thaveclickedonthis.html"
+				}
+			</script>
+		</head>
+		
+		<body onload = "initialize();" background = "images/houseOverview.jpg">
+			<h1>You have escaped the house!</h1>
+			<br />
+			<h3 id = "ending"><h3>
+			<a href = "Intre page.html">Go back inside the house again (for some reason)</a>
+			<br />
+			<a href = "http://ghostbusters.com/">Report this house to the ghostbusters.</a>
+			<br /><br /><br /><br />
+			<button onclick = "no();"style="height:100px;width:100px">You shouldn't click on this...</button>  
+		</body>
+	</html>

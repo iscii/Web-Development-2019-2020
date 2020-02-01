@@ -1,0 +1,44 @@
+	<!DOCTYPE HTML>
+	<html>
+		<head>
+			<title>The Haunted House</title>
+			<style>
+			button
+			{
+			background: transparent;
+			border:none;
+			margin-left:453px
+			}
+			</style>
+			<link rel = "stylesheet" href = "Haunted House CSS.css"/>
+			<script src = "utilities.js"></script>
+			<script>
+			function initialize()
+			{
+				keyObtained = document.getElementById("KP")
+			}
+			function openPainting()
+			{
+				sessionStorage.keyTrue++;
+				keyObtained.innerHTML = " - You remove the painting and obtain a key stuck to the wall behind it."
+			}
+			</script>
+		</head>
+		
+		<body background = "images/livingRoom.png" onload = "initialize();">
+			
+			<h4> <button style="height:150px;width:245px" onclick = "openPainting();"></button>
+			<br /><br /><br /><br /><br /><br /><br /><br />
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			
+			You arrive to find a living room, with a seemingly harmless demeanor. You see a light
+			that looks to come from the kitchen, as well as a sound coming from near the kitchen
+			entrance.<br/>
+			What will you do?
+			</h4>
+			<a href = "HS.html">Sneak into the kitchen</button>
+			<a href = "exit.html">Return to the front door</a>
+			<a href = "Die Page.html">Commit Die</a>
+			<span id = "KP"></h4>
+		</body>
+	</html>

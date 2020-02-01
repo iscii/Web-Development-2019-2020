@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Haunted House!</title>
+
+		<style>
+			body
+			{ 
+				background-image: url("image/diningroom.jpg");
+			}
+
+		</style>
+		<link rel = "stylesheet" href = "css/forAll.css" />
+
+		
+		<script>
+			//This stores the element in the html into a variable. 
+			//Also hides the button "read message" in the beginning
+			function initialize()
+			{
+				narration = document.getElementById("narrate");
+				eatButton = document.getElementById("eatFood");
+				readMessage = document.getElementById("hiddenMessage");
+				readMessage.style.visibility = 'hidden';
+			}
+				
+			//this runs when the user decides to eat food 
+			//there is a secret message hidden
+			function revealSecret()
+			{
+				narration.innerHTML = "Huh? There is something inside the food! <br /> It is a piece of paper. <br /> Should I read it?";
+				eatButton.style.visibility = 'hidden';
+				readMessage.style.visibility = 'visible';
+				
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>Dining Room</h1>
+		
+		<p id = "narrate"> The dining room is pretty small compared to the house.<br /> Wait a minute...Oh! There is food! <br /> Hmmm.. should I eat some? I guess it smells safe.</p>
+
+		<div>
+			<button id="eatFood" onclick = "revealSecret();">Let's have a bite!</button>
+			<br />
+			<a id= "hiddenMessage" href = "secretMessageDining.html" target = "_black">Read the message</a>
+			<br />
+			<a href = "-2,0.html">Go forward</a>
+			<a href = "0,-1.html">Go down the stairs</a>
+			<br />
+			<a href = "0,0.html">Home</a>
+		</div>
+	</body>
+</html>

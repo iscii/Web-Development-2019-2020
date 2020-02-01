@@ -1,0 +1,41 @@
+html{
+    background-image: url('images/bamboo-forest.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100vw 100vh; /*viewport width and height; each v is 1%. 100vw is 100% of width of window.*/
+}
+img.bullet{ /*only affects img elements. do '.bullet' to access all elements with bullet class*/
+    display: none;
+    height: 40px;
+}
+li, span{
+    background-color: #D9ECCA;
+    color: #3E6022;
+    opacity: 0.85;
+    border: 2px solid #3E6022;
+    border-radius: 12px;
+    box-shadow: 8px 8px 5px darkgrey;
+}
+li{
+    list-style-type: none;
+    width: 175px;
+    height: 40px;
+    padding: 12px;
+    font-weight: bold;
+}
+li:hover img.bullet{
+    display: inline;
+}
+h1{
+    text-align: center;
+    margin-top: 100px;
+}
+h1 span{
+    padding: 2px 6px;
+}
+img#displayimage{
+    display: none;
+    margin-left: 27%;
+    margin-top: -260px;
+    height: 425px;
+}

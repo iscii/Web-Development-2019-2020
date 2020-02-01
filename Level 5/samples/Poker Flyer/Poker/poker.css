@@ -1,0 +1,90 @@
+body
+{
+	font-family:copperplate gothic;
+	background-image:url('table.png');
+	text-align:center;
+}
+
+h1,h2
+{
+	color:burlywood;
+}
+
+h1
+{
+	font-size:36pt;
+}
+
+h2
+{
+	font-size:20pt;
+	line-height:50%;
+}
+
+table
+{
+	text-align:left;
+	padding:5px;
+	margin-top:60px;
+	color:burlywood;
+	float:right;
+	border-style:groove;
+	border-width:15px;
+	background-color:wheat;
+	color:peru;
+	border-color:peru;
+}
+
+th
+{
+	text-align:center;
+	font-size:18pt;
+	padding:5px;
+}
+
+td
+{
+	font-weight:bold;
+}
+
+td + td
+{
+	padding-left:30px;
+}
+
+table + div
+{
+	float:left;
+	text-align:center;
+	padding:5px;
+	margin-top:60px;
+	color:burlywood;
+	font-weight:bold;
+	font-size:16pt;
+}
+
+div + div
+{
+	padding:5px;
+}
+
+p
+{
+	font-size:18pt;
+	color:burlywood;
+}
+
+p img
+{
+	float:left;
+}
+
+p img + img
+{
+	float:right;
+}
+
+p img + img + img
+{
+	float:none;
+}

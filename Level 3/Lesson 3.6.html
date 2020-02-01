@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+		
+		</title>
+		<style>
+		    table{
+                border: medium solid grey;
+                border-collapse: collapse;
+                width:25%;
+		    }
+
+            th, td{
+                border:thin solid black;
+                padding:8px;
+                width:50%;
+            }
+		</style>
+        <script src="utilities.js"></script>
+		<script>
+            function initialize()
+            {
+                diceTable = document.getElementById("dicetable");
+                rollDice();
+            }
+            function rollDice()
+            {
+                var numRolls = getRandomInteger(25, 100);
+
+                //for (initialization; condition; action){ code; }
+                for (var i = 0; i < numRolls; i++)
+                {
+                    //Roll the dice
+                    var dieRoll = getRandomInteger(1, 6);
+                    //Add a row to the table
+                    var newRow = diceTable.insertRow();
+                    //Put the roll number in the first cell
+                    var newCell = newRow.insertCell();
+                    newCell.innerHTML = "Roll " + (i + 1);
+                    //Put the result into the second cell
+                    newCell = newRow.insertCell();
+                    newCell.innerHTML = dieRoll; //PLEASE STOP MISSPELLING HTML YOU DOLT IT CAUSES SO MUCH PROBLEMS AND IS HARD AF TO FIND//
+                }
+            }
+		</script>
+	</head>
+	<body onload="initialize();">
+        <table id="dicetable">
+            <tr>
+                <th>Roll</th>
+                <th>Result</th>
+            </tr>
+        </table>
+	
+	</body>
+</html>
