@@ -38,25 +38,26 @@ Level 5 Fast Food Cashier
 
 	mega pseudocode
 	Functions --making everything a seperate function to increase flexibility. Just trying it out
-		-/* Basic change functionality
+		Note: heavily revised during the coding process
+		>X-/* Basic change functionality
 			-Be able to calculate exact change and return pennies/dimes/nickels/quarters etc.. based on
 			a given whole bill.
 				-Have an array (cents) that includes the values [20, 10, 5 ,1, 0.25, 0.10, 0.5, 0.1] and check each item starting
 				from largest to smallest. */
-		-randomTime
+		>X-randomTime
 			-return random 1-5 minutes from 3 hrs (180 mins)
 			-in function: timeLeft - determineTime(nextcustomer);
-		-randomOrder
+		>X-randomOrder
 			-returns the order
 			-order = orderitems.join(";")
 			-numOrder++
-		-costSub
+		>X-costSub
 			-adds up the subtotal costs
 			-sets subTotal to the subtotal
-		-applyTax
+		>X-applyTax
 			-set orderTotal to the subTotal and multiplies it by TAX
 			-set orderTax to orderTotal - subTotal
-		-randomizePayment
+		>X-randomizePayment
 			-var x = getrandomInt(1,10)
 			-if(x < 4) 
 				x = getrandomInt(1, 10)
@@ -66,7 +67,7 @@ Level 5 Fast Food Cashier
 					var cash = cashPayment();
 					
 			-else numElec++;
-		-cashPayment -- keep in mind short changes. consider enhancement
+		>X-cashPayment -- keep in mind short changes. consider enhancement
 			-determineCash()
 			//figure out the bills first, then the change.
 			-var lower = 0
@@ -80,19 +81,19 @@ Level 5 Fast Food Cashier
 							tempchange -= values[i]
 				lower = 4
 				upper = 7
-		-determineCash()
+		>X-determineCash()
 			-cash = [1, getrandomInt[0, 2], getrandomInt[0, 3], getrandomInt[0, 5]]
 			-cashTotal = for... cash[i] * VALUES[i]
-		-determineRegister()
+		>X-determineRegister()
 			-for i... registerTotal += register[i] * VALUES[i]
-		-printReceipt()
+		>-printReceipt()
 			-log
 			-make it look like a receipt (../images/receipt_example.jpg)
-		-simulate() -- button function	
+		>X-simulate() -- button function	
 			-runs this whole thing again
 
 	Interface
-		-Log(<parameter cash>)
+		>-Log(<parameter cash>)
 			-Make it an expandable tab? Every time a new receipt comes in, contract the previous tab
 			-Include:
 				-Each Item + Each Price
@@ -102,7 +103,10 @@ Level 5 Fast Food Cashier
 				-Payment Method
 					-If cash, display Payment
 				-Change
-		-Results
+			-After many trials, make it so that the spans for each simulation are created in JS and have their own unique ID so that they are individually writable.
+			The IDs cannot be the same, and I cannot use class or both spans are modified. Make a variable for the new span -- set it to a string that represents it, with the 
+			simNum, and then evaluate that string into the object.
+		>-Results
 			-Total # sales
 				-Total Cash sales
 				-Total Electronic sales
@@ -112,12 +116,12 @@ Level 5 Fast Food Cashier
 				-Total sales in quantity and revenue			
 
 	Enhancements
-		-Coin and bill drops
+		>X-Coin and bill drops
 			-If the cashier runs low on a particular denomination, it can drop larger bills for lower bills and coins
 			-A roll of pennies is 50 cents. (50)
 			-A roll of nickels is $2. (40)
 			-A roll of dimes is $5. (50)
 			-A roll of quarters is $10. (40)
 		//INCLUDE THIS INDEFINITELY vv
-		-Allow the user to run the simulation multiple times. 
+		>-Allow the user to run the simulation multiple times. 
 		Keep the totals for each shift and determine averages over the course of several shifts.

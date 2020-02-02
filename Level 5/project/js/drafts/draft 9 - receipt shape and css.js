@@ -250,10 +250,14 @@ function manageData(){ //enhancement 2
 }
 //CSS FUNCTIONS
 function setClassStyle(){ //YOU ARE HERE 1/31/20 -- Add other stats to receipts
+    //console.log("current: " + clOrdersWidth);
     if(!clOrdersWidth || clOrdersWidth < (numOrder * 75))
         clOrdersWidth = (numOrder * 75); //75 and 90 were very rough estimates through trial and error and are by no means good parameters.
+    //console.log("to-be: " + (numOrder * 75));
     if(!clReceiptWidth || clReceiptWidth > (90/numOrder))
         clReceiptWidth = ((90 / numOrder));
+    //console.log("orders = " + clOrdersWidth);
+    //console.log("receipts = " + clReceiptWidth);
     for(i = 0; i < clStyleReceipts.length; i++){
         clStyleReceipts[i].style.width = clReceiptWidth + "%";
     }
@@ -262,6 +266,7 @@ function setClassStyle(){ //YOU ARE HERE 1/31/20 -- Add other stats to receipts
     }
 }
 function dispOrder(){ //e for Element
+    //var eSimHead = "<span class = 'simHead'>Sim " + simNum + "</span>";
     var eSim = "<span id = 'sim#" + simNum + "' class = 'cSims'></span>";
     opLog.innerHTML += eSim;
     opSims = document.getElementById("sim#" + simNum);
@@ -275,5 +280,7 @@ function display(){
     
     //display per simulation
     opSims.innerHTML = "<span class = 'simHead'>Sim " + simNum + "</span>"+ opSims.innerHTML;
+    //opSims.id = "";
+    //opLog.innerHTML = opLog.innerHTML + "<br/><span id = 'orders' class = 'cOrders'></span>";
     setClassStyle();
 }
