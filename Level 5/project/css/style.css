@@ -56,9 +56,12 @@ div#log{
     border: 2px solid white;
     padding: 10px 10px 10px 10px;
     display: inline-block;
+    vertical-align: top; /*aligns the blocks to the top of div*/
     margin-right: 0.05%;
+    margin-top: 0.05%;
 }
 .simHead{
    border: 2px solid white;
    display: inline-block;
+   margin-top: 0.05%;
 }
