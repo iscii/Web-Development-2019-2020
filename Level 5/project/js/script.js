@@ -268,7 +268,8 @@ function dispOrder(){ //e for Element
 }
 //DISPLAY FUNCTIONS
 function dispReceipt(){ //called per order iteration of a simulation
-    opSims.innerHTML += "<span class = 'receipts'>Order Number " + numOrder + "<br/> +  </span>";
+    var eReceipt = "<span class = 'receipts'>Order Number " + numOrder + "<br/>" + "</span>";
+    opSims.innerHTML += eReceipt;
 }
 function display(){
     //display totals
