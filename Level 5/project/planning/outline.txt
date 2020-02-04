@@ -100,7 +100,7 @@ Level 5 Fast Food Cashier
 			XX-Make it an expandable tab? Every time a new receipt comes in, contract the previous tab
 			>-Include:
 				>-Each Item + Each Price
-				-Subtotal
+				>-Subtotal
 				-Tax
 				-Total
 				-Payment Method
