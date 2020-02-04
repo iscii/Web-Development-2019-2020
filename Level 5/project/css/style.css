@@ -5,27 +5,29 @@ body{
     margin: 0 auto;
 }
 button{
-    height: 100px;
-    width: 100px;
-    margin-top: 20%;
+    /*clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);*/
+    background-color: red;
+    border: none;
+    width: 10%;
+    height: 10vh;
+    margin: 0 auto;
+    margin-top: 2%;
+    display: block;
+    position: relative; /*also necessary for button to be shown in front of shadow*/
 }
 div#log{
+    z-index: -1; /*allows button to be brought to front of shadow*/
     border: 2px solid #888;
     border-radius: 15px;
     background: #181818;
     width: 30%;
     height: 80vh;
-    float: right;
-    margin-top: 5%;
-    margin-right: 2%;
+    margin: 0 auto;
     color:#FC3939;
     font: Aharoni;
     font-size: 200%;
     overflow: scroll;
     box-shadow: 0 0 10px #fff, 0 0 20px rgb(190, 190, 190), 0 0 30px rgb(119, 119, 119), 0 0 40px rgb(73, 73, 73), 0 0 50px rgb(37, 37, 37), 0 0 60px black;
-    /*left-side elements: box-shadow: -5px -5px 10px #fff, -5px -5px 20px rgb(190, 190, 190), -5px -5px 30px rgb(119, 119, 119), -5px -5px 40px rgb(73, 73, 73), -5px -5px 50px rgb(37, 37, 37), -5px -5px 60px black;*/
-    /*center elements: box-shadow: 0 0 10px #fff, 0 0 20px rgb(190, 190, 190), 0 0 30px rgb(119, 119, 119), 0 0 40px rgb(73, 73, 73), 0 0 50px rgb(37, 37, 37), 0 0 60px black;*/
-    /*right-side elements: left-side elements: box-shadow: 5px 5px 10px #fff, 5px 5px 20px rgb(190, 190, 190), 5px 5px 30px rgb(119, 119, 119), 5px 5px 40px rgb(73, 73, 73), 5px 5px 50px rgb(37, 37, 37), 5px 5px 60px black;*/
 }
 /*scrollbar customization*/
 ::-webkit-scrollbar{

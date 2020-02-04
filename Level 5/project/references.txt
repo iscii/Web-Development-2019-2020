@@ -24,3 +24,9 @@ https://stackoverflow.com/questions/9436123/javascript-changing-a-class-style
 
 CSS Glow
 https://www.w3schools.com/howto/howto_css_glowing_text.asp
+
+CSS shadows under surrounding elements
+https://blog.dudak.me/2014/css-shadows-under-adjacent-elements/
+
+Clip-Path Polygon shapes
+https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
