@@ -47,6 +47,7 @@ Level 5 Fast Food Cashier
 		>X-randomTime
 			-return random 1-5 minutes from 3 hrs (180 mins)
 			-in function: timeLeft - determineTime(nextcustomer);
+			-0-2 minute break
 		>X-randomOrder
 			-returns the order
 			-order = orderitems.join(";")

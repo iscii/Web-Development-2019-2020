@@ -108,19 +108,20 @@ div#log{
     vertical-align: top; /*aligns the blocks to the top of div*/
     margin-right: 0.05%;
     margin-bottom: 0.05%;
+    font-family: Aharoni;
 }
 .simHead{
-   display: inline-block;
+    display: inline-block;
 }
 .rNum{
     text-align: center;
-    color: blue;
+    color: rgb(1, 1, 165);
     border-bottom: 2px solid white;
     width: 100%;
     display: inline-block;
 }
 .itemname{
-    font-size: 75%;
+    font-size: 60%;
 }
 .itemcost{
     display: inline-block;
@@ -128,4 +129,16 @@ div#log{
     font-size: 65%;
     text-align: right;
     border-bottom: 2px solid white;
+}
+.subtotal{
+    display: inline-block;
+    margin-top: 5%;
+    width: 100%;
+    
+}
+.subtotalhead{
+    float:left;
+}
+.subtotalcost{
+    float:right;
 }

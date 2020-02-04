@@ -289,9 +289,9 @@ function dispReceipt(){ //called per order iteration of a simulation
             itemName = order[i].split(";")[0];
         //console.log(itemName);
         itemCost = order[i].split(";")[1];
-        eReceipt += "<br/><span class = 'itemname'>" + itemName + "</span><br/><span class = 'itemcost'>" + itemCost + "</span>";
+        eReceipt += "<br/><span class = 'itemname'>" + itemName + "</span><br/><span class = 'itemcost'>" + itemCost +"</span>";
     }
-    eReceipt += "<br/><span class = 'subtotal'><span class = 'subtotalhead'>Subtotal</span><span class = 'subtotalcost'>" + orderSubTotal + "</span></span></span>";
+    eReceipt += "</span>";
     opSims.innerHTML += eReceipt;
 }
 function display(){
