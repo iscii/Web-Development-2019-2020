@@ -6,7 +6,8 @@ body{
 }
 button{
     /*clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);*/
-    background-color: red;
+    /*YOU ARE HERE 2/3/2020 --> Finish Button CSS (make a lil foundation for it) and then move onto the enhancement css*/
+    background-color: grey;
     border: none;
     width: 10%;
     height: 10vh;
