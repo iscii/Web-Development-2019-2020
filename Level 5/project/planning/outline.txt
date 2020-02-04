@@ -4,7 +4,7 @@ Notes:
 
 Level 5 Fast Food Cashier
 	General
-		-Constants:
+		>X-Constants:
 			//Currency
 			-B20 = 0, B10 = 1, B5 = 2, B1 = 3, Q = 4, D = 5, N = 6, P = 7
 			-VALUES = [20, 10, 5, 1, 0.25, 0.10, 0.05, 0.01]
@@ -18,7 +18,7 @@ Level 5 Fast Food Cashier
 			-foodTypes = [Entrees, Sides, Desserts, Drinks] //use eval to evaulate the values of each item
 			//YOU ARE HERE 1/24 8:08PM constants for food -- write function draft for tax and total and such
 
-		-Variables:
+		>X-Variables:
 			-order
 			-subTotal
 			-orderTax
@@ -31,7 +31,7 @@ Level 5 Fast Food Cashier
 			-numOrder
 			-log
 
-		-Starting cash
+		>X-Starting cash
 			-100 pennies, 40 nickels, 50 dimes, 40 quarters, 42 one bills, 4 five bills, 2 ten bills
 			-register = [0, 2, 4, 42, 30, 50, 40, 100]
 				-//[count;value, count;value, count;value]
@@ -86,24 +86,26 @@ Level 5 Fast Food Cashier
 			-cashTotal = for... cash[i] * VALUES[i]
 		>X-determineRegister()
 			-for i... registerTotal += register[i] * VALUES[i]
-		>-printReceipt()
+		>X-printReceipt()
 			-log
 			-make it look like a receipt (../images/receipt_example.jpg)
 		>X-simulate() -- button function	
 			-runs this whole thing again
+		-totalAverages()
+			-enhancement 2: averages the totals
 
 	Interface
 		>-Log(<parameter cash>)
-			-Make it an expandable tab? Every time a new receipt comes in, contract the previous tab
-			-Include:
-				-Each Item + Each Price
+			XX-Make it an expandable tab? Every time a new receipt comes in, contract the previous tab
+			>-Include:
+				>-Each Item + Each Price
 				-Subtotal
 				-Tax
 				-Total
 				-Payment Method
 					-If cash, display Payment
 				-Change
-			-After many trials, make it so that the spans for each simulation are created in JS and have their own unique ID so that they are individually writable.
+			>X-After many trials, make it so that the spans for each simulation are created in JS and have their own unique ID so that they are individually writable.
 			The IDs cannot be the same, and I cannot use class or both spans are modified. Make a variable for the new span -- set it to a string that represents it, with the 
 			simNum, and then evaluate that string into the object.
 		>-Results
