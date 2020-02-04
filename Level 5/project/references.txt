@@ -21,3 +21,6 @@ https://stackoverflow.com/questions/20383622/width-equal-to-content
 
 Editing class styles from javascript
 https://stackoverflow.com/questions/9436123/javascript-changing-a-class-style
+
+CSS Glow
+https://www.w3schools.com/howto/howto_css_glowing_text.asp

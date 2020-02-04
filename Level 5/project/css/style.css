@@ -22,6 +22,10 @@ div#log{
     font: Aharoni;
     font-size: 200%;
     overflow: scroll;
+    box-shadow: 0 0 10px #fff, 0 0 20px rgb(190, 190, 190), 0 0 30px rgb(119, 119, 119), 0 0 40px rgb(73, 73, 73), 0 0 50px rgb(37, 37, 37), 0 0 60px black;
+    /*left-side elements: box-shadow: -5px -5px 10px #fff, -5px -5px 20px rgb(190, 190, 190), -5px -5px 30px rgb(119, 119, 119), -5px -5px 40px rgb(73, 73, 73), -5px -5px 50px rgb(37, 37, 37), -5px -5px 60px black;*/
+    /*center elements: box-shadow: 0 0 10px #fff, 0 0 20px rgb(190, 190, 190), 0 0 30px rgb(119, 119, 119), 0 0 40px rgb(73, 73, 73), 0 0 50px rgb(37, 37, 37), 0 0 60px black;*/
+    /*right-side elements: left-side elements: box-shadow: 5px 5px 10px #fff, 5px 5px 20px rgb(190, 190, 190), 5px 5px 30px rgb(119, 119, 119), 5px 5px 40px rgb(73, 73, 73), 5px 5px 50px rgb(37, 37, 37), 5px 5px 60px black;*/
 }
 /*scrollbar customization*/
 ::-webkit-scrollbar{
@@ -49,19 +53,41 @@ div#log{
     position: relative;
     top: 2%;
     left: 2%;
+    border-top: 15px solid rgb(180, 180, 180);
+    border-radius: 5px;
 }
 /*work on the appearance of receipts -- USE DIVS AND SPANS INSTEAD OF TABLES AND LISTS COS THESE SUCK EE*/
 .receipts{
-    background: rgb(108, 208, 255);
-    border: 2px solid white;
+    background: rgb(136, 217, 255);
+    border-left: 4px solid rgb(104, 169, 255);
+    border-right: 4px solid rgb(104, 169, 255);
+    border-bottom: 4px solid rgb(104, 169, 255);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     padding: 10px 10px 10px 10px;
     display: inline-block;
     vertical-align: top; /*aligns the blocks to the top of div*/
     margin-right: 0.05%;
-    margin-top: 0.05%;
+    margin-bottom: 0.05%;
 }
 .simHead{
-   border: 2px solid white;
    display: inline-block;
-   margin-top: 0.05%;
+}
+.rNum{
+    text-align: center;
+    color: blue;
+    border-bottom: 2px solid white;
+    width: 100%;
+    display: inline-block;
+}
+.itemname{
+    font-size: 75%;
+}
+.itemcost{
+    display: inline-block;
+    width: 100%;
+    font-size: 65%;
+    text-align: right;
+    border-bottom: 2px solid white;
+    /*position: relative;*/
 }

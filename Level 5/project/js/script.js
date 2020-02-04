@@ -62,6 +62,7 @@ function simulate(){
     if(canSimulate){
         canSimulate = false;
         simNum++;
+        console.log("SIM " + simNum);
         semiVars();
         dynamicVars();
         dispOrder();
@@ -250,8 +251,8 @@ function manageData(){ //enhancement 2
 }
 //CSS FUNCTIONS
 function setClassStyle(){ //YOU ARE HERE 1/31/20 -- Add other stats to receipts
-    if(!clOrdersWidth || clOrdersWidth < (numOrder * 75))
-        clOrdersWidth = (numOrder * 75); //75 and 90 were very rough estimates through trial and error and are by no means good parameters.
+    if(!clOrdersWidth || clOrdersWidth < (numOrder * 80))
+        clOrdersWidth = (numOrder * 80); //75 and 90 were very rough estimates through trial and error and are by no means good parameters.
     if(!clReceiptWidth || clReceiptWidth > (90/numOrder))
         clReceiptWidth = ((90 / numOrder));
     for(i = 0; i < clStyleReceipts.length; i++){
@@ -268,9 +269,19 @@ function dispOrder(){ //e for Element
 }
 //DISPLAY FUNCTIONS
 function dispReceipt(){ //called per order iteration of a simulation
-    var eReceipt = "<span class = 'receipts'> <span class = 'rNum'>Order Number " + numOrder +"</span>";
+    var eReceipt = "<span class = 'receipts'> <span class = 'rNum'>Order " + numOrder +"</span>";
+    var itemName;
+    var itemCost;
     for(i = 0; i < order.length; i++){
-        eReceipt += "<br/>" + order[i];
+        //console.log(order[i].split(";")[0]);
+        //console.log(order[i].split(";")[0].includes("_"));
+        if(order[i].split(";")[0].includes("_"))
+            itemName = order[i].split(";")[0].split("_").join(" "); //removes the _ in names that includes it
+        else
+            itemName = order[i].split(";")[0];
+        //console.log(itemName);
+        itemCost = order[i].split(";")[1];
+        eReceipt += "<br/><span class = 'itemname'>" + itemName + "</span><br/><span class = 'itemcost'>" + itemCost +"</span>";
     }
     eReceipt += "</span>";
     opSims.innerHTML += eReceipt;
