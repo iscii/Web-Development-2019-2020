@@ -30,3 +30,6 @@ https://blog.dudak.me/2014/css-shadows-under-adjacent-elements/
 
 Clip-Path Polygon shapes
 https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+
+Centering element within div
+https://stackoverflow.com/questions/7560832/how-to-center-a-button-within-a-div
