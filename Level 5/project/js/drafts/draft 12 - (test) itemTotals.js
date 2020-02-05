@@ -4,11 +4,7 @@ const B20 = 0, B10 = 1, B5 = 2, B1 = 3, Q = 4, D = 5, N = 6, P = 7;
 const VALUES = [20, 10, 5, 1, 0.25, 0.10, 0.05, 0.01];
 const TAX = 1.08875;
 //menu
-const ENTREES = ["Hamburger;1.99", "Chicken_Sandwich;1.99", "Veggie_Sandwich;2.29"];
-const SIDES = ["French_Fries;0.99", "Salad;1.39", "Cheese_Sticks;1.49", "Rice;1.19"];
-const DESSERTS = ["Ice_Cream;1.89", "Pie;1.69", "Cookie;0.89"];
-const DRINKS = ["Soda;1.19", "Bottled_Water;1.25", "Juice;1.69"];
-const FOODTYPES = ["ENTREES", "SIDES", "DESSERTS", "DRINKS"];
+const FOODTYPES = ["Entrees", "Sides", "Desserts", "Drinks"];
 
 function initialize(){
     iVars();
@@ -48,11 +44,11 @@ function semiVars(){ //changing/reset between simulations
     numCashSales = 0;
     numElecSales = 0;
 
-    entreeTotals = ["0;0", "0;0", "0;0"]; //count;revenue -- enhancement 2
-    sideTotals = ["0;0", "0;0", "0;0", "0;0"];
-    dessertTotals = ["0;0", "0;0", "0;0"];
-    drinkTotals = ["0;0", "0;0", "0;0"];
-    totalTypes = ["entreeTotals", "sideTotals", "dessertTotals", "drinkTotals"];
+    //menu : name, cost, count
+    Entrees = ["Hamburger;1.99;0", "Chicken_Sandwich;1.99;0", "Veggie_Sandwich;2.29;0"];
+    Sides = ["French_Fries;0.99;0", "Salad;1.39;0", "Cheese_Sticks;1.49;0", "Rice;1.19;0"];
+    Desserts = ["Ice_Cream;1.89;0", "Pie;1.69;0", "Cookie;0.89;0"];
+    Drinks = ["Soda;1.19;0", "Bottled_Water;1.25;0", "Juice;1.69;0"];
 }
 function dynamicVars(){ //changing/reset within each iteration of simulation
     //dynamic
@@ -104,37 +100,27 @@ function cooldown(){
     canSimulate = true;
 }
 function dOrder(){
-    var foodNum = 0;
+    var foodCount;
     var placeHolder;
-    var drinkNum = getRandomInteger(0, 2);
-    for (i = 0; i < (FOODTYPES.length - 1); i++){
+    var drinkCount = getRandomInteger(0, 2);
+    for (i = 0; i < (FOODTYPES.length - 1); i++){ //Note for future: You could also do (foodtypes[i].length - 2) for entree/side/dessert loop (a pattern from the guidelines)
         if(i == 2) 
             quantity = getRandomInteger(0, 2);
         else
             quantity = getRandomInteger(0, 1);
         for (x = 0; x < quantity; x++){
-            foodNum = getRandomInteger(0, (eval(FOODTYPES[i]).length - 1));
-            order.push(eval(FOODTYPES[i])[foodNum]);
-            placeHolder = eval(totalTypes[i])[foodNum].split(";");
-            placeHolder[0]++;
-            placeHolder[1] = (parseFloat(placeHolder[1]) + parseFloat(eval(FOODTYPES[i])[foodNum].split(";")[1])).toFixed(2);
-            //placeHolder[1] = placeHolder[1].toFixed(2);
-            eval(totalTypes[i])[foodNum] = placeHolder.join(";");
+            foodCount = getRandomInteger(0, (eval(FOODTYPES[i]).length - 1));
+            order.push(eval(FOODTYPES[i])[foodCount]);
+            placeHolder = eval(FOODTYPES[i])[foodCount].split(";");
+            placeHolder[2]++;
+            eval(FOODTYPES[i])[foodCount] = placeHolder.join(";");
         }
     }
-    order[order.length] = eval(FOODTYPES[3])[drinkNum]; //sets the first (drink)
-    placeHolder = eval(totalTypes[3])[drinkNum].split(";");
-    placeHolder[0]++;
-    placeHolder[1] = (parseFloat(placeHolder[1]) + parseFloat(eval(FOODTYPES[3])[drinkNum].split(";")[1])).toFixed(2);
-    //placeHolder[1] = placeHolder[1].toFixed(2);
-    eval(totalTypes[3])[drinkNum] = placeHolder.join(";");
+    order[order.length] = eval(FOODTYPES[3])[drinkCount]; //sets the first (drink)
+    placeHolder = eval(FOODTYPES[3])[drinkCount].split(";");
+    placeHolder[2]++;
+    eval(FOODTYPES[3])[drinkCount] = placeHolder.join(";");
     console.log(order);
-    /*THIS SECTION (vvvvvvvv) IS JUST CONSOLE.LOG*/
-    var x;
-    for(i = 0; i < totalTypes.length; i++){
-        x += "[" + eval(totalTypes[i]) + "]";
-    }
-    console.log(x);
 }
 function dCost(){
     for (i = 0; i < order.length; i++){
@@ -308,10 +294,10 @@ function dispReceipt(){ //called per order iteration of a simulation
     for(i = 0; i < order.length; i++){
         //console.log(order[i].split(";")[0]);
         //console.log(order[i].split(";")[0].includes("_"));
-        if(order[i].split(";")[0].includes("_")) //i can probably modify this to make it a more flexible function
+        if(order[i].split(";")[0].includes("_"))
             itemName = order[i].split(";")[0].split("_").join(" "); //removes the _ in names that includes it
         else
-            itemName = order[i].split(";")[0]; 
+            itemName = order[i].split(";")[0];
         //console.log(itemName);
         itemCost = order[i].split(";")[1];
         eReceipt += "<br/><span class = 'itemname'>" + itemName + "</span><br/><span class = 'itemcost'>" + itemCost + "</span>";
@@ -322,26 +308,10 @@ function dispReceipt(){ //called per order iteration of a simulation
                 "</span>";
     opSims.innerHTML += eReceipt;
 }
-function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaaaugh
-    var itemName;
-    var itemCount;
-    var itemCost;
-    var eSimTotals = "<span class = 'simhead'>Sim " + simNum + " Totals"
-                     "<br/><span class = 'simlabeltab'>Item -- Revenue (Count)</span>"
-    for(i = 0; i < FOODTYPES.length; i++){
-        for(x = 0; x < eval(FOODTYPES[i]).length; x++){
-            if(eval(FOODTYPES[i])[x].split(";")[0].includes("_")) //i can probably modify this to make it a more flexible function
-                itemName = eval(FOODTYPES[i])[x].split(";")[0].split("_").join(" "); //removes the _ in names that includes it
-            else
-                itemName = eval(FOODTYPES[i])[x].split(";")[0]; 
-            itemCount = eval(totalTypes[i])[x].split(";")[0];
-            itemCost = eval(totalTypes[i])[x].split(";")[1];
-            eSimTotals += "<br/><span class = 'simtotals'>" + itemName + "-- $" + itemCost + " (" + itemCount + ")</span>";
-        }
-    }
-    opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML;
-    //YOU ARE HERE 2/4/20 YOU JUST FINISHED ITEM TOTALS WORK ON THE SUBTOTALS/TAX/TOTALS, AND THEN HEAD TO ENHANCEMENT 2
-    //ALSO MAKE IT PRETTIER AND COLOR THE REVENUE/COUNTS
+function dispSimTotals(){
+    eSimTotals = "<span class = 'simhead'>Sim " + simNum + "</span>";
+    for(i = 0; i < order.length; i++);
+    opSims.innerHTML = eSimTotals + opSims.innerHTML;
 }
 function display(){
     //display per simulation

@@ -129,12 +129,13 @@ function dOrder(){
     //placeHolder[1] = placeHolder[1].toFixed(2);
     eval(totalTypes[3])[drinkNum] = placeHolder.join(";");
     console.log(order);
-    /*THIS SECTION (vvvvvvvv) IS JUST CONSOLE.LOG*/
+    
     var x;
     for(i = 0; i < totalTypes.length; i++){
-        x += "[" + eval(totalTypes[i]) + "]";
+        x += eval(totalTypes[i]);
     }
     console.log(x);
+    
 }
 function dCost(){
     for (i = 0; i < order.length; i++){
@@ -308,10 +309,10 @@ function dispReceipt(){ //called per order iteration of a simulation
     for(i = 0; i < order.length; i++){
         //console.log(order[i].split(";")[0]);
         //console.log(order[i].split(";")[0].includes("_"));
-        if(order[i].split(";")[0].includes("_")) //i can probably modify this to make it a more flexible function
+        if(order[i].split(";")[0].includes("_"))
             itemName = order[i].split(";")[0].split("_").join(" "); //removes the _ in names that includes it
         else
-            itemName = order[i].split(";")[0]; 
+            itemName = order[i].split(";")[0];
         //console.log(itemName);
         itemCost = order[i].split(";")[1];
         eReceipt += "<br/><span class = 'itemname'>" + itemName + "</span><br/><span class = 'itemcost'>" + itemCost + "</span>";
@@ -322,26 +323,10 @@ function dispReceipt(){ //called per order iteration of a simulation
                 "</span>";
     opSims.innerHTML += eReceipt;
 }
-function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaaaugh
-    var itemName;
-    var itemCount;
-    var itemCost;
-    var eSimTotals = "<span class = 'simhead'>Sim " + simNum + " Totals"
-                     "<br/><span class = 'simlabeltab'>Item -- Revenue (Count)</span>"
-    for(i = 0; i < FOODTYPES.length; i++){
-        for(x = 0; x < eval(FOODTYPES[i]).length; x++){
-            if(eval(FOODTYPES[i])[x].split(";")[0].includes("_")) //i can probably modify this to make it a more flexible function
-                itemName = eval(FOODTYPES[i])[x].split(";")[0].split("_").join(" "); //removes the _ in names that includes it
-            else
-                itemName = eval(FOODTYPES[i])[x].split(";")[0]; 
-            itemCount = eval(totalTypes[i])[x].split(";")[0];
-            itemCost = eval(totalTypes[i])[x].split(";")[1];
-            eSimTotals += "<br/><span class = 'simtotals'>" + itemName + "-- $" + itemCost + " (" + itemCount + ")</span>";
-        }
-    }
-    opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML;
-    //YOU ARE HERE 2/4/20 YOU JUST FINISHED ITEM TOTALS WORK ON THE SUBTOTALS/TAX/TOTALS, AND THEN HEAD TO ENHANCEMENT 2
-    //ALSO MAKE IT PRETTIER AND COLOR THE REVENUE/COUNTS
+function dispSimTotals(){
+    eSimTotals = "<span class = 'simhead'>Sim " + simNum + "</span>";
+    for(i = 0; i < order.length; i++);
+    opSims.innerHTML = eSimTotals + opSims.innerHTML;
 }
 function display(){
     //display per simulation

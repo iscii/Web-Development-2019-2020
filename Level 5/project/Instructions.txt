@@ -1,0 +1,3 @@
+Instructions
+shift-wheel scroll to sidescroll through the resulting receipts of a simulation
+wheel-scroll to scroll through the resulting simulations

@@ -110,8 +110,14 @@ div#log{
     margin-bottom: 0.05%;
     font-family: Aharoni;
 }
-.simHead{
+.simhead{
     display: inline-block;
+    width: 2%;
+    text-align: center;
+}
+.simtotals{
+    display: inline-block;
+    font-size: 80%;
 }
 .rNum{
     text-align: center;
@@ -134,11 +140,34 @@ div#log{
     display: inline-block;
     margin-top: 5%;
     width: 100%;
-    
 }
 .subtotalhead{
-    float:left;
+    float: left;
+    font-size: 65%;
 }
 .subtotalcost{
-    float:right;
+    float: right;
+    font-size: 80%;
+}
+.tax{
+    display: inline-block;
+    width: 100%;
+}
+.taxhead{
+    float: left;
+    font-size: 60%;
+}
+.taxcost{
+    float: right;
+    font-size: 75%;
+}
+.total{
+    display: inline-block;
+    width: 100%;
+}
+.totalhead{
+    float: left;
+}
+.totalcost{
+    float: right;
 }
