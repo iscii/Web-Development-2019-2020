@@ -113,7 +113,7 @@ div#log{
 .simtotals{
     display: inline-block;
     width: 1.8%;
-    text-align: left;
+    text-align: center;
     line-height: 85%;
     color: rgb(255, 189, 255);
 }
@@ -156,10 +156,14 @@ div#log{
     text-align: right;
     border-bottom: 2px solid white;
 }
+.tax, .total, .paymentmethod, .paymentchange{
+    display: inline-block;
+    width: 100%;
+}
 .subtotal{
     display: inline-block;
-    margin-top: 5%;
     width: 100%;
+    margin-top: 5%;
 }
 .subtotalhead{
     float: left;
@@ -168,10 +172,6 @@ div#log{
 .subtotalcost{
     float: right;
     font-size: 80%;
-}
-.tax{
-    display: inline-block;
-    width: 100%;
 }
 .taxhead{
     float: left;
@@ -182,12 +182,21 @@ div#log{
     font-size: 75%;
 }
 .total{
-    display: inline-block;
-    width: 100%;
+    border-bottom: 2px solid white;
 }
 .totalhead{
     float: left;
+    font-size: 90%;
 }
 .totalcost{
     float: right;
+    font-size: 90%;
+}
+.methodname, .changehead{
+    float: left;
+    font-size: 75%;
+}
+.payment, .changevalue{
+    float: right;
+    font-size: 80%;
 }

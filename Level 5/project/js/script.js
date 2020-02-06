@@ -38,7 +38,6 @@ function iVars(){ //updating between simulations
 }
 function semiVars(){ //changing/reset between simulations
     //semi-dynamic
-    change = 0;
     register = [0, 2, 4, 42, 40, 50, 40, 100];
     registerTotal = 0;
     numOrder = 0;
@@ -53,15 +52,19 @@ function semiVars(){ //changing/reset between simulations
     dessertTotals = ["0;0", "0;0", "0;0"];
     drinkTotals = ["0;0", "0;0", "0;0"];
     totalTypes = ["entreeTotals", "sideTotals", "dessertTotals", "drinkTotals"];
+
+    //MAKE SIM TOTALS; SIMSALES, SIMCASHSALES, SIMELECSALES, SIMREGBAL
 }
 function dynamicVars(){ //changing/reset within each iteration of simulation
     //dynamic
+    change = 0;
     order = [];
     orderSubTotal = 0;
     orderTotal = 0;
     orderTax = 0;
     cash = [];
     cashGiven = 0;
+    paymentMethod = "Cash";
 }
 function simulate(){
     if(canSimulate){
@@ -151,6 +154,7 @@ function dPaymentMethod(){
     var x = getRandomInteger(1, 10);
     var isExactChange;
     if(x <= 4){
+        paymentMethod = "Cash";
         x = getRandomInteger(1, 10);
         if(x == 1){
             isExactChange = true;
@@ -167,6 +171,12 @@ function dPaymentMethod(){
         console.log("Change: " + change);
     }
     else{
+        //something extra
+        var r = getRandomInteger(0, 4);
+        //if(r == 1) paymentMethod = "Credit"; else if(r == 2) paymentMethod = "Debit";
+        var methods = ["Debit", "Credit", "Google Pay", "Apple Pay", "Gift Card"];
+        paymentMethod = methods[r];
+        cashGiven = orderTotal;
         numElecSales++;
         console.log("Electronic: " + orderTotal);
     }
@@ -305,6 +315,7 @@ function dispReceipt(){ //called per order iteration of a simulation
     var eReceipt = "<span class = 'receipts'> <span class = 'rNum'>Order " + numOrder +"</span>";
     var itemName;
     var itemCost;
+    //items ordered
     for(i = 0; i < order.length; i++){
         //console.log(order[i].split(";")[0]);
         //console.log(order[i].split(";")[0].includes("_"));
@@ -316,10 +327,17 @@ function dispReceipt(){ //called per order iteration of a simulation
         itemCost = order[i].split(";")[1];
         eReceipt += "<br/><span class = 'itemname'>" + itemName + "</span><br/><span class = 'itemcost'>" + itemCost + "</span>";
     }
+    //cost totals
     eReceipt += "<br/><span class = 'subtotal'><span class = 'subtotalhead'>Subtotal</span><span class = 'subtotalcost'>" + orderSubTotal + "</span></span>" + //subtotal
                 "<br/><span class = 'tax'><span class = 'taxhead'>Tax</span><span class = 'taxcost'>" + orderTax + "</span></span>" + //tax
-                "<br/><span class = 'total'><span class = 'totalhead'>Total</span><span class = 'totalcost'>" + orderTotal + "</span></span>" + //total
-                "</span>";
+                "<br/><span class = 'total'><span class = 'totalhead'>Total</span><span class = 'totalcost'>" + orderTotal + "</span></span>"; //total
+    //numsales
+    eReceipt += "<br/><span class = 'paymentmethod'><span class = 'methodname'>" + paymentMethod + "</span><span class = 'payment'>" + cashGiven + "</span></span>";
+    if(paymentMethod == "Cash"){
+        eReceipt += "<br/><span class = 'paymentchange'><span class = 'changehead'>Change</span><span class = 'changevalue'>" + change + "</span></span>";
+    }
+    eReceipt += "</span>";
+
     opSims.innerHTML += eReceipt;
 }
 function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaaaugh
@@ -334,12 +352,14 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
                 itemName = eval(FOODTYPES[i])[x].split(";")[0].split("_").join(" "); //removes the _ in names that includes it
             else
                 itemName = eval(FOODTYPES[i])[x].split(";")[0]; 
+
             itemCount = eval(totalTypes[i])[x].split(";")[0];
             itemCost = eval(totalTypes[i])[x].split(";")[1];
             eSimTotals += "<br/><span class = 'simitems'><span class = 'simitemname'>" + itemName + "</span> -- <span class = 'simitemcost'>$" 
             + itemCost + "</span> (<span class = 'simitemcount'>" + itemCount + "</span>)</span>";
         }
     }
+    /*SIM TOTALS --> eSimTotals += "<br/><span class = 'simordertotals'>" + "</span>";*/
     opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML; ///span closes simhead span element
     //YOU ARE HERE 2/4/20 YOU JUST FINISHED ITEM TOTALS. WORK ON THE SUBTOTALS/TAX/TOTALS, AND THEN HEAD TO ENHANCEMENT 2
     //ALSO MAKE IT PRETTIER AND COLOR THE REVENUE/COUNTS
