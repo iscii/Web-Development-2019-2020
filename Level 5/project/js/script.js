@@ -326,8 +326,8 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
     var itemName;
     var itemCount;
     var itemCost;
-    var eSimTotals = "<span class = 'simhead'>Sim " + simNum + " Totals"
-                     "<br/><span class = 'simlabeltab'>Item -- Revenue (Count)</span>"
+    var eSimTotals = "<span class = 'simtotals'><span class = 'simhead'>Sim <span class = 'simnum'>" + simNum + "</span> Totals</span>"
+                     "<br/><span class = 'simlabeltab'>Item -- Revenue (Count)</span>";
     for(i = 0; i < FOODTYPES.length; i++){
         for(x = 0; x < eval(FOODTYPES[i]).length; x++){
             if(eval(FOODTYPES[i])[x].split(";")[0].includes("_")) //i can probably modify this to make it a more flexible function
@@ -336,11 +336,12 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
                 itemName = eval(FOODTYPES[i])[x].split(";")[0]; 
             itemCount = eval(totalTypes[i])[x].split(";")[0];
             itemCost = eval(totalTypes[i])[x].split(";")[1];
-            eSimTotals += "<br/><span class = 'simtotals'>" + itemName + "-- $" + itemCost + " (" + itemCount + ")</span>";
+            eSimTotals += "<br/><span class = 'simitems'><span class = 'simitemname'>" + itemName + "</span> -- <span class = 'simitemcost'>$" 
+            + itemCost + "</span> (<span class = 'simitemcount'>" + itemCount + "</span>)</span>";
         }
     }
-    opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML;
-    //YOU ARE HERE 2/4/20 YOU JUST FINISHED ITEM TOTALS WORK ON THE SUBTOTALS/TAX/TOTALS, AND THEN HEAD TO ENHANCEMENT 2
+    opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML; ///span closes simhead span element
+    //YOU ARE HERE 2/4/20 YOU JUST FINISHED ITEM TOTALS. WORK ON THE SUBTOTALS/TAX/TOTALS, AND THEN HEAD TO ENHANCEMENT 2
     //ALSO MAKE IT PRETTIER AND COLOR THE REVENUE/COUNTS
 }
 function display(){

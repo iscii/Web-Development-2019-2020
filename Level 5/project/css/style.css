@@ -110,14 +110,34 @@ div#log{
     margin-bottom: 0.05%;
     font-family: Aharoni;
 }
-.simhead{
-    display: inline-block;
-    width: 2%;
-    text-align: center;
-}
 .simtotals{
     display: inline-block;
-    font-size: 80%;
+    width: 1.8%;
+    text-align: left;
+    line-height: 85%;
+    color: rgb(255, 189, 255);
+}
+.simhead{
+    display: inline-block;
+    border-bottom: 2px solid white;
+    margin: 0 auto;
+}
+.simitems{
+    display: inline-block;
+    font-size: 60%;
+    line-height: 2pt;
+}
+.simnum{
+    color: rgb(123, 255, 167);
+}
+.simitemname{
+    color: rgb(255, 163, 163);
+}
+.simitemcost{
+    color: rgb(194, 155, 255);
+}
+.simitemcount{
+    color: rgb(255, 249, 159);
 }
 .rNum{
     text-align: center;
