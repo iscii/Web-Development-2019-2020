@@ -53,21 +53,6 @@ button:active{
         make it so that the Div also gets slightly smaller and the box-shadow glow disappears or is muffed
     */
 }
-div#log{
-    position: relative;
-    border: 2px solid #888;
-    border-radius: 15px;
-    background: #181818;
-    width: 30%;
-    height: 80vh;
-    margin-top: 5%;
-    margin-left: 30%;
-    color:#FC3939;
-    font: Aharoni;
-    font-size: 200%;
-    overflow: scroll;
-    box-shadow: 0 0 10px #fff, 0 0 20px rgb(190, 190, 190), 0 0 30px rgb(119, 119, 119), 0 0 40px rgb(73, 73, 73), 0 0 50px rgb(37, 37, 37), 0 0 60px black;
-}
 /*scrollbar customization*/
 ::-webkit-scrollbar{
     width: 10px;
@@ -86,29 +71,6 @@ div#log{
 ::-webkit-scrollbar-corner{
     background: #181818;
     border-radius: 15px;
-}
-
-.cSims{
-    display: inline-block;
-    position: relative;
-    top: 2%;
-    left: 2%;
-    border-top: 15px solid rgb(180, 180, 180);
-    border-radius: 5px;
-}
-.receipts{
-    background: rgb(136, 217, 255);
-    border-left: 4px solid rgb(104, 169, 255);
-    border-right: 4px solid rgb(104, 169, 255);
-    border-bottom: 4px solid rgb(104, 169, 255);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    padding: 10px 10px 10px 10px;
-    display: inline-block;
-    vertical-align: top; /*aligns the blocks to the top of div*/
-    margin-right: 0.05%;
-    margin-bottom: 0.05%;
-    font-family: Aharoni;
 }
 .simtotals{
     display: inline-block;
@@ -130,26 +92,62 @@ div#log{
 .simnum{
     color: rgb(123, 255, 167);
 }
-.simitemname{
+.simitemname, .simsalenumhead{
     color: rgb(255, 163, 163);
 }
 .simitemcost{
     color: rgb(194, 155, 255);
 }
-.simitemcount{
+.simitemcount, .simsalenumvalue{
     color: rgb(255, 249, 159);
 }
 .simsales{
     display: inline-block;
-    margin-top: 10%;
+    margin-top: 5%;
+	padding-top: 5%;
     border-top: 2px solid white;
     font-size: 80%;
+	line-height: 80%;
 }
-.simsalenumhead{
-    color: rgb(255, 163, 163);
+.simsalespecific{
+	font-size: 75%;
 }
-.simsalenumvalue{
-    color: rgb(255, 249, 159);
+div#log{
+    position: relative;
+    border: 2px solid #888;
+    border-radius: 15px;
+    background: #181818;
+    width: 30%;
+    height: 80vh;
+    margin-top: 5%;
+    margin-left: 30%;
+    color:#FC3939;
+    font: Aharoni;
+    font-size: 200%;
+    overflow: scroll;
+    box-shadow: 0 0 10px #fff, 0 0 20px rgb(190, 190, 190), 0 0 30px rgb(119, 119, 119), 0 0 40px rgb(73, 73, 73), 0 0 50px rgb(37, 37, 37), 0 0 60px black;
+}
+.cSims{
+    display: inline-block;
+    position: relative;
+    top: 2%;
+    left: 2%;
+    border-top: 15px solid rgb(180, 180, 180);
+    border-radius: 5px;
+}
+.receipts{
+    background: rgb(136, 217, 255);
+    border-left: 4px solid rgb(104, 169, 255);
+    border-right: 4px solid rgb(104, 169, 255);
+    border-bottom: 4px solid rgb(104, 169, 255);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 10px 10px 10px 10px;
+    display: inline-block;
+    vertical-align: top; /*aligns the blocks to the top of div*/
+    margin-right: 0.05%;
+    margin-bottom: 0.05%;
+    font-family: Aharoni;
 }
 .rNum{
     text-align: center;

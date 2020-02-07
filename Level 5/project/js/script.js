@@ -348,8 +348,8 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
         }
     }
     eSimTotals += "<br/><span class = 'simsales'><span class = 'simsalenumhead'>Total Sales </span> -- [<span class = 'simsalenumvalue'>" + (numElecSales + numCashSales) + "</span>]" + 
-                  "<br/><span class = 'simsalenumhead'>Electronic </span> -- [<span class = 'simsalenumvalue'>" + numElecSales + "</span>]" + 
-                  "<br/><span class = 'simsalenumhead'>Cash </span> -- [<span class = 'simsalenumvalue'>" + numCashSales + "</span>]</span>";
+                  "<br/><span class = 'simsalespecific'><span class = 'simsalenumhead'>Electronic </span> -- [<span class = 'simsalenumvalue'>" + numElecSales + "</span>]" + 
+                  "<br/><span class = 'simsalenumhead'>Cash </span> -- [<span class = 'simsalenumvalue'>" + numCashSales + "</span>]</span></span>";
     opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML; ///span closes simhead span element
     //YOU ARE HERE 2/4/20 YOU JUST FINISHED ITEM TOTALS. WORK ON THE NUMBER OF SALES, and register balance, AND THEN HEAD TO ENHANCEMENT 2
     //ALSO MAKE IT PRETTIER AND COLOR THE REVENUE/COUNTS
