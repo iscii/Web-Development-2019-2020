@@ -146,10 +146,12 @@ function dCost(){
 }
 function dPaymentMethod(){
     var x = getRandomInteger(1, 10);
+    //var x = 1;
     var isExactChange;
     if(x <= 4){
         paymentMethod = "Cash";
         x = getRandomInteger(1, 10);
+        //var x = 1;
         if(x == 1){
             isExactChange = true;
             cashGiven = orderTotal;
@@ -160,8 +162,11 @@ function dPaymentMethod(){
         }
         change = (cashGiven - orderTotal).toFixed(2);
         registerChange(isExactChange);
+        //console.log(orderTotal);
+        //console.log(totalCashSales);
         totalCashSales += parseFloat(orderTotal);
         totalCashSales = parseFloat(totalCashSales.toFixed(2));
+        //console.log(totalCashSales);
         numCashSales++;
         console.log("Cash: " + cashGiven);
         console.log("Change: " + change);
@@ -172,8 +177,10 @@ function dPaymentMethod(){
         var methods = ["Debit", "Credit", "Google Pay", "Apple Pay", "Gift Card"];
         paymentMethod = methods[r];
         cashGiven = orderTotal;
+        //console.log(orderTotal);
         totalElecSales += parseFloat(orderTotal);
         totalElecSales = parseFloat(totalElecSales.toFixed(2));
+        //console.log(totalElecSales);
         numElecSales++;
         console.log("Electronic: " + orderTotal);
     }
@@ -290,7 +297,7 @@ function manageData(){ //enhancement 2
     console.log("[Note] Avgs: Order Totals [" + logStructure[0] + "], Cash Sales [" + logStructure[1] + "], Electronic Sales [" + logStructure[2] + "]");
 }
 function determineRegisterBal(){
-
+    
 }
 //CSS FUNCTIONS
 function setClassStyle(){ //YOU ARE HERE 1/31/20 -- Add other stats to receipts
@@ -362,6 +369,8 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
                   "<br/><span class = 'simsalenumhead'>Cash </span> -- <span class = 'simsalenumvalue'>$" + totalCashSales + "</span> -- (<span class = 'simsalenumnum'>" + numCashSales + "</span>)</span></span>";
     opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML; ///span closes simhead span element
     //YOU ARE HERE 2/4/20 YOU JUST FINISHED ITEM TOTALS. WORK ON THE NUMBER OF SALES, and register balance, AND THEN HEAD TO ENHANCEMENT 2
+    //ALSO MAKE IT PRETTIER AND COLOR THE REVENUE/COUNTS
+
 }
 function display(){
     //display per simulation

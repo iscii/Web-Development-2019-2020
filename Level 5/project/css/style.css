@@ -73,6 +73,7 @@ button:active{
     border-radius: 15px;
 }
 .simtotals{
+    padding-top: 0.05%;
     display: inline-block;
     width: 1.8%;
     text-align: center;
@@ -95,10 +96,10 @@ button:active{
 .simitemname, .simsalenumhead{
     color: rgb(255, 163, 163);
 }
-.simitemcost{
+.simitemcost, .simsalenumvalue{
     color: rgb(194, 155, 255);
 }
-.simitemcount, .simsalenumvalue{
+.simitemcount, .simsalenumnum{
     color: rgb(255, 249, 159);
 }
 .simsales{
@@ -107,10 +108,10 @@ button:active{
 	padding-top: 5%;
     border-top: 2px solid white;
     font-size: 80%;
-	line-height: 80%;
+	line-height: 85%;
 }
 .simsalespecific{
-	font-size: 75%;
+	font-size: 65%;
 }
 div#log{
     position: relative;
