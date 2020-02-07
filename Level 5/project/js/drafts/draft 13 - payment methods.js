@@ -121,6 +121,7 @@ function dOrder(){
             placeHolder = eval(totalTypes[i])[foodNum].split(";");
             placeHolder[0]++;
             placeHolder[1] = (parseFloat(placeHolder[1]) + parseFloat(eval(FOODTYPES[i])[foodNum].split(";")[1])).toFixed(2);
+            //placeHolder[1] = placeHolder[1].toFixed(2);
             eval(totalTypes[i])[foodNum] = placeHolder.join(";");
         }
     }
@@ -128,8 +129,15 @@ function dOrder(){
     placeHolder = eval(totalTypes[3])[drinkNum].split(";");
     placeHolder[0]++;
     placeHolder[1] = (parseFloat(placeHolder[1]) + parseFloat(eval(FOODTYPES[3])[drinkNum].split(";")[1])).toFixed(2);
+    //placeHolder[1] = placeHolder[1].toFixed(2);
     eval(totalTypes[3])[drinkNum] = placeHolder.join(";");
     console.log(order);
+    /*THIS SECTION (vvvvvvvv) IS JUST CONSOLE.LOG*/
+    var x;
+    for(i = 0; i < totalTypes.length; i++){
+        x += "[" + eval(totalTypes[i]) + "]";
+    }
+    console.log(x);
 }
 function dCost(){
     for (i = 0; i < order.length; i++){
@@ -165,6 +173,7 @@ function dPaymentMethod(){
     else{
         //something extra
         var r = getRandomInteger(0, 4);
+        //if(r == 1) paymentMethod = "Credit"; else if(r == 2) paymentMethod = "Debit";
         var methods = ["Debit", "Credit", "Google Pay", "Apple Pay", "Gift Card"];
         paymentMethod = methods[r];
         cashGiven = orderTotal;
@@ -308,10 +317,13 @@ function dispReceipt(){ //called per order iteration of a simulation
     var itemCost;
     //items ordered
     for(i = 0; i < order.length; i++){
+        //console.log(order[i].split(";")[0]);
+        //console.log(order[i].split(";")[0].includes("_"));
         if(order[i].split(";")[0].includes("_")) //i can probably modify this to make it a more flexible function
             itemName = order[i].split(";")[0].split("_").join(" "); //removes the _ in names that includes it
         else
             itemName = order[i].split(";")[0]; 
+        //console.log(itemName);
         itemCost = order[i].split(";")[1];
         eReceipt += "<br/><span class = 'itemname'>" + itemName + "</span><br/><span class = 'itemcost'>" + itemCost + "</span>";
     }
@@ -347,13 +359,10 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
             + itemCost + "</span> (<span class = 'simitemcount'>" + itemCount + "</span>)</span>";
         }
     }
-    eSimTotals += "<br/><span class = 'simsales'><span class = 'simsalenumhead'>Total Sales </span> -- [<span class = 'simsalenumvalue'>" + (numElecSales + numCashSales) + "</span>]" + 
-                  "<br/><span class = 'simsalenumhead'>Electronic </span> -- [<span class = 'simsalenumvalue'>" + numElecSales + "</span>]" + 
-                  "<br/><span class = 'simsalenumhead'>Cash </span> -- [<span class = 'simsalenumvalue'>" + numCashSales + "</span>]</span>";
+    /*SIM TOTALS --> eSimTotals += "<br/><span class = 'simordertotals'>" + "</span>";*/
     opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML; ///span closes simhead span element
-    //YOU ARE HERE 2/4/20 YOU JUST FINISHED ITEM TOTALS. WORK ON THE NUMBER OF SALES, and register balance, AND THEN HEAD TO ENHANCEMENT 2
+    //YOU ARE HERE 2/4/20 YOU JUST FINISHED ITEM TOTALS. WORK ON THE SUBTOTALS/TAX/TOTALS, AND THEN HEAD TO ENHANCEMENT 2
     //ALSO MAKE IT PRETTIER AND COLOR THE REVENUE/COUNTS
-
 }
 function display(){
     //display per simulation

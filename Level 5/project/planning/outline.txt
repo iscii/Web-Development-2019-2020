@@ -98,14 +98,14 @@ Level 5 Fast Food Cashier
 	Interface
 		>-Log(<parameter cash>)
 			XX-Make it an expandable tab? Every time a new receipt comes in, contract the previous tab
-			>-Include:
+			>X-Include:
 				>-Each Item + Each Price
 				>-Subtotal
-				-Tax
-				-Total
-				-Payment Method
-					-If cash, display Payment
-				-Change
+				>-Tax
+				>-Total
+				>-Payment Method
+					>-If cash, display Payment
+				>-Change
 			>X-After many trials, make it so that the spans for each simulation are created in JS and have their own unique ID so that they are individually writable.
 			The IDs cannot be the same, and I cannot use class or both spans are modified. Make a variable for the new span -- set it to a string that represents it, with the 
 			simNum, and then evaluate that string into the object.

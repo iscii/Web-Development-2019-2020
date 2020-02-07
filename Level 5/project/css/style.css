@@ -139,6 +139,18 @@ div#log{
 .simitemcount{
     color: rgb(255, 249, 159);
 }
+.simsales{
+    display: inline-block;
+    margin-top: 10%;
+    border-top: 2px solid white;
+    font-size: 80%;
+}
+.simsalenumhead{
+    color: rgb(255, 163, 163);
+}
+.simsalenumvalue{
+    color: rgb(255, 249, 159);
+}
 .rNum{
     text-align: center;
     color: rgb(1, 1, 165);
