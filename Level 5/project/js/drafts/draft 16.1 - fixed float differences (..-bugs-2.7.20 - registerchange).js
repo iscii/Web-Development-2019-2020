@@ -39,6 +39,7 @@ function iVars(){ //updating between simulations
 function semiVars(){ //changing/reset between simulations
     //semi-dynamic
     register = [0, 2, 4, 42, 40, 50, 40, 100];
+    dRegisterBal();
     registerTotal = 0;
     numOrder = 0;
     orderTime = 0;
@@ -144,13 +145,13 @@ function dCost(){
     console.log("Total: " + orderTotal); //total
 }
 function dPaymentMethod(){
-    var x = getRandomInteger(1, 10);
-    //var x = 1;
+    //var x = getRandomInteger(1, 10);
+    var x = 1;
     var isExactChange;
     if(x <= 4){
         paymentMethod = "Cash";
-        x = getRandomInteger(1, 10);
-        //var x = 2;
+        //x = getRandomInteger(1, 10);
+        var x = 2;
         if(x == 1){
             isExactChange = true;
             cashGiven = orderTotal;
@@ -160,10 +161,9 @@ function dPaymentMethod(){
             dCash();
         }
         change = (cashGiven - orderTotal).toFixed(2);
+        registerChange(isExactChange);
         totalCashSales += parseFloat(orderTotal);
         totalCashSales = parseFloat(totalCashSales.toFixed(2));
-        console.log(totalCashSales);
-        registerChange(isExactChange);
         numCashSales++;
         console.log("Cash: " + cashGiven);
         console.log("Change: " + change);
@@ -214,7 +214,7 @@ function dCash(){
         }
     }
 }
-function payToRegister(array){ //cannot put in dCash - check /drafts/draft 15 and ../bugs/2.7.20. Also, require specific bills to be added.
+function payToRegister(array){ //cannot put in dCash - check /drafts/draft 15 and ../bugs/2.7.20
     var billsGiven = array;
     var constname;
     for(i = 0; i < billsGiven.length; i++){
@@ -232,19 +232,19 @@ function registerChange(isExactChange){
             for(o = 0; o <= register[x]; o++){
                 if((o > 10) && (x >= 4)) //none of the coin* counts (*hence x >= 4) can go beyond 10 without being replacable by the next value coin. Prevents ~86 iterations before next loop
                     continue loop; //passes control to next iteration
-                if(!isDone) //doing this cos if checkForDrops is called, isDone must be false.
-                    updateRegister(); 
+                if(!isDone){
+                    updateRegister();
+                } //doing this cos if checkForDrops is called, isDone must be false.
                 function updateRegister(){ //nested function
                     if(tempChange - VALUES[x] >= 0){
                         if(register[x]){ 
                             register[x]--;
                             tempChange -= VALUES[x];
-                            //console.log("tempb " + tempChange);
                             tempChange = tempChange.toFixed(2);
-                            //console.log("tempa " + tempChange);
                             if(tempChange == 0){
                                 console.log("[Note] Register a/f change: " + register);
-                                console.log(dRegisterBal());
+                                //console.log(parseInt(dRegisterBal()));
+                                dRegisterBal();
                                 return isDone = true;
                             }
                             return tempChange;
@@ -287,7 +287,6 @@ function registerChange(isExactChange){
             while(tempChange - VALUES[i] >= 0){ //while loop; See ../references
                 register[i]++;
                 tempChange -= VALUES[i];
-                tempChange = tempChange.toFixed(2);
             }
         }
         console.log("[Note] Register a/f change: " + register);
@@ -314,13 +313,15 @@ function manageData(){ //enhancement 2
 }
 function dRegisterBal(){ //these loops are starting to get redundant -- i can probably make a more flexible function that'd take in parameters
     var balance = 0;
+    console.log(register);
     for(i = 0; i < register.length; i++){
         for(x = 0; x < register[i]; x++){
             balance += VALUES[i];
+            //console.log("+ " + VALUES[i]);
         }
     }
     balance = balance.toFixed(2);
-    console.log(totalCashSales);
+    console.log(balance);
     return balance;
 }
 //CSS FUNCTIONS

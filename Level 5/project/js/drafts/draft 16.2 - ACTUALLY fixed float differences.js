@@ -283,13 +283,19 @@ function registerChange(isExactChange){
     else{
         console.log("[Note] Exact change");
         var tempChange = cashGiven; //a little redundant, but the other functions are rather specific 
+        //console.log("tempchange = " + tempChange);
         for(i = B20; i <= P; i++){
             while(tempChange - VALUES[i] >= 0){ //while loop; See ../references
+                //console.log(tempChange);
+                //console.log(VALUES[i]);
+                //console.log("A" + register);
                 register[i]++;
+                //console.log("B" + register);
                 tempChange -= VALUES[i];
                 tempChange = tempChange.toFixed(2);
             }
         }
+        //console.log("end: " + tempChange);
         console.log("[Note] Register a/f change: " + register);
     }
 }
