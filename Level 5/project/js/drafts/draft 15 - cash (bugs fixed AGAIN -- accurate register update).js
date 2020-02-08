@@ -43,7 +43,7 @@ function semiVars(){ //changing/reset between simulations
     registerTotal = 0;
     numOrder = 0;
     orderTime = 0;
-    time = 180;
+    time = 10;
     exactChange = false;
     numCashSales = 0;
     numElecSales = 0;
@@ -98,8 +98,8 @@ function simulate(){
             dynamicVars();
         }
         manageData();
+        console.log(dRegisterBal());
         display();
-        dRegisterBal();
         console.log("[Note] Remaining time: " + time);
         
         setTimeout(cooldown, 1000);
@@ -145,13 +145,13 @@ function dCost(){
     console.log("Total: " + orderTotal); //total
 }
 function dPaymentMethod(){
-    var x = getRandomInteger(1, 10);
-    //var x = 1;
+    //var x = getRandomInteger(1, 10);
+    var x = 1;
     var isExactChange;
     if(x <= 4){
         paymentMethod = "Cash";
-        x = getRandomInteger(1, 10);
-        //var x = 2;
+        //x = getRandomInteger(1, 10);
+        var x = 2;
         if(x == 1){
             isExactChange = true;
             cashGiven = orderTotal;
@@ -184,43 +184,79 @@ function dCash(){
     cash = [1, getRandomInteger(0, 2), getRandomInteger(0, 3), getRandomInteger(0, 5)]
     console.log("[Note] Customer bills carried: " + cash);
     var billsGiven = [];
+    //console.log(register);
+    //var tempReg = register.slice(0);
+    //console.log(tempReg);
     var quantItem;
     //determines cash payment from the lowest denominator
     for(i = 3; i >= 0; i--){ //check lowest value, add from lowest up. If cannot pay for total, check next value, add from lowest up, etc...
         if(cash[i] > 0){
+            //register[i] = tempReg.slice(0)[i];
+            //console.log("standard: " + register); 
             for(x = 3; x >= i; x--){ //3 being cash[3]
+                //console.log("i = " + i);  
                 cashGiven = VALUES[i]; // FIXES ../bugs/1.27.19_-_cash.png
-                billsGiven = [VALUES[i]];     
+                billsGiven = [VALUES[i]];
+                //register[i]++;       
                 if(cashGiven - orderTotal >= 0){
+                    //console.log("cashGiven = " + cashGiven);
+                    //console.log(register);
                     payToRegister(billsGiven);
+                    //console.log(register);
                     return;                                                      
                 }
                 if(x == i){
+                    //console.log("x = i");
                     quantItem = (cash[x] - 1);           
                 }
                 else{
+                    //console.log("x != i");
                     quantItem = cash[x];
                 }
 
                 for(o = 0; o < quantItem; o++){
+                    //console.log("o: " + o);
                     cashGiven += VALUES[x];
                     billsGiven.push(VALUES[x]);
+                    //console.log(cashGiven);
+                    //console.log(register);
+                    //register[x]++;// --> CANNOT PUT THIS HERE SINCE CASHGIVEN SOMETIMES RESETS DEPENDING ON WHETHER OR NOT THE ORDER COULD BE AFFORDED AND OBJECTS IN MEMORY WOULD NOT ALLOW ME TO SET A VARIABLE TO REGISTER AS A CHECKPOINT FOR RESETTING IT
+                    //console.log(register);
                     if(cashGiven - orderTotal >= 0){
+                        //console.log("cashGiven = " + cashGiven);
+                        //console.log(register);
                         payToRegister(billsGiven);
+                        //console.log(register);
                         return;
                     }
                 }
             }
         }
     }
+    //console.log(register);
 }
 function payToRegister(array){ //cannot put in dCash - check /drafts/draft 15 and ../bugs/2.7.20
     var billsGiven = array;
     var constname;
+    //console.log(billsGiven);
+    //console.log(register);
     for(i = 0; i < billsGiven.length; i++){
         constname = "B" + billsGiven[i];
+        //console.log(constname);
         register[eval(constname)]++;
     }
+    
+    /*
+    console.log("initial: " + register);
+    var tempCash = cashGiven;
+    for(i = 0; i < VALUES.length; i++){
+        while((tempCash - VALUES[i] >= 0) && (cash[i] > 0)){
+            register[i]++;
+            tempCash -= VALUES[i];
+        }
+    }
+    console.log("after: " + register);
+    */
 }
 function registerChange(isExactChange){
     console.log("[Note] Register b/f change: " + register);
@@ -235,6 +271,7 @@ function registerChange(isExactChange){
                 if(!isDone) //doing this cos if checkForDrops is called, isDone must be false.
                     updateRegister();
                 function updateRegister(){ //nested function
+                    //dRegisterBal();
                     if(tempChange - VALUES[x] >= 0){
                         if(register[x]){ 
                             register[x]--;
@@ -318,7 +355,7 @@ function dRegisterBal(){ //these loops are starting to get redundant -- i can pr
         }
     }
     balance = balance.toFixed(2);
-    console.log(balance);
+    return balance;
 }
 //CSS FUNCTIONS
 function setClassStyle(){ //YOU ARE HERE 1/31/20 -- Add other stats to receipts
@@ -389,8 +426,7 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
                   "<br/><span class = 'simsalespecific'><span class = 'simsalenumhead'>Electronic </span> -- <span class = 'simsalenumvalue'>$" + totalElecSales + "</span> -- (<span class = 'simsalenumnum'>" + numElecSales + "</span>)" + 
                   "<br/><span class = 'simsalenumhead'>Cash </span> -- <span class = 'simsalenumvalue'>$" + totalCashSales + "</span> -- (<span class = 'simsalenumnum'>" + numCashSales + "</span>)</span></span>";
     opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML; ///span closes simhead span element
-    //YOUU ARE HERE 2/7/20 JUST FINISHED REGISTER BALANCE CHECK WHY THE TOTALS ARE SLLIGHTLY OFF (../bugs/2.7.20 - registerbalance) AND FIX (prob has to do with .toFixed)
-    //AND THEN WORK ON ENHANCEMENT 2
+    //YOU ARE HERE 2/4/20 YOU JUST FINISHED ITEM TOTALS. WORK ON THE NUMBER OF SALES, and register balance, AND THEN HEAD TO ENHANCEMENT 2
 }
 function display(){
     //display per simulation

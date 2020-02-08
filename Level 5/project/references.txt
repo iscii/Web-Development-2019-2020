@@ -33,3 +33,6 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
 
 Centering element within div
 https://stackoverflow.com/questions/7560832/how-to-center-a-button-within-a-div
+
+Cloning Arrays
+https://davidwalsh.name/javascript-clone-array
