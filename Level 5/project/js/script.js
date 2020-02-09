@@ -324,7 +324,6 @@ function dRegisterBal(){ //these loops are starting to get redundant -- i can pr
         }
     }
     balance = balance.toFixed(2);
-    console.log(totalCashSales);
     return balance;
 }
 //CSS FUNCTIONS
@@ -377,8 +376,10 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
     var itemCount;
     var itemCost;
     var simSalesTotal = (totalCashSales + totalElecSales).toFixed(2);
+    var regBalDiff = dRegisterBal() - totalCashSales;
     var eSimTotals = "<span class = 'simtotals'><span class = 'simhead'>Sim <span class = 'simnum'>" + simNum + "</span> Totals</span>"
                      "<br/><span class = 'simlabeltab'>Item -- Revenue (Count)</span>";
+    //simitemtotals
     for(i = 0; i < FOODTYPES.length; i++){
         for(x = 0; x < eval(FOODTYPES[i]).length; x++){
             if(eval(FOODTYPES[i])[x].split(";")[0].includes("_")) //i can probably modify this to make it a more flexible function
@@ -392,12 +393,16 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
             + itemCost + "</span> (<span class = 'simitemcount'>" + itemCount + "</span>)</span>";
         }
     } //.toFixed is necessary here for the float to display as "9.70" instead of "9.7"
-    eSimTotals += "<br/><span class = 'simsales'><span class = 'simsalenumhead'>Total Sales </span> -- <span class = 'simsalenumvalue'>$" + simSalesTotal + "</span> -- </span>(<span class = 'simsalenumnum'>" + (numElecSales + numCashSales) + "</span>)" + 
-                  "<br/><span class = 'simsalespecific'><span class = 'simsalenumhead'>Electronic </span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalElecSales).toFixed(2) + "</span> -- (<span class = 'simsalenumnum'>" + numElecSales + "</span>)" + 
-                  "<br/><span class = 'simsalenumhead'>Cash </span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalCashSales).toFixed(2) + "</span> -- (<span class = 'simsalenumnum'>" + numCashSales + "</span>)</span></span>";
-    opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML; ///span closes simhead span element
-    //YOUU ARE HERE 2/7/20 JUST FINISHED REGISTER BALANCE CHECK WHY THE TOTALS ARE SLLIGHTLY OFF (../bugs/2.7.20 - registerbalance) AND FIX (prob has to do with .toFixed)
-    //AND THEN WORK ON ENHANCEMENT 2
+    //simsaletotalls
+    eSimTotals += "<br/><span class = 'simsales'><span class = 'simsalenumhead'>Total Sales</span> -- <span class = 'simsalenumvalue'>$" + simSalesTotal + "</span> -- </span> (<span class = 'simsalenumnum'>" + (numElecSales + numCashSales) + "</span>)" + 
+                  "<br/><span class = 'simsalespecific'><span class = 'simsalenumhead'>Electronic</span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalElecSales).toFixed(2) + "</span> -- (<span class = 'simsalenumnum'>" + numElecSales + "</span>)" + 
+                  "<br/><span class = 'simsalenumhead'>Cash</span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalCashSales).toFixed(2) + "</span> -- (<span class = 'simsalenumnum'>" + numCashSales + "</span>)</span></span>";
+    //simregisterbalance
+    eSimTotals += "<br/><span class = 'regbal'><span class = 'regbalhead'>Register Balance</span> -- <span class = 'regbalvalue'>" + dRegisterBal() + "</span>";
+    if(regBalDiff == 100){//determines if under, even, or over
+        
+    }
+    opSims.innerHTML = eSimTotals + "</span></span>" + opSims.innerHTML; ///first span closes regbal, second span closes simhead
 }
 function display(){
     //display per simulation
