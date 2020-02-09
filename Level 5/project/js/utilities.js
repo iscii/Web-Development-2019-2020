@@ -88,3 +88,14 @@ function shuffleArray(array)
     }
     return array;
 }
+/* roundDecimal
+
+    Returns a float rounded to the specified digit
+
+    Parameters:
+        float - the float
+        digit - the digits/decimal places to round to
+*/
+function roundDecimal(float, digit){
+    return parseFloat(parseFloat(float).toFixed(digit));
+}
