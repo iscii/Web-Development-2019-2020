@@ -93,13 +93,13 @@ button:active{
 .simnum{
     color: rgb(123, 255, 167);
 }
-.simitemname, .simsalenumhead{
+.simitemname, .simsalenumhead, .regbalhead{
     color: rgb(255, 163, 163);
 }
-.simitemcost, .simsalenumvalue{
+.simitemcost, .simsalenumvalue, .regbalvalue{
     color: rgb(194, 155, 255);
 }
-.simitemcount, .simsalenumnum{
+.simitemcount, .simsalenumnum, .regbalresult{
     color: rgb(255, 249, 159);
 }
 .simsales{
@@ -112,6 +112,9 @@ button:active{
 }
 .simsalespecific{
 	font-size: 65%;
+}
+.regbal{
+    font-size: 70%;
 }
 div#log{
     position: relative;

@@ -376,8 +376,9 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
     var itemCount;
     var itemCost;
     var simSalesTotal = (totalCashSales + totalElecSales).toFixed(2);
-    var regBalDiff = dRegisterBal() - totalCashSales;
-    var eSimTotals = "<span class = 'simtotals'><span class = 'simhead'>Sim <span class = 'simnum'>" + simNum + "</span> Totals</span>"
+    var regBalDiff = parseFloat(dRegisterBal() - totalCashSales).toFixed(2);
+    var regBalResult;
+    var eSimTotals = "<span class = 'simtotals'><span class = 'simhead'>Sim <span class = 'simnum'>" + simNum + "</span>Totals</span>"
                      "<br/><span class = 'simlabeltab'>Item -- Revenue (Count)</span>";
     //simitemtotals
     for(i = 0; i < FOODTYPES.length; i++){
@@ -394,15 +395,20 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
         }
     } //.toFixed is necessary here for the float to display as "9.70" instead of "9.7"
     //simsaletotalls
-    eSimTotals += "<br/><span class = 'simsales'><span class = 'simsalenumhead'>Total Sales</span> -- <span class = 'simsalenumvalue'>$" + simSalesTotal + "</span> -- </span> (<span class = 'simsalenumnum'>" + (numElecSales + numCashSales) + "</span>)" + 
+    eSimTotals += "<br/><span class = 'simsales'><span class = 'simsalenumhead'>Total Sales</span> -- <span class = 'simsalenumvalue'>$" + simSalesTotal + "</span> -- (<span class = 'simsalenumnum'>" + (numElecSales + numCashSales) + "</span>)" + 
                   "<br/><span class = 'simsalespecific'><span class = 'simsalenumhead'>Electronic</span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalElecSales).toFixed(2) + "</span> -- (<span class = 'simsalenumnum'>" + numElecSales + "</span>)" + 
                   "<br/><span class = 'simsalenumhead'>Cash</span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalCashSales).toFixed(2) + "</span> -- (<span class = 'simsalenumnum'>" + numCashSales + "</span>)</span></span>";
     //simregisterbalance
-    eSimTotals += "<br/><span class = 'regbal'><span class = 'regbalhead'>Register Balance</span> -- <span class = 'regbalvalue'>" + dRegisterBal() + "</span>";
-    if(regBalDiff == 100){//determines if under, even, or over
+    eSimTotals += "<br/><span class = 'regbal'><span class = 'regbalhead'>Register Balance</span> -- <span class = 'regbalvalue'>$" + dRegisterBal() + "</span>";
+    if(regBalDiff == 100)//determines if under, even, or over
+        regBalResult = "Even";
+    else if(regBalDiff > 100)
+        regBalResult = "Over";
+    else
+        regBalResult = "Under";
         
-    }
-    opSims.innerHTML = eSimTotals + "</span></span>" + opSims.innerHTML; ///first span closes regbal, second span closes simhead
+    eSimTotals += " (<span class = 'regbalresult'>" + regBalResult + "</span>)</span>"
+    opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML; ///span closes simhead element
 }
 function display(){
     //display per simulation
