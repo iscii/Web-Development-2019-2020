@@ -167,6 +167,7 @@ function dPaymentMethod(){
         change = (cashGiven - orderTotal).toFixed(2);
         totalCashSales += parseFloat(orderTotal);
         totalCashSales = parseFloat(parseFloat(totalCashSales).toFixed(2));
+        console.log(totalCashSales);
         registerChange(isExactChange);
         numCashSales++;
         console.log("Cash: " + cashGiven);
@@ -180,6 +181,7 @@ function dPaymentMethod(){
         cashGiven = orderTotal;
         totalElecSales += parseFloat(orderTotal);
         totalElecSales = parseFloat(parseFloat(totalElecSales).toFixed(2));
+        console.log(totalElecSales);
         numElecSales++;
         console.log("Electronic: " + orderTotal);
     }
@@ -391,7 +393,7 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
             eSimTotals += "<br/><span class = 'simitems'><span class = 'simitemname'>" + itemName + "</span> -- <span class = 'simitemcost'>$" 
             + itemCost + "</span> (<span class = 'simitemcount'>" + itemCount + "</span>)</span>";
         }
-    } //.toFixed is necessary here for the float to display as "9.70" instead of "9.7"
+    }
     eSimTotals += "<br/><span class = 'simsales'><span class = 'simsalenumhead'>Total Sales </span> -- <span class = 'simsalenumvalue'>$" + simSalesTotal + "</span> -- </span>(<span class = 'simsalenumnum'>" + (numElecSales + numCashSales) + "</span>)" + 
                   "<br/><span class = 'simsalespecific'><span class = 'simsalenumhead'>Electronic </span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalElecSales).toFixed(2) + "</span> -- (<span class = 'simsalenumnum'>" + numElecSales + "</span>)" + 
                   "<br/><span class = 'simsalenumhead'>Cash </span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalCashSales).toFixed(2) + "</span> -- (<span class = 'simsalenumnum'>" + numCashSales + "</span>)</span></span>";
