@@ -103,7 +103,6 @@ function simulate(){
         }
         manageData();
         display();
-        console.log(dRegisterBal());
         console.log("[Note] Remaining time: " + time);
         
         setTimeout(cooldown, 1000);
@@ -142,7 +141,7 @@ function dCost(){
         orderSubTotal += parseFloat(order[i].split(";")[1]);
     }
     orderSubTotal = orderSubTotal.toFixed(2); //rounds to two decimal places (sometimes floating-point error)
-    console.log("subTotal: " + orderSubTotal); //subtotal
+    console.log("Subtotal: " + orderSubTotal); //subtotal
     orderTotal = (orderSubTotal * TAX).toFixed(2);
     orderTax = (orderTotal - orderSubTotal).toFixed(2);
     console.log("Tax: " + orderTax); //tax
