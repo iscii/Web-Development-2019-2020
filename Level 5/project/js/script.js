@@ -18,6 +18,7 @@ function iRefs(){
     opLog = document.getElementById("logframe");
     clStyleReceipts = document.getElementsByClassName("receipts");
     clStyleSims = document.getElementsByClassName("cSims");
+    inputRepeat = document.getElementById("repeatForm");
 
     opItemAvgs = document.getElementById("itemavgs");
     opSaleAvgs = document.getElementById("saleavgs");
@@ -88,6 +89,8 @@ function iVars(){ //updating between simulations
     //css
     clReceiptWidth = 0; //class "receipts"
     clOrdersWidth = 0; //class "orders"
+
+    repeatCount = 0;
 }
 function semiVars(){ //changing/reset between simulations
     //semi-dynamic
@@ -119,39 +122,50 @@ function dynamicVars(){ //changing/reset within each iteration of simulation
     cashGiven = 0;
     paymentMethod = "Cash";
 }
-//back-end functions
-function simulate(){
-    if(canSimulate){
+function repeat(){ //YOU ARE HERE 2/10/20 FIX THE LOOP/SETTIMEOUT
+    repeatCount = inputRepeat.runcount.value;
+    if(!repeatCount && canSimulate){
         canSimulate = false;
-        simNum++;
-        console.log("SIM " + simNum);
-        semiVars();
-        dynamicVars();
-        dispOrder();
-        for(time; time > 0; time -= (orderTime + breakTime)){
-            numOrder++;
-            console.log("--------------------------------------------- ORDER [" + numOrder + "] ---------------------------------------------");
-            //determines the order's length in time
-            orderTime = getRandomInteger(1, 5);
-            breakTime = getRandomInteger(0, 2);
-            if((time - (orderTime + breakTime) <= 0)){
-                breakTime = 0;
-                orderTime = time;
-            }
-            console.log("[Note] Length: " + orderTime);
-            console.log("[Note] Break: " + breakTime);
-            console.log("[Note] Total Length: " + (orderTime + breakTime));
-            dOrder();
-            dCost();
-            dPaymentMethod();
-            dispReceipt();
-            dynamicVars();
-        }
-        display();
-        console.log("[Note] Remaining time: " + time);
-        
+        simulate();
         setTimeout(cooldown, 1000);
     }
+    if(repeatCount && canSimulate){
+        for(i = 0; i < repeatCount; i++){
+            console.log("NUMBA " + i);
+            canSimulate = false;
+            simulate();
+            setTimeout(cooldown, 100);
+        }
+    }
+}
+//back-end functions
+function simulate(){
+    simNum++;
+    console.log("SIM " + simNum);
+    semiVars();
+    dynamicVars();
+    dispOrder();
+    for(time; time > 0; time -= (orderTime + breakTime)){
+        numOrder++;
+        console.log("--------------------------------------------- ORDER [" + numOrder + "] ---------------------------------------------");
+        //determines the order's length in time
+        orderTime = getRandomInteger(1, 5);
+        breakTime = getRandomInteger(0, 2);
+        if((time - (orderTime + breakTime) <= 0)){
+            breakTime = 0;
+            orderTime = time;
+        }
+        console.log("[Note] Length: " + orderTime);
+        console.log("[Note] Break: " + breakTime);
+        console.log("[Note] Total Length: " + (orderTime + breakTime));
+        dOrder();
+        dCost();
+        dPaymentMethod();
+        dispReceipt();
+        dynamicVars();
+    }
+    display();
+    console.log("[Note] Remaining time: " + time);
 }
 function cooldown(){
     canSimulate = true;
@@ -213,6 +227,7 @@ function dPaymentMethod(){
         numCashSales++;
         console.log("Cash: " + cashGiven);
         console.log("Change: " + change);
+        console.log("Register: " + register);
     }
     else{
         //something extra
@@ -237,7 +252,7 @@ function dCash(){
         if(cash[i] > 0){
             for(x = 3; x >= i; x--){ //3 being cash[3]
                 cashGiven = VALUES[i]; // FIXES ../bugs/1.27.19_-_cash.png
-                billsGiven = [VALUES[i]];     
+                billsGiven = [VALUES[i]]; 
                 if(cashGiven - orderTotal >= 0){
                     payToRegister(billsGiven);
                     return;                                                      
@@ -261,6 +276,7 @@ function dCash(){
 }
 function payToRegister(array){ //cannot put in dCash - check /drafts/draft 15 and ../bugs/2.7.20. Also, require specific bills to be added.
     var billsGiven = array;
+    console.log("[Note] Paid in " + billsGiven); 
     var constname;
     for(i = 0; i < billsGiven.length; i++){
         constname = "B" + billsGiven[i];

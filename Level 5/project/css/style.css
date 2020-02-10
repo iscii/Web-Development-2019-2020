@@ -136,6 +136,7 @@ span#itemavgs, #saleavgs{
     text-align: center;
     display: inline-block;
     line-height: 150%;
+    font-size: 90%;
     width: 49%;
 }
 span#saleavgs{
