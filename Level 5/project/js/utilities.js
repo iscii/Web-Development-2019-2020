@@ -96,6 +96,6 @@ function shuffleArray(array)
         float - the float
         digit - the digits/decimal places to round to
 */
-function roundDecimal(float, digit){
-    return parseFloat(parseFloat(float).toFixed(digit));
+function roundDecimal(stringfloat, digit){
+    return parseFloat(parseFloat(stringfloat).toFixed(digit));
 }

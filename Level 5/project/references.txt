@@ -36,3 +36,6 @@ https://stackoverflow.com/questions/7560832/how-to-center-a-button-within-a-div
 
 Cloning Arrays
 https://davidwalsh.name/javascript-clone-array
+
+(Maybe) Settimeout For
+https://stackoverflow.com/questions/5226285/settimeout-in-for-loop-does-not-print-consecutive-values

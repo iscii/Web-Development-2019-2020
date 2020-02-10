@@ -92,11 +92,11 @@ Level 5 Fast Food Cashier
 			-make it look like a receipt (../images/receipt_example.jpg)
 		>X-simulate() -- button function	
 			-runs this whole thing again
-		-totalAverages()
+		>X-totalAverages()
 			-enhancement 2: averages the totals
 
 	Interface
-		>-Log(<parameter cash>)
+		>X-Log(<parameter cash>)
 			XX-Make it an expandable tab? Every time a new receipt comes in, contract the previous tab
 			>X-Include:
 				>-Each Item + Each Price
@@ -109,7 +109,7 @@ Level 5 Fast Food Cashier
 			>X-After many trials, make it so that the spans for each simulation are created in JS and have their own unique ID so that they are individually writable.
 			The IDs cannot be the same, and I cannot use class or both spans are modified. Make a variable for the new span -- set it to a string that represents it, with the 
 			simNum, and then evaluate that string into the object.
-		>-Results
+		>X-Results
 			-Total # sales
 				-Total Cash sales
 				-Total Electronic sales
@@ -126,5 +126,20 @@ Level 5 Fast Food Cashier
 			-A roll of dimes is $5. (50)
 			-A roll of quarters is $10. (40)
 		//INCLUDE THIS INDEFINITELY vv
-		>-Allow the user to run the simulation multiple times. 
+		>X-Allow the user to run the simulation multiple times. 
 		Keep the totals for each shift and determine averages over the course of several shifts.
+		-My Own
+			-Have an input box that'd run the simulation a specified number of times
+			-You'd have to use settimeout loops (see ../references)
+
+
+
+
+
+
+
+
+
+
+
+

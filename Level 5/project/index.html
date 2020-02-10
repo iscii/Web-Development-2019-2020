@@ -19,24 +19,31 @@
 			<div id = "logframe" class = "display"></div>
 			<div id = "dataframe" class = "display">
 				<div id = "data">
-					<h1>Results</h1>
+					<h1>Results (Averages)</h1>
 					<span id = "itemavgs">
-						<span class = "avgitems"><span class = "avgitemname">Hamburger -- </span><span id = "avghamburgercost" class = "avgitemcost"></span><span id = "avghamburgercount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Chicken Sandwich -- </span><span id = "avgchickensandwichcost" class = "avgitemcost"></span><span id = "avgchickensandwichcount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Veggie Sandwich -- </span><span id = "avgveggiesandwichcost" class = "avgitemcost"></span><span id = "avgveggiesandwichcount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">French Fries -- </span><span id = "avgfrenchfriescost" class = "avgitemcost"></span><span id = "avgfrenchfriescount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Salad -- </span><span id = "avgsaladcost" class = "avgitemcost"></span><span id = "avgsaladcount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Cheese Sticks -- </span><span id = "avgcheesestickscost" class = "avgitemcost"></span><span id = "avgcheesestickscount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Rice -- </span><span id = "avgricecost" class = "avgitemcost"></span><span id = "avgricecount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Ice Cream -- </span><span id = "avgicecreamcost" class = "avgitemcost"></span><span id = "avgicecreamcount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Pie -- </span><span id = "avgpiecost" class = "avgitemcost"></span><span id = "avgpiecount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Cookie  -- </span><span id = "avgcookiecost" class = "avgitemcost"></span><span id = "avgcookiecount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Soda -- </span><span id = "avgsodacost" class = "avgitemcost"></span><span id = "avgsodacount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Bottled Water -- </span><span id = "avgbottledwatercost" class = "avgitemcost"></span><span id = "avgbottledwatercount" class = "avgitemcount"></span></span><br/>
-						<span class = "avgitems"><span class = "avgitemname">Juice -- </span><span id = "avgjuicecost" class = "avgitemcost"></span><span id = "avgjuicecount" class = "avgitemcount"></span></span>
+						<span class = "avgitemname">Hamburger</span> -- <span id = "avghamburgercost" class = "avgitemcost">0</span> (<span id = "avghamburgercount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Chicken Sandwich</span> -- <span id = "avgchickensandwichcost" class = "avgitemcost">0</span> (<span id = "avgchickensandwichcount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Veggie Sandwich</span> -- <span id = "avgveggiesandwichcost" class = "avgitemcost">0</span> (<span id = "avgveggiesandwichcount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">French Fries</span> -- <span id = "avgfrenchfriescost" class = "avgitemcost">0</span> (<span id = "avgfrenchfriescount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Salad</span> -- <span id = "avgsaladcost" class = "avgitemcost">0</span> (<span id = "avgsaladcount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Cheese Sticks</span> -- <span id = "avgcheesestickscost" class = "avgitemcost">0</span> (<span id = "avgcheesestickscount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Rice</span> -- <span id = "avgricecost" class = "avgitemcost">0</span> (<span id = "avgricecount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Ice Cream</span> -- <span id = "avgicecreamcost" class = "avgitemcost">0</span> (<span id = "avgicecreamcount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Pie</span> -- <span id = "avgpiecost" class = "avgitemcost">0</span> (<span id = "avgpiecount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Cookie </span> -- <span id = "avgcookiecost" class = "avgitemcost">0</span> (<span id = "avgcookiecount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Soda</span> -- <span id = "avgsodacost" class = "avgitemcost">0</span> (<span id = "avgsodacount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Bottled Water</span> -- <span id = "avgbottledwatercost" class = "avgitemcost">0</span> (<span id = "avgbottledwatercount" class = "avgitemcount">0</span>)<br/>
+						<span class = "avgitemname">Juice</span> -- <span id = "avgjuicecost" class = "avgitemcost">0</span> (<span id = "avgjuicecount" class = "avgitemcount">0</span>)
 					</span>
-					<span id = "saleavgs"></span>
-					<span id = "regbalavgs"></span>
+					<span id = "saleavgs">
+						<span id = "simcount"><span id = "numsims">0</span> Simulation(s)</span><br/>
+						<span class = "avgsalehead">Total Sales</span> -- <span id = "avgtotalsalevalue" class = "avgsalevalue">0</span> (<span id = "avgtotalsalecount" class = "avgsalecount">0</span>)<br/>
+						<span class = "avgsalespecific">
+							<span class = "avgsalehead">Electronic Sales</span> -- <span id = "avgelecsalevalue" class = "avgsalevalue">0</span> (<span id = "avgelecsalecount" class = "avgsalecount">0</span>)<br/>
+							<span class = "avgsalehead">Cash Sales</span> -- <span id = "avgcashsalevalue" class = "avgsalevalue">0</span> (<span id = "avgcashsalecount" class = "avgsalecount">0</span>)
+						</span><br/>
+						<span id = "regbalavgs"><span class = "regbalhead">Register Balance</span> -- <span id = "regbalval" class = "regbalvalue">0</span></span>
+					</span>
 				</div>
 				<div id = "buttonfoundation4">
 					<div id = "buttonfoundation3">

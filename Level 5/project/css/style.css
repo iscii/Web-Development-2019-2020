@@ -108,13 +108,13 @@ button:active{
 .simnum{
     color: rgb(123, 255, 167);
 }
-.simitemname, .simsalenumhead, .regbalhead{
+.simitemname, .simsalenumhead, .regbalhead, .avgitemname, .avgsalehead, .regbalhead{
     color: rgb(255, 163, 163);
 }
-.simitemcost, .simsalenumvalue, .regbalvalue{
+.simitemcost, .simsalenumvalue, .regbalvalue, .avgitemcost, .avgsalevalue, .regbalvalue{
     color: rgb(194, 155, 255);
 }
-.simitemcount, .simsalenumnum, .regbalresult{
+.simitemcount, .simsalenumnum, .regbalresult, .avgitemcount, .avgsalecount, span#numsims{
     color: rgb(255, 249, 159);
 }
 .simsales{
@@ -130,6 +130,20 @@ button:active{
 }
 .regbal{
     font-size: 70%;
+}
+span#itemavgs, #saleavgs{
+    margin-top: 2%;
+    text-align: center;
+    display: inline-block;
+    line-height: 150%;
+    width: 49%;
+}
+span#saleavgs{
+    float: right;
+}
+
+span#simcount{
+    font-size: 150%;
 }
 h1{
     margin: 0 auto;
@@ -163,16 +177,13 @@ div#data{
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     height: 67%;
+    font-size: 105%;
 }
 div#alignment{
     display: flex;
     align-items: center;
     justify-content: center;
     /*text-align: center; -- CANNOT DO COS IT ALSO CENTERS THE TEXT IN THE DIVLOGS AND MAKES IT WONKY -- FIND A WAY TO mAKE THE DIVLOG TEXT RELATIVE TO ONLY ITS PARENT AND NOT GRANDPARENT*/
-}
-span#itemavgs{
-    border: 2px solid white;
-    display: inline-block;
 }
 .cSims{
     display: inline-block;
@@ -248,6 +259,7 @@ span#itemavgs{
 .totalcost{
     float: right;
     font-size: 90%;
+    padding-bottom: 2%;
 }
 .methodname, .changehead{
     float: left;

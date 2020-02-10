@@ -119,18 +119,16 @@ function dynamicVars(){ //changing/reset within each iteration of simulation
     cashGiven = 0;
     paymentMethod = "Cash";
 }
-//back-end functions
+//back-end
 function simulate(){
     if(canSimulate){
         canSimulate = false;
         simNum++;
-        console.log("SIM " + simNum);
         semiVars();
         dynamicVars();
         dispOrder();
         for(time; time > 0; time -= (orderTime + breakTime)){
             numOrder++;
-            console.log("--------------------------------------------- ORDER [" + numOrder + "] ---------------------------------------------");
             //determines the order's length in time
             orderTime = getRandomInteger(1, 5);
             breakTime = getRandomInteger(0, 2);
@@ -138,9 +136,6 @@ function simulate(){
                 breakTime = 0;
                 orderTime = time;
             }
-            console.log("[Note] Length: " + orderTime);
-            console.log("[Note] Break: " + breakTime);
-            console.log("[Note] Total Length: " + (orderTime + breakTime));
             dOrder();
             dCost();
             dPaymentMethod();
@@ -148,7 +143,6 @@ function simulate(){
             dynamicVars();
         }
         display();
-        console.log("[Note] Remaining time: " + time);
         
         setTimeout(cooldown, 1000);
     }
@@ -179,17 +173,13 @@ function dOrder(){
     placeHolder[0]++;
     placeHolder[1] = (parseFloat(placeHolder[1]) + parseFloat(eval(FOODTYPES[3])[drinkNum].split(";")[1])).toFixed(2);
     eval(simTotalTypes[3])[drinkNum] = placeHolder.join(";");
-    console.log(order);
 }
 function dCost(){
     for (i = 0; i < order.length; i++)
         orderSubTotal += parseFloat(order[i].split(";")[1]);
     orderSubTotal = orderSubTotal.toFixed(2); //rounds to two decimal places (sometimes floating-point error)
-    console.log("Subtotal: " + orderSubTotal); //subtotal
     orderTotal = (orderSubTotal * TAX).toFixed(2);
     orderTax = (orderTotal - orderSubTotal).toFixed(2);
-    console.log("Tax: " + orderTax); //tax
-    console.log("Total: " + orderTotal); //total
 }
 function dPaymentMethod(){
     var x = getRandomInteger(1, 10);
@@ -207,12 +197,9 @@ function dPaymentMethod(){
         }
         change = (cashGiven - orderTotal).toFixed(2);
         totalCashSales += parseFloat(orderTotal);
-        //totalCashSales = parseFloat(parseFloat(totalCashSales).toFixed(2));
         totalCashSales = roundDecimal(totalCashSales, 2);
         registerChange(isExactChange);
         numCashSales++;
-        console.log("Cash: " + cashGiven);
-        console.log("Change: " + change);
     }
     else{
         //something extra
@@ -221,15 +208,12 @@ function dPaymentMethod(){
         paymentMethod = methods[r];
         cashGiven = orderTotal;
         totalElecSales += parseFloat(orderTotal);
-        //totalElecSales = parseFloat(parseFloat(totalElecSales).toFixed(2));
         totalElecSales = roundDecimal(totalElecSales, 2);
         numElecSales++;
-        console.log("Electronic: " + orderTotal);
     }
 }
 function dCash(){
     cash = [1, getRandomInteger(0, 2), getRandomInteger(0, 3), getRandomInteger(0, 5)]
-    console.log("[Note] Customer bills carried: " + cash);
     var billsGiven = [];
     var quantItem;
     //determines cash payment from the lowest denominator
@@ -268,7 +252,6 @@ function payToRegister(array){ //cannot put in dCash - check /drafts/draft 15 an
     }
 }
 function registerChange(isExactChange){
-    console.log("[Note] Register b/f change: " + register);
     if(!isExactChange){
         var isDone = false;
         var tempChange = change;
@@ -286,22 +269,18 @@ function registerChange(isExactChange){
                             tempChange -= VALUES[x];
                             tempChange = tempChange.toFixed(2);
                             if(tempChange == 0){
-                                console.log("[Note] Register a/f change: " + register);
                                 return isDone = true;
                             }
                             return tempChange;
                         }
                         else{
-                            console.log("[Event] Register [" + x + "] " + "is empty! Checking for drops..");
                             if(x >= 4)
                                 checkForDrops();
                         }
                     }
                 }
-                if(!register[x]){ //if the currency type is still unreplaced, skip to next value
-                    console.log("[Note] Skipped register [" + x + "] ");
+                if(!register[x]) //if the currency type is still unreplaced, skip to next value
                     continue loop; //is out of the updateRegister() function since I don't know of a way to access a loop from a nested function
-                }
                 
                 function checkForDrops(){ //enhancement
                     var roll = [0, 0, 0, 0, 40, 50, 40, 100]; //the coin count of its corresponding roll
@@ -313,7 +292,6 @@ function registerChange(isExactChange){
                         if(register[o] >= quantity){
                             register[o] -= quantity;
                             register[x] += roll[x];
-                            console.log("[Event (Drop)] Exchanged [" + quantity + "] of " + "register [" + o + "]"  + " for [" + roll[x] + "] of register [" + x + "]");
                             updateRegister();
                             return;
                         }
@@ -323,7 +301,6 @@ function registerChange(isExactChange){
         }
     }
     else{
-        console.log("[Note] Exact change");
         var tempChange = cashGiven; //a little redundant, but the other functions are rather specific 
         for(i = B20; i <= P; i++){
             while(tempChange - VALUES[i] >= 0){ //while loop; See ../references
@@ -332,7 +309,6 @@ function registerChange(isExactChange){
                 tempChange = tempChange.toFixed(2);
             }
         }
-        console.log("[Note] Register a/f change: " + register);
     }
 }
 //front-end functions

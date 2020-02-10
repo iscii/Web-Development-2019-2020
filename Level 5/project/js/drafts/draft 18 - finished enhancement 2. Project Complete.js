@@ -10,22 +10,24 @@ const DESSERTS = ["Ice_Cream;1.89", "Pie;1.69", "Cookie;0.89"];
 const DRINKS = ["Soda;1.19", "Bottled_Water;1.25", "Juice;1.69"];
 const FOODTYPES = ["ENTREES", "SIDES", "DESSERTS", "DRINKS"];
 
+//const AVGTYPES = ["opHamburger", "opCSw", "opVSw", "opFF", "opSalad", "opCSticks", "opRice", "opIceCream", "opPie", "opCookie", "opSoda", "opWater", "opJuice"];
 function initialize(){
     iVars();
     iRefs();
 }
 function iRefs(){
+    //opSims = document.getElementById("sim");
     opLog = document.getElementById("logframe");
     clStyleReceipts = document.getElementsByClassName("receipts");
     clStyleSims = document.getElementsByClassName("cSims");
 
+    opData = document.getElementById("data");
     opItemAvgs = document.getElementById("itemavgs");
     opSaleAvgs = document.getElementById("saleavgs");
     opRegBalAvgs = document.getElementById("regbalavgs");
     opNumSims = document.getElementById("numsims");
 
-    //itemcost
-    opHamburgerCost = document.getElementById("avghamburgercost"); //lost of repeat code. Is there a way to shorten it?
+    opHamburgerCost = document.getElementById("avghamburgercost");
     opChicken_SandwichCost = document.getElementById("avgchickensandwichcost");
     opVeggie_SandwichCost = document.getElementById("avgveggiesandwichcost");
     opFrench_FriesCost = document.getElementById("avgfrenchfriescost");
@@ -39,7 +41,6 @@ function iRefs(){
     opBottled_WaterCost = document.getElementById("avgbottledwatercost");
     opJuiceCost = document.getElementById("avgjuicecost");
 
-    //itemcount
     opHamburgerCount = document.getElementById("avghamburgercount");
     opChicken_SandwichCount = document.getElementById("avgchickensandwichcount");
     opVeggie_SandwichCount = document.getElementById("avgveggiesandwichcount");
@@ -54,7 +55,6 @@ function iRefs(){
     opBottled_WaterCount = document.getElementById("avgbottledwatercount");
     opJuiceCount = document.getElementById("avgjuicecount");
 
-    //sales
     opAvgTotalSaleV = document.getElementById("avgtotalsalevalue");
     opAvgElecSaleV = document.getElementById("avgelecsalevalue");
     opAvgCashSaleV = document.getElementById("avgcashsalevalue");
@@ -62,7 +62,6 @@ function iRefs(){
     opAvgElecSaleC = document.getElementById("avgelecsalecount");
     opAvgCashSaleC = document.getElementById("avgcashsalecount");
 
-    //register balance
     opRegBalValue = document.getElementById("regbalval");
 }
 function iVars(){ //updating between simulations
@@ -70,7 +69,6 @@ function iVars(){ //updating between simulations
     canSimulate = true;
     simNum = 0;
 
-    //enhancement 2
     logData = []; //holds the totals of every simulation overall
     avgRegisterBal = 0;
     avgTotalSales = 0;
@@ -119,7 +117,6 @@ function dynamicVars(){ //changing/reset within each iteration of simulation
     cashGiven = 0;
     paymentMethod = "Cash";
 }
-//back-end functions
 function simulate(){
     if(canSimulate){
         canSimulate = false;
@@ -144,7 +141,11 @@ function simulate(){
             dOrder();
             dCost();
             dPaymentMethod();
+            //logData.push(orderTotal, numCashSales, numElecSales); //orderTotals: 0 + 3n; numCashSales; 1 + 3n; numElecSales; 2 + 3n 
             dispReceipt();
+            //manageData();
+            
+            //everything that happens above this point is logged
             dynamicVars();
         }
         display();
@@ -182,8 +183,9 @@ function dOrder(){
     console.log(order);
 }
 function dCost(){
-    for (i = 0; i < order.length; i++)
+    for (i = 0; i < order.length; i++){
         orderSubTotal += parseFloat(order[i].split(";")[1]);
+    }
     orderSubTotal = orderSubTotal.toFixed(2); //rounds to two decimal places (sometimes floating-point error)
     console.log("Subtotal: " + orderSubTotal); //subtotal
     orderTotal = (orderSubTotal * TAX).toFixed(2);
@@ -193,10 +195,12 @@ function dCost(){
 }
 function dPaymentMethod(){
     var x = getRandomInteger(1, 10);
+    //var x = 1;
     var isExactChange;
     if(x <= 4){
         paymentMethod = "Cash";
         x = getRandomInteger(1, 10);
+        //var x = 2;
         if(x == 1){
             isExactChange = true;
             cashGiven = orderTotal;
@@ -242,10 +246,12 @@ function dCash(){
                     payToRegister(billsGiven);
                     return;                                                      
                 }
-                if(x == i)
+                if(x == i){
                     quantItem = (cash[x] - 1);           
-                else
+                }
+                else{
                     quantItem = cash[x];
+                }
 
                 for(o = 0; o < quantItem; o++){
                     cashGiven += VALUES[x];
@@ -284,9 +290,12 @@ function registerChange(isExactChange){
                         if(register[x]){ 
                             register[x]--;
                             tempChange -= VALUES[x];
+                            //console.log("tempb " + tempChange);
                             tempChange = tempChange.toFixed(2);
+                            //console.log("tempa " + tempChange);
                             if(tempChange == 0){
                                 console.log("[Note] Register a/f change: " + register);
+                                //console.log(dRegisterBal());
                                 return isDone = true;
                             }
                             return tempChange;
@@ -335,13 +344,14 @@ function registerChange(isExactChange){
         console.log("[Note] Register a/f change: " + register);
     }
 }
-//front-end functions
 function dispData(){ //enhancement 2
     //item averages
     var valueHolder;
     for(i = 0; i < FOODTYPES.length; i++){
         for(x = 0; x < eval(FOODTYPES[i]).length; x++){
+            //YOU ARE HERE 2/9/20. FINISHED THE ADDING, JUST MOVE ONTO THE AVERAGING (value/totaltypes[2]) AND THEN THE NAMING (op + FOODTYPES[i][x].split(";")[0] + Cost);
             valueHolder = eval(avgTotalTypes[i])[x].split(";");
+            //console.log(valueHolder);
             
             valueHolder[0] = parseInt(valueHolder[0]);
             valueHolder[0] += parseInt(eval(simTotalTypes[i])[x].split(";")[0]);
@@ -349,14 +359,16 @@ function dispData(){ //enhancement 2
             valueHolder[1] = parseFloat(valueHolder[1]);
             valueHolder[1] += parseFloat(eval(simTotalTypes[i])[x].split(";")[1]);
             valueHolder[1] = parseFloat(valueHolder[1]).toFixed(2);
-
+            //console.log(valueHolder);
+            
+            //console.log(eval(FOODTYPES[i])[x].split(";")[0]);
             eval("op" + eval(FOODTYPES[i])[x].split(";")[0] + "Cost").innerHTML = "~$" + (valueHolder[1] / simNum).toFixed(2);
             eval("op" + eval(FOODTYPES[i])[x].split(";")[0] + "Count").innerHTML = "~" + parseInt(valueHolder[0] / simNum);
             opNumSims.innerHTML = simNum;
             eval(avgTotalTypes[i])[x] = valueHolder.join(";");
         }
+        //console.log(eval(avgTotalTypes[i]));
     }
-
     //sales averages
     avgTotalSales += (numElecSales + numCashSales);
     avgTotalSalesTotal += (totalElecSales + totalCashSales);
@@ -373,32 +385,39 @@ function dispData(){ //enhancement 2
     opAvgCashSaleV.innerHTML = "~$" + (avgCashSalesTotal / simNum).toFixed(2);
     
     //register balance averages
+
     avgRegisterBal += parseFloat(dRegisterBal());
     opRegBalValue.innerHTML = "~$" + (avgRegisterBal / simNum).toFixed(2);
 }
 function dRegisterBal(){ //these loops are starting to get redundant -- i can probably make a more flexible function that'd take in parameters
     var balance = 0;
-    for(i = 0; i < register.length; i++)
-        for(x = 0; x < register[i]; x++)
+    for(i = 0; i < register.length; i++){
+        for(x = 0; x < register[i]; x++){
             balance += VALUES[i];
+        }
+    }
     balance = balance.toFixed(2);
     return balance;
 }
-function setClassStyle(){
+// Front-end functions
+function setClassStyle(){ //YOU ARE HERE 1/31/20 -- Add other stats to receipts
     if(!clOrdersWidth || clOrdersWidth < (numOrder * 80))
         clOrdersWidth = (numOrder * 80); //these numbers were very rough estimates through trial and error and are by no means good parameters.
     if(!clReceiptWidth || clReceiptWidth > (85 / numOrder))
         clReceiptWidth = ((85 / numOrder));
-    for(i = 0; i < clStyleReceipts.length; i++)
+    for(i = 0; i < clStyleReceipts.length; i++){
         clStyleReceipts[i].style.width = clReceiptWidth + "%";
-    for(i = 0; i <clStyleSims.length; i++)
+    }
+    for(i = 0; i <clStyleSims.length; i++){
         clStyleSims[i].style.width = clOrdersWidth +"%";
+    }
 }
 function dispOrder(){ //e for Element
     var eSim = "<span id = 'sim#" + simNum + "' class = 'cSims'></span>";
     opLog.innerHTML += eSim;
     opSims = document.getElementById("sim#" + simNum);
 }
+//DISPLAY FUNCTIONS
 function dispReceipt(){ //called per order iteration of a simulation
     var eReceipt = "<span class = 'receipts'> <span class = 'rNum'>Order " + numOrder +"</span>";
     var itemName;
@@ -418,8 +437,9 @@ function dispReceipt(){ //called per order iteration of a simulation
                 "<br/><span class = 'total'><span class = 'totalhead'>Total</span><span class = 'totalcost'>" + orderTotal + "</span></span>"; //total
     //numsales
     eReceipt += "<br/><span class = 'paymentmethod'><span class = 'methodname'>" + paymentMethod + "</span><span class = 'payment'>" + cashGiven + "</span></span>";
-    if(paymentMethod == "Cash")
+    if(paymentMethod == "Cash"){
         eReceipt += "<br/><span class = 'paymentchange'><span class = 'changehead'>Change</span><span class = 'changevalue'>" + change + "</span></span>";
+    }
     eReceipt += "</span>";
 
     opSims.innerHTML += eReceipt;
@@ -447,7 +467,7 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
             + itemCost + "</span> (<span class = 'simitemcount'>" + itemCount + "</span>)</span>";
         }
     } //.toFixed is necessary here for the float to display as "9.70" instead of "9.7"
-    //simsaletotals
+    //simsaletotalls
     eSimTotals += "<br/><span class = 'simsales'><span class = 'simsalenumhead'>Total Sales</span> -- <span class = 'simsalenumvalue'>$" + simSalesTotal + "</span> (<span class = 'simsalenumnum'>" + (numElecSales + numCashSales) + "</span>)" + 
                   "<br/><span class = 'simsalespecific'><span class = 'simsalenumhead'>Electronic</span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalElecSales).toFixed(2) + "</span> (<span class = 'simsalenumnum'>" + numElecSales + "</span>)" + 
                   "<br/><span class = 'simsalenumhead'>Cash</span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalCashSales).toFixed(2) + "</span> (<span class = 'simsalenumnum'>" + numCashSales + "</span>)</span></span>";
@@ -463,7 +483,8 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
     eSimTotals += " (<span class = 'regbalresult'>" + regBalResult + "</span>)</span>"
     opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML; ///span closes simhead element
 }
-function display(){ //display per simulation
+function display(){
+    //display per simulation
     dispSimTotals();
     dispData();
     setClassStyle();
