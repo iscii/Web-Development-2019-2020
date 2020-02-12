@@ -122,20 +122,29 @@ function dynamicVars(){ //changing/reset within each iteration of simulation
     cashGiven = 0;
     paymentMethod = "Cash";
 }
-function run(){
+function repeat(){ //YOU ARE HERE 2/10/20 FIX THE LOOP/SETTIMEOUT
     repeatCount = inputRepeat.runcount.value;
-    if(!repeatCount && canSimulate){
+    //console.log(repeatCount);
+    if((!repeatCount || repeatCount > 10) && canSimulate){
         canSimulate = false;
+        console.log("simulate, repeatcount none");
         simulate();
         setTimeout(cooldown, 1000);
     }
-    if(repeatCount){ //figure out how to time the simulation so that it slowly performs each simulation upon repeat and does not lag out the computer
+    if(repeatCount <= 10){ //figure out how to time the simulation so that it slowly performs each simulation upon repeat and does not lag out the computer
         for(y = 0; y < repeatCount; y++){ //for some reason, setting this to i ruins the for loop -> sometimes the iteration is skipped. Probably cos simulate() uses so many i vars to the point where it interferes with this one.
+            console.log("NUMBA " + y);
+            console.log("simulate, repeatcount = " + repeatCount);
+            simulate();
+            /*setTimeout(functon(){
+                
+            }*/
+            /*
             if(canSimulate){
                 canSimulate = false;
                 simulate();
             }
-            setTimeout(cooldown, 1000);
+            setTimeout(cooldown(), 1000);*/
         }
     }
 }
@@ -171,10 +180,10 @@ function simulate(){
 function cooldown(){
     canSimulate = true;
 }
-function dOrder(){ //d for Determine
+function dOrder(){
     var foodNum = 0;
     var placeHolder;
-    var drinkNum = getRandomInteger(0, 2); //drinks are not in loop cos there has to be at least one (could've probably put it in loop tho)
+    var drinkNum = getRandomInteger(0, 2);
     for (i = 0; i < (FOODTYPES.length - 1); i++){
         if(i == 1) 
             quantity = getRandomInteger(0, 2);

@@ -171,10 +171,10 @@ function simulate(){
 function cooldown(){
     canSimulate = true;
 }
-function dOrder(){ //d for Determine
+function dOrder(){
     var foodNum = 0;
     var placeHolder;
-    var drinkNum = getRandomInteger(0, 2); //drinks are not in loop cos there has to be at least one (could've probably put it in loop tho)
+    var drinkNum = getRandomInteger(0, 2);
     for (i = 0; i < (FOODTYPES.length - 1); i++){
         if(i == 1) 
             quantity = getRandomInteger(0, 2);

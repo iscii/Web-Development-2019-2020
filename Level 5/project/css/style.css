@@ -270,3 +270,23 @@ div#alignment{
     float: right;
     font-size: 80%;
 }
+form#repeatForm{
+    margin-top: 8%;
+    display: inline-block;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+}
+input#inputbox{
+    color: rgb(151, 255, 53);
+    border-radius: 10px;
+    background: rgb(92, 92, 92);
+    border:none;
+    height: 100%;
+    width: 40%;
+    text-align: center;
+    font-size: 150%;
+}
+input::placeholder{
+    color: rgb(255, 189, 255);
+}

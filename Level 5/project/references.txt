@@ -39,3 +39,7 @@ https://davidwalsh.name/javascript-clone-array
 
 (Maybe) Settimeout For
 https://stackoverflow.com/questions/5226285/settimeout-in-for-loop-does-not-print-consecutive-values
+https://stackoverflow.com/questions/22154129/javascript-settimeout-loops
+
+Input Placeholders 
+https://www.w3schools.com/howto/howto_css_placeholder.asp

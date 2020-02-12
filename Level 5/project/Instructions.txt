@@ -1,3 +1,23 @@
-Instructions
-shift-wheel scroll to sidescroll through the resulting receipts of a simulation
-wheel-scroll to scroll through the resulting simulations
+README
+
+The panels are meant to be, like, futuristic ipad looking tablet looking thingies. Please no judge
+
+Shift-wheel scroll to sidescroll through the resulting receipts of a simulation
+Wheel-scroll to scroll through the resulting simulations
+
+Left-side panel displays simulation results:
+	-Each individual receipt
+		-Customers can pay electronically or by cash. Normally, only cash payments update the register.
+	-The simulation results (totals/averages)
+	-The final value in the register + outcome (under, over, even in cash sales)
+
+Right-side panel displays overall results:
+	-The average sales in price and quantity of each menu item across every simulation (rounded)
+	-The average number and revenue of electronic and cash sales across every simulation (rounded)
+	-The average balance of the register at the end of each shift across every simulation(rounded)
+
+Click the Run key on the right-side panel to run the simulation once. 
+	-Run button has a cooldown of 1 second
+
+Increase the repeat increment to run the simulation multiple times.
+	-Repeat button has a minimum value of 1, maximum value of 10
