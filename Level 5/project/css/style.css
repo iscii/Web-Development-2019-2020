@@ -178,7 +178,6 @@ div#data{
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     height: 67%;
-    font-size: 105%;
 }
 div#alignment{
     display: flex;
@@ -271,10 +270,11 @@ div#alignment{
     font-size: 80%;
 }
 form#repeatForm{
-    margin-top: 8%;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 10%;
+    height: 18%;
     text-align: center;
 }
 input#inputbox{
@@ -282,7 +282,7 @@ input#inputbox{
     border-radius: 10px;
     background: rgb(92, 92, 92);
     border:none;
-    height: 100%;
+    height: 50%;
     width: 40%;
     text-align: center;
     font-size: 150%;

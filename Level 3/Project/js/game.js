@@ -43,6 +43,7 @@ function iVars()
     //the array is always changing, so I use variables that store default values.
     p1Arsenal = [p1ArsenalD[0], p1ArsenalD[1], p1ArsenalD[2]]; //[0] = Rock, [1] = Paper, [2] = Scissor//
     p2Arsenal = [p2ArsenalD[0], p2ArsenalD[1], p2ArsenalD[2]];
+    console.log(p2Arsenal);
     
     p1PlayInRowCount = 1;
     p2PlayInRowCount = 1;
@@ -125,6 +126,7 @@ function resetGame()
     opp2Rsrc = p2Arsenal[0].toString();
     opp2Psrc = p2Arsenal[1].toString();
     opp2Ssrc = p2Arsenal[2].toString();
+    console.log(p2Arsenal[2]);
 
     //other
     opp1A.style.pointerEvents = 'auto';

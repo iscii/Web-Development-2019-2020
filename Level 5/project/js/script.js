@@ -131,11 +131,7 @@ function run(){
     }
     if(repeatCount){ //figure out how to time the simulation so that it slowly performs each simulation upon repeat and does not lag out the computer
         for(y = 0; y < repeatCount; y++){ //for some reason, setting this to i ruins the for loop -> sometimes the iteration is skipped. Probably cos simulate() uses so many i vars to the point where it interferes with this one.
-            if(canSimulate){
-                canSimulate = false;
-                simulate();
-            }
-            setTimeout(cooldown, 1000);
+            simulate();
         }
     }
 }
@@ -176,7 +172,7 @@ function dOrder(){ //d for Determine
     var placeHolder;
     var drinkNum = getRandomInteger(0, 2); //drinks are not in loop cos there has to be at least one (could've probably put it in loop tho)
     for (i = 0; i < (FOODTYPES.length - 1); i++){
-        if(i == 1) 
+        if(i == 1)
             quantity = getRandomInteger(0, 2);
         else
             quantity = getRandomInteger(0, 1);
