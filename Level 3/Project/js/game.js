@@ -101,7 +101,7 @@ function resetGame()
     prevResult = "";
     
     p1Arsenal = [p1ArsenalD[0], p1ArsenalD[1], p1ArsenalD[2]]; //[0] = Rock, [1] = Paper, [2] = Scissor//
-    p2Arsenal = [p2ArsenalD[0], p2ArsenalD[1], p1ArsenalD[2]];
+    p2Arsenal = [p2ArsenalD[0], p2ArsenalD[1], p2ArsenalD[2]];
     
     p1PlayInRowCount = 1;
     p2PlayInRowCount = 1;
@@ -168,7 +168,7 @@ function resetBoth()
     prevResult = "";
     
     p1Arsenal = [p1ArsenalD[0], p1ArsenalD[1], p1ArsenalD[2]]; //[0] = Rock, [1] = Paper, [2] = Scissor//
-    p2Arsenal = [p2ArsenalD[0], p2ArsenalD[1], p1ArsenalD[2]];
+    p2Arsenal = [p2ArsenalD[0], p2ArsenalD[1], p2ArsenalD[2]];
     
     p1PlayInRowCount = 1;
     p2PlayInRowCount = 1;
