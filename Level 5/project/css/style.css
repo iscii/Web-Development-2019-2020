@@ -88,9 +88,8 @@ button:active{
     border-radius: 15px;
 }
 .simtotals{
-    padding-top: 0.05%;
-    display: inline-block;
-    width: 1.8%;
+    padding-top: 0.01%;
+    display: inline-block;  
     text-align: center;
     line-height: 85%;
     color: rgb(255, 189, 255);
@@ -142,7 +141,6 @@ span#itemavgs, #saleavgs{
 span#saleavgs{
     float: right;
 }
-
 span#simcount{
     font-size: 150%;
 }
@@ -269,23 +267,24 @@ div#alignment{
     float: right;
     font-size: 80%;
 }
-form#repeatForm{
+form#repeatForm, #shiftForm{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 18%;
+    height: 12%;
     text-align: center;
+    margin-top: 2%;
 }
-input#inputbox{
+input#inputrepeat, #inputhours{
     color: rgb(151, 255, 53);
     border-radius: 10px;
     background: rgb(92, 92, 92);
-    border:none;
-    height: 50%;
-    width: 40%;
+    border: none;
+    height: 70%;
+    width: 50%;
     text-align: center;
-    font-size: 150%;
+    font-size: 140%;
 }
 input::placeholder{
     color: rgb(255, 189, 255);

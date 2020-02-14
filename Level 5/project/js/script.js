@@ -19,6 +19,7 @@ function iRefs(){
     clStyleReceipts = document.getElementsByClassName("receipts");
     clStyleSims = document.getElementsByClassName("cSims");
     inputRepeat = document.getElementById("repeatForm");
+    inputShift = document.getElementById("shiftForm");
 
     opItemAvgs = document.getElementById("itemavgs");
     opSaleAvgs = document.getElementById("saleavgs");
@@ -97,8 +98,10 @@ function semiVars(){ //changing/reset between simulations
     register = [0, 2, 4, 42, 40, 50, 40, 100];
     registerTotal = 0;
     numOrder = 0;
-    orderTime = 0;
-    time = 60;
+    orderTime = 0;//shift length (in minutes)
+    time = 180;
+    if(inputShift.shiftlength.value)
+        time = (inputShift.shiftlength.value * 60);
     exactChange = false;
     numCashSales = 0;
     numElecSales = 0;
@@ -400,8 +403,8 @@ function dRegisterBal(){ //these loops are starting to get redundant -- i can pr
 function setClassStyle(){
     if(!clOrdersWidth || clOrdersWidth < (numOrder * 80))
         clOrdersWidth = (numOrder * 80); //these numbers were very rough estimates through trial and error and are by no means good parameters.
-    if(!clReceiptWidth || clReceiptWidth > (85 / numOrder))
-        clReceiptWidth = ((85 / numOrder));
+    if(!clReceiptWidth || clReceiptWidth > (82 / numOrder))
+        clReceiptWidth = ((82 / numOrder));
     for(i = 0; i < clStyleReceipts.length; i++)
         clStyleReceipts[i].style.width = clReceiptWidth + "%";
     for(i = 0; i <clStyleSims.length; i++)
