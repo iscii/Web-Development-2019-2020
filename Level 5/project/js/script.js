@@ -98,7 +98,7 @@ function semiVars(){ //changing/reset between simulations
     registerTotal = 0;
     numOrder = 0;
     orderTime = 0;
-    time = 180;
+    time = 60;
     exactChange = false;
     numCashSales = 0;
     numElecSales = 0;
