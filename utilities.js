@@ -90,3 +90,27 @@ function shuffleArray(array)
     }
     return array;
 }
+/* splitArray
+
+        Returns an array with the split contents of a larger array
+
+        Parameters:
+            array - the array to be split
+            increment - the length of each content splice
+            fillarray - the array to add the split contents to
+*/
+function splitArray(array, increment, fillarray)
+{
+    var index = 0;
+    if(fillarray) var split = fillarray; else var split = [];
+    for(i = 0; i < Math.ceil(array.length / increment); i++){
+        if(array.length - index < increment){
+            split[i] = array.slice(index, array.length);
+        }
+        else{
+            split[i] = array.slice(index, index + increment)
+            index += increment;
+        }
+    }
+    return split;
+}
