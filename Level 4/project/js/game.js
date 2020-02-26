@@ -207,8 +207,8 @@ function checkForGridLock(move, player)
 {
     if(cGrid[move].split(";")[GRID_1] == player)
         cGridLock(move);
-    else
-        return;
+    /* else 
+        return; unnecessary code */
 }
 function cGridLock(move)
 {

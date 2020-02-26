@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+		
+		</title>
+		<style>
+			body
+			{
+				text-align: center;
+			}
+
+			.thumb
+			{
+				width: 12%;
+			}
+
+			#mainimg
+			{
+				width: 50%;
+			}
+		</style>
+		<script>
+			function initialize()
+			{
+				mainImage = document.getElementById("mainImg");
+				captionOut = document.getElementById("caption");
+
+				var dragon_names = 	["Rax", "Ash", "Barnabas", "Drake", "Endisun", "Lunar"];
+				var dragonImages = document.getElementsByClassName("thumb");
+
+				dragons = [];
+				for(var i = 0; i < dragonImages.length; i++)
+				{
+					dragons[i] = {};
+					dragons[i].dragonName = dragon_names[i];
+					dragons[i].dragonImage = dragonImages[i];
+				}
+			}
+		</script>
+	</head>
+    <body onload = "initialize();">
+        <img id = "maninimg" src = "images\rax copy.png" />
+        <div id = "caption">Rax</div>
+        <hr/>
+		<img class = "thumb" src = "images\rax copy.png" />
+		<img class = "thumb" src = "images\ash copy.png" />
+		<img class = "thumb" src = "images\barnabas copy.png" />
+		<img class = "thumb" src = "images\drake copy.png" />
+		<img class = "thumb" src = "images\endisun copy.png" />
+		<img class = "thumb" src = "images\lunar copy.png" />
+	</body>
+</html>

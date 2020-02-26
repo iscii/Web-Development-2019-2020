@@ -15,4 +15,8 @@ Copy
 alt + shift + up/down: copy line and paste above/below
 
 Comments
-highlight, ctrl + q: comment out a set of lines
+highlight, ctrl + Q: comment out a set of lines
+highlight, shift + alt + A: comment out multiple lines
+
+Delete
+ctrl + shift + K: delete entire line

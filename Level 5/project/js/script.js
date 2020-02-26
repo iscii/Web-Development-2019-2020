@@ -67,6 +67,7 @@ function iRefs(){
     //register balance
     opRegBalValue = document.getElementById("regbalval");
 }
+//note: Instead of using floats for calculations, you could just use integers (100 for 1$) and then convert it to a float when it needs to be displayed. (Credits to Steven Hsui)
 function iVars(){ //updating between simulations
     //sequencing
     canSimulate = true;
@@ -132,15 +133,15 @@ function run(){
         simulate();
         setTimeout(cooldown, 1000);
     }
-    if(repeatCount){ //figure out how to time the simulation so that it slowly performs each simulation upon repeat and does not lag out the computer
+    if(repeatCount){ //figure out how to time the simulation so that it slowly performs each simulation upon repeat and does not lag out the computer -> probably requires some sort of settimeout or async await?
         for(y = 0; y < repeatCount; y++){ //for some reason, setting this to i ruins the for loop -> sometimes the iteration is skipped. Probably cos simulate() uses so many i vars to the point where it interferes with this one.
             simulate();
+            //display();
         }
     }
 }
-//back-end functions
-function simulate(){
-    simNum++;
+function simulate(){ //split into functions primarily for organization and readability
+    simNum++; //update simulation number
     console.log("SIM " + simNum);
     semiVars();
     dynamicVars();
@@ -158,7 +159,7 @@ function simulate(){
         console.log("[Note] Length: " + orderTime);
         console.log("[Note] Break: " + breakTime);
         console.log("[Note] Total Length: " + (orderTime + breakTime));
-        dOrder();
+        dOrder(); //d for 'determine'
         dCost();
         dPaymentMethod();
         dispReceipt();
@@ -167,10 +168,10 @@ function simulate(){
     display();
     console.log("[Note] Remaining time: " + time);
 }
-function cooldown(){
+function cooldown(){ //small code for setTimeout (prevents spamming the button while simulation is in progress, potentially messing up the arrays?)
     canSimulate = true;
 }
-function dOrder(){ //d for Determine
+function dOrder(){
     var foodNum = 0;
     var placeHolder;
     var drinkNum = getRandomInteger(0, 2); //drinks are not in loop cos there has to be at least one (could've probably put it in loop tho)
@@ -221,7 +222,6 @@ function dPaymentMethod(){
         }
         change = (cashGiven - orderTotal).toFixed(2);
         totalCashSales += parseFloat(orderTotal);
-        //totalCashSales = parseFloat(parseFloat(totalCashSales).toFixed(2));
         totalCashSales = roundDecimal(totalCashSales, 2);
         registerChange(isExactChange);
         numCashSales++;
@@ -236,7 +236,6 @@ function dPaymentMethod(){
         paymentMethod = methods[r];
         cashGiven = orderTotal;
         totalElecSales += parseFloat(orderTotal);
-        //totalElecSales = parseFloat(parseFloat(totalElecSales).toFixed(2));
         totalElecSales = roundDecimal(totalElecSales, 2);
         numElecSales++;
         console.log("Electronic: " + orderTotal);
@@ -351,7 +350,6 @@ function registerChange(isExactChange){
         console.log("[Note] Register a/f change: " + register);
     }
 }
-//front-end functions
 function dispData(){ //enhancement 2
     //item averages
     var valueHolder;
@@ -449,7 +447,7 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
     var regBalResult;
     var eSimTotals = "<span class = 'simtotals'><span class = 'simhead'>Sim <span class = 'simnum'>" + simNum + "</span> Totals</span>"
                      "<br/><span class = 'simlabeltab'>Item -- Revenue (Count)</span>";
-    //simitemtotals
+    //sim item totals
     for(i = 0; i < FOODTYPES.length; i++){
         for(x = 0; x < eval(FOODTYPES[i]).length; x++){
             if(eval(FOODTYPES[i])[x].split(";")[0].includes("_")) //i can probably modify this to make it a more flexible function
@@ -463,11 +461,11 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
             + itemCost + "</span> (<span class = 'simitemcount'>" + itemCount + "</span>)</span>";
         }
     } //.toFixed is necessary here for the float to display as "9.70" instead of "9.7"
-    //simsaletotals
+    //sim sale totals
     eSimTotals += "<br/><span class = 'simsales'><span class = 'simsalenumhead'>Total Sales</span> -- <span class = 'simsalenumvalue'>$" + simSalesTotal + "</span> (<span class = 'simsalenumnum'>" + (numElecSales + numCashSales) + "</span>)" + 
                   "<br/><span class = 'simsalespecific'><span class = 'simsalenumhead'>Electronic</span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalElecSales).toFixed(2) + "</span> (<span class = 'simsalenumnum'>" + numElecSales + "</span>)" + 
                   "<br/><span class = 'simsalenumhead'>Cash</span> -- <span class = 'simsalenumvalue'>$" + parseFloat(totalCashSales).toFixed(2) + "</span> (<span class = 'simsalenumnum'>" + numCashSales + "</span>)</span></span>";
-    //simregisterbalance
+    //sim register balance
     eSimTotals += "<br/><span class = 'regbal'><span class = 'regbalhead'>Register Balance</span> -- <span class = 'regbalvalue'>$" + dRegisterBal() + "</span>";
     if(regBalDiff == 100)//determines if under, even, or over
         regBalResult = "Even";

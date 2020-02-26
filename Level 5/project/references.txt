@@ -43,3 +43,6 @@ https://stackoverflow.com/questions/22154129/javascript-settimeout-loops
 
 Input Placeholders 
 https://www.w3schools.com/howto/howto_css_placeholder.asp
+
+Prevent Keyboard Inputs in Forms
+https://stackoverflow.com/questions/23263886/is-there-a-way-to-only-allow-input-using-the-spinner-controls-on-an-input-type
