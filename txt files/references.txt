@@ -9,7 +9,8 @@ https://stackoverflow.com/questions/9277311/how-can-i-horizontally-align-my-divs
 or
 https://stackoverflow.com/questions/15374918/how-to-put-two-divs-side-by-side/55430864
 
-
+chrome debugger localhost not working
+https://stackoverflow.com/questions/38738905/google-chrome-debugger-in-visual-studio-site-cannot-be-reached-localhost-refuse
 
 
 
