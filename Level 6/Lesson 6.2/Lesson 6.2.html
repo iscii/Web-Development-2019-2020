@@ -23,7 +23,7 @@
 		<script>
 			function initialize()
 			{
-				mainImage = document.getElementById("mainImg");
+				mainImage = document.getElementById("mainimg");
 				captionOut = document.getElementById("caption");
 
 				var dragon_names = 	["Rax", "Ash", "Barnabas", "Drake", "Endisun", "Lunar"];
@@ -35,19 +35,27 @@
 					dragons[i] = {};
 					dragons[i].dragonName = dragon_names[i];
 					dragons[i].dragonImage = dragonImages[i];
+
+					dragonImages[i].dragon = dragons[i];
 				}
+				console.log(dragons);
+			}
+			function selectDragon(dragon)
+			{
+				mainImage.src = dragon.dragonImage.src;
+				captionOut.innerHTML = dragon.dragonName;	
 			}
 		</script>
 	</head>
     <body onload = "initialize();">
-        <img id = "maninimg" src = "images\rax copy.png" />
+        <img id = "mainimg" src = "images\rax copy.png" />
         <div id = "caption">Rax</div>
         <hr/>
-		<img class = "thumb" src = "images\rax copy.png" />
-		<img class = "thumb" src = "images\ash copy.png" />
-		<img class = "thumb" src = "images\barnabas copy.png" />
-		<img class = "thumb" src = "images\drake copy.png" />
-		<img class = "thumb" src = "images\endisun copy.png" />
-		<img class = "thumb" src = "images\lunar copy.png" />
+		<img class = "thumb" onclick = "selectDragon(this.dragon);" src = "images\rax copy.png" />
+		<img class = "thumb" onclick = "selectDragon(this.dragon);" src = "images\ash copy.png" />
+		<img class = "thumb" onclick = "selectDragon(this.dragon);" src = "images\barnabas copy.png" />
+		<img class = "thumb" onclick = "selectDragon(this.dragon);" src = "images\drake copy.png" />
+		<img class = "thumb" onclick = "selectDragon(this.dragon);" src = "images\endisun copy.png" />
+		<img class = "thumb" onclick = "selectDragon(this.dragon);" src = "images\lunar copy.png" />
 	</body>
 </html>
