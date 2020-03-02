@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+		
+		</title>
+		<style>
+		
+		</style>
+		<script>
+            const JACK = 11, QUEEN = 12, KING = 13, ACE = 1;
+            const CLUB = 0, DIAMOND = 1, HEART = 2, SPADE = 3;
+            const BLUE_BACK = "back-blue-75-3.png";
+
+            function initialize(){
+                flippedCardsContainer = document.getElementById("flipped");
+
+                deck = generateStandardDeck();
+            }
+
+            function generateStandardDeck(){
+                var deck = [];
+                for(var r = ACE; r <= KING; r++){
+                    for(var s = CLUB; s <= SPADE; s++){
+                        var card = {};
+                        card.rank = r;
+                        card.suit = s;
+                        card.imgFile = r + "-" + s + ".png";
+                        deck.push(card);
+                    }
+                }
+                return deck;
+            }
+
+            function flipCard(){
+                if(deck.length == 0){
+                    return;
+                }
+
+                var card = deck.shift();
+                var cardImage = document.createElement("img");
+                cardImage.src = "cardimages/" + card.imgFile;
+                flippedCardsContainer.appendChild(cardImage);
+            }
+
+		</script>
+	</head>
+    <body onload = "initialize()">
+        <img src = "cardimages/back-blue-75-3.png" onclick = "flipCard();" />
+        <div id = "flipped"></div>
+	
+	</body> 
+</html>
