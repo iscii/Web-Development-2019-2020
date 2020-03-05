@@ -1,0 +1,6 @@
+Level 6, Lesson 5.11:
+	-What is the point of initializing opList.innerHTML before the loop?
+	-Answer: notice the = sign vs. the += sign in the loop. Without initializing in before the loop, you'll be +=ing (adding) the first values into the array,
+		 so the first item of the array will be undefined. (This issue occured often in the fast food cashier code)
+	Lesson 5.12 (issue)
+	-There's an issue with the displayed code image. the conditional checks if something is = and not ==. Big mistake-o

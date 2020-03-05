@@ -19,14 +19,25 @@
             function Animal(n, loc){ //class Animals
                 this.name = n;
                 this.location = loc;
-
             }
             function display(){
-                opList.innerHTML += "0: " + animalList[0].name + " lives in " + animalList[0].location +".";
+                opList.innerHTML = "0: " + animalList[0].name + " lives in " + animalList[0].location +".";
 
                 for(var i = 1; i < animalList.length; i++){
                     opList.innerHTML += "<br/>" + i + ": " + animalList[i].name + " lives in " + animalList[i].location + ".";
                 }
+            }
+            function addAnimal(){
+                if(zooForm.animalname.value == "" || zooForm.animallocation.value == ""){
+                    alert("Please enter a name and location for the animal");
+                    return;
+                }
+
+                animalList.push(new Animal(zooForm.animalname.value, zooForm.animallocation.value));
+                zooForm.animalname.value = "";
+                zooForm.animallocation.value = "";
+
+                display(); 
             }
 		</script>
 	</head>
@@ -38,6 +49,8 @@
             Animal Location: <input type = "text" name = "animallocation">
         </form>
         <button onclick = "addAnimal();">Add Animal</button>
+        <button onclick = "deleteAnimal();">Delete Animal</button>
+        <button onclick = "updateAnimal();">Update Animal</button>
         <hr/>
         <div id = "animallist"></div>
 	</body>
