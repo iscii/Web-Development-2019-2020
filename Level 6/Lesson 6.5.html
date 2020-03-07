@@ -28,10 +28,7 @@
                 }
             }
             function addAnimal(){
-                if(zooForm.animalname.value == "" || zooForm.animallocation.value == ""){
-                    alert("Please enter a name and location for the animal");
-                    return;
-                }
+                if(!valuesEntered()) return;
 
                 animalList.push(new Animal(zooForm.animalname.value, zooForm.animallocation.value));
                 zooForm.animalname.value = "";
@@ -39,14 +36,38 @@
 
                 display(); 
             }
+            function deleteAnimal(){
+                var animalIdx = zooForm.animalidx.value;
+
+                if(!animalInList(animalIdx)) return;
+
+                animalList.splice(animalIdx, 1);
+                display();
+            }
+            function updateAnimal(){
+                var animalIdx = zooForm.animalidx.value;
+                if(!animalInList(animalIdx) || !valuesEntered()) return;
+
+                animalList[animalIdx].name = zooForm.animalname.value;
+                animalList[animalIdx].location = zooForm.animallocation.value;
+
+                display();
+            }
+            function valuesEntered(){
+                return zooForm.animalname.value != "" && zooForm.animallocation.value != "";
+            }
+            function animalInList(animalIdx){
+                return animalIdx >= 0 && animalIdx < animalList.length;
+            }
 		</script>
 	</head>
 	<body onload = "initialize()">
         <h1>The Zoo</h1>
         <hr/>
         <form id = "zoo">
-            Animal Name: <input type = "text" name = "animalname">
-            Animal Location: <input type = "text" name = "animallocation">
+            Animal Index: <input type = "number" name = "animalidx" />
+            Animal Name: <input type = "text" name = "animalname" />
+            Animal Location: <input type = "text" name = "animallocation" />
         </form>
         <button onclick = "addAnimal();">Add Animal</button>
         <button onclick = "deleteAnimal();">Delete Animal</button>

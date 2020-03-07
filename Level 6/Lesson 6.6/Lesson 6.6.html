@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+            CardTest
+		</title>
+		<style>
+		
+        </style>
+        <script src = "utilities.js"></script>
+        <script src = "playingcards.js"></script>
+		<script>
+            function initialize(){
+                cardsOutput = document.getElementById("cardsout");
+                theDeck = generateStandardDeck();
+                showDeck();
+            }
+
+            function showDeck(){
+                while(theDeck.length > 0){
+                    var tmpImg = document.createElement("img");
+
+                    var tmpCard = theDeck.shift(); //array.prototype.shift() removes the first item of the array and returns it.
+                    tmpImg.src = "cardimages/" + tmpCard.imageFileName;
+
+                    cardsOutput.appendChild(tmpImg);
+                }
+            }
+		</script>
+	</head>
+	<body onload = "initialize();">
+        <div id ="cardsout"></div>
+	</body>
+</html>
