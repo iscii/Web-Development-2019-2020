@@ -1,0 +1,25 @@
+Card Deck psdc
+
+Turns psdc
+    function Player()
+    Player.id
+    Player.cards
+
+
+CPU psdc
+    Discard:
+        if discardpile[0] + handvalue - hand[lowest value] > handvalue
+
+determineHandalue(<optional parameter){
+    for(var i = 0; i < suites; i++){
+        add up values 
+    }
+    if(optional parameter){
+        find suite and add it to total value
+    }
+    compare values (maybe by sorting the array in which the values are put in or smtn)
+    set total value to highest value
+
+    return total value;
+}
+

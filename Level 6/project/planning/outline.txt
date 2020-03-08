@@ -1,0 +1,42 @@
+Level 6 Project: Thirty One
+    Blackjack
+
+Functionality
+    -Card Deck (Prototype class):
+        -add cards to object, and then shuffle
+            -can prob do both at once (pseudocode)
+    -Turns
+        -Start
+            -Dealer chosen at random
+            -Next player after dealer has first turn (if dealer is largest number, wrap)
+            -shift the Card Deck 3x and push the returned value to the player's hand.
+    -Players
+        -player class
+            -ID#
+            -Hand array
+            -Strikes
+        -player objects are created upon initial card deals
+        -4 players (identified by numbers)
+    -CPU
+        -Knock: if hand's value > 24
+        -Discard: if doing so will increase value in its hand (based on suit?)
+            -
+        -
+    -Moves
+        -Draw
+            -shift the card deck and push the returned value to the player's hand
+        -Discard
+            -shift the discard pile and push the returned value to the player's hand (psdc)
+            -let player select a card from hand to discard
+        -Knock 
+            -Ends current player's turn.
+    -Determine card value (psdc)
+        -for each suite, add up the cards belonging to it (using class properties?)
+        -face cards are worth 10, aces are worth 11
+Interface
+
+
+
+Enhancements
+    -AI:
+        -
