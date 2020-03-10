@@ -55,6 +55,8 @@ Functionality
 
         -Knocking:
             -A knock may only occur once (Set knock = 1 and -- when a player knocks. add player.knock = true?)
+            -When a player knocks, everybody gets a turn after the player who knocks
+                (play proceeds around the table a full loop until it gets back to the player who knocked).
 
         -For as long as the game is in play, after each round the dealer shifts to
         the next player clockwise (opposite of person who goes first in prev round)
