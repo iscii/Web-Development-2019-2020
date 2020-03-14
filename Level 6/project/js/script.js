@@ -6,12 +6,7 @@ function initialize()
     deck.shuffleDeck();
     for(i = 0; i < deck.length; i++)
     {
-        console.log(deck[i]);//figure out how to access class properties
+        console.log(deck[i]); //add <.property> to access it
     }
-}
-
-function Player(id, hand)
-{
-    id = this.id;
-    hand = new CardDeck();
+    console.log(deck);
 }

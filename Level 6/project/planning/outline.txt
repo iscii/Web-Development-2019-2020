@@ -9,7 +9,11 @@ Functionality
     -Start
         -Dealer chosen at random
         -Next player clockwise after dealer has first turn (if dealer is largest number, wrap)
-        -shift the Card Deck 3x and push the returned value to the player's hand.
+        
+        -Shuffle Button (next to deck)
+            -call deck.shuffleDeck();
+        -Deal Button (next to dealer)
+            -shift the Card Deck 3x and push the returned value to the player's hand.
         
         -move top card of deck to discard pile (as first card of discard pile) to initiate it
             -Discard pile cards are visible.

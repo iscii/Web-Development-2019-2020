@@ -23,7 +23,7 @@ determineHandValue(player, <optional parameter){
     return total value;
 }
 
-1. get deck shuffling to work.
+X1. get deck shuffling to work.
 2. get the deck images and display to work.
 3. get the dealing to work after making player class.
 4. get the determine hand value function to work properly
