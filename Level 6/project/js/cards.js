@@ -28,30 +28,11 @@ CardDeck.prototype.shuffleDeck = function()
 
 CardDeck.prototype.generateStandardDeck = function()
 {
-    var deck = new CardDeck();
-
     for(var s = CLUB; s < SPADE; s++)
     {
         for(var r = ACE; r < KING; r++)
         {
-            deck.push(new Cards(r, s, r + "-" + s + ".png"));
+            this.push(new Cards(r, s, r + "-" + s + ".png"));
         }
     }
-
-    return deck;
-}
-
-function generateStandardDeck()
-{
-    var deck = new CardDeck();
-
-    for(var s = CLUB; s < SPADE; s++)
-    {
-        for(var r = ACE; r < KING; r++)
-        {
-            deck.push(new Cards(r, s, r + " - " + s + ".png"));
-        }
-    }
-
-    return deck;
 }

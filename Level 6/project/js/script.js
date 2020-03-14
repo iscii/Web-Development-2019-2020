@@ -1,6 +1,8 @@
 function initialize()
 {
-    deck = generateStandardDeck();
+    deck = new CardDeck();
+
+    deck.generateStandardDeck();
     deck.shuffleDeck();
     for(i = 0; i < deck.length; i++)
     {
