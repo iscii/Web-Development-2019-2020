@@ -2,6 +2,7 @@ const JACK = 11, QUEEN = 12, KING = 13, ACE = 1;
 const CLUB = 0, DIAMOND = 1, HEART = 2, SPADE = 3;
 const TOP_DECK = 0;
 
+
 function Card(r, s ,i){ //class Card with properties rank, suit, inagefilname
     this.rank = r;
     this.suit = s;
@@ -15,13 +16,14 @@ CardDeck.prototype = Array.prototype;
 
 //why don't we just declare CardDeck an array and shuffleDeck a separate function? What are the benefits to making it a prototype/class?
 CardDeck.prototype.shuffleDeck = function(){//prototype function (of class CardDeck)
-    var tmpDeck = [];
+    var tempDeck = [];
     while(this.length > 0){
         var tmpCard = this.splice(getRandomInteger(0, this.length - 1), 1)[0]; //how would this work if deck has no value?
+        //console.log(tmpCard);
 
         tempDeck.push(tmpCard);
     }
-    this.push.apply(this, tmp); //pg 25
+    this.push.apply(this, tempDeck); //pg 25 (issue in lesson)
 }
 function generateStandardDeck(){
     var deck = new CardDeck();
@@ -33,4 +35,3 @@ function generateStandardDeck(){
     }
     return deck;
 }
-    
