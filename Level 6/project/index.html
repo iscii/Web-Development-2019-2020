@@ -8,16 +8,28 @@
 		<script src = "js/library.js"></script>
 	</head>
 	<body onload = "initialize();">
-		<div>
+		<div idi = "players">
 			<!--probably gonna add another div inside each of the player divs for the hand-->
-			<div class = "player" id = "p1"></div>
-			<div class = "cpu" id = "p2"></div>
-			<div class = "cpu" id = "p3"></div>
-			<div class = "cpu" id = "p4"></div>
+			<div class = "player" id = "p1">
+				<img src = "images/cards/back-blue-75-3.png" />
+			</div>
+			<div class = "cpu" id = "p2">
+				<img src = "images/cards/back-red-75-3.png" />
+			</div>
+			<div class = "cpu" id = "p3">
+				<img src = "images/cards/back-red-75-3.png" />
+			</div>
+			<div class = "cpu" id = "p4">
+				<img src = "images/cards/back-red-75-3.png" />
+			</div>
 		</div>
 		<div>
-			<div id = "deckpile"></div>
-			<div id = "discardpile"></div>
+			<div id = "deckpile">
+				<img src = "images/cards/back-red-75-3.png" />
+			</div>
+			<div id = "discardpile"> <!--.appendChild this one-->
+				<img src = "images/cards/back-blue-75-3.png" />
+			</div>
 		</div>
 	</body>
 </html>

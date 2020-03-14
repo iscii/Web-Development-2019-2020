@@ -2,10 +2,10 @@ Level 6 Project: Thirty One
     Blackjack
 
 Functionality
-    -**Card Deck (Prototype class):
-        -add cards to object, and then shuffle
+    X-Card Deck (class):
+        X-add cards(object), and then shuffle
             -can prob do both at once (pseudocode)
-        -get this to shuffle and display first before anything
+        X-get this to shuffle and display first before anything
     -Start
         -Dealer chosen at random
         -Next player clockwise after dealer has first turn (if dealer is largest number, wrap)
