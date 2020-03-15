@@ -68,6 +68,9 @@ button:active{
         make it so that the Div also gets slightly smaller and the box-shadow glow disappears or is muffed
     */
 }
+button#simButton{
+    border-right: 2px solid black;
+}
 /*scrollbar customization*/
 ::-webkit-scrollbar{
     width: 10px;

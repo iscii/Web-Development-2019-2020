@@ -8,28 +8,28 @@
 		<script src = "js/library.js"></script>
 	</head>
 	<body onload = "initialize();">
-		<div idi = "players">
 			<!--probably gonna add another div inside each of the player divs for the hand-->
-			<div class = "player" id = "p1">
-				<img src = "images/cards/back-blue-75-3.png" />
-			</div>
-			<div class = "cpu" id = "p2">
+		<div class = "cpu" id = "p1">
+			<img src = "images/cards/back-red-75-3.png" />
+		</div> <br/>
+		<div id = "middle">
+			<span class = "cpu" id = "p2">
 				<img src = "images/cards/back-red-75-3.png" />
-			</div>
+			</span>
+			<span id = "drawpiles">
+				<span id = "discardpile"> <!--.appendChild this one-->
+					<img src = "images/cards/back-blue-75-3.png" />
+				</span> 
+				<span id = "deckpile">
+					<img src = "images/cards/back-red-75-3.png" />
+				</span>
+			</span>
 			<div class = "cpu" id = "p3">
 				<img src = "images/cards/back-red-75-3.png" />
 			</div>
-			<div class = "cpu" id = "p4">
-				<img src = "images/cards/back-red-75-3.png" />
-			</div>
 		</div>
-		<div>
-			<div id = "deckpile">
-				<img src = "images/cards/back-red-75-3.png" />
-			</div>
-			<div id = "discardpile"> <!--.appendChild this one-->
-				<img src = "images/cards/back-blue-75-3.png" />
-			</div>
+		<div class = "player" id = "p4">
+			<img src = "images/cards/back-blue-75-3.png" />
 		</div>
 	</body>
 </html>

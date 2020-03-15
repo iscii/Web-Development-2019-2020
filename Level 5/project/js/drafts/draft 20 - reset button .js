@@ -140,7 +140,7 @@ function run(){
         }
     }
 }
-function reset(){ //refreshes page (can't simply reset values and display since storing every value of every simulation would take up too much memory)
+function reset(){ //refreshes page
     location.reload();
 }
 function simulate(){ //split into functions primarily for organization and readability
@@ -482,6 +482,25 @@ function dispSimTotals(){ //these get a bit redundant since i didn't plan it aaa
     eSimTotals += " (<span class = 'regbalresult'>" + regBalResult + "</span>)</span>"
     opSims.innerHTML = eSimTotals + "</span>" + opSims.innerHTML; ///span closes simhead element
 }
+/*function resetDisplay(){ //i've learned to use variables for srcs to not need to make a new function for reset. Also, make display more dynamic.
+    because I made display the way I did (still showing every simulation result), and because I can't store every single simulation result in a variable due to memory limits, I couldn't
+    reset 
+
+    opRegBalAvgs.innerHTML = "";
+    opNumSims.innerHTML = "";
+
+    console.log(opSims.innerHTML);
+    //opSims.innerHTML = null;
+    //opLogs.innerHTML = null;
+
+    opAvgTotalSaleC.innerHTML = "0";
+    opAvgTotalSaleV.innerHTML = "0";
+    opAvgElecSaleC.innerHTML = "0";
+    opAvgElecSaleV.innerHTML = "0";
+    opAvgCashSaleC.innerHTML = "0";
+    opAvgCashSaleV.innerHTML = "0";
+    opRegBalValue.innerHTML = null;
+} */
 function display(){ //display per simulation
     dispSimTotals();
     dispData();
