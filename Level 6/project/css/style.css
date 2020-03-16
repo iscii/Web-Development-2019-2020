@@ -11,7 +11,7 @@ body{
 #p1, #p2, #p3, #p4, #drawpiles{
     padding-top: 4%;
     padding-bottom: 4%;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     margin: auto;
     margin-top: 1%;
     text-align: center;
@@ -20,12 +20,12 @@ body{
     display: inline-block;
     width: 15vw;
 }
-img{
-    transform: rotate(90);
+#p2 img, #p3 img{
+    transform: rotate(90deg);
 }
 #drawpiles{
     display: inline-block;
-    width: 55vw;
+    width: 30vw;
 }
 #deckpile{
     padding-left: 20%;

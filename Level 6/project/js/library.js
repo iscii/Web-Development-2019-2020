@@ -1,3 +1,4 @@
+//Cards
 const JACK = 11, QUEEN = 12, KING = 13, ACE = 1;
 const CLUB = 0, DIAMOND = 1, HEART = 2, SPADE = 3;
 
@@ -39,6 +40,7 @@ CardDeck.prototype.generateStandardDeck = function()
     }
 }
 
+//Players
 function Player(id, hand)
 {
     id = this.id;
