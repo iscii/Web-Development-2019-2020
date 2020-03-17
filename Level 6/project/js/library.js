@@ -41,14 +41,24 @@ CardDeck.prototype.generateStandardDeck = function()
 }
 
 //Players
-function Player(id, hand)
+function Player(id)
 {
-    id = this.id;
-    hand = new CardDeck();
+    this.id = id;
+    this.hand = [];
 }
 
 //optional parameter newcard; use parameter to determine the hand's value IF the new card were to be drawn (for cpus).
 Player.prototype.determineHandValue = function(newcard)
 {
     
+}
+
+Player.prototype.drawCards = function(quantity, pile)
+{
+    for(var i = 0; i < quantity; i++)
+    {
+        //var card = deck.shift();
+        this.hand.push(pile.shift());
+        console.log(this.hand[this.hand.length - 1]);
+    }
 }

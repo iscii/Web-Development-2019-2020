@@ -7,8 +7,8 @@
 		<script src = "js/utilities.js"></script>
 		<script src = "js/library.js"></script>
 	</head>
-	<body onload = "initialize();">
-			<!--probably gonna add another div inside each of the player divs for the hand-->
+	<!--<body onload = "initialize();">-->
+	<body>
 		<div class = "cpu" id = "p1">
 			<img src = "images/cards/back-red-75-3.png" />
 		</div>
@@ -18,9 +18,11 @@
 			</span>
 			<span id = "drawpiles">
 				<span id = "discardpile"> <!--.appendChild this one-->
+					<img id = "topdiscardcard" src = "images/cards/back-blue-75-3.png" /> <!--todo: make this not have a transform when hovered and clicked-->
 					<img src = "images/cards/back-blue-75-3.png" />
 				</span> 
 				<span id = "deckpile">
+					<img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "initialize();"/> <!--todo: make this have a transform when hovered and clicked-->
 					<img src = "images/cards/back-red-75-3.png" />
 				</span>
 			</span>
@@ -29,6 +31,7 @@
 			</div>
 		</div>
 		<div class = "player" id = "p4">
+			<!--todo: to identify the card clicked, make an onclick and have it input the two values of the card image's name as parameters of a function, split by "-"-->
 			<img src = "images/cards/back-blue-75-3.png" />
 		</div>
 	</body>

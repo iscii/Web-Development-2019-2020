@@ -24,7 +24,7 @@ determineHandValue(player, <optional parameter){
 }
 
 X1. get deck shuffling to work.
-2. get the deck images and display to work.
+C2. get the deck images and display to work.
 3. get the dealing to work after making player class.
 4. get the determine hand value function to work properly
 5. then do everything else lol
