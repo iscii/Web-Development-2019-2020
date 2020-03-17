@@ -16,26 +16,14 @@ function initialize()
 
     //Deal cards
     for(var i = 0; i < 4; i++)
-    {
-        //drawCards(i, 3);   
+    {  
         Players[i].drawCards(3, deck); //!lastest commit: player prototype function drawCards works. 
-        //() =>{Player, player.id = player.i
     }
     console.log(deck);
     console.log(Players);
 }
-
+/*
 function draw()
 {
 
-}
-/*
-function drawCards(x, quantity){
-    var i;
-    while(i < quantity)
-    {
-        Player[x].hand.push(deck.shift());
-    }
-    console.log(deck);
-    console.log(Players);
-} */
+}*/

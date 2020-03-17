@@ -9,6 +9,7 @@
 	</head>
 	<!--<body onload = "initialize();">-->
 	<body>
+		<button onclick = "intialize();"></button>
 		<div class = "cpu" id = "p1">
 			<img src = "images/cards/back-red-75-3.png" />
 		</div>
@@ -22,7 +23,7 @@
 					<img src = "images/cards/back-blue-75-3.png" />
 				</span> 
 				<span id = "deckpile">
-					<img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "initialize();"/> <!--todo: make this have a transform when hovered and clicked-->
+					<img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "Players[4].drawCards(1, deck);"/> <!--todo: make this have a transform when hovered and clicked-->
 					<img src = "images/cards/back-red-75-3.png" />
 				</span>
 			</span>

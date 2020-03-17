@@ -57,7 +57,6 @@ Player.prototype.drawCards = function(quantity, pile)
 {
     for(var i = 0; i < quantity; i++)
     {
-        //var card = deck.shift();
         this.hand.push(pile.shift());
         console.log(this.hand[this.hand.length - 1]);
     }
