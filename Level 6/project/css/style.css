@@ -16,11 +16,11 @@ body{
     margin-top: 1%;
     text-align: center;
 }
-#p2, #p3{
+#p2, #p4{
     display: inline-block;
     width: 15vw;
 }
-#p2 img, #p3 img{
+#p2 img, #p4 img{
     transform: rotate(90deg);
 }
 #drawpiles{

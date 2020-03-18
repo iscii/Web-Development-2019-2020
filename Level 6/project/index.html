@@ -9,8 +9,8 @@
 	</head>
 	<!--<body onload = "initialize();">-->
 	<body>
-		<button onclick = "intialize();"></button>
-		<div class = "cpu" id = "p1">
+		<button onclick = "initialize();">Start</button>
+		<div class = "cpu" id = "p3">
 			<img src = "images/cards/back-red-75-3.png" />
 		</div>
 		<div id = "middle">
@@ -23,15 +23,15 @@
 					<img src = "images/cards/back-blue-75-3.png" />
 				</span> 
 				<span id = "deckpile">
-					<img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "Players[4].drawCards(1, deck);"/> <!--todo: make this have a transform when hovered and clicked-->
+					<img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "draw();"/> <!--todo: make this have a transform when hovered and clicked-->
 					<img src = "images/cards/back-red-75-3.png" />
 				</span>
 			</span>
-			<div class = "cpu" id = "p3">
+			<div class = "cpu" id = "p4">
 				<img src = "images/cards/back-red-75-3.png" />
 			</div>
 		</div>
-		<div class = "player" id = "p4">
+		<div class = "player" id = "p1">
 			<!--todo: to identify the card clicked, make an onclick and have it input the two values of the card image's name as parameters of a function, split by "-"-->
 			<img src = "images/cards/back-blue-75-3.png" />
 		</div>

@@ -41,10 +41,13 @@ CardDeck.prototype.generateStandardDeck = function()
 }
 
 //Players
+const p1 = 0, p2 = 1, p3 = 2, p4 = 3;
+
 function Player(id)
 {
     this.id = id;
     this.hand = [];
+    this.strikes = 3;
 }
 
 //optional parameter newcard; use parameter to determine the hand's value IF the new card were to be drawn (for cpus).
@@ -58,6 +61,7 @@ Player.prototype.drawCards = function(quantity, pile)
     for(var i = 0; i < quantity; i++)
     {
         this.hand.push(pile.shift());
-        console.log(this.hand[this.hand.length - 1]);
+        console.log(this); //!
+        console.log(pile); //!
     }
 }
