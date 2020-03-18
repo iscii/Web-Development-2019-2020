@@ -20,19 +20,32 @@ function initialize()
     }
     console.log(players); //!
 
-    //Determine dealer
+    //Determine dealer & turn
     dealer = getRandomInteger(p1, p4);
     turn = dealer + 1;
     if(dealer + 1 > p4) //*if there's a way to loop it without this conditional, pls do tell
-        dealer = p1;
+        turn = p1;
+    console.log("First turn: " + turn);
 
-    rounds();
+    game();
     display();
 }
 
-function rounds() //todo: get the rounds and turns working.
+function cpuMoves() //todo: get the rounds and turns working.
 {
+    //Check if player in turn has strikes
+    if(players[turn].strikes < 0) return;
+    //if(turn == p1) return console.log("User's turn");
+    
+    nextTurn();
+    console.log(turn);
+}
 
+function game()
+{
+    if(turn == p1) return console.log("user's turn");
+
+    setInterval(cpuMoves, 10000);
 }
 
 function draw()
@@ -41,10 +54,18 @@ function draw()
     players[p1].drawCards(1, deck);
 }
 
+function discard()
+{
+    //code
+
+    nextTurn();
+    game();
+}
+
 function nextTurn()
 {
     turn += 1;
-    if(turn + 1 > p4)
+    if(turn > p4)
         turn = p1;
 }
 
