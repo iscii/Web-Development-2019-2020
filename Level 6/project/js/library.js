@@ -66,6 +66,8 @@ Player.prototype.drawCards = function(quantity, pile)
         console.log(" ------------------------------------- ");
     }
     console.log(pile); //!
+
+    display();
 }
 
 Player.prototype.discardCards = function(card)

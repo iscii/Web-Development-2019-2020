@@ -66,7 +66,6 @@ function draw()
     if(turn != p1) return;
     players[p1].drawCards(1, deck);
 
-    display();
     discard();
 }
 
@@ -75,6 +74,7 @@ function discard(card) //*when appendChild-ing the images, assign to them ids re
     if(turn != p1) return;
     players[turn].discardCards(card);
     //code
+
 
     nextTurn();
     display();
@@ -93,10 +93,14 @@ function display() //todo: YOU ARE HERE 3/18/2020. You've just finished the disp
     //Player display
     for(var i = 0; i < players.length; i++)
     {
+        eval("opP" + (i + 1)).innerHTML = ""; //*resets the divs so that the images don't build onto each other (see bug 1)
+
         for(var o = 0; o < players[i].hand.length; o++)
         {
             var image = document.createElement("img");
             image.id = "img" + players[i].hand[o].rank + "-" + players[i].hand[o].suit;
+            //? Is it possible to give the element a class that'll have style properties defined in css? I tried it but the class property never appeared in console.log, whilst id and src did.
+
             if(i == 0) //only for the user player
             {
                 image.onclick = "discard(this.id.slice(3))"; //calls the discard function and inputs as parameter the image's id without the "img" portion.
@@ -105,7 +109,7 @@ function display() //todo: YOU ARE HERE 3/18/2020. You've just finished the disp
             else
                 image.src = "./images/cards/back-red-75-3.png";
         
-            eval("opP" + (i + 1)).appendChild(image);
+            eval("opP" + (i + 1)).appendChild(image); //!FIXED: problem with this is that it keeps appending the image. I need it to *set* the div's innerHTML to the image
         }
     }
 }

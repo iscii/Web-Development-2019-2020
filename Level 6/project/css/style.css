@@ -8,7 +8,7 @@ body{
     width: 90vw;
     text-align: center;
 }
-#p1, #p2, #p3, #p4, #drawpiles{
+.playerhand, #drawpiles{
     padding-top: 4%;
     padding-bottom: 4%;
     /*border: 2px solid black;*/
@@ -16,11 +16,9 @@ body{
     margin-top: 1%;
     text-align: center;
 }
-#p2, #p4{
+#p2disp, #p4disp{
     display: inline-block;
-    width: 15vw;
-}
-#p2 img, #p4 img{
+    width: 20vw; /*once you finish discard, the wonky formatting should stop. There should be no more than 4 cards per hand*/
     transform: rotate(90deg);
 }
 #drawpiles{
