@@ -61,7 +61,14 @@ Player.prototype.drawCards = function(quantity, pile)
     for(var i = 0; i < quantity; i++)
     {
         this.hand.push(pile.shift());
+        console.log(this.id + " draws: -------------------------");
         console.log(this); //!
-        console.log(pile); //!
+        console.log(" ------------------------------------- ");
     }
+    console.log(pile); //!
+}
+
+Player.prototype.discardCards = function(card)
+{
+
 }
