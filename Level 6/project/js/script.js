@@ -39,7 +39,6 @@ function initialize()
 
 function cpuMoves() //todo: get the rounds and turns working.
 {
-    //!console.log("cpuMoves");
     //Check if player in turn has strikes. If not, pass turn and continue with interval
     if(players[turn].strikes < 0) 
         return nextTurn();
@@ -89,7 +88,7 @@ function nextTurn()
         turn = p1;
 }
 
-function display()
+function display() //todo: YOU ARE HERE 3/18/2020. You've just finished the display function. fix the display formatting and get working on the discard function.
 {
     //Player display
     for(var i = 0; i < players.length; i++)
