@@ -45,24 +45,21 @@ function cpuMoves() //todo: get the rounds and turns working.
         return nextTurn();
     if(turn == p1)
     {
-        console.log("user's turn");
-        //!if(cpuInterval) 
+        console.log("user's turn"); //!
         return clearInterval(cpuInterval);
     }
     
     players[turn].drawCards(1, deck);
 
-    //console.log(turn); //!
     nextTurn();
 }
 
 function game()
 {
     if(turn == p1) 
-        return console.log("user's turn");
-        //!if(cpuInterval) clearInterval(cpuInterval);
+        return console.log("user's turn"); //!
     else
-        cpuInterval = setInterval(cpuMoves, 2000); ///!create a variable that holds an interval
+        cpuInterval = setInterval(cpuMoves, 2000); //create a variable that holds an interval
 }
 
 function draw()
@@ -87,7 +84,6 @@ function discard(card) //*when appendChild-ing the images, assign to them ids re
 
 function nextTurn()
 {
-    //!console.log("turn:" + turn);
     turn += 1;
     if(turn > p4)
         turn = p1;
@@ -100,9 +96,6 @@ function display()
     {
         for(var o = 0; o < players[i].hand.length; o++)
         {
-            //console.log(players[i].id + " -------------------");
-            //console.log(players[i].hand[o]);
-            //console.log(" ------------------------------------- ");
             var image = document.createElement("img");
             image.id = "img" + players[i].hand[o].rank + "-" + players[i].hand[o].suit;
             if(i == 0) //only for the user player
@@ -111,9 +104,8 @@ function display()
                 image.src = "./images/cards/" + players[i].hand[o].rank + "-" + players[i].hand[o].suit + ".png";
             }
             else
-            {
                 image.src = "./images/cards/back-red-75-3.png";
-            }
+        
             eval("opP" + (i + 1)).appendChild(image);
         }
     }
