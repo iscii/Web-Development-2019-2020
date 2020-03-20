@@ -109,7 +109,7 @@ function display() //todo: YOU ARE HERE 3/18/2020. You've just finished the disp
             else
                 image.src = "./images/cards/back-red-75-3.png";
         
-            eval("opP" + (i + 1)).appendChild(image); //!FIXED: problem with this is that it keeps appending the image. I need it to *set* the div's innerHTML to the image
+            eval("opP" + (i + 1)).appendChild(image);
         }
     }
 }
