@@ -66,7 +66,7 @@ Player.prototype.determineHandValue = function(newcard) //make it so that only t
             }
         }
     }
-    console.log(suitTotals);
+    console.log(suitTotals); //!
 
     var value = suitTotals[0]; //create the returned value
 
@@ -75,15 +75,8 @@ Player.prototype.determineHandValue = function(newcard) //make it so that only t
         if(suitTotals[o] > value)
             value = suitTotals[o];
 
-    console.log("[" + value + "]");
+    console.log("Value: [" + value + "]"); //!
     return value;
-    /*
-    var value = 0;
-    for(var i = 0; i < this.hand.length; i++)
-        value += this.hand[i].value;
-    if(newcard)
-        value += newcard.value;
-    */
 }
 
 Player.prototype.drawCards = function(quantity, pile)
