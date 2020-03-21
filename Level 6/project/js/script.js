@@ -18,7 +18,6 @@ function initialize()
     //Create round vars
     round = 1;
     canDiscard = false;
-    //tempturn = []; //creates a turn storage for cpu discards - > DITCHED since discard has to occur within the ssame turn as draw
 
     deckpile.generateStandardDeck();
     deckpile.shuffleDeck();
@@ -57,16 +56,11 @@ function cpuMoves()
     }
     
     //CPU draw
-    console.log("draw");
-    console.log(turn);
     players[turn].drawCards(1, deckpile);
-    //tempturn.push[turn];  
 
     //CPU discard
     //players[turn].discardCards(players[turn].determineDiscardCard());
     setTimeout(function(){
-        console.log("discard");
-        //console.log(tempturn);
         players[turn].discardCards(0); //todo: YOU ARE HERE 3/21: work on the cpu discard specifics.
         nextTurn();
     }, 500);
