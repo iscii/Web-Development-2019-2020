@@ -55,6 +55,12 @@ Player.prototype.determineHandValue = function(newcard) //make it so that only t
 {
     var suitTotals = [0, 0, 0, 0]; //[0] = club, [1] = diamonds, [2] = hearts, [3] = spades
 
+    //if the there is a parameter, add it to the value.
+    if(newcard) //todo: test this after working on discard deck initialization
+    {
+        suitTotals[newcard.suit] += newcard.value;
+    }
+
     for(var s = 0; s < SPADE; s++)
     {
         //check if any cards in the hand has the suit

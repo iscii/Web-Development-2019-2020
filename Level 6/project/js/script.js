@@ -6,8 +6,11 @@ function initialize()
     opP3 = document.getElementById("p3disp");
     opP4 = document.getElementById("p4disp");
 
-    //Create deck
-    deck = new CardDeck();
+    opDiscard = document.getElementById("topdiscardcard");
+
+    //Create deckpile
+    deckpile = new CardDeck();
+    discardpile = new CardDeck();
 
     //Create players
     players = [new Player("p1"), new Player("p2"), new Player("p3"), new Player("p4")];
@@ -15,14 +18,17 @@ function initialize()
     //Create round vars
     round = 1;
 
-    deck.generateStandardDeck();
-    deck.shuffleDeck();
-    console.log(deck); //!
+    deckpile.generateStandardDeck();
+    deckpile.shuffleDeck();
+    console.log(deckpile); //!
+    
+    //Initialize discard pile. Placed before card deals since display requires discardpile to be initialized.
+    discardpile.push(deckpile.shift());
 
     //Deal cards
     for(var i = 0; i < 4; i++)
     {  
-        players[i].drawCards(3, deck);
+        players[i].drawCards(3, deckpile);
     }
     console.log(players); //!
 
@@ -48,7 +54,7 @@ function cpuMoves() //todo: get the rounds and turns working.
         return clearInterval(cpuInterval);
     }
     
-    players[turn].drawCards(1, deck);
+    players[turn].drawCards(1, deckpile);
 
     nextTurn();
 }
@@ -64,7 +70,7 @@ function game()
 function draw()
 {
     if(turn != p1) return;
-    players[p1].drawCards(1, deck);
+    players[p1].drawCards(1, deckpile);
 
     discard();
 }
@@ -114,6 +120,6 @@ function display() //todo: YOU ARE HERE 3/18/2020. You've just finished the disp
     }
 
     //Discard display
-    
+    opDiscard.src = "./images/cards/" + discardpile[0].rank + "-" + discardpile[0].suit + ".png";
 }
 
