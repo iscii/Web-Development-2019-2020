@@ -18,6 +18,7 @@ function initialize()
     //Create round vars
     round = 1;
     canDiscard = false;
+    //tempturn = []; //creates a turn storage for cpu discards - > DITCHED since discard has to occur within the ssame turn as draw
 
     deckpile.generateStandardDeck();
     deckpile.shuffleDeck();
@@ -55,10 +56,20 @@ function cpuMoves()
         return clearInterval(cpuInterval);
     }
     
+    //CPU draw
+    console.log("draw");
+    console.log(turn);
     players[turn].drawCards(1, deckpile);
-    //players[turn].discardCards(card);
+    //tempturn.push[turn];  
 
-    nextTurn();
+    //CPU discard
+    //players[turn].discardCards(players[turn].determineDiscardCard());
+    setTimeout(function(){
+        console.log("discard");
+        //console.log(tempturn);
+        players[turn].discardCards(0); //todo: YOU ARE HERE 3/21: work on the cpu discard specifics.
+        nextTurn();
+    }, 500);
 }
 
 function game()
@@ -66,9 +77,10 @@ function game()
     if(turn == p1) 
         return console.log("user's turn"); //!
     else
-        cpuInterval = setInterval(cpuMoves, 2000); //create a variable that holds an interval
+        cpuInterval = setInterval(cpuMoves, 1500); //create a variable that holds an interval
 }
 
+//User draw
 function draw()
 {
     if(turn != p1 || canDiscard == true) return;
@@ -77,6 +89,7 @@ function draw()
     players[p1].drawCards(1, deckpile);
 }
 
+//User discard
 function discard(card) //*when appendChild-ing the images, assign to them ids relative to the card name (rank-suit) and give them onclick = discard(this.id.split("-"))
 {
     if(turn != p1 || canDiscard == false) return;

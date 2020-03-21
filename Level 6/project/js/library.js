@@ -100,8 +100,12 @@ Player.prototype.drawCards = function(quantity, pile)
 
 Player.prototype.discardCards = function(card)
 {
-    console.log(this.hand[card]);
     discardpile.unshift(this.hand.splice(card, 1)[0]); //*[0] because splice returns an array!!!!! (in lesson)
     console.log(discardpile);
     display();
+}
+
+Player.prototype.determineDiscardCard = function()
+{
+    
 }
