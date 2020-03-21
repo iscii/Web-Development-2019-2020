@@ -112,5 +112,8 @@ function display() //todo: YOU ARE HERE 3/18/2020. You've just finished the disp
             eval("opP" + (i + 1)).appendChild(image);
         }
     }
+
+    //Discard display
+    
 }
 

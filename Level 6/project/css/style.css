@@ -1,16 +1,33 @@
+@font-face{
+    font-family: Quinthero;
+    src: url(../fonts/Quinthero.ttf);
+    font-family: akaPosse;
+    src: url(../fonts/akaPosse.ttf);
+}
+h1{
+    font-size: 250%;
+    text-align: center;
+}
 body{
     background-image: url(../images/background.png);
     background-repeat: repeat;
     background-size: 20rem; /*rem = font-size of root element*/
+    font-family: akaPosse;
 }
+/*drawpiles*/
 #middle{
     margin: auto;
     width: 90vw;
     text-align: center;
 }
+#drawpiles{
+    display: inline-block;
+    width: 30vw;
+}
+/*hands*/
 .playerhand, #drawpiles{
-    padding-top: 4%;
-    padding-bottom: 4%;
+    padding-top: 2%;
+    padding-bottom: 2%;
     /*border: 2px solid black;*/
     margin: auto;
     margin-top: 1%;
@@ -21,10 +38,25 @@ body{
     width: 20vw; /*once you finish discard, the wonky formatting should stop. There should be no more than 4 cards per hand*/
     transform: rotate(90deg);
 }
-#drawpiles{
+#p1disp{
+    margin-top: 4%;
+}
+#deckpile, #discardpile{
     display: inline-block;
-    width: 30vw;
+    /*border: 2px solid black;*/
+    padding-top: 2%;
+    width: 8vw;
 }
 #deckpile{
-    padding-left: 20%;
+    margin-left: 20%;
+}
+.pilelabel{
+    display: inline-block;
+    /* border: 4px solid gray;
+    border-radius: 5%; */
+    font-size: 200%;
+    color: gray;
+    margin-bottom: 10%;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }

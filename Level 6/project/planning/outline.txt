@@ -2,29 +2,29 @@ Level 6 Project: Thirty One
     Blackjack
 
 Functionality
-    X-Card Deck (class):
-        X-add cards(object), and then shuffle
-            -can prob do both at once (pseudocode)
-        X-get this to shuffle and display first before anything
-    -Start
-        -Dealer chosen at random
-        -Next player clockwise after dealer has first turn (if dealer is largest number, wrap)
+    >X-Card Deck (class):
+        >X-add cards(object), and then shuffle
+            XX-can prob do both at once (pseudocode)
+        >X-get this to shuffle and display first before anything
+    >X-Start
+        >X-Dealer chosen at random
+        >X-Next player clockwise after dealer has first turn (if dealer is largest number, wrap)
         
-        -Shuffle Button (next to deck)
+        XX-Shuffle Button (next to deck)
             -call deck.shuffleDeck();
-        -Deal Button (next to dealer)
+        XX-Deal Button (next to dealer)
             -shift the Card Deck 3x and push the returned value to the player's hand.
         
-        -move top card of deck to discard pile (as first card of discard pile) to initiate it
+        >-move top card of deck to discard pile (as first card of discard pile) to initiate it
             -Discard pile cards are visible.
 
-    -Players
-        -player class
+    >X-Players
+        >X-player class
             -ID#
             -Hand array
             -Strikes
-        -player objects are created upon initial card deals
-        -4 players (identified by numbers)
+        >X-player objects are created upon initial card deals
+        >X-4 players (identified by numbers)
     -CPU
         -Knock: if hand's value > 24
         -Discard Pile: if doing so will increase value in its hand (based on suit?)
@@ -110,7 +110,8 @@ Enhancements
     -AI:
         -
 
-
+My Own:
+    -Give the player a choice for the enemy play interval: fast/slow. Change the interval time accordingly.
 Question Answers:
     1: Values
     2: Knocking is basically standing in blackjack; you pass your turn, and the round ends upon your next turn.

@@ -8,23 +8,29 @@
 		<script src = "js/library.js"></script>
 	</head>
 	<body onload = "initialize();">
-		<div class = "playerhand" id = "p3disp"></div>
-		<div id = "middle">
-			<div class = "playerhand" id = "p2disp"></div>
-			<span id = "drawpiles">
-				<span id = "discardpile"> <!--.appendChild this one-->
-					<img id = "topdiscardcard" src = "images/cards/back-blue-75-3.png" /> <!--todo: make this not have a transform when hovered and clicked-->
-					<img src = "images/cards/back-blue-75-3.png" />
-				</span> 
-				<span id = "deckpile">
-					<img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "draw();"/> <!--todo: make this have a transform when hovered and clicked-->
-					<img src = "images/cards/back-red-75-3.png" />
+		<h1>Thirty One</h1>
+		<div id = "gamedisplay">
+			<div class = "playerhand" id = "p3disp"></div>
+			<div id = "middle">
+				<div class = "playerhand" id = "p2disp"></div>
+				<span id = "drawpiles">
+					<span id = "discardpile"> <!--.appendChild this one-->
+						<span id = "discardpilelabel" class = "pilelabel">Discard</span><br/>
+						<img id = "topdiscardcard" src = "images/cards/back-blue-75-3.png" /><!--todo: make this not have a transform when hovered and clicked-->
+						<!--<img src = "images/cards/back-blue-75-3.png" />-->
+					</span> 
+					<span id = "deckpile">
+						<span id = "deckpilelabel" class = "pilelabel">Deck</span><br/>
+						<img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "draw();"/><!--todo: make this have a transform when hovered and clicked-->
+						<!--<img src = "images/cards/back-red-75-3.png" />-->
+					</span>
+					<!--todo <span id = "message">P1 Turn</span> -->
 				</span>
-			</span>
-			<div class = "playerhand" id = "p4disp"></div>
-		</div>
-		<div class = "playerhand" id = "p1disp">
-			<!--todo: to identify the card clicked, make an onclick and have it input the two values of the card image's name as parameters of a function, split by "-"-->
+				<div class = "playerhand" id = "p4disp"></div>
+			</div>
+			<div class = "playerhand" id = "p1disp">
+				<!--todo: to identify the card clicked, make an onclick and have it input the two values of the card image's name as parameters of a function, split by "-"-->
+			</div>
 		</div>
 	</body>
 </html>
