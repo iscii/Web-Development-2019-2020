@@ -3,3 +3,6 @@ https://css-tricks.com/adding-stroke-to-web-text/
 
 Custom fonts
 https://www.w3schools.com/css/css3_fonts.asp
+
+Assigning onclick events in JS
+https://www.w3schools.com/jsref/event_onclick.asp
