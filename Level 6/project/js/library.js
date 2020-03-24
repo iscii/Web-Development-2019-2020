@@ -106,7 +106,7 @@ Player.prototype.drawCards = function(quantity, pile)
     }
     console.log(this); //!
 
-    this.determineHandValue();
+    //this.determineHandValue();
 
     display();
 }
@@ -121,4 +121,9 @@ Player.prototype.discardCards = function(card)
 Player.prototype.determineDiscardCard = function()
 {
     
+}
+
+Player.prototype.knock = function()
+{
+    //game(); -> //for the player
 }

@@ -1,16 +1,16 @@
-Card Deck psdc
+>XCard Deck psdc
 
-Turns psdc
+>XTurns psdc
     function Player()
     Player.id
     Player.cards
 
 
-CPU psdc
+>XCPU psdc
     Discard:
         if discardpile[0] + handvalue - hand[lowest value] > handvalue
 
-determineHandValue(player, <optional parameter){
+>XdetermineHandValue(player, <optional parameter){
     for(var i = 0; i < player.cards.suites; i++){
         add up values 
     }
@@ -26,5 +26,10 @@ determineHandValue(player, <optional parameter){
 X1. get deck shuffling to work.
 X2. get the deck images and display to work.
 X3. get the dealing to work after making player class.
-4. get the determine hand value function to work properly
-5. then do everything else lol
+X4. get the determine hand value function to work properly
+X5. drawing from discard/deck
+ADDED 3/24/20
+6. knocking
+7. strikes and round management
+8. cpu choices and stuff 
+9. round management

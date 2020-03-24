@@ -61,7 +61,7 @@ function cpuMoves()
     //CPU discard
     //players[turn].discardCards(players[turn].determineDiscardCard());
     setTimeout(function(){
-        players[turn].discardCards(0); //todo: YOU ARE HERE 3/21: work on the cpu discard specifics.
+        players[turn].discardCards(0);
         nextTurn();
     }, 500);
 }
@@ -75,12 +75,14 @@ function game()
 }
 
 //User draw
-function draw()
+function draw(pile)
 {
     if(turn != p1 || canDiscard == true) return;
     canDiscard = true; //*flag variable
-
-    players[p1].drawCards(1, deckpile);
+    if(pile === deckpile)
+        players[p1].drawCards(1, pile);
+    if(pile === discardpile)
+        players[p1].drawCards(1, pile)
 }
 
 //User discard
@@ -132,6 +134,9 @@ function display() //todo: YOU ARE HERE 3/18/2020. You've just finished the disp
     }
 
     //Discard display
-    opDiscard.src = "./images/cards/" + discardpile[0].rank + "-" + discardpile[0].suit + ".png";
+    if(discardpile[0])
+        opDiscard.src = "./images/cards/" + discardpile[0].rank + "-" + discardpile[0].suit + ".png";
+    else
+        opDiscard.src = "./images/cards/empty.png";
 }
 
