@@ -72,9 +72,9 @@ Functionality
         every player gets back a strike and eliminated players are back in the game.
 
 Interface
-    -Player hand perspective relative to real life (bottom of screen - p1)
-    -CPUs left, right, and top (p2, p3, p4, respectively).
-    -Cards (during the round) are shows as cardbacks.
+    >X-Player hand perspective relative to real life (bottom of screen - p1)
+    >X-CPUs left, right, and top (p2, p3, p4, respectively).
+    >X-Cards (during the round) are shows as cardbacks.
         -Reveal cards upon round end
         -Card numbers shown will update according to number of cards in hand
             *-Display() each time a card is drawn or discarded.
@@ -83,7 +83,7 @@ Interface
     -Display next to each player showing number of strikes (digital display looking thing?)
     -Knock button above p1's hand
 
-    -Deck and Discard pile are in middle of screen
+    >X-Deck and Discard pile are in middle of screen
         -Deck in middle, Discard to left/right of deck.
         -Label them with mahjong-style table labeling (transparent white-gray box above the pile)
         -Discard pile cards are visible to players
