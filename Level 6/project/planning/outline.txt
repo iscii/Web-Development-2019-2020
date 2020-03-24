@@ -36,22 +36,22 @@ Functionality
             throw the lowest card unless it means breaking up a **pair of cards with the same value**
             -see spec sheet example
     -Moves
-        -Draw
-            -shift the card deck and push the returned value to the player's hand
-        -Discard
-            -shift the discard pile and push the returned value to the player's hand (psdc)
-        -Knock 
+        >X-Draw
+            >X-shift the card deck and push the returned value to the player's hand
+            -Deckpile
+            -Discardpile
+        >X-Discard
+            >-shift the discard pile and push the returned value to the player's hand (psdc)
+        >-Knock 
             -Ends current player's turn.
-        -Discarding
-            -let player choose a card in hand to discard (add to top of deck)
     -**Determine card value (psdc)
         -for each suite, add up the cards belonging to it (using class properties?)
         -face cards are worth 10, aces are worth 11
 
     -Rules
-        -3 matching cards of the same value: score is 30
-        -Two face cards and an ace: 31
-            -end round and give every other player a strike
+        >X-3 matching cards of the same value: score is 30
+        >-Two face cards and an ace: 31
+            >-end round and give every other player a strike
         -Reveal cards at end of round and tally
         -Strikes
             -Players with the lowest score recieve a strike

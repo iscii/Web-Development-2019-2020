@@ -6,3 +6,6 @@ https://www.w3schools.com/css/css3_fonts.asp
 
 Assigning onclick events in JS
 https://www.w3schools.com/jsref/event_onclick.asp
+
+Hash tables
+http://www.mojavelinux.com/articles/javascript_hashes.html

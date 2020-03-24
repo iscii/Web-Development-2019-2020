@@ -11,6 +11,8 @@ function Cards(r, s, i) //class Cards; every rank above 10 is valued at 10.
     this.value = this.rank;
     if(this.rank > 10)
         this.value = 10;
+    if(this.rank == 1)
+        this.value = 11;
 }
 
 function CardDeck(){}
@@ -29,11 +31,12 @@ CardDeck.prototype.shuffleDeck = function()
     this.push.apply(this, tempDeck);
 }
 
+//creates a deck, ordered by rank. If you swap the positions of the for loops, the deck'll be ordered by suit.
 CardDeck.prototype.generateStandardDeck = function()
 {
-    for(var s = CLUB; s <= SPADE; s++)
+    for(var r = ACE; r <= KING; r++)
     {
-        for(var r = ACE; r <= KING; r++)
+        for(var s = CLUB; s <= SPADE; s++)
         {
             this.push(new Cards(r, s, r + "-" + s + ".png"));
         }
@@ -54,25 +57,29 @@ function Player(id)
 Player.prototype.determineHandValue = function(newcard) //make it so that only the greatest number of suites are added up
 {
     var suitTotals = [0, 0, 0, 0]; //[0] = club, [1] = diamonds, [2] = hearts, [3] = spades
+    var rankBank = {}; //hash table
+
+    //set the rankBank indexes to 0
+    for(var i = 0; i < this.hand.length; i++)
+        rankBank[this.hand[i].rank] = 0;
 
     //if the there is a parameter, add it to the value.
-    if(newcard) //todo: test this after working on discard deck initialization
+    if(newcard)
     {
         suitTotals[newcard.suit] += newcard.value;
     }
 
-    for(var s = 0; s < SPADE; s++)
+    for(var i = 0; i < this.hand.length; i++)
     {
-        //check if any cards in the hand has the suit
-        for(var i = 0; i < this.hand.length; i++)
-        {
-            if(this.hand[i].suit == s)
-            {
-                suitTotals[s] += this.hand[i].value;
-            }
-        }
+        console.log(this.hand[i]); //!
+        //add value of hand to corresponding suit position in suitTotals
+        suitTotals[this.hand[i].suit] += this.hand[i].value;
+
+        //add matching values to rankBank
+        rankBank[this.hand[i].rank] ++; //? Are we finding 3 cards of the same value or rank?
     }
     console.log(suitTotals); //!
+    console.log(rankBank); //!
 
     var value = suitTotals[0]; //create the returned value
 
@@ -80,6 +87,12 @@ Player.prototype.determineHandValue = function(newcard) //make it so that only t
     for(var o = 1; o < suitTotals.length; o++)
         if(suitTotals[o] > value)
             value = suitTotals[o];
+
+    //if there are 3 cards of matching rank, and the value isn't already 30 or 31, set value to 30.
+    for(item in rankBank)
+        if(rankBank[item] == 3)
+            if(30 > value)
+                value = 30;
 
     console.log("Value: [" + value + "]"); //!
     return value;
