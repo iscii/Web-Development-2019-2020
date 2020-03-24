@@ -76,7 +76,7 @@ Player.prototype.determineHandValue = function(newcard) //make it so that only t
         suitTotals[this.hand[i].suit] += this.hand[i].value;
 
         //add matching values to rankBank
-        rankBank[this.hand[i].rank] ++; //? Are we finding 3 cards of the same value or rank?
+        rankBank[this.hand[i].rank] ++;
     }
     console.log(suitTotals); //!
     console.log(rankBank); //!
