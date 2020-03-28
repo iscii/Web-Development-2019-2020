@@ -51,6 +51,7 @@ function Player(id)
     this.id = id;
     this.hand = [];
     this.strikes = 3;
+    this.knocker = false;
 }
 
 //optional parameter newcard; use parameter to determine the hand's value IF the new card were to be drawn (for cpus).
@@ -118,12 +119,14 @@ Player.prototype.discardCards = function(card)
     display();
 }
 
+Player.prototype.knockTurn = function() //*ONLY ALLOW KNOCK IF CANDISCARD = FALSE.
+{
+    this.knocker = true;
+    //game(); -> //for the player
+    //set knocker = turn
+}
+
 Player.prototype.determineDiscardCard = function()
 {
     
-}
-
-Player.prototype.knock = function()
-{
-    //game(); -> //for the player
 }

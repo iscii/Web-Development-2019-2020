@@ -9,3 +9,6 @@ https://www.w3schools.com/jsref/event_onclick.asp
 
 Hash tables
 http://www.mojavelinux.com/articles/javascript_hashes.html
+
+Removing button focus outlines
+https://stackoverflow.com/questions/20340138/remove-blue-border-from-css-custom-styled-button-in-chrome

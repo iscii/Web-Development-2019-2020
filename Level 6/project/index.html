@@ -18,7 +18,11 @@
 						<span id = "discardpilelabel" class = "pilelabel">Discard</span><br/>
 						<img id = "topdiscardcard" src = "images/cards/empty.png" onclick = "draw(discardpile);"/><!--todo: make this not have a transform when hovered and clicked-->
 						<!--<img id = "bottomdiscardcard" src = "images/cards/back-blue-75-3.png" />-->
-					</span> 
+					</span>
+					<span id = "knockblock">
+						<span id = "knocklabel" class = "pilelabel">Knock</span><br/>
+						<button id = "knockbutton" onclick = "knock();"></button>
+					</span>
 					<span id = "deckpile">
 						<span id = "deckpilelabel" class = "pilelabel">Deck</span><br/>
 						<img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "draw(deckpile);"/><!--todo: make this have a transform when hovered and clicked-->

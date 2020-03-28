@@ -44,8 +44,11 @@ function initialize()
     display();
 }
 
+//cpu controller
 function cpuMoves()
 {
+    //todo: cpu drawing from discard pile
+    //todo: cpu knocking
     //Check if player in turn has strikes. If not, pass turn and continue with interval
     if(players[turn].strikes < 0) 
         return nextTurn();
@@ -66,43 +69,65 @@ function cpuMoves()
     }, 500);
 }
 
+//game managers
 function game()
 {
+    if(players[turn].knock) //hold turn's value to check for lowest score
+        return tally();
+
     if(turn == p1) 
         return console.log("user's turn"); //!
     else
         cpuInterval = setInterval(cpuMoves, 1500); //create a variable that holds an interval
 }
+function nextTurn()
+{
+    turn += 1;
+    if(turn > p4)
+        turn = p1;
+}
+function tally()
+{
+    //!YOU ARE HERE 3/27/2020 - working on knock. then move onto cpumoves todos. 
+    for(var i = 0; i < players.length; i++)
+    {
+        players[i].determineHandValue();
+    }
+}
 
-//User draw
+//user draw
 function draw(pile)
 {
     if(turn != p1 || canDiscard == true) return;
     canDiscard = true; //*flag variable
-    if(pile === deckpile)
-        players[p1].drawCards(1, pile);
-    if(pile === discardpile)
-        players[p1].drawCards(1, pile)
-}
 
-//User discard
+    console.log("user draws"); //!
+    players[p1].drawCards(1, pile);
+}
+//user discard
 function discard(card) //*when appendChild-ing the images, assign to them ids relative to the card name (rank-suit) and give them onclick = discard(this.id.split("-"))
 {
     if(turn != p1 || canDiscard == false) return;
     canDiscard = false;
 
+    console.log("user discards"); //!
     players[turn].discardCards(card);
 
     nextTurn();
     display();
     game();
 }
-
-function nextTurn()
+//user knock
+function knock()
 {
-    turn += 1;
-    if(turn > p4)
-        turn = p1;
+    if(turn != p1 || canDiscard == true) return;
+
+    console.log("user knocks"); //!
+    players[turn].knockTurn();
+
+    nextTurn();
+    display();
+    game();
 }
 
 function display() //todo: YOU ARE HERE 3/18/2020. You've just finished the display function. fix the display formatting and get working on the discard function.

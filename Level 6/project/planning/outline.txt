@@ -59,10 +59,11 @@ Functionality
             -If the player with the lowest score knocked, they recieve two strikes.
             -Three strikes and the player is out
 
-        -Knocking:
+        >-Knocking:
             -A knock may only occur once (Set knock = 1 and -- when a player knocks. add player.knock = true?)
             -When a player knocks, everybody gets a turn after the player who knocks
                 (play proceeds around the table a full loop until it gets back to the player who knocked).
+            -If the knocker has the lowest score, they get two strikes.
 
         -For as long as the game is in play, after each round the dealer shifts to
         the next player clockwise (to the person who went first this round).
