@@ -101,13 +101,12 @@ Player.prototype.determineHandValue = function(newcard) //make it so that only t
 
 Player.prototype.drawCards = function(quantity, pile)
 {
+    console.log(this); //!
+    console.log(pile); //!
     for(var i = 0; i < quantity; i++)
     {
         this.hand.push(pile.shift());
     }
-    console.log(this); //!
-
-    //this.determineHandValue();
 
     display();
 }

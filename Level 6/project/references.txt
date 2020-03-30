@@ -12,3 +12,11 @@ http://www.mojavelinux.com/articles/javascript_hashes.html
 
 Removing button focus outlines
 https://stackoverflow.com/questions/20340138/remove-blue-border-from-css-custom-styled-button-in-chrome
+
+Radial Gradient
+https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient
+
+
+
+
+

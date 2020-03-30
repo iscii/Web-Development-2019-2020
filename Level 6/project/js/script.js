@@ -49,18 +49,22 @@ function cpuMoves()
 {
     //todo: cpu drawing from discard pile
     //todo: cpu knocking
+    //todo: cpu decisions
     //Check if player in turn has strikes. If not, pass turn and continue with interval
     if(players[turn].strikes < 0) 
         return nextTurn();
     if(turn == p1)
     {
-        console.log("user's turn"); //!
+        game();
         return clearInterval(cpuInterval);
     }
     
     //CPU draw
-    players[turn].drawCards(1, deckpile);
-
+    if(discardpile[0] && (players[turn].determineHandValue(discardpile[0])) > players[turn].determineHandValue()) //check if discard has a card and if the card will benefit the hand.
+        players[turn].drawCards(1, discardpile);
+    else
+        players[turn].drawCards(1, deckpile);
+        
     //CPU discard
     //players[turn].discardCards(players[turn].determineDiscardCard());
     setTimeout(function(){
@@ -72,7 +76,9 @@ function cpuMoves()
 //game managers
 function game()
 {
-    if(players[turn].knock) //hold turn's value to check for lowest score
+    //only for user
+    //hold turn's value to check for lowest score
+    if(players[turn].knocker)
         return tally();
 
     if(turn == p1) 
@@ -91,7 +97,7 @@ function tally()
     //!YOU ARE HERE 3/27/2020 - working on knock. then move onto cpumoves todos. 
     for(var i = 0; i < players.length; i++)
     {
-        players[i].determineHandValue();
+        console.log(players[i].id + "tallied");
     }
 }
 
