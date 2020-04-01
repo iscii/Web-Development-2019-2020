@@ -9,10 +9,12 @@ function Cards(r, s, i) //class Cards; every rank above 10 is valued at 10.
     this.imagename = i;
     
     this.value = this.rank;
-    if(this.rank > 10)
+    if(this.rank > 10) //all face cards are worth 10
         this.value = 10;
-    if(this.rank == 1)
+    if(this.rank == 1) //aces are worth 11
         this.value = 11;
+    
+    //*value of hand may never exceed 31 due to the way the game works - value is grouped by suit, so the value of any two aces will never add up.
 }
 
 function CardDeck(){}
@@ -55,7 +57,7 @@ function Player(id)
 }
 
 //optional parameter newcard; use parameter to determine the hand's value IF the new card were to be drawn (for cpus).
-Player.prototype.determineHandValue = function(newcard) //make it so that only the greatest number of suites are added up
+Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so that only the greatest number of suites are added up
 {
     var suitTotals = [0, 0, 0, 0]; //[0] = club, [1] = diamonds, [2] = hearts, [3] = spades
     var rankBank = {}; //hash table
@@ -67,23 +69,21 @@ Player.prototype.determineHandValue = function(newcard) //make it so that only t
     //if the there is a parameter, add it to the value.
     if(newcard)
     {
-        suitTotals[newcard.suit] += newcard.value;
+        suitTotals[newcard.suit] += newcard.value; //*input null for newcard to access cpudiscard without using newcard
     }
 
+    //for checking if hands has 3 matching card ranks
     for(var i = 0; i < this.hand.length; i++)
     {
-        console.log(this.hand[i]); //!
         //add value of hand to corresponding suit position in suitTotals
         suitTotals[this.hand[i].suit] += this.hand[i].value;
 
         //add matching values to rankBank
-        rankBank[this.hand[i].rank] ++;
+        rankBank[this.hand[i].rank]++;
     }
-    console.log(suitTotals); //!
-    console.log(rankBank); //!
 
     var value = suitTotals[0]; //create the returned value
-
+    
     //set value to the largest number in suitTotals
     for(var o = 1; o < suitTotals.length; o++)
         if(suitTotals[o] > value)
@@ -95,14 +95,97 @@ Player.prototype.determineHandValue = function(newcard) //make it so that only t
             if(30 > value)
                 value = 30;
 
-    console.log("Value: [" + value + "]"); //!
+    //determine the card for discarding
+    if(cpudiscard)
+    {
+        //checks for matching card pairs
+        var paircount = 0;
+        var unmatch = [];
+
+        for(item in rankBank) //sets paircount to 2 if there are two pairs.
+            if(rankBank[item] == 2)
+                paircount++;
+        if(paircount == 2) //highly unlikely but addresses having two pairs of matching rank cards.
+        {
+            return this.hand[getRandomInteger(0, 4)];
+        }
+
+        for(item in rankBank) //checks for the bank's item (card pair's value)
+        {
+            if(rankBank[item] >= 2)
+            {
+                for(var i = 0; i < this.hand.length; i++) //pushes the non-matching card positions into unmatch
+                    if(this.hand[i].rank != item)
+                        unmatch.push(i);
+                
+                if(this.hand[unmatch[1]]) //if rankBank[item] > 2, check for smaller value
+                    if(this.hand[unmatch[1]] < this.hand[unmatch[0]])
+                        return unmatch[1];
+
+                return unmatch[0];
+            }
+        }
+
+        //standard procedure (no matching card value pairs)
+
+        //determine discard card
+        for(item in suitTotals)
+        {
+            if(suitTotals[item] != 0)
+            {
+                var lowestsuit = item;       
+                break;
+            }
+        }
+
+        console.log(" --------------------------- "); //!
+
+        //find the lowest value suitTotal
+        for(var i = 1; i < suitTotals.length; i++)
+            if(suitTotals[i] < suitTotals[lowestsuit] && suitTotals[i] != 0) //skips the 0s
+                lowestsuit = i;
+
+        console.log("Suit " + lowestsuit); //!        
+        var lowestranks = [];
+
+        //find the lowest value cards in that suit group
+        for(var i = 0; i < this.hand.length; i++)
+            if(this.hand[i].suit == lowestsuit)
+                lowestranks.push(this.hand[i].rank);
+        
+        console.log("Ranks " + lowestranks); //!
+        var lowestvalue = lowestranks[0];
+
+        //find the lowest value card.
+        if(lowestranks[1])
+            for(var i = 1; i < lowestranks.length; i++)
+                if(lowestranks[i] < lowestvalue)
+                    lowestvalue = lowestranks[i];
+
+        console.log("Value " + lowestvalue); //!   
+                 
+        //find the card's position in the hand
+        for(var i = 0; i < this.hand.length; i++)
+            if(this.hand[i].suit == lowestsuit && this.hand[i].rank == lowestvalue)
+                value = i;
+
+        console.log("Position " + value); //!
+        console.log(" ---------------------------- "); //!
+
+        return value; //just reusing value variable since it's returned anyway
+    }
+
+    console.log(value); //!
     return value;
 }
 
-Player.prototype.drawCards = function(quantity, pile)
+Player.prototype.drawCards = function(quantity, pile) //*it's hard to console.log these since logged objects' properties are updated upon the object's update. 
 {
+    if(pile == deckpile) var name = "deckpile"; else var name = "discardpile"; //!
+    console.log(this.id + " draws"); //!
+    console.log(pile[0]); //!
     console.log(this); //!
-    console.log(pile); //!
+    console.log(name); //!
     for(var i = 0; i < quantity; i++)
     {
         this.hand.push(pile.shift());
@@ -113,19 +196,17 @@ Player.prototype.drawCards = function(quantity, pile)
 
 Player.prototype.discardCards = function(card)
 {
+    console.log(this.id + " discards"); //!
+    console.log(this.hand[card]);
     discardpile.unshift(this.hand.splice(card, 1)[0]); //*[0] because splice returns an array!!!!! (in lesson)
-    console.log(discardpile);
+    console.log(discardpile); //!
+    this.determineHandValue(); //!
+
     display();
 }
 
-Player.prototype.knockTurn = function() //*ONLY ALLOW KNOCK IF CANDISCARD = FALSE.
+Player.prototype.knockTurn = function()
 {
+    console.log(this.id + " knocks"); //!
     this.knocker = true;
-    //game(); -> //for the player
-    //set knocker = turn
-}
-
-Player.prototype.determineDiscardCard = function()
-{
-    
 }

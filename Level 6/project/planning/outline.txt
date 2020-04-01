@@ -15,7 +15,7 @@ Functionality
         XX-Deal Button (next to dealer)
             -shift the Card Deck 3x and push the returned value to the player's hand.
         
-        >-move top card of deck to discard pile (as first card of discard pile) to initiate it
+        >X-move top card of deck to discard pile (as first card of discard pile) to initiate it
             -Discard pile cards are visible.
 
     >X-Players
@@ -25,33 +25,33 @@ Functionality
             -Strikes
         >X-player objects are created upon initial card deals
         >X-4 players (identified by numbers)
-    -CPU
-        -Knock: if hand's value > 24
-        -Discard Pile: if doing so will increase value in its hand (based on suit?)
+    >-CPU
+        >X-Knock: if hand's value > 24
+        >X-Discard Pile: if doing so will increase value in its hand (based on suit?)
             -determineHandValue(parameter);
-        -Draw: if no discard or knock.
+        >X-Draw: if no discard or knock.
         -Discarding: discard a card that will not decrease its hand value (of a minority suit)
             -or discard a card that will decrease its hand value by least amount (if all cards are of same suit)
             -If there are more than 1 card that satisfy the above requirement, the computer will always
             throw the lowest card unless it means breaking up a **pair of cards with the same value**
             -see spec sheet example
-    -Moves
+    >X-Moves
         >X-Draw
             >X-shift the card deck and push the returned value to the player's hand
-            -Deckpile
-            -Discardpile
+            >X-Deckpile
+            >X-Discardpile
         >X-Discard
-            >-shift the discard pile and push the returned value to the player's hand (psdc)
-        >-Knock 
-            -Ends current player's turn.
-    -**Determine card value (psdc)
-        -for each suite, add up the cards belonging to it (using class properties?)
-        -face cards are worth 10, aces are worth 11
+            >X-shift the discard pile and push the returned value to the player's hand (psdc)
+        >X-Knock 
+            >X-Ends current player's turn.
+    >X-**Determine card value (psdc)
+        >X-for each suite, add up the cards belonging to it (using class properties?)
+        >X-face cards are worth 10, aces are worth 11
 
     -Rules
         >X-3 matching cards of the same rank: score is 30
         
-        >-Two face cards and an ace: 31
+        >X-Two face cards and an ace: 31
             >-end round and give every other player a strike
         -Reveal cards at end of round and tally
         -Strikes
@@ -64,6 +64,7 @@ Functionality
             -When a player knocks, everybody gets a turn after the player who knocks
                 (play proceeds around the table a full loop until it gets back to the player who knocked).
             -If the knocker has the lowest score, they get two strikes.
+            -A player may not knock after drawing/discarding.
 
         -For as long as the game is in play, after each round the dealer shifts to
         the next player clockwise (to the person who went first this round).
@@ -94,6 +95,10 @@ Interface
             -For the deck, show two cards overlayed over one another (so you only see one, but can see the other upon hovering)
             -For the discard pile, show the top two cards (discard[0] and [1]) overlayed over one another.
 
+    -Display number of cards left in a pile
+
+    -Give the Deckpile an empty png as well
+
     -Drawing:
         -pull-card-from-deck transition/animation effect
             -When hovering, call animation. Top card slides downward
@@ -102,7 +107,7 @@ Interface
 
     -Reset button
 
-    -Typical gambling table (green, rough pattern, wooden edges)
+    >X-Typical gambling table (green, rough pattern, wooden edges)
     
     -Discarding:
         -Hovering over cards will extend them from the hand

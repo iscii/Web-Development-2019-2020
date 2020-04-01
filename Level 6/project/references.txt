@@ -16,6 +16,9 @@ https://stackoverflow.com/questions/20340138/remove-blue-border-from-css-custom-
 Radial Gradient
 https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient
 
+Object.keys
+https://stackoverflow.com/questions/4260308/getting-the-objects-property-name
+
 
 
 

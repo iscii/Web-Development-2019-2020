@@ -1,3 +1,4 @@
+//debugging this program has been a pain in the arse due to how objects work and the difficulty of replicating bugged situations e.e
 function initialize()
 {
     //Element references
@@ -18,6 +19,8 @@ function initialize()
     //Create round vars
     round = 1;
     canDiscard = false;
+    roundEnd = false;
+    knocked = false;
 
     deckpile.generateStandardDeck();
     deckpile.shuffleDeck();
@@ -38,7 +41,7 @@ function initialize()
     turn = dealer + 1;
     if(dealer + 1 > p4) //*if there's a way to loop it without this conditional, pls do tell
         turn = p1;
-    console.log("First turn: " + turn);
+    console.log("First turn: " + turn); //!
 
     game();
     display();
@@ -47,28 +50,34 @@ function initialize()
 //cpu controller
 function cpuMoves()
 {
-    //todo: cpu drawing from discard pile
-    //todo: cpu knocking
-    //todo: cpu decisions
-    //Check if player in turn has strikes. If not, pass turn and continue with interval
-    if(players[turn].strikes < 0) 
+    if(players[turn].strikes < 0) //Check if player in turn has strikes. If not, pass turn and continue with interval
         return nextTurn();
-    if(turn == p1)
+    if(turn == p1) 
     {
         game();
         return clearInterval(cpuInterval);
     }
     
-    //CPU draw
+    //cpu decisions
+    //knock
+    if(players[turn].determineHandValue() > 24)
+    {
+        if(players[turn].knocker)
+            return game();
+        
+        knocked = true;
+        players[turn].knockTurn();
+        return nextTurn();
+    }
+    //draw
     if(discardpile[0] && (players[turn].determineHandValue(discardpile[0])) > players[turn].determineHandValue()) //check if discard has a card and if the card will benefit the hand.
         players[turn].drawCards(1, discardpile);
-    else
+    else //from deck
         players[turn].drawCards(1, deckpile);
         
-    //CPU discard
-    //players[turn].discardCards(players[turn].determineDiscardCard());
+    //cpu discard
     setTimeout(function(){
-        players[turn].discardCards(0);
+        players[turn].discardCards(players[turn].determineHandValue(null, true));
         nextTurn();
     }, 500);
 }
@@ -83,8 +92,8 @@ function game()
 
     if(turn == p1) 
         return console.log("user's turn"); //!
-    else
-        cpuInterval = setInterval(cpuMoves, 1500); //create a variable that holds an interval
+
+    cpuInterval = setInterval(cpuMoves, 1500); //create a variable that holds an interval
 }
 function nextTurn()
 {
@@ -94,17 +103,19 @@ function nextTurn()
 }
 function tally()
 {
-    //!YOU ARE HERE 3/27/2020 - working on knock. then move onto cpumoves todos. 
+    //!YOU ARE HERE 3/31/2020: You've just finished cpu's determine discard card and player knocks. Now, just work on the strike system and tallying. And then head over to display and resetting.
+    roundEnd = true;
+
     for(var i = 0; i < players.length; i++)
     {
-        console.log(players[i].id + "tallied");
+        players[i].determineHandValue();
     }
 }
 
 //user draw
 function draw(pile)
 {
-    if(turn != p1 || canDiscard == true) return;
+    if(turn != p1 || canDiscard == true || roundEnd == true) return;
     canDiscard = true; //*flag variable
 
     console.log("user draws"); //!
@@ -113,10 +124,9 @@ function draw(pile)
 //user discard
 function discard(card) //*when appendChild-ing the images, assign to them ids relative to the card name (rank-suit) and give them onclick = discard(this.id.split("-"))
 {
-    if(turn != p1 || canDiscard == false) return;
+    if(turn != p1 || canDiscard == false || roundEnd == true) return;
     canDiscard = false;
 
-    console.log("user discards"); //!
     players[turn].discardCards(card);
 
     nextTurn();
@@ -126,9 +136,9 @@ function discard(card) //*when appendChild-ing the images, assign to them ids re
 //user knock
 function knock()
 {
-    if(turn != p1 || canDiscard == true) return;
+    if(turn != p1 || canDiscard == true || roundEnd == true) return;
 
-    console.log("user knocks"); //!
+    knocked = true;
     players[turn].knockTurn();
 
     nextTurn();
@@ -136,7 +146,7 @@ function knock()
     game();
 }
 
-function display() //todo: YOU ARE HERE 3/18/2020. You've just finished the display function. fix the display formatting and get working on the discard function.
+function display()
 {
     //Player display
     for(var i = 0; i < players.length; i++)
