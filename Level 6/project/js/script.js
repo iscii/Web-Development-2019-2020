@@ -55,8 +55,6 @@ function cpuMoves()
         game();
         return clearInterval(cpuInterval);
     }
-    if(roundEnd) //! NOT SURE IF roundEnd variable is needed. pretty sure it isn't. clearInterval only needs to happen once and every other time it's covered by a return statement. double check this and if not needed, delete this and all declarations of true.
-        return clearInterval(cpuInterval); //!also, nextturn is never called after a round ends.
     
     //cpu decisions
     //knock
