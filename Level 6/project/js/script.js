@@ -19,8 +19,6 @@ function initialize()
     //Create round vars
     round = 1;
     canDiscard = false;
-    roundEnd = false;
-    knocked = false;
 
     deckpile.generateStandardDeck();
     deckpile.shuffleDeck();
@@ -52,20 +50,18 @@ function cpuMoves()
 {
     if(players[turn].strikes < 0) //Check if player in turn has strikes. If not, pass turn and continue with interval
         return nextTurn();
-    if(turn == p1) 
+    if(turn == p1 || players[turn].knocker) 
     {
         game();
         return clearInterval(cpuInterval);
     }
+    if(roundEnd) //! NOT SURE IF roundEnd variable is needed. pretty sure it isn't. clearInterval only needs to happen once and every other time it's covered by a return statement. double check this and if not needed, delete this and all declarations of true.
+        return clearInterval(cpuInterval); //!also, nextturn is never called after a round ends.
     
     //cpu decisions
     //knock
     if(players[turn].determineHandValue() > 24)
     {
-        if(players[turn].knocker)
-            return game();
-        
-        knocked = true;
         players[turn].knockTurn();
         return nextTurn();
     }
@@ -104,8 +100,6 @@ function nextTurn()
 function tally()
 {
     //!YOU ARE HERE 3/31/2020: You've just finished cpu's determine discard card and player knocks. Now, just work on the strike system and tallying. And then head over to display and resetting.
-    roundEnd = true;
-
     for(var i = 0; i < players.length; i++)
     {
         players[i].determineHandValue();
@@ -115,7 +109,7 @@ function tally()
 //user draw
 function draw(pile)
 {
-    if(turn != p1 || canDiscard == true || roundEnd == true) return;
+    if(turn != p1 || canDiscard == true || players[turn].knocker) return;
     canDiscard = true; //*flag variable
 
     console.log("user draws"); //!
@@ -124,7 +118,7 @@ function draw(pile)
 //user discard
 function discard(card) //*when appendChild-ing the images, assign to them ids relative to the card name (rank-suit) and give them onclick = discard(this.id.split("-"))
 {
-    if(turn != p1 || canDiscard == false || roundEnd == true) return;
+    if(turn != p1 || canDiscard == false || players[turn].knocker) return;
     canDiscard = false;
 
     players[turn].discardCards(card);
@@ -136,7 +130,7 @@ function discard(card) //*when appendChild-ing the images, assign to them ids re
 //user knock
 function knock()
 {
-    if(turn != p1 || canDiscard == true || roundEnd == true) return;
+    if(turn != p1 || canDiscard == true || rplayers[turn].knocker) return;
 
     knocked = true;
     players[turn].knockTurn();
