@@ -23,13 +23,35 @@
     return total value;
 }
 
+display
+    if knocker, then all cards are shown
+    else, only user cards are shown
+        display()
+        {
+            for...
+                for...
+                    img.src = shown;
+                    if(i == 0)
+                        image.onclick = function(){}
+                    else if(!players[turn].knocker)
+                        image.src = hidden;
+                    
+        }
+
 X1. get deck shuffling to work.
 X2. get the deck images and display to work.
 X3. get the dealing to work after making player class.
 X4. get the determine hand value function to work properly
 X5. drawing from discard/deck
 ADDED 3/24/20
-6. knocking
-7. strikes and round management
-8. cpu choices and stuff 
+X6. knocking
+X7. strikes and round management
+X8. cpu choices and stuff 
+ADDED 4/4/2020
 9. round management
+    either give it a small interval after each round till the next round, or
+    let the user choose when the next round begins.
+X10. Now, just work on the strike system and tallying. 
+11. And then do the deck reshuffle. 
+12. Also, simplify the user functions by putting them into the prototype functions.
+13. And then head over to display and resetting.

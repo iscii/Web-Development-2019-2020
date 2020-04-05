@@ -30,7 +30,7 @@ Functionality
         >X-Discard Pile: if doing so will increase value in its hand (based on suit?)
             -determineHandValue(parameter);
         >X-Draw: if no discard or knock.
-        -Discarding: discard a card that will not decrease its hand value (of a minority suit)
+        >X-Discarding: discard a card that will not decrease its hand value (of a minority suit)
             -or discard a card that will decrease its hand value by least amount (if all cards are of same suit)
             -If there are more than 1 card that satisfy the above requirement, the computer will always
             throw the lowest card unless it means breaking up a **pair of cards with the same value**
@@ -119,6 +119,10 @@ Enhancements
 
 My Own:
     -Give the player a choice for the enemy play interval: fast/slow. Change the interval time accordingly.
+    -Display value of each hand after tally
+
+
+
 Question Answers:
     1: Values
     2: Knocking is basically standing in blackjack; you pass your turn, and the round ends upon your next turn.
@@ -132,3 +136,5 @@ Question Answers:
         Yes. If the deckpile runs out of cards, shuffle the discard pile into the deckpile.
     6: For the 3 matching cards: Are we finding 3 cards of the same value or rank?
         Rank
+    7: If two players were to have the lowest score in a round, would both get a strike? Or neither? And, if the knocker is one of them, how would the strikes be distributed?
+        They both get a strike.  If one of the lowest hands is the knocker, that player gets 2 strikes.

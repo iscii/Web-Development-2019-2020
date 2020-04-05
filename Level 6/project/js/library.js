@@ -107,6 +107,7 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so
                 paircount++;
         if(paircount == 2) //highly unlikely but addresses having two pairs of matching rank cards.
         {
+            console.log("[Note] double pair");
             return this.hand[getRandomInteger(0, 4)];
         }
 
@@ -114,7 +115,8 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so
         {
             if(rankBank[item] >= 2)
             {
-                for(var i = 0; i < this.hand.length; i++) //pushes the non-matching card positions into unmatch
+                //*let initializes a variable local to the LOOP and not the function. var initializes it local to the function.
+                for(let i = 0; i < this.hand.length; i++) //pushes the non-matching card positions into unmatch
                     if(this.hand[i].rank != item)
                         unmatch.push(i);
                 
@@ -122,6 +124,7 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so
                     if(this.hand[unmatch[1]] < this.hand[unmatch[0]])
                         return unmatch[1];
 
+                console.log("[Note] unmatch position: " + unmatch[0]);
                 return unmatch[0];
             }
         }
@@ -149,7 +152,7 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so
         var lowestranks = [];
 
         //find the lowest value cards in that suit group
-        for(var i = 0; i < this.hand.length; i++)
+        for(i = 0; i < this.hand.length; i++)
             if(this.hand[i].suit == lowestsuit)
                 lowestranks.push(this.hand[i].rank);
         
@@ -158,14 +161,14 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so
 
         //find the lowest value card.
         if(lowestranks[1])
-            for(var i = 1; i < lowestranks.length; i++)
+            for(i = 1; i < lowestranks.length; i++)
                 if(lowestranks[i] < lowestvalue)
                     lowestvalue = lowestranks[i];
 
         console.log("Value " + lowestvalue); //!   
                  
         //find the card's position in the hand
-        for(var i = 0; i < this.hand.length; i++)
+        for(i = 0; i < this.hand.length; i++)
             if(this.hand[i].suit == lowestsuit && this.hand[i].rank == lowestvalue)
                 value = i;
 
@@ -175,14 +178,14 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so
         return value; //just reusing value variable since it's returned anyway
     }
 
-    console.log(value); //!
+    //console.log(value); //!
     return value;
 }
 
 Player.prototype.drawCards = function(quantity, pile) //*it's hard to console.log these since logged objects' properties are updated upon the object's update. 
 {
     if(pile == deckpile) var name = "deckpile"; else var name = "discardpile"; //!
-    console.log(this.id + " draws"); //!
+    console.log("[Note] " + this.id + " draws -----------------------------"); //!
     console.log(pile[0]); //!
     console.log(this); //!
     console.log(name); //!
@@ -196,8 +199,8 @@ Player.prototype.drawCards = function(quantity, pile) //*it's hard to console.lo
 
 Player.prototype.discardCards = function(card)
 {
-    console.log(this.id + " discards"); //!
-    console.log(this.hand[card]);
+    console.log("[Note] " + this.id + " discards -----------------------------"); //!
+    console.log(this.hand[card]); //!
     discardpile.unshift(this.hand.splice(card, 1)[0]); //*[0] because splice returns an array!!!!! (in lesson)
     console.log(discardpile); //!
     this.determineHandValue(); //!
@@ -209,4 +212,5 @@ Player.prototype.knockTurn = function()
 {
     console.log(this.id + " knocks"); //!
     this.knocker = true;
+    knocked = true;
 }
