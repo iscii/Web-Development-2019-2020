@@ -48,10 +48,18 @@ X6. knocking
 X7. strikes and round management
 X8. cpu choices and stuff 
 ADDED 4/4/2020
-9. round management
+X9. round management
     either give it a small interval after each round till the next round, or
     let the user choose when the next round begins.
-X10. Now, just work on the strike system and tallying. 
+10. Now, just work on the strike system and tallying. 
+    X-Standard strikes
+    -check for 31 and when 31, end round and strike to all other players.
+        -add this to initial dealing and then every turn thereafter.
 11. And then do the deck reshuffle. 
 12. Also, simplify the user functions by putting them into the prototype functions.
 13. And then head over to display and resetting.
+
+
+4/10/2020
+-Completed round management, fixed bug where user could click before intervals were cleared.
+-Rearranged the initialization functions, made more flexible.

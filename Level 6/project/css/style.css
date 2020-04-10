@@ -32,11 +32,11 @@ body{
 }
 #p2disp, #p4disp{
     display: inline-block;
-    width: 20vw; /*once you finish discard, the wonky formatting should stop. There should be no more than 4 cards per hand*/
+    width: 20vw;
     transform: rotate(90deg);
 }
 #p1disp{
-    margin-top: 4%;
+    margin-top: 4%; /*!!*/
 }
 
 /*center*/
@@ -80,4 +80,16 @@ body{
 #knockbutton:hover
 {
     box-shadow: 0 0 10px rgb(55, 182, 255);
+}
+
+#rcHolder
+{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+#roundController
+{
+    width: 7vw;
+
 }

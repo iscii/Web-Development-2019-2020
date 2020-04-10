@@ -8,22 +8,13 @@ function initialize()
     opP4 = document.getElementById("p4disp");
 
     opDiscard = document.getElementById("topdiscardcard");
-
-    //Create deckpile
-    deckpile = new CardDeck();
-    discardpile = new CardDeck();
+    opRounds = document.getElementById("rcHolder");
 
     //Create players
     players = [new Player("p1"), new Player("p2"), new Player("p3"), new Player("p4")];
 
     //Create round vars
-    round = 1;
-    canDiscard = false;
-    knocked = false;
-
-    deckpile.generateStandardDeck();
-    deckpile.shuffleDeck();
-    console.log(deckpile); //!
+    round = 0;
 
     //Determine dealer & turn - put before card deals cos they display
     dealer = getRandomInteger(p1, p4);
@@ -31,17 +22,56 @@ function initialize()
     if(dealer + 1 > p4) //*if there's a way to loop it without this conditional, pls do tell
         turn = p1;
     console.log("First turn: " + turn); //!
+
+    startRound();
+}
+function startRound()
+{
+    //Create round vars
+    round++;
+    userTurn = false;
+    canDiscard = false;
+    knocked = false;
+    awaitNextRound = false;
+
+    //Create deckpile
+    deckpile = new CardDeck();
+    discardpile = new CardDeck();
     
+    deckpile.generateStandardDeck();
+    deckpile.shuffleDeck();
+    console.log(deckpile); //!
+
     //Initialize discard pile. Placed before card deals since display requires discardpile to be initialized.
     discardpile.push(deckpile.shift());
+
+    //Follow-up rounds initiations
+    if(round != 1)
+    {
+        //sets dealer to next dealer clockwise
+        dealer++;
+        if(dealer + 1 > p4) //loops it back
+            dealer = p1;
+        turn = dealer + 1;
+        if(turn + 1 > p4) //loops it back
+            turn = p1;
+
+        //resets all players' hands and knocker property
+        for(var i = 0; i < players.length; i++)
+        {
+            players[i].hand = [];
+            players[i].knocker = false;
+        }
+    }
 
     //Deal cards
     for(var i = 0; i < 4; i++)
     {  
         players[i].drawCards(3, deckpile);
+        //! add a check function to check for 31. If 31, end round and give all other players a strike.
     }
     console.log(players); //!
-
+    
     game();
     display();
 }
@@ -85,8 +115,12 @@ function game()
     if(players[turn].knocker)
         return tally();
     
-    if(turn == p1) 
+    if(turn == p1)
+    {
+        userTurn = true;
         return console.log("user's turn"); //!
+    }
+    userTurn = false;
 
     cpuInterval = setInterval(cpuMoves, 1500); //create a variable that holds an interval
 }
@@ -98,7 +132,7 @@ function nextTurn()
 }
 function tally()
 {
-    //!YOU ARE HERE 4/4/2020. You've just finished the strike/tally system. Move onto round management (next round after tallying) and then the rest in the function semi-pseudocode todo list.
+    awaitNextRound = true;
     var lowestScore = players[0].determineHandValue();
     for(var i = 1; i < players.length; i++) //determine the lowest score
     {
@@ -131,7 +165,7 @@ function tally()
 //user draw
 function draw(pile)
 {
-    if(turn != p1 || canDiscard == true || players[turn].knocked) return;
+    if(!userTurn || canDiscard == true || players[turn].knocked) return; //i'm using userTurn because I need it to be controlled by the game() function - the turn is updated early, but the user UI may only be interacted with after the intervals are cleared, which is determined by game()'s call in cpuMoves. Otherwise it'd cause problems with the intervals.
     canDiscard = true; //*flag variable
 
     console.log("user draws"); //!
@@ -140,7 +174,7 @@ function draw(pile)
 //user discard
 function discard(card) //*when appendChild-ing the images, assign to them ids relative to the card name (rank-suit) and give them onclick = discard(this.id.split("-"))
 {
-    if(turn != p1 || canDiscard == false || players[turn].knocked) return;
+    if(!userTurn || canDiscard == false || players[turn].knocked) return;
     canDiscard = false;
 
     players[turn].discardCards(card);
@@ -152,7 +186,7 @@ function discard(card) //*when appendChild-ing the images, assign to them ids re
 //user knock
 function knock()
 {
-    if(turn != p1 || canDiscard == true || knocked) return;
+    if(!userTurn || canDiscard == true || knocked) return;
 
     players[turn].knockTurn();
 
@@ -195,5 +229,9 @@ function display()
         opDiscard.src = "./images/cards/" + discardpile[0].rank + "-" + discardpile[0].suit + ".png";
     else
         opDiscard.src = "./images/cards/empty.png";
+
+    //Next round button display
+    if(awaitNextRound)
+        opRounds.style.display = "block";
 }
 
