@@ -8,6 +8,7 @@ function initialize()
     opP4 = document.getElementById("p4disp");
 
     opDiscard = document.getElementById("topdiscardcard");
+    opDeck = document.getElementById("topdeckcard");
     opRounds = document.getElementById("rcHolder");
 
     //Create players
@@ -35,8 +36,8 @@ function startRound()
     awaitNextRound = false;
 
     //Create deckpile
-    deckpile = new CardDeck();
-    discardpile = new CardDeck();
+    deckpile = new CardDeck("Deck");
+    discardpile = new CardDeck("Discard");
     
     deckpile.generateStandardDeck();
     deckpile.shuffleDeck();
@@ -64,6 +65,8 @@ function startRound()
         }
     }
 
+    console.log("[Note] Dealer: " + players[dealer].id + " --------------------------");
+
     //Deal cards
     for(var i = 0; i < 4; i++)
     {  
@@ -72,6 +75,7 @@ function startRound()
     }
     console.log(players); //!
     
+    console.log("[Next Round] --------------------------------------------------------"); //!
     game();
     display();
 }
@@ -79,13 +83,28 @@ function startRound()
 //cpu controller
 function cpuMoves()
 {
+    //check if the drawpile is empty.
+    if(!deckpile[0])
+    {
+        //display the empty deck for visual effect
+        display();
+        
+        //move all discarded cards to deck
+        for(i = 0; i < 40; i++)
+            deckpile.push(discardpile.shift());
+
+        deckpile.shuffleDeck(); //shuffle
+        discardpile.push(deckpile.shift()); //first card of discard is top of deck pile
+        return;
+    }
+    
     if(players[turn].strikes < 0) //Check if player in turn has strikes. If not, pass turn and continue with interval
         return nextTurn();
-    if(turn == p1 || players[turn].knocker) 
+    if(turn == p1 || players[turn].knocker)  //*<- remove this to turn user player into a bot
     {
         clearInterval(cpuInterval); //?for some reason, doing game(); and then return clearInterval(cpuInterval); would call the game() statement but not the clearInterval statement. In fact, it'd call nothing below game(). very strange.
         return game();
-    }
+    } 
     
     //cpu decisions
     //knock
@@ -93,7 +112,7 @@ function cpuMoves()
     {
         players[turn].knockTurn();
         return nextTurn();
-    }
+    } 
     //draw
     if(discardpile[0] && (players[turn].determineHandValue(discardpile[0])) > players[turn].determineHandValue()) //check if discard has a card and if the card will benefit the hand.
         players[turn].drawCards(1, discardpile);
@@ -130,8 +149,25 @@ function nextTurn()
     if(turn > p4)
         turn = p1;
 }
-function tally()
+function tally(checking31)
 {
+    /*
+    if(checking31)
+    {
+        for(var i = 0; i < players.length; i++)
+        {
+            if(players[i].determineHandValue() == 31)
+            {
+                for(var o = 0; o < players.length; o++)
+                {
+                    if(o != i)
+                        players[o].strikes--;
+                }
+                return display();
+            }
+        }
+    } */
+
     awaitNextRound = true;
     var lowestScore = players[0].determineHandValue();
     for(var i = 1; i < players.length; i++) //determine the lowest score
@@ -197,6 +233,18 @@ function knock()
 
 function display()
 {
+    //Deck display
+    if(!deckpile[0])
+        opDeck.src = "./images/cards/empty.png";
+    else
+        opDeck.src = "./images/cards/back-red-75-3.png";
+
+    //Discard display
+    if(discardpile[0])
+        opDiscard.src = "./images/cards/" + discardpile[0].rank + "-" + discardpile[0].suit + ".png";
+    else
+        opDiscard.src = "./images/cards/empty.png";
+
     //Player display
     for(var i = 0; i < players.length; i++)
     {
@@ -224,14 +272,10 @@ function display()
         }
     }
 
-    //Discard display
-    if(discardpile[0])
-        opDiscard.src = "./images/cards/" + discardpile[0].rank + "-" + discardpile[0].suit + ".png";
-    else
-        opDiscard.src = "./images/cards/empty.png";
-
     //Next round button display
     if(awaitNextRound)
         opRounds.style.display = "block";
+    else
+        opRounds.style.display = "none";
 }
 

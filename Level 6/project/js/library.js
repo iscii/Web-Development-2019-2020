@@ -17,7 +17,10 @@ function Cards(r, s, i) //class Cards; every rank above 10 is valued at 10.
     //*value of hand may never exceed 31 due to the way the game works - value is grouped by suit, so the value of any two aces will never add up.
 }
 
-function CardDeck(){}
+function CardDeck(id)
+{
+    this.id = id; //fore console identification & debug purposes
+}
 //a prototype is a storage that applies to all of a class: rather than each class having their own function, you can have every class connected to one function stored in the prototype
 CardDeck.prototype = Array.prototype;
 
@@ -189,6 +192,7 @@ Player.prototype.drawCards = function(quantity, pile) //*it's hard to console.lo
     console.log(pile[0]); //!
     console.log(this); //!
     console.log(name); //!
+    console.log(deckpile); //!
     for(var i = 0; i < quantity; i++)
     {
         this.hand.push(pile.shift());
