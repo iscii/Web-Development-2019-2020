@@ -25,7 +25,7 @@ Functionality
             -Strikes
         >X-player objects are created upon initial card deals
         >X-4 players (identified by numbers)
-    >-CPU
+    >X-CPU
         >X-Knock: if hand's value > 24
         >X-Discard Pile: if doing so will increase value in its hand (based on suit?)
             -determineHandValue(parameter);
@@ -53,20 +53,20 @@ Functionality
         
         >X-Two face cards and an ace: 31
             >-end round and give every other player a strike
-        -Reveal cards at end of round and tally
-        -Strikes
-            -Players with the lowest score recieve a strike
-            -If the player with the lowest score knocked, they recieve two strikes.
-            -Three strikes and the player is out
+        >X-Reveal cards at end of round and tally
+        >-Strikes
+            >X-Players with the lowest score recieve a strike
+            >X-If the player with the lowest score knocked, they recieve two strikes.
+            >-Three strikes and the player is out
 
         >-Knocking:
-            -A knock may only occur once (Set knock = 1 and -- when a player knocks. add player.knock = true?)
-            -When a player knocks, everybody gets a turn after the player who knocks
+            >X-A knock may only occur once (Set knock = 1 and -- when a player knocks. add player.knock = true?)
+            >X-When a player knocks, everybody gets a turn after the player who knocks
                 (play proceeds around the table a full loop until it gets back to the player who knocked).
-            -If the knocker has the lowest score, they get two strikes.
-            -A player may not knock after drawing/discarding.
+            >X-If the knocker has the lowest score, they get two strikes.
+            >X-A player may not knock after drawing/discarding.
 
-        -For as long as the game is in play, after each round the dealer shifts to
+        >X-For as long as the game is in play, after each round the dealer shifts to
         the next player clockwise (to the person who went first this round).
 
         -If human player is eliminated, game proceeds unless player resets

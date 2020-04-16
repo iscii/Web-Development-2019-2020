@@ -23,7 +23,7 @@
     return total value;
 }
 
-display
+>Xdisplay
     if knocker, then all cards are shown
     else, only user cards are shown
         display()
@@ -54,7 +54,7 @@ X9. round management
 X10. Now, just work on the strike system and tallying. 
     X-Standard strikes
 X11. And then do the deck reshuffle. 
-12. Also, simplify the user functions by putting them into the prototype functions.
+X12. Also, simplify the user functions by putting them into the prototype functions.
 13. And then head over to display and resetting.
 14.check for 31 and when 31, end round and strike to all other players.
         -add this to initial dealing and then every turn thereafter.

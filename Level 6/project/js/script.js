@@ -148,6 +148,8 @@ function nextTurn()
     turn += 1;
     if(turn > p4)
         turn = p1;
+
+    console.log(turn);
 }
 function tally(checking31)
 {
@@ -198,39 +200,6 @@ function tally(checking31)
     display();
 }
 
-//user draw
-function draw(pile)
-{
-    if(!userTurn || canDiscard == true || players[turn].knocked) return; //i'm using userTurn because I need it to be controlled by the game() function - the turn is updated early, but the user UI may only be interacted with after the intervals are cleared, which is determined by game()'s call in cpuMoves. Otherwise it'd cause problems with the intervals.
-    canDiscard = true; //*flag variable
-
-    console.log("user draws"); //!
-    players[p1].drawCards(1, pile);
-}
-//user discard
-function discard(card) //*when appendChild-ing the images, assign to them ids relative to the card name (rank-suit) and give them onclick = discard(this.id.split("-"))
-{
-    if(!userTurn || canDiscard == false || players[turn].knocked) return;
-    canDiscard = false;
-
-    players[turn].discardCards(card);
-
-    nextTurn();
-    game();
-    display();
-}
-//user knock
-function knock()
-{
-    if(!userTurn || canDiscard == true || knocked) return;
-
-    players[turn].knockTurn();
-
-    nextTurn();
-    game();
-    display(); //display goes after nextTurn(); for the tally, since its conditional checks for currentTurn's knocker.
-}
-
 function display()
 {
     //Deck display
@@ -262,7 +231,7 @@ function display()
             {
                 image.onclick = function() //*calls the discard function and inputs as parameter the image's id without the "img" portion.
                 {
-                    discard(this.id.slice(5));
+                    players[p1].discardCards(this.id.slice(5), true);
                 }
             }
             else if(!players[turn].knocker) //*if not user and if round isn't ended, hide cards

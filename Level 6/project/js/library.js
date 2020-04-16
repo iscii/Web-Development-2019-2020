@@ -185,14 +185,23 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so
     return value;
 }
 
-Player.prototype.drawCards = function(quantity, pile) //*it's hard to console.log these since logged objects' properties are updated upon the object's update. 
+Player.prototype.drawCards = function(quantity, pile, isPlayer) //*it's hard to console.log these since logged objects' properties are updated upon the object's update. 
 {
+    if(isPlayer)
+    {
+        if(!userTurn || canDiscard == true || players[turn].knocked) return; //i'm using userTurn because I need it to be controlled by the game() function - the turn is updated early, but the user UI may only be interacted with after the intervals are cleared, which is determined by game()'s call in cpuMoves. Otherwise it'd cause problems with the intervals.
+        canDiscard = true; //*flag variable
+
+        console.log("user draws");
+    }
+
     if(pile == deckpile) var name = "deckpile"; else var name = "discardpile"; //!
     console.log("[Note] " + this.id + " draws -----------------------------"); //!
     console.log(pile[0]); //!
     console.log(this); //!
     console.log(name); //!
     console.log(deckpile); //!
+
     for(var i = 0; i < quantity; i++)
     {
         this.hand.push(pile.shift());
@@ -201,19 +210,38 @@ Player.prototype.drawCards = function(quantity, pile) //*it's hard to console.lo
     display();
 }
 
-Player.prototype.discardCards = function(card)
+Player.prototype.discardCards = function(card, isPlayer)
 {
+    if(isPlayer)
+    {
+        if(!userTurn || canDiscard == false || players[turn].knocked) return;
+        canDiscard = false;
+
+        nextTurn();
+        game();
+    }
+
     console.log("[Note] " + this.id + " discards -----------------------------"); //!
     console.log(this.hand[card]); //!
+
     discardpile.unshift(this.hand.splice(card, 1)[0]); //*[0] because splice returns an array!!!!! (in lesson)
+
     console.log(discardpile); //!
     this.determineHandValue(); //!
 
     display();
 }
 
-Player.prototype.knockTurn = function()
+Player.prototype.knockTurn = function(isPlayer)
 {
+    if(isPlayer)
+    {
+        if(!userTurn || canDiscard == true || knocked) return;
+
+        nextTurn();
+        game();
+    }
+
     console.log(this.id + " knocks"); //!
     this.knocker = true;
     knocked = true;
