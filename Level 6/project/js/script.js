@@ -9,13 +9,25 @@ function initialize()
 
     opDiscard = document.getElementById("topdiscardcard");
     opDeck = document.getElementById("topdeckcard");
-    opRounds = document.getElementById("rcHolder");
+    opRounds = document.getElementById("roundController");
+    opReStart = document.getElementById("reStart");
+
+    //if initializing, make it startRound. else, make it initialize (restart the entire game). Only let it be clicked inbetween round breaks or at game end.
+    /*opReStart.addEventListener("click", function(){
+        if(round == 0)
+            startRound();
+        else
+            initialize();
+    }); */
 
     //Create players
     players = [new Player("p1"), new Player("p2"), new Player("p3"), new Player("p4")];
 
     //Create round vars
     round = 0;
+    gameEnd = false;
+    awaitNextRound = false;
+    victor = null; //declaration (i can't set it to 0 since that's p1)
 
     //Determine dealer & turn - put before card deals cos they display
     dealer = getRandomInteger(p1, p4);
@@ -24,10 +36,17 @@ function initialize()
         turn = p1;
     console.log("First turn: " + turn); //!
 
-    startRound();
+    display();
 }
 function startRound()
 {
+    /*
+    if(checkGameEnd)
+    {
+        gameEnd = true;
+        return display();
+    } */
+
     //Create round vars
     round++;
     userTurn = false;
@@ -45,6 +64,7 @@ function startRound()
 
     //Initialize discard pile. Placed before card deals since display requires discardpile to be initialized.
     discardpile.push(deckpile.shift());
+    console.log(discardpile); //!
 
     //Follow-up rounds initiations
     if(round != 1)
@@ -54,6 +74,7 @@ function startRound()
         while(!players[dealer].strikes) //if the player is out, the dealer is the next. if that one is out, the next.
             determineDealer();
 
+        //sets turn to next turn clockwise
         turn = dealer;
         nextTurn();
         while(!players[turn].strikes) //if the player is out, the turn is the next. 
@@ -64,6 +85,7 @@ function startRound()
         {
             players[i].hand = [];
             players[i].knocker = false;
+            players[i].isout = false;
         }
     }
 
@@ -73,7 +95,10 @@ function startRound()
     for(var i = 0; i < 4; i++)
     {  
         if(!players[i].strikes) //skips players that are out
+        {
+            console.log(players[i].id + " is out! Did not draw");
             continue;
+        }   
         players[i].drawCards(3, deckpile);
         //! add a check function to check for 31. If 31, end round and give all other players a strike.
     }
@@ -82,6 +107,20 @@ function startRound()
     console.log("[Next Round] --------------------------------------------------------"); //!
     game();
     display();
+}
+function checkGameEnd()
+{
+    var ingame = [];
+    for(var i = 0; i < players.length; i++)
+        if(players[i].strikes)
+            ingame.push(i);
+
+    if(ingame.length == 1)
+    {
+        victor = ingame[0];
+        return true;
+    }
+    return false;
 }
 
 //cpu controller
@@ -93,8 +132,9 @@ function cpuMoves()
         //display the empty deck for visual effect
         display();
         
+        var discardlength = discardpile.length; //addresses changing deck sizes due to player outs and addresses only pushing half of discardpile into deckpile, as the for function constantly updates discardpile.length as the deck is shifted
         //move all discarded cards to deck
-        for(i = 0; i < 40; i++)
+        for(i = 0; i < discardlength; i++)
             deckpile.push(discardpile.shift());
 
         deckpile.shuffleDeck(); //shuffle
@@ -112,14 +152,13 @@ function cpuMoves()
         clearInterval(cpuInterval); //?for some reason, doing game(); and then return clearInterval(cpuInterval); would call the game() statement but not the clearInterval statement. In fact, it'd call nothing below game(). very strange.
         return game();
     } 
-    
     //cpu decisions
     //knock
     if(players[turn].determineHandValue() > 24 && !knocked)
     {
         players[turn].knockTurn();
         return nextTurn();
-    } 
+    }
     //draw
     if(discardpile[0] && (players[turn].determineHandValue(discardpile[0], false, true)) > players[turn].determineHandValue()) //check if discard has a card and if the card will benefit the hand.
         players[turn].drawCards(1, discardpile);
@@ -155,13 +194,12 @@ function nextTurn()
     turn += 1;
     if(turn > p4)
         turn = p1;
-
     console.log("Turn: " + turn);
 }
 function determineDealer()
 {
     dealer++;
-    if(dealer + 1 > p4) //loops it back
+    if(dealer > p4) //loops it back
         dealer = p1;
     console.log("Dealer: " + dealer);
 }
@@ -215,22 +253,25 @@ function tally(checking31)
                 players[i].strikes--;
         }
 
-        console.log(players[i]);
-        console.log(players[i].determineHandValue());
+        if(!players[i].strikes) //if this round eliminates the player, set isout to true.
+            players[i].isout = true;
+
+        console.log(players[i]); //!
+        console.log(players[i].determineHandValue()); //!
     }
-    display();
+    display(); 
 }
 
 function display()
 {
     //Deck display
-    if(!deckpile[0])
+    if(!deckpile[0] && round)
         opDeck.src = "./images/cards/empty.png";
     else
         opDeck.src = "./images/cards/back-red-75-3.png";
 
     //Discard display
-    if(discardpile[0])
+    if(discardpile[0] && round)
         opDiscard.src = "./images/cards/" + discardpile[0].rank + "-" + discardpile[0].suit + ".png";
     else
         opDiscard.src = "./images/cards/empty.png";
@@ -239,6 +280,18 @@ function display()
     for(var i = 0; i < players.length; i++)
     {
         eval("opP" + (i + 1)).innerHTML = ""; //*resets the divs so that the images don't build onto each other (see bug 1)
+        //if a player is out, show empty cards instead (addresses format issue 4.18.2020)
+        //*cannot put this inside the for loop below since their hand length is 0 so the loop isn't even called for them
+        if(!players[i].strikes && !players[i].isout || !round) //check for !knocked so that it doesn't display an empty image upon reveal and tally
+        {
+            for(var o = 0; o < 3; o++)
+            {
+                var image = document.createElement("img");
+                image.src = "./images/cards/empty.png";
+                eval("opP" + (i + 1)).appendChild(image); 
+            }
+            continue;
+        }
 
         for(var o = 0; o < players[i].hand.length; o++)
         {
@@ -267,5 +320,18 @@ function display()
         opRounds.style.display = "block";
     else
         opRounds.style.display = "none";
+
+    //cannot click button during gameplay
+    if(awaitNextRound || !round || gameEnd)
+    {
+        if(!round || gameEnd) //I feel that there's a way to greatly simplify these conditionals but I can't seem to think of it
+            opReStart.innerHTML = "Start";
+        else
+            opReStart.innerHTML = "Reset";
+
+        opReStart.style.display = "block";
+    }
+    else
+        opReStart.style.display = "none";
 }
 

@@ -55,16 +55,17 @@ X10. Now, just work on the strike system and tallying.
     X-Standard strikes
 X11. And then do the deck reshuffle. 
 X12. Also, simplify the user functions by putting them into the prototype functions.
+16. Head over to display and resetting.
+    >XReset first
+        >XStart game button -> when game is started, turn it to reset
+            >Xwhen game is ended, turn it to start
+    Display
+        >XRedesign your shitty arrow lmao
 14. Victory
 13. If the remaining two players tie in the last round, 
         every player gets back a strike and eliminated players are back in the game.
 15 Check for 31 and when 31, end round and strike to all other players.
         -add this to initial dealing and then every turn thereafter.
-16. Head over to display and resetting.
-    Reset first
-        Start game button -> when game is started, turn it to reset
-            >when game is ended, turn it to start
-    Display
 17. Animations
 
 4/10/2020
@@ -93,3 +94,17 @@ Query:
 For tomorrow: 
     -figure out bug where only one player stands, the next round button doesn't work
         -most likely has something to do with my while loops or an infinite loop? try console.logging.
+
+4/18/2020
+Currently: 
+            cleaning up
+
+Completed:
+            -reset/start button
+            -fixed bug where empty slots don't show upon tally
+            -fixed bug where, on deck reshuffle, the cards of a player whose out will be placed into discard pile rather than deckpile
+            -fixing double pair "undefined" issue
+            -fixed: When only one player stands, the next round button doesn't work
+                -Problem: when only p4 is left, the dealer loop will loop forever since
+                          the conditional checked for if dealer + 1 > p4.
+                -Fix: replaced if(dealer + 1 > p4) with if(dealer > p4)

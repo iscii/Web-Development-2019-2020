@@ -69,27 +69,41 @@ body{
     background: radial-gradient(#ff8d8d, #ff0000);
     border-radius: 50%;
 }
-#knockbutton:focus
+#knockbutton:focus, #reStart:focus
 {
     outline: 0; /*removes blue focus outline*/
 }
-#knockbutton:active
+#knockbutton:active, #reStart:active
 {
     background: radial-gradient(#c05353, #b90000);
 }
-#knockbutton:hover
+#knockbutton:hover, #reStart:hover
 {
     box-shadow: 0 0 10px rgb(55, 182, 255);
 }
 
 #rcHolder
 {
+    display: inline-block;
     width: 100%;
     margin: 0 auto;
-    text-align: center;
+    vertical-align: middle;
 }
 #roundController
 {
     width: 7vw;
-
+    float: right;
+    margin-right: 1%;
+}
+#reStart
+{
+    font-family: akaPosse; /*For some reason, it doesn't take the parent element (body)'s font-family*/
+    font-size: 120%;
+    margin-top: 2%;
+    width: 5vw;
+    background: radial-gradient(#ff8d8d, #ff0000);
+    border: 4px solid black;
+    border-radius: 45%;
+    float: left;
+    margin-left: 1%;
 }

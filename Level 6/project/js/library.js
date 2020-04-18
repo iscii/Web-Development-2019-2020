@@ -57,6 +57,7 @@ function Player(id)
     this.hand = [];
     this.strikes = 3;
     this.knocker = false;
+    this.isout = false; //temporary property, flag for the player's last round in the game so that the game can display their cards upon reveal during tally. Then, their hand is displayed as empty cards.
 }
 
 //optional parameter newcard; use parameter to determine the hand's value IF the new card were to be drawn (for cpus).
@@ -116,7 +117,7 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard, drawing) //m
     {
         //checks for matching card pairs
         var paircount = 0;
-        var unmatch = [];
+        var unmatch = []; //holds card positions
 
         for(item in rankBank) //sets paircount to 2 if there are two pairs.
             if(rankBank[item] == 2)
@@ -124,7 +125,7 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard, drawing) //m
         if(paircount == 2) //highly unlikely but addresses having two pairs of matching rank cards.
         {
             console.log("[Note] double pair");
-            return this.hand[getRandomInteger(0, 4)];
+            return getRandomInteger(0, 3);
         }
 
         for(item in rankBank) //checks for the bank's item (card pair's value)
@@ -223,7 +224,7 @@ Player.prototype.drawCards = function(quantity, pile, isPlayer) //*it's hard to 
     display();
 }
 
-Player.prototype.discardCards = function(card, isPlayer)
+Player.prototype.discardCards = function(card, isPlayer) //card is the position of the card in the hand
 {
     if(isPlayer)
     {

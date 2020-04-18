@@ -33,7 +33,7 @@
 				<div class = "playerhand" id = "p4disp"></div>
 			</div>
 			<div class = "playerhand" id = "p1disp"></div>
-			<div hidden id = "rcHolder"><img id = "roundController" src = "images/arrow.png" onclick = "startRound();"/></div>
+			<div id = "rcHolder"> <button id = "reStart" onclick = "if(!round) startRound(); else initialize();"></button> <img hidden id = "roundController" src = "images/arrow.png" onclick = "startRound();"/></div>
 		</div>
 	</body>
 </html>
