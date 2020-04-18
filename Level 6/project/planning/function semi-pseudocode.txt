@@ -57,6 +57,8 @@ X11. And then do the deck reshuffle.
 X12. Also, simplify the user functions by putting them into the prototype functions.
 13. And then head over to display and resetting.
     Reset first
+        Start game button -> when game is started, turn it to reset
+            >when game is ended, turn it to start
     Display
 14.check for 31 and when 31, end round and strike to all other players.
         -add this to initial dealing and then every turn thereafter.
@@ -68,3 +70,15 @@ X12. Also, simplify the user functions by putting them into the prototype functi
 4/11/2020
 Currently: cleaning up for the day
 Completed: [7:57PM] testing to see if deck reshuffling from discard works
+
+4/17/2020
+Currently: testing to see if strikes work properly
+            -if player is out, do not deal them
+Completed:  
+
+            -strikes for player work
+            -removed redudant code in discardCards
+            -added prevention of player from actions without strikes   
+            -fixed strikes going below 0
+Query:
+            -if a player is out, can they still be dealer?

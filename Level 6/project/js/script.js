@@ -50,12 +50,14 @@ function startRound()
     if(round != 1)
     {
         //sets dealer to next dealer clockwise
-        dealer++;
-        if(dealer + 1 > p4) //loops it back
-            dealer = p1;
-        turn = dealer + 1;
-        if(turn + 1 > p4) //loops it back
-            turn = p1;
+        determineDealer();
+        while(!players[dealer].strikes) //if the player is out, the dealer is the next. if that one is out, the next.
+            determineDealer();
+
+        turn = dealer;
+        determineTurn();
+        while(!players[turn].strikes) //if the player is out, the turn is the next. 
+            determineTurn();
 
         //resets all players' hands and knocker property
         for(var i = 0; i < players.length; i++)
@@ -70,6 +72,8 @@ function startRound()
     //Deal cards
     for(var i = 0; i < 4; i++)
     {  
+        if(!players[i].strikes) //skips players that are out
+            continue;
         players[i].drawCards(3, deckpile);
         //! add a check function to check for 31. If 31, end round and give all other players a strike.
     }
@@ -98,8 +102,11 @@ function cpuMoves()
         return;
     }
     
-    if(players[turn].strikes < 0) //Check if player in turn has strikes. If not, pass turn and continue with interval
+    if(!players[turn].strikes) //Check if player in turn has strikes. If not, pass turn and continue with interval
+    {
+        console.log(players[turn].id + "is out!");
         return nextTurn();
+    }
     if(turn == p1 || players[turn].knocker)  //*<- remove this to turn user player into a bot
     {
         clearInterval(cpuInterval); //?for some reason, doing game(); and then return clearInterval(cpuInterval); would call the game() statement but not the clearInterval statement. In fact, it'd call nothing below game(). very strange.
@@ -151,6 +158,18 @@ function nextTurn()
 
     console.log(turn);
 }
+function determineDealer()
+{
+    dealer++;
+    if(dealer + 1 > p4) //loops it back
+        dealer = p1;
+}
+function determineTurn()
+{
+    turn++;
+    if(turn + 1 > p4) //loops it back
+        turn = p1;
+}
 function tally(checking31)
 {
     /*
@@ -190,7 +209,7 @@ function tally(checking31)
         {
             players[i].strikes--;
 
-            if(players[i].knocker) //if the knocker has the lowest score, they lose an additional point.
+            if(players[i].knocker && players[i].strikes) //if the knocker has the lowest score and they aren't at 0 strikes, they lose an additional point.
                 players[i].strikes--;
         }
 

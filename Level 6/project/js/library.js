@@ -189,7 +189,7 @@ Player.prototype.drawCards = function(quantity, pile, isPlayer) //*it's hard to 
 {
     if(isPlayer)
     {
-        if(!userTurn || canDiscard == true || players[turn].knocked) return; //i'm using userTurn because I need it to be controlled by the game() function - the turn is updated early, but the user UI may only be interacted with after the intervals are cleared, which is determined by game()'s call in cpuMoves. Otherwise it'd cause problems with the intervals.
+        if(!userTurn || canDiscard == true || players[turn].knocked || !players[turn].strikes) return; //i'm using userTurn because I need it to be controlled by the game() function - the turn is updated early, but the user UI may only be interacted with after the intervals are cleared, which is determined by game()'s call in cpuMoves. Otherwise it'd cause problems with the intervals.
         canDiscard = true; //*flag variable
 
         console.log("user draws");
@@ -214,7 +214,7 @@ Player.prototype.discardCards = function(card, isPlayer)
 {
     if(isPlayer)
     {
-        if(!userTurn || canDiscard == false || players[turn].knocked) return;
+        if(canDiscard == false) return;
         canDiscard = false;
 
         nextTurn();
@@ -236,7 +236,7 @@ Player.prototype.knockTurn = function(isPlayer)
 {
     if(isPlayer)
     {
-        if(!userTurn || canDiscard == true || knocked) return;
+        if(!userTurn || canDiscard == true || knocked || !players[turn].strikes) return;
 
         nextTurn();
         game();
