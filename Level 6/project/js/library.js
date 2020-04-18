@@ -60,7 +60,7 @@ function Player(id)
 }
 
 //optional parameter newcard; use parameter to determine the hand's value IF the new card were to be drawn (for cpus).
-Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so that only the greatest number of suites are added up
+Player.prototype.determineHandValue = function(newcard, cpudiscard, drawing) //make it so that only the greatest number of suites are added up
 {
     var suitTotals = [0, 0, 0, 0]; //[0] = club, [1] = diamonds, [2] = hearts, [3] = spades
     var rankBank = {}; //hash table
@@ -98,6 +98,19 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so
             if(30 > value)
                 value = 30;
 
+    //addresses bug where every cpu has a pair of matching cards and the turn loops are infinite since they only pick from discard pile
+    if(drawing) //this flag is necessary to prevent screw-ups with tallying
+    {
+        for(item in rankBank)
+        {
+            if(rankBank[item] >= 2 && newcard) //checks if there's a pair of matching ranks in hand, and if newcard is a parameter
+                if(newcard.rank == Object.keys(rankBank)[item]) //checks if newcard's rank matches pair of cards.
+                    return 30; //if so, make the value 30 so the cpu draws from the newcard's pile.
+                else
+                    return 0; //if not, make the value 0 so the cpu draws from the deck pile.
+        }
+    }
+
     //determine the card for discarding
     if(cpudiscard)
     {
@@ -116,7 +129,7 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard) //make it so
 
         for(item in rankBank) //checks for the bank's item (card pair's value)
         {
-            if(rankBank[item] >= 2)
+            if(rankBank[item] >= 2) //checks for count of ranks in hand
             {
                 //*let initializes a variable local to the LOOP and not the function. var initializes it local to the function.
                 for(let i = 0; i < this.hand.length; i++) //pushes the non-matching card positions into unmatch

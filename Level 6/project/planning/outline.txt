@@ -1,5 +1,5 @@
 Level 6 Project: Thirty One
-    Blackjack
+    Blackjack 31.0
 
 Functionality
     >X-Card Deck (class):
@@ -54,12 +54,12 @@ Functionality
         >X-Two face cards and an ace: 31
             >-end round and give every other player a strike
         >X-Reveal cards at end of round and tally
-        >-Strikes
+        >X-Strikes
             >X-Players with the lowest score recieve a strike
             >X-If the player with the lowest score knocked, they recieve two strikes.
-            >-Three strikes and the player is out
+            >X-Three strikes and the player is out
 
-        >-Knocking:
+        >X-Knocking:
             >X-A knock may only occur once (Set knock = 1 and -- when a player knocks. add player.knock = true?)
             >X-When a player knocks, everybody gets a turn after the player who knocks
                 (play proceeds around the table a full loop until it gets back to the player who knocked).
@@ -69,7 +69,7 @@ Functionality
         >X-For as long as the game is in play, after each round the dealer shifts to
         the next player clockwise (to the person who went first this round).
 
-        -If human player is eliminated, game proceeds unless player resets
+        >X-If human player is eliminated, game proceeds unless player resets
 
         -If the remaining two players tie in the last round, 
         every player gets back a strike and eliminated players are back in the game.

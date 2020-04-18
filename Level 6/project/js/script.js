@@ -55,9 +55,9 @@ function startRound()
             determineDealer();
 
         turn = dealer;
-        determineTurn();
+        nextTurn();
         while(!players[turn].strikes) //if the player is out, the turn is the next. 
-            determineTurn();
+            nextTurn();
 
         //resets all players' hands and knocker property
         for(var i = 0; i < players.length; i++)
@@ -104,7 +104,7 @@ function cpuMoves()
     
     if(!players[turn].strikes) //Check if player in turn has strikes. If not, pass turn and continue with interval
     {
-        console.log(players[turn].id + "is out!");
+        console.log("[Note] " + players[turn].id + " is out!");
         return nextTurn();
     }
     if(turn == p1 || players[turn].knocker)  //*<- remove this to turn user player into a bot
@@ -121,7 +121,7 @@ function cpuMoves()
         return nextTurn();
     } 
     //draw
-    if(discardpile[0] && (players[turn].determineHandValue(discardpile[0])) > players[turn].determineHandValue()) //check if discard has a card and if the card will benefit the hand.
+    if(discardpile[0] && (players[turn].determineHandValue(discardpile[0], false, true)) > players[turn].determineHandValue()) //check if discard has a card and if the card will benefit the hand.
         players[turn].drawCards(1, discardpile);
     else //from deck
         players[turn].drawCards(1, deckpile);
@@ -156,19 +156,14 @@ function nextTurn()
     if(turn > p4)
         turn = p1;
 
-    console.log(turn);
+    console.log("Turn: " + turn);
 }
 function determineDealer()
 {
     dealer++;
     if(dealer + 1 > p4) //loops it back
         dealer = p1;
-}
-function determineTurn()
-{
-    turn++;
-    if(turn + 1 > p4) //loops it back
-        turn = p1;
+    console.log("Dealer: " + dealer);
 }
 function tally(checking31)
 {
@@ -190,10 +185,17 @@ function tally(checking31)
     } */
 
     awaitNextRound = true;
-    var lowestScore = players[0].determineHandValue();
-    for(var i = 1; i < players.length; i++) //determine the lowest score
+    for(var i = 0; i < players.length; i++)
     {
-        if(players[i].strikes == 0)
+        if(players[i].strikes)
+        {
+            var lowestScore = players[i].determineHandValue();
+            break;
+        } 
+    }
+    for(var i = 0; i < players.length; i++) //determine the lowest score
+    {
+        if(!players[i].strikes)
             continue;
 
         if(players[i].determineHandValue() < lowestScore)
@@ -202,7 +204,7 @@ function tally(checking31)
     
     for(var i = 0; i < players.length; i++) //strike to all with lowest score
     {
-        if(players[i].strikes == 0)
+        if(!players[i].strikes)
             continue;
 
         if(players[i].determineHandValue() == lowestScore)
