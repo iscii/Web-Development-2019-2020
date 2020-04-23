@@ -61,6 +61,11 @@ X12. Also, simplify the user functions by putting them into the prototype functi
             >Xwhen game is ended, turn it to start
     Display
         >XRedesign your shitty arrow lmao
+        Event and Turn displayy
+        Round display
+        Strikes
+            for i = 0; i < player.strikes; i++
+                var += "I";
 14. Victory
 13. If the remaining two players tie in the last round, 
         every player gets back a strike and eliminated players are back in the game.
@@ -108,3 +113,9 @@ Completed:
                 -Problem: when only p4 is left, the dealer loop will loop forever since
                           the conditional checked for if dealer + 1 > p4.
                 -Fix: replaced if(dealer + 1 > p4) with if(dealer > p4)
+
+4/23/2020
+Currently:
+            -cleaning up
+Completed: 
+            -event and turn display

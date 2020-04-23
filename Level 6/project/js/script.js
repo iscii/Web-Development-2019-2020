@@ -11,14 +11,8 @@ function initialize()
     opDeck = document.getElementById("topdeckcard");
     opRounds = document.getElementById("roundController");
     opReStart = document.getElementById("reStart");
-
-    //if initializing, make it startRound. else, make it initialize (restart the entire game). Only let it be clicked inbetween round breaks or at game end.
-    /*opReStart.addEventListener("click", function(){
-        if(round == 0)
-            startRound();
-        else
-            initialize();
-    }); */
+    opPEvents = document.getElementById("playerevents");
+    opGEvents = document.getElementById("gameevents");
 
     //Create players
     players = [new Player("p1"), new Player("p2"), new Player("p3"), new Player("p4")];
@@ -28,6 +22,10 @@ function initialize()
     gameEnd = false;
     awaitNextRound = false;
     victor = null; //declaration (i can't set it to 0 since that's p1)
+
+    //Create element vars
+    pEventsrc = "";
+    gEventsrc = "";
 
     //Determine dealer & turn - put before card deals cos they display
     dealer = getRandomInteger(p1, p4);
@@ -57,6 +55,9 @@ function startRound()
     //Create deckpile
     deckpile = new CardDeck("Deck");
     discardpile = new CardDeck("Discard");
+
+    //Create element vars
+    pEventsrc = players[turn].id.toUpperCase() + "'s turn";
     
     deckpile.generateStandardDeck();
     deckpile.shuffleDeck();
@@ -126,6 +127,8 @@ function checkGameEnd()
 //cpu controller
 function cpuMoves()
 {
+    gEventsrc = "";
+    pEventsrc = "";
     //check if the drawpile is empty.
     if(!deckpile[0])
     {
@@ -175,6 +178,7 @@ function cpuMoves()
 //game managers
 function game()
 {
+    gEventsrc = "";
     //only for user
     //hold turn's value to check for lowest score
     if(players[turn].knocker)
@@ -191,10 +195,13 @@ function game()
 }
 function nextTurn()
 {
-    turn += 1;
+    turn++;
     if(turn > p4)
         turn = p1;
-    console.log("Turn: " + turn);
+    if(!players[turn].knocker)
+        pEventsrc = players[turn].id.toUpperCase() + "'s turn";
+    console.log(pEventsrc); //!
+    display();
 }
 function determineDealer()
 {
@@ -221,7 +228,7 @@ function tally(checking31)
             }
         }
     } */
-
+    pEventsrc = "";
     awaitNextRound = true;
     for(var i = 0; i < players.length; i++)
     {
@@ -333,5 +340,9 @@ function display()
     }
     else
         opReStart.style.display = "none";
+
+    //Event display
+    opPEvents.innerHTML = pEventsrc;
+    opGEvents.innerHTML = gEventsrc;
 }
 

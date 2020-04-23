@@ -14,6 +14,9 @@
 			<div id = "middle">
 				<div class = "playerhand" id = "p2disp"></div>
 				<span id = "drawpiles">
+					<div class = "eventsabsolute" style = "margin-top: -2%">
+						<div id = "playerevents" class = "eventsrelative"></div>
+					</div>
 					<span id = "discardpile"> <!--.appendChild this one-->
 						<span id = "discardpilelabel" class = "pilelabel">Discard</span><br/>
 						<img id = "topdiscardcard" src = "images/cards/empty.png" onclick = "players[p1].drawCards(1, discardpile, true);"/><!--todo: make this not have a transform when hovered and clicked-->
@@ -21,13 +24,16 @@
 					</span>
 					<span id = "knockblock">
 						<span id = "knocklabel" class = "pilelabel">Knock</span><br/>
-						<button id = "knockbutton" onclick = "players[p1].knockTurn(true);"></button>
+						<button id = "knockbutton" onclick = "players[p1].knockTurn(true);"></button><br/>
 					</span>
 					<span id = "deckpile">
 						<span id = "deckpilelabel" class = "pilelabel">Deck</span><br/>
 						<img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "players[p1].drawCards(1, deckpile, true);"/><!--todo: make this have a transform when hovered and clicked-->
 						<!--<img id = "bottomdeckcard" src = "images/cards/back-red-75-3.png" />-->
 					</span>
+					<div class = "eventsabsolute" style = "margin-top: 3%;">
+						<div id = "gameevents" class = "eventsrelative"></div>
+					</div>
 					<!--todo <span id = "message">P1 Turn</span> -->
 				</span>
 				<div class = "playerhand" id = "p4disp"></div>

@@ -256,7 +256,10 @@ Player.prototype.knockTurn = function(isPlayer)
         game();
     }
 
-    console.log(this.id + " knocks"); //!
+    gEventsrc = this.id.toUpperCase() + " knocks";
+    console.log(gEventsrc); //!
     this.knocker = true;
     knocked = true;
+    
+    display();
 }

@@ -78,34 +78,38 @@ Interface
     >X-Player hand perspective relative to real life (bottom of screen - p1)
     >X-CPUs left, right, and top (p2, p3, p4, respectively).
     >X-Cards (during the round) are shows as cardbacks.
-        -Reveal cards upon round end
-        -Card numbers shown will update according to number of cards in hand
-            *-Display() each time a card is drawn or discarded.
-    -Have a random delay for cpu discarding and knocking.
+        >X-Reveal cards upon round end
+        >X-Card numbers shown will update according to number of cards in hand
+            >X*-Display() each time a card is drawn or discarded.
+    >X-Have a random delay for cpu discarding and knocking.
     
     -Display next to each player showing number of strikes (digital display looking thing?)
-    -Knock button above p1's hand
+    >X-Knock button above p1's hand
 
     >X-Deck and Discard pile are in middle of screen
-        -Deck in middle, Discard to left/right of deck.
-        -Label them with mahjong-style table labeling (transparent white-gray box above the pile)
-        -Discard pile cards are visible to players
-            -Just make it so the top card is visible to player
+        XX-Deck in middle, Discard to left/right of deck.
+        >X-Label them with mahjong-style table labeling (transparent white-gray box above the pile)
+        >X-Discard pile cards are visible to players
+            >X-Just make it so the top card is visible to player
         -In display (for hovering animation)
             -For the deck, show two cards overlayed over one another (so you only see one, but can see the other upon hovering)
             -For the discard pile, show the top two cards (discard[0] and [1]) overlayed over one another.
 
     -Display number of cards left in a pile
 
-    -Give the Deckpile an empty png as well
+    >X-Give the Deckpile an empty png as well
 
+    -When it's the user's turn and they are waiting to draw,
+    shadow-box the decks. when they're waiting to discard, highlight
+    the hand cards.
+    
     -Drawing:
         -pull-card-from-deck transition/animation effect
             -When hovering, call animation. Top card slides downward
         -when clicked, make a "fall-into-hand animation" 
             appears out of thin air, uses reverse hand hover animation
 
-    -Reset button
+    >X-Reset button
 
     >X-Typical gambling table (green, rough pattern, wooden edges)
     
