@@ -11,7 +11,11 @@
 	<body onload = "initialize();">
 		<h1>Thirty One</h1>
 		<div id = "gamedisplay">
-			<div class = "playerhand" id = "p3disp"></div>
+			<div id = "p2-3Holder">
+				<div class = "strikes" id = "p3strikes"></div>
+				<div class = "strikes" id = "p2strikes"></div>
+				<div class = "playerhand" id = "p3disp"></div>
+			</div>
 			<div id = "middle">
 				<div class = "playerhand" id = "p2disp"></div>
 				<span id = "drawpiles">
@@ -39,7 +43,11 @@
 				</span>
 				<div class = "playerhand" id = "p4disp"></div>
 			</div>
-			<div class = "playerhand" id = "p1disp"></div>
+			<div id = "p1-4Holder">
+				<div class = "playerhand" id = "p1disp"></div>
+				<div class = "strikes" id = "p1strikes"></div>
+				<div class = "strikes" id = "p4strikes"></div>
+			</div>
 			<div id = "rcHolder"> <button id = "reStart" onclick = "if(!round) startRound(); else initialize();"></button> <img hidden id = "roundController" src = "images/arrow.png" onclick = "startRound();"/></div>
 		</div>
 	</body>

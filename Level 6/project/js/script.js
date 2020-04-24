@@ -14,6 +14,11 @@ function initialize()
     opPEvents = document.getElementById("playerevents");
     opGEvents = document.getElementById("gameevents");
 
+    opP1Strikes = document.getElementById("p1strikes");
+    opP2Strikes = document.getElementById("p2strikes");
+    opP3Strikes = document.getElementById("p3strikes");
+    opP4Strikes = document.getElementById("p4strikes");
+
     //Create players
     players = [new Player("p1"), new Player("p2"), new Player("p3"), new Player("p4")];
 
@@ -186,6 +191,7 @@ function game()
     
     if(turn == p1)
     {
+        pEventsrc = players[turn].id.toUpperCase() + "'s turn"; //when the player is the first turn of a round, nextTurn is not called so the display text must be declared here.
         userTurn = true;
         return console.log("user's turn"); //!
     }
@@ -198,7 +204,9 @@ function nextTurn()
     turn++;
     if(turn > p4)
         turn = p1;
-    if(!players[turn].knocker)
+    if(!players[turn].strikes)
+        pEventsrc = players[turn].id.toUpperCase() + " is out!";
+    else if(!players[turn].knocker)
         pEventsrc = players[turn].id.toUpperCase() + "'s turn";
     console.log(pEventsrc); //!
     display();
@@ -321,6 +329,14 @@ function display()
             eval("opP" + (i + 1)).appendChild(image);
         }
     }
+    
+    //Strikes display
+    for(var i = 0; i < players.length; i++)
+    {
+        eval("opP" + (i + 1) + "Strikes").innerHTML = players[i].strikes;
+        if(round)
+            eval("opP" + (i + 1) + "Strikes").style.display = "inline-block";
+    }
 
     //Next round button display
     if(awaitNextRound)
@@ -342,6 +358,7 @@ function display()
         opReStart.style.display = "none";
 
     //Event display
+    console.log
     opPEvents.innerHTML = pEventsrc;
     opGEvents.innerHTML = gEventsrc;
 }

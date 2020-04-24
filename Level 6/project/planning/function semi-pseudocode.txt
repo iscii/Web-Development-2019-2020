@@ -119,3 +119,10 @@ Currently:
             -cleaning up
 Completed: 
             -event and turn display
+
+4/24/2020
+Currently: 
+            -cleaning up
+Completed:
+            -Strikes display
+            -fixing issue where it says p4 is out when it's p1 turn
