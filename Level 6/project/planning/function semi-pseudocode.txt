@@ -61,9 +61,9 @@ X12. Also, simplify the user functions by putting them into the prototype functi
             >Xwhen game is ended, turn it to start
     Display
         >XRedesign your shitty arrow lmao
-        Event and Turn displayy
+        >XEvent and Turn displayy
         Round display
-        Strikes
+        >XStrikes
             for i = 0; i < player.strikes; i++
                 var += "I";
 14. Victory

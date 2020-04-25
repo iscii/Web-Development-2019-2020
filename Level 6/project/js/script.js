@@ -114,20 +114,6 @@ function startRound()
     game();
     display();
 }
-function checkGameEnd()
-{
-    var ingame = [];
-    for(var i = 0; i < players.length; i++)
-        if(players[i].strikes)
-            ingame.push(i);
-
-    if(ingame.length == 1)
-    {
-        victor = ingame[0];
-        return true;
-    }
-    return false;
-}
 
 //cpu controller
 function cpuMoves()
@@ -274,7 +260,27 @@ function tally(checking31)
         console.log(players[i]); //!
         console.log(players[i].determineHandValue()); //!
     }
+    
+    var ingame = [];
+    for(var i = 0; i < players.length; i++)
+        if(players[i].strikes)
+            ingame.push(i);
+
+    if(ingame.length == 1)
+    {
+        victor = ingame[0];
+        endGame();
+    }
+
     display(); 
+}
+
+function endGame()
+{
+    //stop all actions
+    //display victor
+    console.log(victor);
+    awaitNextRound = false;
 }
 
 function display()
@@ -297,7 +303,7 @@ function display()
         eval("opP" + (i + 1)).innerHTML = ""; //*resets the divs so that the images don't build onto each other (see bug 1)
         //if a player is out, show empty cards instead (addresses format issue 4.18.2020)
         //*cannot put this inside the for loop below since their hand length is 0 so the loop isn't even called for them
-        if(!players[i].strikes && !players[i].isout || !round) //check for !knocked so that it doesn't display an empty image upon reveal and tally
+        if(!players[i].strikes && (!players[i].isout || (i != victor)) || !round) //check for !knocked so that it doesn't display an empty image upon reveal and tally
         {
             for(var o = 0; o < 3; o++)
             {
