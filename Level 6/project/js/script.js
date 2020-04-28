@@ -13,6 +13,7 @@ function initialize()
     opReStart = document.getElementById("reStart");
     opPEvents = document.getElementById("playerevents");
     opGEvents = document.getElementById("gameevents");
+    opRInfo = document.getElementById("roundinfo");
 
     opP1Strikes = document.getElementById("p1strikes");
     opP2Strikes = document.getElementById("p2strikes");
@@ -31,6 +32,7 @@ function initialize()
     //Create element vars
     pEventsrc = "";
     gEventsrc = "";
+    rInfosrc = "";
 
     //Determine dealer & turn - put before card deals cos they display
     dealer = getRandomInteger(p1, p4);
@@ -43,27 +45,18 @@ function initialize()
 }
 function startRound()
 {
-    /*
-    if(checkGameEnd)
-    {
-        gameEnd = true;
-        return display();
-    } */
-
-    //Create round vars
+    //Start round vars
     round++;
     userTurn = false;
     canDiscard = false;
     knocked = false;
     awaitNextRound = false;
+    losers = []; 
 
-    //Create deckpile
+    //Start deckpile
     deckpile = new CardDeck("Deck");
     discardpile = new CardDeck("Discard");
 
-    //Create element vars
-    pEventsrc = players[turn].id.toUpperCase() + "'s turn";
-    
     deckpile.generateStandardDeck();
     deckpile.shuffleDeck();
     console.log(deckpile); //!
@@ -77,14 +70,10 @@ function startRound()
     {
         //sets dealer to next dealer clockwise
         determineDealer();
-        while(!players[dealer].strikes) //if the player is out, the dealer is the next. if that one is out, the next.
-            determineDealer();
-
+        
         //sets turn to next turn clockwise
         turn = dealer;
         nextTurn();
-        while(!players[turn].strikes) //if the player is out, the turn is the next. 
-            nextTurn();
 
         //resets all players' hands and knocker property
         for(var i = 0; i < players.length; i++)
@@ -94,8 +83,11 @@ function startRound()
             players[i].isout = false;
         }
     }
+    //Start display vars
+    pEventsrc = players[turn].id.toUpperCase() + "'s turn"; //First turn of game
+    rInfosrc = "Round " + round + "<br/>" + "Dealer: " + players[dealer].id.toUpperCase();
 
-    console.log("[Note] Dealer: " + players[dealer].id + " --------------------------");
+    console.log("[Note] Dealer: " + players[dealer].id + " --------------------------"); //!
 
     //Deal cards
     for(var i = 0; i < 4; i++)
@@ -190,10 +182,14 @@ function nextTurn()
     turn++;
     if(turn > p4)
         turn = p1;
+    if(!players[turn].strikes) //if the player is out, the turn is the next. 
+        return nextTurn();
+
     if(!players[turn].strikes)
         pEventsrc = players[turn].id.toUpperCase() + " is out!";
     else if(!players[turn].knocker)
         pEventsrc = players[turn].id.toUpperCase() + "'s turn";
+
     console.log(pEventsrc); //!
     display();
 }
@@ -202,11 +198,15 @@ function determineDealer()
     dealer++;
     if(dealer > p4) //loops it back
         dealer = p1;
-    console.log("Dealer: " + dealer);
+    if(!players[dealer].strikes) //if the player is out, the dealer is the next. if that one is out, the next.
+        return determineDealer();
+        
+    rInfosrc += "<br/>" + "Dealer: " + players[dealer].id.toUpperCase();
+    console.log("Dealer: " + dealer); //!
 }
-function tally(checking31)
+function tally()
 {
-    /*
+    /* put this in game()
     if(checking31)
     {
         for(var i = 0; i < players.length; i++)
@@ -248,6 +248,7 @@ function tally(checking31)
 
         if(players[i].determineHandValue() == lowestScore)
         {
+            losers.push(i);
             players[i].strikes--;
 
             if(players[i].knocker && players[i].strikes) //if the knocker has the lowest score and they aren't at 0 strikes, they lose an additional point.
@@ -269,18 +270,10 @@ function tally(checking31)
     if(ingame.length == 1)
     {
         victor = ingame[0];
-        endGame();
+        console.log(victor);
     }
 
     display(); 
-}
-
-function endGame()
-{
-    //stop all actions
-    //display victor
-    console.log(victor);
-    awaitNextRound = false;
 }
 
 function display()
@@ -345,10 +338,24 @@ function display()
     }
 
     //Next round button display
-    if(awaitNextRound)
+    if(awaitNextRound && !victor)
+    {
+        if(losers.length > 1)
+            pEventsrc = "Losers: ";
+        else
+            pEventsrc = "Loser: ";
+        
+        for(var i = 0; i < losers.length; i++)
+            pEventsrc += players[losers[i]].id.toUpperCase() + " ";
+
         opRounds.style.display = "block";
+    }
     else
+    {
+        if(victor)
+            pEventsrc = players[victor].id.toUpperCase() + " Wins!";
         opRounds.style.display = "none";
+    }
 
     //cannot click button during gameplay
     if(awaitNextRound || !round || gameEnd)
@@ -364,8 +371,8 @@ function display()
         opReStart.style.display = "none";
 
     //Event display
-    console.log
     opPEvents.innerHTML = pEventsrc;
     opGEvents.innerHTML = gEventsrc;
+    opRInfo.innerHTML = rInfosrc;
 }
 

@@ -28,6 +28,11 @@ img
 {
     width: 4vw;
 }
+#roundinfo
+{
+    position: absolute;
+    font-size: 150%;
+}
 /*hands*/
 .playerhand, #drawpiles
 {
