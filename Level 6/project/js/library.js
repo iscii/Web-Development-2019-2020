@@ -245,7 +245,11 @@ Player.prototype.discardCards = function(card, isPlayer) //card is the position 
     discardpile.unshift(this.hand.splice(card, 1)[0]); //*[0] because splice returns an array!!!!! (in lesson)
 
     console.log(discardpile); //!
-    this.determineHandValue(); //!
+    if(this.determineHandValue() == 31)
+    {
+        pEventsrc = "";
+        gameEnd = true;
+    }
 
     display();
 }

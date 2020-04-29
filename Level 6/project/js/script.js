@@ -51,6 +51,7 @@ function startRound()
     canDiscard = false;
     knocked = false;
     awaitNextRound = false;
+    gameEnd = false;
     losers = []; 
 
     //Start deckpile
@@ -113,28 +114,15 @@ function cpuMoves()
     gEventsrc = "";
     pEventsrc = "";
     //check if the drawpile is empty.
-    if(!deckpile[0])
-    {
-        //display the empty deck for visual effect
-        display();
-        
-        var discardlength = discardpile.length; //addresses changing deck sizes due to player outs and addresses only pushing half of discardpile into deckpile, as the for function constantly updates discardpile.length as the deck is shifted
-        //move all discarded cards to deck
-        for(i = 0; i < discardlength; i++)
-            deckpile.push(discardpile.shift());
-
-        deckpile.shuffleDeck(); //shuffle
-        discardpile.push(deckpile.shift()); //first card of discard is top of deck pile
-        return;
-    }
+    if(checkEmpty()) return;
     
     if(!players[turn].strikes) //Check if player in turn has strikes. If not, pass turn and continue with interval
     {
         console.log("[Note] " + players[turn].id + " is out!");
         return nextTurn();
     }
-    if(turn == p1 || players[turn].knocker)  //*<- remove this to turn user player into a bot
-    {
+    if(turn == p1 || players[turn].knocker || gameEnd)  //*<- remove this to turn user player into a bot
+    { 
         clearInterval(cpuInterval); //?for some reason, doing game(); and then return clearInterval(cpuInterval); would call the game() statement but not the clearInterval statement. In fact, it'd call nothing below game(). very strange.
         return game();
     } 
@@ -162,13 +150,13 @@ function cpuMoves()
 function game()
 {
     gEventsrc = "";
-    //only for user
     //hold turn's value to check for lowest score
-    if(players[turn].knocker)
+    if(players[turn].knocker || gameEnd)
         return tally();
     
     if(turn == p1)
     {
+        checkEmpty();
         pEventsrc = players[turn].id.toUpperCase() + "'s turn"; //when the player is the first turn of a round, nextTurn is not called so the display text must be declared here.
         userTurn = true;
         return console.log("user's turn"); //!
@@ -193,6 +181,22 @@ function nextTurn()
     console.log(pEventsrc); //!
     display();
 }
+function checkEmpty()
+{
+    if(!deckpile[0])
+    {
+        //display the empty deck for visual effect
+        var discardlength = discardpile.length; //addresses changing deck sizes due to player outs and addresses only pushing half of discardpile into deckpile, as the for function constantly updates discardpile.length as the deck is shifted
+        //move all discarded cards to deck
+        for(i = 0; i < discardlength; i++)
+            deckpile.push(discardpile.shift());
+
+        deckpile.shuffleDeck(); //shuffle
+        discardpile.push(deckpile.shift()); //first card of discard is top of deck pile
+        display();
+        return true;
+    }
+}
 function determineDealer()
 {
     dealer++;
@@ -206,24 +210,26 @@ function determineDealer()
 }
 function tally()
 {
-    /* put this in game()
-    if(checking31)
-    {
-        for(var i = 0; i < players.length; i++)
-        {
-            if(players[i].determineHandValue() == 31)
-            {
-                for(var o = 0; o < players.length; o++)
-                {
-                    if(o != i)
-                        players[o].strikes--;
-                }
-                return display();
-            }
-        }
-    } */
     pEventsrc = "";
     awaitNextRound = true;
+
+    for(var i = 0; i < players.length; i++)
+    {
+        if(players[i].determineHandValue() == 31)
+        {
+            gEventsrc = players[i].id.toUpperCase() + " 31!";
+            for(var j = 0; j < players.length; j++)
+            {
+                if(!players[j].strikes || j == i)
+                    continue;
+                losers.push(j);
+                players[j].strikes--;
+            }
+            checkEndGame();
+            return display();
+        }
+    }
+
     for(var i = 0; i < players.length; i++)
     {
         if(players[i].strikes)
@@ -261,7 +267,13 @@ function tally()
         console.log(players[i]); //!
         console.log(players[i].determineHandValue()); //!
     }
-    
+
+    checkEndGame();
+    display(); 
+}
+
+function checkEndGame()
+{
     var ingame = [];
     for(var i = 0; i < players.length; i++)
         if(players[i].strikes)
@@ -272,8 +284,6 @@ function tally()
         victor = ingame[0];
         console.log(victor);
     }
-
-    display(); 
 }
 
 function display()
@@ -322,7 +332,7 @@ function display()
                     players[p1].discardCards(this.id.slice(5), true);
                 }
             }
-            else if(!players[turn].knocker) //*if not user and if round isn't ended, hide cards
+            else if(!players[turn].knocker && !gameEnd) //*if not user and if round isn't ended, hide cards
                 image.src = "./images/cards/back-red-75-3.png";
             
             eval("opP" + (i + 1)).appendChild(image);
@@ -337,8 +347,9 @@ function display()
             eval("opP" + (i + 1) + "Strikes").style.display = "inline-block";
     }
 
+    //*I feel that there's a way to greatly simplify these conditionals but I can't seem to think of it
     //Next round button display
-    if(awaitNextRound && !victor)
+    if(awaitNextRound && (!victor || gameEnd))
     {
         if(losers.length > 1)
             pEventsrc = "Losers: ";
@@ -360,7 +371,7 @@ function display()
     //cannot click button during gameplay
     if(awaitNextRound || !round || gameEnd)
     {
-        if(!round || gameEnd) //I feel that there's a way to greatly simplify these conditionals but I can't seem to think of it
+        if(!round)
             opReStart.innerHTML = "Start";
         else
             opReStart.innerHTML = "Reset";

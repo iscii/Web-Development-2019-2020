@@ -55,25 +55,31 @@ X10. Now, just work on the strike system and tallying.
     X-Standard strikes
 X11. And then do the deck reshuffle. 
 X12. Also, simplify the user functions by putting them into the prototype functions.
-16. Head over to display and resetting.
+X13. Head over to display and resetting.
     >XReset first
         >XStart game button -> when game is started, turn it to reset
             >Xwhen game is ended, turn it to start
-    Display
+    >XDisplay
         >XRedesign your shitty arrow lmao
         >XEvent and Turn displayy
-        Round display
+        >XRound display
         >XStrikes
             for i = 0; i < player.strikes; i++
                 var += "I";
->X14. Victory
-13. If the remaining two players tie in the last round, 
-        every player gets back a strike and eliminated players are back in the game.
-15 Check for 31 and when 31, end round and strike to all other players.
+X14. Victory
+X15 Check for 31 and when 31, end round and strike to all other players.
         -add this to initial dealing and then every turn thereafter.
+16. If the remaining two players tie in the last round, 
+every player gets back a strike and eliminated players are back in the game.
 17. Animations
+18. Instructions
 
-
+4/29/2020
+Currently:
+            -cleaning up
+Completed:
+            -checking 31
+            -deck reshuffle when empty bugfixes
 4/28/2020
 Currently: 
             -cleaning up
