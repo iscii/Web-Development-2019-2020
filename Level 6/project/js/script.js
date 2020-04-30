@@ -120,11 +120,6 @@ function cpuMoves()
     //check if the drawpile is empty.
     if(checkEmpty()) return;
     
-    if(!players[turn].strikes) //Check if player in turn has strikes. If not, pass turn and continue with interval
-    {
-        console.log("[Note] " + players[turn].id + " is out!");
-        return nextTurn();
-    }
     if(turn == p1 || players[turn].knocker || gameEnd)  //*<- remove this to turn user player into a bot
     { 
         clearInterval(cpuInterval); //?for some reason, doing game(); and then return clearInterval(cpuInterval); would call the game() statement but not the clearInterval statement. In fact, it'd call nothing below game(). very strange.
@@ -259,6 +254,8 @@ function tally()
         {
             for(var i = 0; i < players.length; i++)
                 players[i].strikes++;
+            
+            pEventsrc = "Tie!!!";
             return display();
         }
     }
