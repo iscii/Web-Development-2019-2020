@@ -26,8 +26,8 @@
 					</div>
 					<span id = "discardpile"> <!--.appendChild this one-->
 						<span id = "discardpilelabel" class = "pilelabel">Discard</span><br/>
-						<img id = "topdiscardcard" src = "images/cards/empty.png" onclick = "players[p1].drawCards(1, discardpile, true);"/><!--todo: make this not have a transform when hovered and clicked-->
-						<!--<img id = "bottomdiscardcard" src = "images/cards/back-blue-75-3.png" />--> <!--!Use z-index-->
+						<span id = "topdiscardanim"><img id = "topdiscardcard" src = "images/cards/empty.png" onclick = "players[p1].drawCards(1, discardpile, true);"/></span><!--todo: make this not have a transform when hovered and clicked-->
+						<img id = "bottomdiscardcard" src = "images/cards/empty.png"/> <!--!Use z-index-->
 					</span>
 					<span id = "knockblock">
 						<span id = "knocklabel" class = "pilelabel">Knock</span><br/>
@@ -35,13 +35,12 @@
 					</span>
 					<span id = "deckpile">
 						<span id = "deckpilelabel" class = "pilelabel">Deck</span><br/>
-						<img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "players[p1].drawCards(1, deckpile, true);"/><!--todo: make this have a transform when hovered and clicked-->
-						<!--<img id = "bottomdeckcard" src = "images/cards/back-red-75-3.png" />-->
+						<span id = "topdeckanim"><img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "players[p1].drawCards(1, deckpile, true);"/> </span><!--todo: make this have a transform when hovered and clicked-->
+						<img id = "bottomdeckcard" src = "images/cards/back-red-75-3.png" />
 					</span>
 					<div class = "eventsabsolute" style = "margin-top: 3%;">
 						<div id = "gameevents" class = "eventsrelative">A player has already knocked</div>
 					</div>
-					<!--todo <span id = "message">P1 Turn</span> -->
 				</span>
 				<div class = "playerhand" id = "p4disp"></div>
 			</div>

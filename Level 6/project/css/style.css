@@ -72,10 +72,43 @@ img
     width: 30vw;
 }
 #deckpile, #knockblock, #discardpile{
+    position: relative;
     display: inline-block;
     /*border: 2px solid black;*/
     padding-top: 2%;
     width: 8vw;
+}
+#bottomdiscardcard, #bottomdeckcard
+{
+    position: absolute;
+    top: 20;
+    left: 25%;
+    z-index: -1; /*layer*/
+}
+#topdeckcard, #topdiscardcard
+{
+    transform: translate(0, 0);
+    transition-duration: 100ms;
+}
+.pileanim:hover #topdeckcard
+{
+    transform: translate(0, 20px);
+    transition-duration: 250ms;
+}
+.pileanim:hover #topdiscardcard
+{
+    transform: translate(0, 20px);
+    transition-duration: 250ms;
+}
+.handanim
+{
+    transform: translate(0, 0);
+    transition-duration: 100ms;
+}
+.handanim:hover
+{
+    transform: translate(0, -20px);
+    transition-duration: 250ms;
 }
 #knockbutton /*Gradient from bottom to top - brighter towards center. spherical illusion*/
 {

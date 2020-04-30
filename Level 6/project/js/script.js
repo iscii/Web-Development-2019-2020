@@ -8,7 +8,11 @@ function initialize()
     opP4 = document.getElementById("p4disp");
 
     opDiscard = document.getElementById("topdiscardcard");
+    opDiscard2 = document.getElementById("bottomdiscardcard");
+    opDiscardAnim = document.getElementById("topdiscardanim");
     opDeck = document.getElementById("topdeckcard");
+    opDeck2 = document.getElementById("bottomdeckcard");
+    opDeckAnim = document.getElementById("topdeckanim");
     opRounds = document.getElementById("roundController");
     opReStart = document.getElementById("reStart");
     opPEvents = document.getElementById("playerevents");
@@ -25,9 +29,11 @@ function initialize()
 
     //Create round vars
     round = 0;
+    userTurn = false;
     gameEnd = false;
     awaitNextRound = false;
-    victor = null; //declaration (i can't set it to 0 since that's p1)
+    canDiscard = false;
+    victor = null;
 
     //Create element vars
     pEventsrc = "";
@@ -47,11 +53,10 @@ function startRound()
 {
     //Start round vars
     round++;
-    userTurn = false;
-    canDiscard = false;
-    knocked = false;
-    awaitNextRound = false;
+    userTurn = false; //userTurn is a thing since it's controlled by setTimeout() rather than nextTurn(). It seems rather redundant but it's necessary
     gameEnd = false;
+    awaitNextRound = false;
+    knocked = false;
     losers = []; 
 
     //Start deckpile
@@ -99,7 +104,6 @@ function startRound()
             continue;
         }   
         players[i].drawCards(3, deckpile);
-        //! add a check function to check for 31. If 31, end round and give all other players a strike.
     }
     console.log(players); //!
     
@@ -159,6 +163,7 @@ function game()
         checkEmpty();
         pEventsrc = players[turn].id.toUpperCase() + "'s turn"; //when the player is the first turn of a round, nextTurn is not called so the display text must be declared here.
         userTurn = true;
+        display();
         return console.log("user's turn"); //!
     }
     userTurn = false;
@@ -213,14 +218,23 @@ function tally()
     pEventsrc = "";
     awaitNextRound = true;
 
+    var ingame = [];
+
     for(var i = 0; i < players.length; i++)
     {
-        if(players[i].determineHandValue() == 31)
+        if(!players[i].strikes)
+            continue;
+        ingame.push(i);
+    }
+
+    for(var i = 0; i < ingame.length; i++)
+    {
+        if(players[ingame[i]].determineHandValue() == 31)
         {
-            gEventsrc = players[i].id.toUpperCase() + " 31!";
+            gEventsrc = players[ingame[i]].id.toUpperCase() + " 31!";
             for(var j = 0; j < players.length; j++)
             {
-                if(!players[j].strikes || j == i)
+                if(j == ingame[i])
                     continue;
                 losers.push(j);
                 players[j].strikes--;
@@ -230,42 +244,42 @@ function tally()
         }
     }
 
-    for(var i = 0; i < players.length; i++)
+    var lowestScore = players[ingame[0]].determineHandValue();
+
+    for(var i = 0; i < ingame.length; i++) //determine the lowest score
     {
-        if(players[i].strikes)
-        {
-            var lowestScore = players[i].determineHandValue();
-            break;
-        } 
+        if(players[ingame[i]].determineHandValue() < lowestScore)
+            lowestScore = players[ingame[i]].determineHandValue();
     }
-    for(var i = 0; i < players.length; i++) //determine the lowest score
-    {
-        if(!players[i].strikes)
-            continue;
 
-        if(players[i].determineHandValue() < lowestScore)
-            lowestScore = players[i].determineHandValue();
-    }
-    
-    for(var i = 0; i < players.length; i++) //strike to all with lowest score
+    //check for tie and last round
+    if(ingame.length == 2)
     {
-        if(!players[i].strikes)
-            continue;
-
-        if(players[i].determineHandValue() == lowestScore)
+        if((players[ingame[0]].determineHandValue() == players[ingame[1]].determineHandValue()) && (players[ingame[0]].strikes == 1 && players[ingame[0]].strikes == 1))
         {
-            losers.push(i);
-            players[i].strikes--;
+            for(var i = 0; i < players.length; i++)
+                players[i].strikes++;
+            return display();
+        }
+    }
 
-            if(players[i].knocker && players[i].strikes) //if the knocker has the lowest score and they aren't at 0 strikes, they lose an additional point.
-                players[i].strikes--;
+    for(var i = 0; i < ingame.length; i++) //strike to all with lowest score
+    {
+        var x = ingame[i];
+        if(players[x].determineHandValue() == lowestScore)
+        {
+            losers.push(x);
+            players[x].strikes--;
+
+            if(players[x].knocker && players[x].strikes) //if the knocker has the lowest score and they aren't at 0 strikes, they lose an additional point.
+                players[x].strikes--;
         }
 
-        if(!players[i].strikes) //if this round eliminates the player, set isout to true.
-            players[i].isout = true;
+        if(!players[x].strikes) //if this round eliminates the player, set isout to true.
+            players[x].isout = true;
 
-        console.log(players[i]); //!
-        console.log(players[i].determineHandValue()); //!
+        console.log(players[x]); //!
+        console.log(players[x].determineHandValue()); //!
     }
 
     checkEndGame();
@@ -288,19 +302,28 @@ function checkEndGame()
 
 function display()
 {
+    //Please email me if there's a simpler way to do these conditionals, I get a feeling that it's too redundant.
     //Deck display
     if(!deckpile[0] && round)
         opDeck.src = "./images/cards/empty.png";
     else
         opDeck.src = "./images/cards/back-red-75-3.png";
+    if(!deckpile[1] && round)
+        opDeck2.src = "./images/cards/empty.png";
+    else
+        opDeck2.src = "./images/cards/back-red-75-3.png";
 
     //Discard display
     if(discardpile[0] && round)
         opDiscard.src = "./images/cards/" + discardpile[0].rank + "-" + discardpile[0].suit + ".png";
     else
         opDiscard.src = "./images/cards/empty.png";
+    if(discardpile[1] && round)
+        opDiscard2.src = "./images/cards/" + discardpile[1].rank + "-" + discardpile[1].suit + ".png";
+    else
+        opDiscard2.src = "./images/cards/empty.png";
 
-    //Player display
+    //Player displays
     for(var i = 0; i < players.length; i++)
     {
         eval("opP" + (i + 1)).innerHTML = ""; //*resets the divs so that the images don't build onto each other (see bug 1)
@@ -331,6 +354,10 @@ function display()
                 {
                     players[p1].discardCards(this.id.slice(5), true);
                 }
+                if(userTurn)
+                    image.className = "handanim";
+                else
+                    image.className = null;
             }
             else if(!players[turn].knocker && !gameEnd) //*if not user and if round isn't ended, hide cards
                 image.src = "./images/cards/back-red-75-3.png";
@@ -338,6 +365,23 @@ function display()
             eval("opP" + (i + 1)).appendChild(image);
         }
     }
+
+    //Animation control
+    if(userTurn && !canDiscard)
+    {   
+        opDeckAnim.className = "pileanim";
+        opDiscardAnim.className = "pileanim";
+        opDiscard2.style.boxShadow = "0 0 10px white";
+        opDeck2.style.boxShadow = "0 0 10px white";
+    }
+    else
+    {
+        opDeckAnim.className = null;
+        opDiscardAnim.className = null;
+        opDiscard2.style.boxShadow = null;
+        opDeck2.style.boxShadow = null;
+    }
+    
     
     //Strikes display
     for(var i = 0; i < players.length; i++)
@@ -347,7 +391,7 @@ function display()
             eval("opP" + (i + 1) + "Strikes").style.display = "inline-block";
     }
 
-    //*I feel that there's a way to greatly simplify these conditionals but I can't seem to think of it
+    //Please email me if there's a simpler way to do these conditionals as well.
     //Next round button display
     if(awaitNextRound && (!victor || gameEnd))
     {
@@ -386,4 +430,3 @@ function display()
     opGEvents.innerHTML = gEventsrc;
     opRInfo.innerHTML = rInfosrc;
 }
-

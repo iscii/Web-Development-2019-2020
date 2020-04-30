@@ -69,10 +69,16 @@ X13. Head over to display and resetting.
 X14. Victory
 X15 Check for 31 and when 31, end round and strike to all other players.
         -add this to initial dealing and then every turn thereafter.
-16. If the remaining two players tie in the last round, 
+X16. If the remaining two players tie in the last round, 
 every player gets back a strike and eliminated players are back in the game.
-17. Animations
+X17. Animations
 18. Instructions
+
+4/30/2020
+Currently:
+            -cleaning up
+Completed: 
+            -animations!!!
 
 4/29/2020
 Currently:
