@@ -104,11 +104,13 @@ img
 {
     transform: translate(0, 0);
     transition-duration: 100ms;
+    box-shadow: none;
 }
 .handanim:hover
 {
     transform: translate(0, -20px);
     transition-duration: 250ms;
+    box-shadow: 0 0 10px white;
 }
 #knockbutton /*Gradient from bottom to top - brighter towards center. spherical illusion*/
 {
