@@ -5,6 +5,7 @@
     font-family: akaPosse;
     src: url(../fonts/akaPosse.ttf);
 }
+
 /*general*/
 h1
 {
@@ -33,6 +34,7 @@ img
     position: absolute;
     font-size: 150%;
 }
+
 /*hands*/
 .playerhand, #drawpiles
 {
@@ -85,11 +87,13 @@ img
     left: 25%;
     z-index: -1; /*layer*/
 }
+/*animations*/
 #topdeckcard, #topdiscardcard
 {
-    transform: translate(0, 0);
+    transform: translate(0, 0); /*original position*/
     transition-duration: 100ms;
 }
+/*cannot control two elements with one hover fsr*/
 .pileanim:hover #topdeckcard
 {
     transform: translate(0, 20px);
@@ -102,7 +106,7 @@ img
 }
 .handanim
 {
-    transform: translate(0, 0);
+    transform: translate(0, 0); /*original position*/
     transition-duration: 100ms;
     box-shadow: none;
 }
@@ -132,6 +136,7 @@ img
 {
     box-shadow: 0 0 10px rgb(55, 182, 255);
 }
+
 /*events*/
 .eventsabsolute
 {
@@ -174,6 +179,7 @@ img
     float: left;
     margin-left: 1%;
 }
+
 /*strikes*/
 .strikes
 {
@@ -205,4 +211,50 @@ img
 {
     margin-top: 18.25%;
     margin-left: 82%;
+}
+
+/*instructions*/
+#instbutton
+{
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    z-index: 2;
+}
+#instmain
+{
+    width: 100vw; /*A width of 100% and a border will cause overflow*/
+    height: 100vh;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.568);
+    justify-content: center;
+    align-items: center;
+    
+}
+#instblock
+{
+    text-align: center;
+    color:lightcoral; /*text*/
+    border: 2px solid lightcoral;
+    display: inline-block;
+    background:#3f3f3f; /*background*/
+    width: 75%;
+    height: 97%;
+    border-radius: 2%;
+}
+h4
+{
+    margin-top: -3%;
+    padding-bottom: 1%;
+    border-bottom: 2px solid lightcoral;
+}
+#instcontent1
+{
+    margin-left: 2%;
+    text-align: left;
+    color: lightblue;
+    font-size: 150%;
 }

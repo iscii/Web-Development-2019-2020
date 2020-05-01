@@ -9,6 +9,7 @@
 		<script src = "js/library.js"></script>
 	</head>
 	<body onload = "initialize();">
+		<button id = "instbutton" onclick = "toggleInstructions()">Instructions</button>
 		<h1>Thirty One</h1>
 		<div id = "roundinfo"></div>
 		<div id = "gamedisplay">
@@ -49,6 +50,17 @@
 				<div class = "strikes" id = "p1strikes"></div>
 			</div>
 			<div id = "rcHolder"> <button id = "reStart" onclick = "if(!round) startRound(); else initialize();"></button> <img hidden id = "roundController" src = "images/arrow.png" onclick = "startRound();"/></div>
+		</div>
+		<!--credits to Steven for popup idea-->
+		<div id = "instmain" style = "display: none;"> <!--if I put display: none in the css file, it won't be recognized as display: none in js-->
+			<div id = "instblock">
+				<h1>Welcome to Thirty One!</h1> <br/>
+				<h4>By Issac Zheng</h4>
+				<div id = "instcontent1">Hello! This is a test message <br/>
+					and these are the momomo
+
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

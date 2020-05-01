@@ -73,13 +73,19 @@ X16. If the remaining two players tie in the last round,
 every player gets back a strike and eliminated players are back in the game.
 X17. Animations
 18. Instructions
+        -make the instructions box slide from the right
+
+5/1/2020
+Currently:  -implementing instructions
+
+Completed: 
+            -
 
 4/30/2020
 Currently:
             -cleaning up
 Completed: 
             -animations!!!
-
 4/29/2020
 Currently:
             -cleaning up

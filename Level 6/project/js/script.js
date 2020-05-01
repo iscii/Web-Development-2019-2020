@@ -18,6 +18,8 @@ function initialize()
     opPEvents = document.getElementById("playerevents");
     opGEvents = document.getElementById("gameevents");
     opRInfo = document.getElementById("roundinfo");
+    opInstMain = document.getElementById("instmain");
+    opInstBlock = document.getElementById("instblock");
 
     opP1Strikes = document.getElementById("p1strikes");
     opP2Strikes = document.getElementById("p2strikes");
@@ -294,6 +296,18 @@ function checkEndGame()
     {
         victor = ingame[0];
         console.log(victor);
+    }
+}
+
+function toggleInstructions()
+{
+    if(opInstMain.style.display == "none")
+    {
+        opInstMain.style.display = "flex";
+    }
+    else
+    {
+        opInstMain.style.display = "none";
     }
 }
 
