@@ -1,0 +1,298 @@
+@font-face
+{
+    font-family: Quinthero;
+    src: url(../fonts/Quinthero.ttf);
+    font-family: akaPosse;
+    src: url(../fonts/akaPosse.ttf);
+}
+
+/*general*/
+h1
+{
+    font-size: 250%;
+    text-align: center;
+}
+body
+{
+    background-image: url(../images/background.png);
+    background-repeat: repeat;
+    background-size: 20rem; /*rem = font-size of root element*/
+    font-family: akaPosse;
+}
+#middle
+{
+    margin: auto;
+    width: 90vw;
+    text-align: center;
+}
+img
+{
+    width: 4vw;
+}
+button
+{
+    background: radial-gradient(#ff8d8d, #ff0000);
+    border: 3px solid black;
+}
+button:focus
+{
+    outline: 0; /*removes blue focus outline*/
+}
+button:active
+{
+    background: radial-gradient(#c05353, #b90000);
+}
+button:hover
+{
+    box-shadow: 0 0 10px rgb(55, 182, 255);
+}
+
+/*hands*/
+.playerhand, #drawpiles
+{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    /* border: 2px solid black; */
+    margin: auto;
+    margin-top: 1%;
+    text-align: center;
+}
+#p2disp, #p4disp
+{
+    display: inline-block;
+    width: 20vw;
+    transform: rotate(90deg);
+}
+#p1disp
+{
+    margin-top: 4%; /*!!*/
+}
+
+/*center*/
+.pilelabel
+{
+    display: inline-block;
+    /* border: 4px solid gray;
+    border-radius: 5%; */
+    font-size: 200%;
+    color: gray;
+    margin-bottom: 10%;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+#drawpiles
+{
+    display: inline-block;
+    width: 30vw;
+}
+#deckpile, #knockblock, #discardpile{
+    position: relative;
+    display: inline-block;
+    /*border: 2px solid black;*/
+    padding-top: 2%;
+    width: 8vw;
+}
+#bottomdiscardcard, #bottomdeckcard
+{
+    position: absolute;
+    top: 20;
+    left: 25%;
+    z-index: -1; /*layer*/
+}
+/*animations*/
+#topdeckcard, #topdiscardcard
+{
+    transform: translate(0, 0); /*original position*/
+    transition-duration: 100ms;
+}
+/*cannot control two elements with one hover fsr*/
+.pileanim:hover #topdeckcard
+{
+    transform: translate(0, 20px);
+    transition-duration: 250ms;
+}
+.pileanim:hover #topdiscardcard
+{
+    transform: translate(0, 20px);
+    transition-duration: 250ms;
+}
+.handanim
+{
+    transform: translate(0, 0); /*original position*/
+    transition-duration: 100ms;
+    box-shadow: none;
+}
+.handanim:hover
+{
+    transform: translate(0, -20px);
+    transition-duration: 250ms;
+    box-shadow: 0 0 10px white;
+}
+#knockbutton /*Gradient from bottom to top - brighter towards center. spherical illusion*/
+{
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+}
+
+/*events*/
+.eventsabsolute
+{
+    width: 10vw;
+    position: absolute;
+    /* border: 2px solid black; */
+    margin-left: 10%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.eventsrelative
+{
+    position: relative;
+    font-size: 200%;
+}
+#roundinfo
+{
+    position: absolute;
+    font-size: 150%;
+}
+#tallies
+{
+    width: 8vw;
+    height: 15%;
+    position: absolute;
+    font-size: 150%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    top: 42.5%;
+    left: 90vw;
+}
+
+/*bottom*/
+#rcHolder
+{
+    display: inline-block;
+    width: 100%;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+#roundController
+{
+    width: 5vw;
+    float: right;
+    margin-right: 1%;
+}
+#reStart
+{
+    font-family: akaPosse; /*For some reason, it doesn't take the parent element (body)'s font-family*/
+    font-size: 120%;
+    margin-top: 2%;
+    width: 5vw;
+    border-radius: 45%;
+    float: left;
+    margin-left: 1%;
+}
+
+/*strikes*/
+.strikes
+{
+    display: none;
+    position: absolute;
+    width: 2%;
+    border: 2px solid rgba(128, 128, 128, 0.26);
+    text-align: center;
+    font-size: 150%;
+    color: rgb(255, 126, 126);
+    background-color: rgba(255, 0, 0, 0.185);
+}
+#p1strikes
+{
+    margin-left: 59%;
+    margin-top: -6%;
+}
+#p2strikes
+{
+    margin-top: 18.25%;
+    margin-left: 15%;
+}
+#p3strikes
+{
+    margin-left: 38%;
+    margin-top: 4%;
+}   
+#p4strikes
+{
+    margin-top: 18.25%;
+    margin-left: 82%;
+}
+
+/*instructions*/
+#instbutton
+{
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    z-index: 2;
+}
+#instmain
+{
+    width: 100vw; /*A width of 100% and a border will cause overflow*/
+    height: 100vh;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.568);
+    justify-content: center;
+    align-items: center;
+    
+}
+#instblock
+{
+    font-family: Aharoni;
+    text-align: center;
+    color:lightcoral; /*text*/
+    border: 2px solid lightcoral;
+    display: inline-block;
+    background:#3f3f3f; /*background*/
+    width: 75%;
+    height: 97%;
+    border-radius: 2%;
+}
+h4
+{
+    margin-top: -3%;
+    padding-bottom: 1%;
+    border-bottom: 2px solid lightcoral;
+}
+#instcontent1
+{
+    line-height: 130%;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: left;
+    color: lightblue;
+    font-size: 120%;
+}
+.instheader
+{
+    color: lightgreen;
+    font-size: 125%;
+}
+.innote
+{
+    margin-left: 5%;
+}
+#inquote
+{
+    color: lightsalmon;
+}
+#instbutton
+{
+    font-family: akaPosse;
+    border-radius: 45%;
+    width: 8vw;
+    font-size: 125%;
+    padding-bottom: 0.1%;
+    border: 4px solid black;
+}

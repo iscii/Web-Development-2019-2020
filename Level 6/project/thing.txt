@@ -1,1 +1,0 @@
-when knock, set knock = turn, and then stop the game the next time knock == turn.

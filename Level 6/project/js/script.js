@@ -306,13 +306,9 @@ function checkEndGame()
 function toggleInstructions()
 {
     if(opInstMain.style.display == "none")
-    {
         opInstMain.style.display = "flex";
-    }
     else
-    {
         opInstMain.style.display = "none";
-    }
 }
 
 function display()

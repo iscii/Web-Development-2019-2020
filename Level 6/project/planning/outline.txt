@@ -52,7 +52,7 @@ Functionality
         >X-3 matching cards of the same rank: score is 30
         
         >X-Two face cards and an ace: 31
-            >-end round and give every other player a strike
+            >X-end round and give every other player a strike
         >X-Reveal cards at end of round and tally
         >X-Strikes
             >X-Players with the lowest score recieve a strike
@@ -71,7 +71,7 @@ Functionality
 
         >X-If human player is eliminated, game proceeds unless player resets
 
-        -If the remaining two players tie in the last round, 
+        >X-If the remaining two players tie in the last round, 
         every player gets back a strike and eliminated players are back in the game.
 
 Interface
@@ -95,38 +95,32 @@ Interface
             -For the deck, show two cards overlayed over one another (so you only see one, but can see the other upon hovering)
             -For the discard pile, show the top two cards (discard[0] and [1]) overlayed over one another.
 
-    -Display number of cards left in a pile
+    XX(think of IRL situations)-Display number of cards left in a pile
 
     >X-Give the Deckpile an empty png as well
 
-    -When it's the user's turn and they are waiting to draw,
+    >X-When it's the user's turn and they are waiting to draw,
     shadow-box the decks. when they're waiting to discard, highlight
     the hand cards.
     
-    -Drawing:
-        -pull-card-from-deck transition/animation effect
+    >X-Drawing:
+        >X-pull-card-from-deck transition/animation effect
             -When hovering, call animation. Top card slides downward
-        -when clicked, make a "fall-into-hand animation" 
+        XX-when clicked, make a "fall-into-hand animation" 
             appears out of thin air, uses reverse hand hover animation
 
     >X-Reset button
 
     >X-Typical gambling table (green, rough pattern, wooden edges)
     
-    -Discarding:
-        -Hovering over cards will extend them from the hand
-
-
-Enhancements
-    -AI:
-        -
+    >X-Discarding:
+        >X-Hovering over cards will extend them from the hand
+XXEnhancements
 
 My Own:
-    -Give the player a choice for the enemy play interval: fast/slow. Change the interval time accordingly.
-    -Display value of each hand after tally
-
-
-
+    XX-Give the player a choice for the enemy play interval: fast/slow. Change the interval time accordingly.
+    >X-Display value of each hand after tally
+    
 Question Answers:
     1: Values
     2: Knocking is basically standing in blackjack; you pass your turn, and the round ends upon your next turn.
