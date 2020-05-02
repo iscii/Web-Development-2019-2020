@@ -72,14 +72,22 @@ X15 Check for 31 and when 31, end round and strike to all other players.
 X16. If the remaining two players tie in the last round, 
 every player gets back a strike and eliminated players are back in the game.
 X17. Animations
-18. Instructions
-        -make the instructions box slide from the right
+X18. Instructions
+        XX-make the instructions box slide from the right
+
+5/2/2020 (Complete)
+Currently:
+            -cleaning up
+Completed:
+            -stylizing instructions button
+            -instructions
+            -indication of player hand values upon tally
 
 5/1/2020
-Currently:  -implementing instructions
-
+Currently:  
+            -cleaning up
 Completed: 
-            -
+            -instructions basic layout and main elements
 
 4/30/2020
 Currently:

@@ -18,6 +18,7 @@ function initialize()
     opPEvents = document.getElementById("playerevents");
     opGEvents = document.getElementById("gameevents");
     opRInfo = document.getElementById("roundinfo");
+    opTallies = document.getElementById("tallies");
     opInstMain = document.getElementById("instmain");
     opInstBlock = document.getElementById("instblock");
 
@@ -41,6 +42,7 @@ function initialize()
     pEventsrc = "";
     gEventsrc = "";
     rInfosrc = "";
+    tallysrc = "";
 
     //Determine dealer & turn - put before card deals cos they display
     dealer = getRandomInteger(p1, p4);
@@ -94,6 +96,7 @@ function startRound()
     //Start display vars
     pEventsrc = players[turn].id.toUpperCase() + "'s turn"; //First turn of game
     rInfosrc = "Round " + round + "<br/>" + "Dealer: " + players[dealer].id.toUpperCase();
+    tallysrc = "";
 
     console.log("[Note] Dealer: " + players[dealer].id + " --------------------------"); //!
 
@@ -265,6 +268,7 @@ function tally()
     for(var i = 0; i < ingame.length; i++) //strike to all with lowest score
     {
         var x = ingame[i];
+        tallysrc += "P" + (x + 1) + ": " + players[x].determineHandValue() + "<br/>";
         if(players[x].determineHandValue() == lowestScore)
         {
             losers.push(x);
@@ -392,8 +396,7 @@ function display()
         opDiscard2.style.boxShadow = null;
         opDeck2.style.boxShadow = null;
     }
-    
-    
+
     //Strikes display
     for(var i = 0; i < players.length; i++)
     {
@@ -440,4 +443,5 @@ function display()
     opPEvents.innerHTML = pEventsrc;
     opGEvents.innerHTML = gEventsrc;
     opRInfo.innerHTML = rInfosrc;
+    opTallies.innerHTML = tallysrc;
 }
