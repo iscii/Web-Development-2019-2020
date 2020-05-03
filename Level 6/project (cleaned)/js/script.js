@@ -347,7 +347,7 @@ function display()
                 {
                     players[p1].discardCards(this.id.slice(5), true);
                 }
-                if(userTurn)
+                if(userTurn && canDiscard)
                     image.className = "handanim";
                 else
                     image.className = null;
