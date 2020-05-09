@@ -26,6 +26,7 @@ function initialize()
     opP2Strikes = document.getElementById("p2strikes");
     opP3Strikes = document.getElementById("p3strikes");
     opP4Strikes = document.getElementById("p4strikes");
+    opPLabels = document.getElementsByClassName("playerlabel");
 
     //Create players
     players = [new Player("p1"), new Player("p2"), new Player("p3"), new Player("p4")];
@@ -113,7 +114,7 @@ function startRound()
     console.log(players); //!
     
     console.log("[Next Round] --------------------------------------------------------"); //!
-    game();
+    if(!victor) game();
     display();
 }
 
@@ -232,12 +233,12 @@ function tally()
         if(players[ingame[i]].determineHandValue() == 31)
         {
             gEventsrc = players[ingame[i]].id.toUpperCase() + " 31!";
-            for(var j = 0; j < players.length; j++)
+            for(var j = 0; j < ingame.length; j++)
             {
-                if(j == ingame[i])
+                if(ingame[j] == ingame[i])
                     continue;
-                losers.push(j);
-                players[j].strikes--;
+                losers.push(ingame[j]);
+                players[ingame[j]].strikes--;
             }
             checkEndGame();
             return display();
@@ -292,13 +293,14 @@ function tally()
 function checkEndGame()
 {
     var ingame = [];
-    for(var i = 0; i < players.length; i++)
+    for(var i = 0; i < players.length; i++) 
         if(players[i].strikes)
             ingame.push(i);
 
     if(ingame.length == 1)
     {
-        victor = ingame[0];
+        victor = ingame[0] + 1; //making it 1-4 instead of 0-3 since !victor is a condition that needs to be checked and if victor is 0, it sends true, which is not what I want it to do.
+        gameEnd = true;
         console.log(victor);
     }
 }
@@ -340,7 +342,7 @@ function display()
         eval("opP" + (i + 1)).innerHTML = ""; //*resets the divs so that the images don't build onto each other (see bug 1)
         //if a player is out, show empty cards instead (addresses format issue 4.18.2020)
         //*cannot put this inside the for loop below since their hand length is 0 so the loop isn't even called for them
-        if(!players[i].strikes && (!players[i].isout || (i != victor)) || !round) //check for !knocked so that it doesn't display an empty image upon reveal and tally
+        if(!players[i].strikes && (!players[i].isout || (i != (victor - 1))) || !round) //check for !knocked so that it doesn't display an empty image upon reveal and tally
         {
             for(var o = 0; o < 3; o++)
             {
@@ -378,7 +380,7 @@ function display()
     }
 
     //Animation control
-    if(userTurn && !canDiscard)
+    if(userTurn && !canDiscard && !awaitNextRound)
     {   
         opDeckAnim.className = "pileanim";
         opDiscardAnim.className = "pileanim";
@@ -398,12 +400,16 @@ function display()
     {
         eval("opP" + (i + 1) + "Strikes").innerHTML = players[i].strikes;
         if(round)
-            eval("opP" + (i + 1) + "Strikes").style.display = "inline-block";
+            for(var j = 0; j < opPLabels.length; j++)
+                opPLabels[j].style.display = "inline-block";
+        else
+            for(var j = 0; j < opPLabels.length; j++)
+                opPLabels[j].style.display = "none";
     }
 
     //Please email me if there's a simpler way to do these conditionals as well.
     //Next round button display
-    if(awaitNextRound && (!victor || gameEnd))
+    if(awaitNextRound && !gameEnd)
     {
         if(losers.length > 1)
             pEventsrc = "Losers: ";
@@ -417,8 +423,9 @@ function display()
     }
     else
     {
+        console.log("victor");
         if(victor)
-            pEventsrc = players[victor].id.toUpperCase() + " Wins!";
+            pEventsrc = players[victor - 1].id.toUpperCase() + " Wins!";
         opRounds.style.display = "none";
     }
 

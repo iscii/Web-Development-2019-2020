@@ -15,9 +15,9 @@
 		<div id = "tallies"></div>
 		<div id = "gamedisplay">
 			<div id = "p2-3Holder">
-				<div class = "strikes" id = "p4strikes"></div>
-				<div class = "strikes" id = "p3strikes"></div>
-				<div class = "strikes" id = "p2strikes"></div>
+				<div class = "playerlabel" id = "p4label">P4 <br/>Strikes: <span id = "p4strikes"></span></div>
+				<div class = "playerlabel" id = "p3label">P3 <br/>Strikes: <span id = "p3strikes"></span></div>
+				<div class = "playerlabel" id = "p2label">P2 <br/>Strikes: <span id = "p2strikes"></span></div>
 				<div class = "playerhand" id = "p3disp"></div>
 			</div>
 			<div id = "middle">
@@ -48,7 +48,7 @@
 			</div>
 			<div id = "p1-4Holder">
 				<div class = "playerhand" id = "p1disp"></div>
-				<div class = "strikes" id = "p1strikes"></div>
+				<div class = "playerlabel" id = "p1label">P1 <br/>Strikes: <span id = "p1strikes"></span></div>
 			</div>
 			<div id = "rcHolder"> <button id = "reStart" onclick = "if(!round) startRound(); else initialize();"></button> <img hidden id = "roundController" src = "images/arrow.png" onclick = "startRound();"/></div>
 		</div>

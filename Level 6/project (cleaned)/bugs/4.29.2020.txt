@@ -1,1 +1,0 @@
-when p4 draws the last card, the deck does not reshuffle on user turn.

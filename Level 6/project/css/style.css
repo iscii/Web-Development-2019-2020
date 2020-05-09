@@ -142,8 +142,6 @@ button:hover
     position: absolute;
     /* border: 2px solid black; */
     margin-left: 10%;
-    overflow: hidden;
-    white-space: nowrap;
 }
 .eventsrelative
 {
@@ -179,8 +177,18 @@ button:hover
 #roundController
 {
     width: 5vw;
+    transition-duration: 20ms;
     float: right;
     margin-right: 1%;
+}
+#roundController:hover
+{
+    width: 5.3vw;
+    transition-duration: 20ms;
+}
+#roundController:active
+{
+    width: 5vw;
 }
 #reStart
 {
@@ -194,36 +202,36 @@ button:hover
 }
 
 /*strikes*/
-.strikes
+.playerlabel
 {
     display: none;
     position: absolute;
-    width: 2%;
+    width: 7%;
     border: 2px solid rgba(128, 128, 128, 0.26);
     text-align: center;
     font-size: 150%;
     color: rgb(255, 126, 126);
     background-color: rgba(255, 0, 0, 0.185);
 }
-#p1strikes
+#p1label
 {
     margin-left: 59%;
-    margin-top: -6%;
+    margin-top: -7%;
 }
-#p2strikes
+#p2label
 {
-    margin-top: 18.25%;
-    margin-left: 15%;
+    margin-top: 17.25%;
+    margin-left: 12%;
 }
-#p3strikes
+#p3label
 {
-    margin-left: 38%;
-    margin-top: 4%;
+    margin-left: 33%;
+    margin-top: 3%;
 }   
-#p4strikes
+#p4label
 {
-    margin-top: 18.25%;
-    margin-left: 82%;
+    margin-top: 17.25%;
+    margin-left: 80%;
 }
 
 /*instructions*/

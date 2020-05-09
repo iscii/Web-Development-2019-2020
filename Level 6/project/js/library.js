@@ -171,7 +171,7 @@ Player.prototype.determineHandValue = function(newcard, cpudiscard, drawing) //m
         //find the lowest value cards in that suit group
         for(i = 0; i < this.hand.length; i++)
             if(this.hand[i].suit == lowestsuit)
-                lowestranks.push(this.hand[i].rank);
+                lowestranks.push(this.hand[i].rank); //!5/9/2020
         
         console.log("Ranks " + lowestranks); //!
         var lowestvalue = lowestranks[0];
@@ -203,7 +203,7 @@ Player.prototype.drawCards = function(quantity, pile, isPlayer) //*it's hard to 
 {
     if(isPlayer)
     {
-        if(!userTurn || canDiscard == true || players[turn].knocked || !players[turn].strikes) return; //i'm using userTurn because I need it to be controlled by the game() function - the turn is updated early, but the user UI may only be interacted with after the intervals are cleared, which is determined by game()'s call in cpuMoves. Otherwise it'd cause problems with the intervals.
+        if(!userTurn || canDiscard == true || players[turn].knocked || !players[turn].strikes || awaitNextRound) return; //i'm using userTurn because I need it to be controlled by the game() function - the turn is updated early, but the user UI may only be interacted with after the intervals are cleared, which is determined by game()'s call in cpuMoves. Otherwise it'd cause problems with the intervals.
         canDiscard = true; //*flag variable
 
         gEventsrc = "";

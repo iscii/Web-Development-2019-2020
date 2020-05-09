@@ -1,0 +1,4 @@
+determineHandValue's discard portion might have an issue - I think (i've forgotten lol it's been so long)
+that it compares rank instead of value, so the cpu might discard an Ace and then pick it back up since
+determineHandValue's draw portion actually factors in value. Which, in a 1v1, would end
+up in an infinite loop of drawing an ace from the discard pileif both hands have the same suit
