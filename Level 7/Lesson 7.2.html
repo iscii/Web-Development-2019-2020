@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Functions as Objects</title>
+		<style></style>
+		<script>
+			const TIMER_OFF = -1;
+			function init(){
+				opCounter = document.getElementById("ctrout");
+				counter = 0;
+				counterTimer = TIMER_OFF;
+			}
+			function startCounter(){
+				if(counterTimer == TIMER_OFF)
+					counterTimer = setInterval(count, 1000);
+			}
+			function stopCounter(){
+				clearInterval(counterTimer);
+				counterTimer = TIMER_OFF;
+			}
+			function count(){
+				counter++;
+				display();
+			}
+			function display(){
+				opCounter.innerHTML = counter;
+			}
+		</script>
+	</head>
+	<body onload = "init()">
+		<div id = "ctrout">0</div>
+		<button onclick = "startCounter();">Start Counter</button>
+		<button onclick = "stopCounter();">Stop Counter</button>
+	</body>
+</html>

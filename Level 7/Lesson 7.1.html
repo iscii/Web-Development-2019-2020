@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html onmousedown = "react(event, 'gray');" onmouseup="react(event, 'white')" oncontextmenu="react(event, 'black')"> <!-- onmousedown = call event when mouse button goes down. onclick = call event when mousebutton goes back up after it goes down (a full click) oncontextmenu = right click menu-->
+	<head>
+        <meta charset="utf-8"/>
+		<title>	
+            Events
+		</title>
+		<style></style>
+		<script>
+            function init(){
+                opEvent = document.getElementById("evout");
+            }
+            function react(e, color){
+                if(e.type === 'contextmenu') //checks when the right button is clicked. Right click type = contextmenu
+                    e.preventDefault(); //prevents the default function of opening the right click menu
+
+                var str = "( " + e.clientX + ", " + e.clientY + ")<br/>"; //clientX = mouseX position, clientY = mouseY position
+                str += "target: " + e.target + "<br/>"; //target = *object* that is clicked
+                str += "button: " + e.button + "<br/>"; //works w/ onmousedown: gives the mousebutton # clicked (in firefox, left = 0, scrollwheel = 1, right = 2)
+                str += "type: " + e.type + "<br/>"; //gives onmouse event type (up/down)
+
+                e.target.style.backgroundColor = color;
+                opEvent.innerHTML = str;
+            }
+		</script>
+	</head>
+	<body onload = "init();">
+        <div id = "evout"></div>
+	</body>
+</html>

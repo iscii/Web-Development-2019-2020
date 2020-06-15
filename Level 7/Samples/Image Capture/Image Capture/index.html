@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<!--
+	The onmousemove event is in the html tag so that the user can move the image to anywhere within the window.
+-->
+<html onmousemove = "moveTarget(event);">
+	<head>
+		<title>Image Capture</title>
+		<style>
+			img
+			{
+				position:absolute;
+				left:20px;
+				right:20px;
+			}
+		</style>
+		<script>
+			/*
+				initialize
+			*/
+			function initialize()
+			{
+				capturedObject = null;
+			}
+		
+			/*
+				toggleCapture
+				
+				This function turns the capture of an HTML object on and off.  If the object is not selected (null) then the global object gets its identity.  Otherwise, it is set to null.
+				
+				Parameters
+					e - the click event
+			*/
+			function toggleCapture(e)
+			{
+				if (capturedObject == null)
+					capturedObject = e.target;
+				else
+					capturedObject = null;
+			}
+			
+			/*
+				moveTarget
+				
+				This function repositions the capturedObject so that its coordinates match the coordinates of the moving mouse pointer.
+				
+				Parameters
+					e - the move event
+			*/
+			function moveTarget(e)
+			{
+				//If there is no capturedObject, do nothing.
+				if (capturedObject == null)
+					return;
+					
+				capturedObject.style.top = e.clientY + "px";
+				capturedObject.style.left = e.clientX + "px";
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<img onclick = "toggleCapture(event);" src = "homer.png" />
+	</body>
+</html>

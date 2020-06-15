@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title></title>
+		<style></style>
+		<script src = "drag manager.js"></script>
+		<script>
+			function initialize()
+			{
+				/*
+					All of the images have been captured into a list and made dragNodes.  When you run this, you should be able to drag any of the images around the screen.
+				*/
+				dragNodes = document.getElementsByTagName("img");
+				for (var i = 0; i < dragNodes.length; i++)
+					makeDragNode(dragNodes[i]);
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<img src = "enterprise.png" />
+		<img src = "enterprise.png" />
+		<img src = "enterprise.png" />
+		<img src = "enterprise.png" />
+		<img src = "enterprise.png" />
+		<img src = "enterprise.png" />
+		<img src = "enterprise.png" />
+		<img src = "enterprise.png" />
+	</body>
+</html>

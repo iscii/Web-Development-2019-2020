@@ -1,0 +1,44 @@
+/*
+	General CSS File
+*/
+img.backimg
+{
+	height:101%;
+	width:101%;
+	position:absolute;
+	top:-1px;
+	left:-1px;
+	z-index:-1;
+}
+
+h1 span
+{
+	position:relative;
+	padding:2px 8px;
+}
+
+h1
+{
+	text-align:center;
+}
+
+h2
+{
+	width:30%;
+	text-align:center;
+}
+
+div.maincontainer
+{
+	position:relative;
+	width:90%;
+	text-align:center;
+	margin:auto;
+}
+
+span.column
+{
+	position:relative;
+	display:inline-block;
+	vertical-align:top;
+}

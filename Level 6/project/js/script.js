@@ -38,6 +38,7 @@ function initialize()
     awaitNextRound = false;
     canDiscard = false;
     victor = null;
+    thirtyone = null;
 
     //Create element vars
     pEventsrc = "";
@@ -62,6 +63,7 @@ function startRound()
     gameEnd = false;
     awaitNextRound = false;
     knocked = false;
+    thirtyone = null;
     losers = []; 
 
     //Start deckpile
@@ -126,7 +128,7 @@ function cpuMoves()
     //check if the drawpile is empty.
     if(checkEmpty()) return;
     
-    if(turn == p1 || players[turn].knocker || gameEnd)  //*<- remove this to turn user player into a bot
+    if(turn == p1 || players[turn].knocker || gameEnd || awaitNextRound)  //*<- remove this to turn user player into a bot
     { 
         clearInterval(cpuInterval); //?for some reason, doing game(); and then return clearInterval(cpuInterval); would call the game() statement but not the clearInterval statement. In fact, it'd call nothing below game(). very strange.
         return game();
@@ -140,15 +142,23 @@ function cpuMoves()
     }
     //draw
     if(discardpile[0] && (players[turn].determineHandValue(discardpile[0], false, true)) > players[turn].determineHandValue()) //check if discard has a card and if the card will benefit the hand.
+    {
+        opDiscard2.style.boxShadow = "0 0 10px white";
         players[turn].drawCards(1, discardpile);
+        opDeck2.style.boxShadow = null;
+    }
     else //from deck
+    {
+        opDeck2.style.boxShadow = "0 0 10px white";
         players[turn].drawCards(1, deckpile);
-        
+        opDiscard2.style.boxShadow = null;
+    }
+    
     //cpu discard
     setTimeout(function(){
         players[turn].discardCards(players[turn].determineHandValue(null, true));
         nextTurn();
-    }, 500);
+    }, 500); //500
 }
 
 //game managers
@@ -156,7 +166,7 @@ function game()
 {
     gEventsrc = "";
     //hold turn's value to check for lowest score
-    if(players[turn].knocker || gameEnd)
+    if(players[turn].knocker || gameEnd || thirtyone)
         return tally();
     
     if(turn == p1)
@@ -169,7 +179,7 @@ function game()
     }
     userTurn = false;
 
-    cpuInterval = setInterval(cpuMoves, 1500); //create a variable that holds an interval
+    cpuInterval = setInterval(cpuMoves, 1500); //create a variable that holds an interval //1500
 }
 function nextTurn()
 {
@@ -232,9 +242,11 @@ function tally()
     {
         if(players[ingame[i]].determineHandValue() == 31)
         {
+            console.log(players[ingame[i]].id + " 31")
             gEventsrc = players[ingame[i]].id.toUpperCase() + " 31!";
             for(var j = 0; j < ingame.length; j++)
             {
+                tallysrc += "P" + (ingame[j] + 1) + ": " + players[ingame[j]].determineHandValue() + "<br/>";
                 if(ingame[j] == ingame[i])
                     continue;
                 losers.push(ingame[j]);
@@ -380,19 +392,25 @@ function display()
     }
 
     //Animation control
-    if(userTurn && !canDiscard && !awaitNextRound)
+    if(userTurn && !awaitNextRound)
     {   
         opDeckAnim.className = "pileanim";
         opDiscardAnim.className = "pileanim";
-        opDiscard2.style.boxShadow = "0 0 10px white";
-        opDeck2.style.boxShadow = "0 0 10px white";
+        if(!canDiscard)
+        {
+            opDiscard2.style.boxShadow = "0 0 10px white";
+            opDeck2.style.boxShadow = "0 0 10px white";
+        }
+        else
+        {    
+            opDiscard2.style.boxShadow = null;
+            opDeck2.style.boxShadow = null;
+        }
     }
     else
     {
         opDeckAnim.className = null;
         opDiscardAnim.className = null;
-        opDiscard2.style.boxShadow = null;
-        opDeck2.style.boxShadow = null;
     }
 
     //Strikes display
@@ -411,19 +429,21 @@ function display()
     //Next round button display
     if(awaitNextRound && !gameEnd)
     {
-        if(losers.length > 1)
-            pEventsrc = "Losers: ";
-        else
-            pEventsrc = "Loser: ";
-        
-        for(var i = 0; i < losers.length; i++)
-            pEventsrc += players[losers[i]].id.toUpperCase() + " ";
+        if(!thirtyone)
+        {
+            if(losers.length > 1)
+                pEventsrc = "Losers: ";
+            else
+                pEventsrc = "Loser: ";
+            
+            for(var i = 0; i < losers.length; i++)
+                pEventsrc += players[losers[i]].id.toUpperCase() + " ";
+        }
 
         opRounds.style.display = "block";
     }
     else
     {
-        console.log("victor");
         if(victor)
             pEventsrc = players[victor - 1].id.toUpperCase() + " Wins!";
         opRounds.style.display = "none";

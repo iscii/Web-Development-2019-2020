@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<!-- Ivan Turner -->
+
+<!--
+	The program uses both an onkeydown and an onkeyup so that the button that corresponds to the key will highlight as if it was clicked.
+-->
+<html onkeydown = "processKeyEntry(event);" onkeyup = "processKeyRelease(event);">
+	<head>
+		<title>Simon</title>
+		
+		<link rel = "stylesheet" type = "text/css" href = "templatecss.css" />
+		<link rel = "stylesheet" type = "text/css" href = "simon.css" />
+		<style></style>
+		
+		<script type = "text/javascript" src = "utilities.js"></script>
+		<script>
+			//Constants
+			const FLASH = "1.0", UNFLASH = "0.5";			//The opacity of buttons that are and are not in use.
+			const KEY_OFFSET = 37;							//This corresponds to the key codes.
+			const RED = 0, GREEN = 1, YELLOW = 2, BLUE = 3;	//Constants for each of the colors.
+			
+			function initialize()
+			{
+				//Button array
+				buttonArray = document.getElementById("simonButtons").getElementsByTagName("button");
+			}
+			
+			/*
+				startNewGame
+				
+				Creates an empty pattern array and starts the round.
+			*/
+			function startNewGame()
+			{
+				pattern = [];
+				startRound();
+			}
+			
+			/*
+				startRound
+				
+				At the beginning of a round, a new color is added to the pattern and the rest of the mechanics are kicked off.
+			*/
+			function startRound()
+			{
+				/*
+					userEntryIdx counts the number of buttons the user has clicked during the round.
+				*/
+				userEntryIdx = 0;
+				pattern.push(getRandomInteger(RED, BLUE));
+				
+				//Disable the buttons before showing the pattern.
+				for (btn in buttonArray)
+					buttonArray[btn].disabled = true;
+
+				/*
+					This is ultimately called on a timer, but the first call doesn't need to be timed.  It should just happen.
+				*/
+				flashPattern(0);
+			}
+			
+			/*
+				Shows the pattern on screen by changing the opacity of the buttons.
+				
+				Parameters:
+					idx - the index, in the pattern array, of the button to be highlighted.
+			*/
+			function flashPattern(idx)
+			{
+				//Change the appropiate button's opacity to full to indicate that it's highlighted.
+				buttonArray[pattern[idx]].style.opacity = FLASH;
+				
+				/*
+					This timer turns off the button (calls the funtion that sets its opacity back to whatever UNFLASH is set to.  The 700 millisecond time is the time that the button stays "on".
+				*/
+				unflashTimer = setTimeout(unflashPattern, 700, idx);
+			}
+			
+			/*
+				Turns "off" the highlighting of a button.
+				
+				Parameters:
+					idx - the index, in the pattern array, of the button to be UNhighlighted.
+			*/
+			function unflashPattern(idx)
+			{
+				//Change the appropiate button's opacity to full to indicate that it's highlighted.
+				buttonArray[pattern[idx]].style.opacity = UNFLASH;
+
+				/*
+					If the program hasn't reached the end of the pattern, then set the timer to highlight the next button (idx + 1) in a tenth of a second.
+					
+					Otherwise, if you have reached the end of the pattern, it's time for the user to begin clicking buttons.
+				*/
+				if (idx < pattern.length - 1)
+				{
+					flashTimer = setTimeout(flashPattern, 200, idx+1);
+				}
+				else
+					prepForUserInput();
+			}
+			
+			/*
+				prepForUserInput
+				
+				Enables all of the buttons.
+			*/
+			function prepForUserInput()
+			{
+				for (btn in buttonArray)
+					buttonArray[btn].disabled = false;
+			}
+			
+			/*
+				processKeyEntry
+				
+				Handles the button "animation" for key presses.
+				
+				Parameters:
+					e - the event object
+			*/
+			function processKeyEntry(e)
+			{
+				/*
+					The arrow keys come in with codes 37 - 40.  By subtracting the offset, we can bring that value down to an index in the array.
+				*/
+				btn = e.which - KEY_OFFSET;
+				if (btn == RED || btn == BLUE || btn == GREEN || btn ==YELLOW)
+				{
+					buttonArray[btn].style.opacity = FLASH;
+				}
+			}
+			
+			/*
+				processKeyRelease
+				
+				Handles the button "animation" for key presses.
+				
+				Parameters:
+					e - the event object
+			*/
+			function processKeyRelease(e)
+			{
+				btn = e.which - KEY_OFFSET;
+				if (btn == RED || btn == BLUE || btn == GREEN || btn ==YELLOW)
+				{
+					buttonArray[btn].style.opacity = UNFLASH;
+					
+					//Only check the entries on the key release, otherwise the display is off.
+					checkEntry(btn);
+				}
+			}
+			
+			/*
+				checkEntry
+				
+				Checks the user's entry against the pattern.  This function is used whether the player hits a key or clicks a button.  The button click can call it directly, but the key entry requires the code to be parsed.
+				
+				Parameters:
+					entry - the user's color entry
+			*/
+			function checkEntry(entry)
+			{
+				/*
+					The userEntryIdx keeps track of where the user is in the pattern.  If the entry doesn't correspond to the appropriate pattern element, disable all of the buttons and alert how far the user got in the pattern.
+					
+					Otherwise, increment the userEntryIdx.  If it's the last entry, start a new round.
+				*/
+				if (entry != pattern[userEntryIdx])
+				{
+					for (btn in buttonArray)
+						buttonArray[btn].disabled = true;
+					alert("You completed " + (pattern.length - 1) + " rounds!");
+				}
+				else
+				{
+					userEntryIdx++;
+					if (userEntryIdx == pattern.length)
+						/*
+							The new round is on a timer so that the human eye can see the changeover between clicking the buttons and the highlighting of the pattern to start the next round.
+						*/
+						setTimeout(startRound, 200);
+				}
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<h1>
+			<img src = "simongame.png" />
+			<span>SIMON</span>
+			<img src = "simongame.png" />
+		</h1>
+		<div id = "simonButtons" class = "maincontainer">
+			<span class = "column">
+				<button class = "simon" id = "red" onclick = "checkEntry(RED);" onmousedown = "this.style.opacity = FLASH;" onmouseup = "this.style.opacity = UNFLASH;"></button><br />
+				LEFT
+			</span>
+			<span class = "column">
+				<button class = "simon" id = "green" onclick = "checkEntry(GREEN);" onmousedown = "this.style.opacity = FLASH;" onmouseup = "this.style.opacity = UNFLASH;"></button><br />
+				UP
+			</span>
+			<span class = "column">
+				<button class = "simon" id = "yellow" onclick = "checkEntry(YELLOW);" onmousedown = "this.style.opacity = FLASH;" onmouseup = "this.style.opacity = UNFLASH;"></button><br />
+				RIGHT
+			</span>
+			<span class = "column">
+				<button class = "simon" id = "blue" onclick = "checkEntry(BLUE);" onmousedown = "this.style.opacity = FLASH;" onmouseup = "this.style.opacity = UNFLASH;"></button><br />
+				DOWN
+			</span>
+		</div>
+		<hr />
+		<button onclick = "startNewGame();">Start New Game</button>
+	</body>
+</html>

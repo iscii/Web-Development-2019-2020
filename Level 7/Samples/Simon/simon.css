@@ -1,0 +1,65 @@
+body
+{
+	text-align:center;
+	font:18pt impact;
+}
+
+button
+{
+	font:18pt impact;
+}
+
+button.simon
+{
+	width:150px;
+	height:150px;
+	opacity:0.5;
+}
+
+button#yellow
+{
+	background-color:yellow;
+}
+
+button#red
+{
+	background-color:red;
+}
+
+button#blue
+{
+	background-color:blue;
+}
+
+button#green
+{
+	background-color:green;
+}
+
+div.maincontainer
+{
+	margin-top:150px;
+	background-color:white;
+	max-width:650px;
+}
+
+hr
+{
+	max-width:700px;
+}
+
+h1 img
+{
+	float:left;
+}
+
+h1 img~img
+{
+	float:right;
+}
+
+h1 span
+{
+	font:bold 72pt impact;
+	background-color:white;
+}

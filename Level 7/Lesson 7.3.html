@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Custom Events</title>
+		<style></style>
+		<script>
+			function init(){
+				opCounters = document.getElementById("counters");
+				counterList = [];
+			}
+			function addCounter(){
+				var tempCounter = {};
+				tempCounter.counter = 0;
+				tempCounter.started = false;
+
+				tempCounter.startButton = document.createElement("button");
+				tempCounter.startButton.innerHTML = "Start Counter";
+				tempCounter.startButton.myCounter = tempCounter;
+
+				tempCounter.startButton.addEventListener("click", function(){ //click = event
+					if(!this.myCounter.started){
+						this.myCounter.started = true;
+						this.myCounter.timerID = setInterval(function(){
+							tempCounter.counter++;
+							display();
+						}, 1000);
+					}
+				});
+
+				tempCounter.stopButton = document.createElement("button");
+				tempCounter.stopButton.innerHTML = "Stop Counter";
+				tempCounter.stopButton.myCounter = tempCounter;
+				
+				tempCounter.stopButton.addEventListener("click", function(){
+					clearInterval(this.myCounter.timerID);
+					this.myCounter.started = false;
+				});
+
+				tempCounter.counterDisplay = document.createElement("span");
+				tempCounter.counterDisplay.innerHTML = " " + 0;
+
+				opCounters.appendChild(document.createElement("hr"));
+				opCounters.appendChild(tempCounter.startButton);
+				opCounters.appendChild(tempCounter.stopButton);
+				opCounters.appendChild(tempCounter.counterDisplay);
+
+				counterList.push(tempCounter);
+			}
+			function display(){
+				for (var i = 0; i < counterList.length; i++){
+					counterList[i].counterDisplay.innerHTML = " " + counterList[i].counter;
+				}
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<button onclick="addCounter()">Add Counter</button>
+		<div id="counters"></div>
+	</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html onkeydown = "logKey(event);">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Need for speed</title>
+		<style>
+            #log{
+                width: 200px;
+                height: 400px;
+                overflow-y: scroll;
+                border: thick solid black;
+            }
+			#pcar{
+				height: 75px;
+				position: absolute;
+				top: 340px;
+				left: 250px;
+			}
+        </style>
+		<script>
+			const FORWARD = 38, BACKWARD = 40; //38 = up arrow unicode, 40 = down arrow unicode
+            function init(){
+				car = document.getElementById("pcar");
+				inputSpeed = document.getElementById("speedometer");
+
+				opKeyLog = document.getElementById("log");
+				keyLog = "";
+
+				xPos = 250;
+				yPos = 340;
+			}
+			function logKey(e){
+				/*
+				var str = "which: " + e.which + "<br/>"; //which = unicode value of character
+				str += "key: " + e.key + "<br/>"; //key
+				str += "code: " + e.code + "<hr/>"; //keycode
+				//caps characters have their own code. tab, capslock, shift, ctrl, etc... are not recognized as keys
+				//pressing the standard keyboard numbers give you 'DigitX' while pressing numpad numbers give you 'NumpadX'. The unicode values of the same numbers are the same.
+				//numberpad keys don't trigger the event if numlock is on. I can't experiment w this cos i don't have a numpad
+				*/
+				var dir = "";
+				var speed = parseInt(inputSpeed.value);
+				if(e.which == FORWARD){
+					yPos -= speed;
+					dir = "forward";
+				}
+				else if(e.which == BACKWARD){
+					yPos += speed;
+					dir = "backward";
+				}
+				
+				keyLog = "The car moved " + dir + ".<hr/>" + keyLog;
+
+				display();
+			}
+			function display(){
+				opKeyLog.innerHTML = keyLog;
+				car.style.top = yPos + "px";
+				car.style.left = xPos + "px";
+			}
+		</script>
+	</head>
+	<body onload = "init()">
+		Speed: <input id="speedometer" value = "1" type="number" /><br/><br/>
+		<div id = "log"></div>
+		<img id="pcar" src="purple car.png"/>
+	</body>
+</html>

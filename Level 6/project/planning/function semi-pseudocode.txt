@@ -74,9 +74,15 @@ every player gets back a strike and eliminated players are back in the game.
 X17. Animations
 X18. Instructions
         XX-make the instructions box slide from the right
+19. custom cpu interval
 
-FIX 31
-End game when user is last player
+5/22/2020
+Currently:
+            -cleaning up
+Completed:
+            -fixing score display
+            -fixing user 31 bug
+            -cpu drawpile indications
 
 5/2/2020 (Complete)
 Currently:

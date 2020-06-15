@@ -236,7 +236,6 @@ Player.prototype.discardCards = function(card, isPlayer) //card is the position 
         gEventsrc = "";
 
         nextTurn();
-        game();
     }
 
     console.log("[Note] " + this.id + " discards -----------------------------"); //!
@@ -244,12 +243,18 @@ Player.prototype.discardCards = function(card, isPlayer) //card is the position 
 
     discardpile.unshift(this.hand.splice(card, 1)[0]); //*[0] because splice returns an array!!!!! (in lesson)
 
+    opDiscard2.style.boxShadow = null;
+    opDeck2.style.boxShadow = null;
+
     console.log(discardpile); //!
     if(this.determineHandValue() == 31)
     {
         pEventsrc = "";
-        gameEnd = true;
+        thirtyone = true;
     }
+    
+    if(isPlayer)
+        game();
 
     display();
 }
@@ -272,6 +277,9 @@ Player.prototype.knockTurn = function(isPlayer)
     console.log(gEventsrc); //!
     this.knocker = true;
     knocked = true;
+
+    opDiscard2.style.boxShadow = null;
+    opDeck2.style.boxShadow = null;
 
     rInfosrc += "<br/> Knocker: " + this.id.toUpperCase();
     
