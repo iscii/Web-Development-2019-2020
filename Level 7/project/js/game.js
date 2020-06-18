@@ -37,21 +37,5 @@ function display(){
             }
             gridNum.appendChild(grid.boxes[j].elem)
         }
-        /*
-        //display boxes
-        for(let j = 0; j < XLABELS.length; j++){
-            //display y label
-            var y = document.createElement("div");
-            y.className = "labelStyle";
-            y.innerHTML = YLABELS[j];
-            eval(gridNum).appendChild(y);
-
-            for(let k = 0; k < YLABELS.length; k++){
-                var box = document.createElement("div");
-                box.className = "boxStyle";
-                box.innerHTML = "[" + XLABELS[j].toUpperCase() + ", " + YLABELS[k] + "]";
-                eval(gridNum).appendChild(box);
-            }
-        } */
     }
 }
