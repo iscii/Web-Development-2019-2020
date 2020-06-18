@@ -19,8 +19,6 @@ function display(){
         var gridNum = eval("opGrid" + i);
         var grid = eval("grid" + i);
 
-        //!make the display commands relative to the grid/box objects
-
         //display x label
         for(let j = 0; j < XLABELS.length; j++){
             var x = document.createElement("div");
