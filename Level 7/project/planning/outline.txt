@@ -1,0 +1,97 @@
+Battleship
+
+Functionality
+
+    Objects
+        Ships
+            - Aircraft Carrier, takes up 5 spaces
+            - Battleship, takes up 4 spaces
+            - Destroyer, takes up 3 spaces
+            - Submarine, takes up 3 spaces
+            - Patrol Boat, takes up 2 spaces
+        Boxes (class?)
+            - Each box will be an object
+            - *Local to grid object
+        Grid (class)
+            - contains corresponding boxes
+
+    Rounds
+        Setup
+            - Ships begin in order from top to bottom, all defaulted horizontal
+            - Players may move and rotate ships around the grid
+                - Select the ship [onclick, client.target]
+                - When a ship is selected:
+                    - selected = true;
+                    - it will follow the cursor.
+                    - hovering over grids will expand it and highlight it in a different color
+                    - pressing R will rotate the ship (from the angle of its furthest left and top grid)
+                        - only two rotation forms: vertical (ex: A1 - E1) and horizontal (ex: A1 - A5)
+            Start Button
+                - Randomly arranges enemy ships [not visible to player]
+                - Disables setup functions
+                - Starts game functions
+        Game
+            - One player turn = one round
+            - players, user, cpu
+            Player Turn
+                - click on enemy grid to attack it
+                    - [normal] if you hit a ship you go again
+                    - [salvo] you get 5 hits
+                        - grid turns red if ship is it
+                        - if not, grid turns white [blue to reflect water]
+                        - if all the grids occupied by a ship are hit, the ship is sunk 
+            Enemy Turn
+                - choose a spot at random
+                - if it hits or knows where a ship is, it will track the grid
+                vertically or horizontally (coinflip) until it is sunk.
+                    - if vertically and it hits, remain vertical. If miss on next turn,
+                    skip to the opposite vertical end on next turn.
+                    - if both misses, it will try horizontal until a ship is sunk.
+
+        Victory
+            - When all the ships of a player are sunk
+            - log, event notice
+            - button pop-up to go back to menu
+            - store the player ship positions for next round
+
+    Game version
+        Normal
+            - attack()
+        Salvo
+            - salvo() [call this on attack rounds instead of attack()]
+
+Interface
+
+    Main Page
+        - Begin Game button expands
+            Game version buttons
+                - Normal
+                - Salvo
+    Game Page
+        - 2 Grids [right 1, left 2] 
+                - Grid 1 = user's fleet. [click to setup ships on turn]
+                - Grid 2 = cpu's fleet. [click to attack on turn]
+            - Grids should be 11 x 11
+                - A - J along top
+                - 1 - 10 along side 
+    Log
+        Properties
+            - overflow y
+        Content
+        - Log setup end / game start
+        - Log rounds and moves corresponding to rounds
+        - Log results of each round
+    Animations
+        - When the user hovers over grids, highlight it    
+        
+
+Enhancements
+    Salvo
+        - X shots per turn, no resets on hit.
+    Move a ship every time a ship is sunk
+        - Moving ship would use same interface as setup
+        - A shup that moves may not occupy any of the spaces that
+        have already been called (?) by the opponent
+        - A ship that moves has all its hits repaired.
+
+

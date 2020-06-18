@@ -1,0 +1,35 @@
+/* Test */
+body{
+    color: rgb(255, 219, 233);
+    background: rgb(11, 26, 48);
+    width: 99vw;
+    height: 97vh;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.dgrid{
+    display: inline-grid;
+    grid-template-columns: 5% auto auto auto auto auto auto auto auto auto auto;
+    grid-template-rows: 5% auto auto auto auto auto auto auto auto auto auto;
+    /*border: 2px solid black;*/
+    width: 38%;
+    height: 76%;
+    margin: 1%;
+}
+
+.boxStyle{
+    border: 2px solid rgb(8, 73, 15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.labelStyle{
+    border: 2px solid rgb(8, 73, 15);
+    color: rgb(255, 72, 72);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
