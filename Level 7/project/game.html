@@ -8,15 +8,16 @@
 		<style></style>
 		<script src = js/game.js></script>
 		<script src = js/library.js></script>
+		<script src = js/utilities.js></script>
 		<script>
 			
 		</script>
 	</head>
 	<body onload = "initialize()">
-		<div id = "divG1" class = "dgrid">
+		<div id = "divG1" onclick = "react(grid1, event)" class = "dgrid">
 			<div></div>
 		</div>
-		<div id = "divG2" class = "dgrid">
+		<div id = "divG2" onclick = "react(grid2, event)" class = "dgrid">
 			<div></div>
 		</div>
 	</body>

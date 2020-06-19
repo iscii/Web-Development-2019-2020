@@ -14,6 +14,12 @@ function initialize(){
     display();
 }
 
+function react(g, e){
+    if(e.target.className == "box"){ //only react if click target was a box
+        console.log(g.getBox(e));
+    }
+}
+
 function display(){
     for(let i = USER; i <= CPU; i++){
         var gridNum = eval("opGrid" + i);
@@ -22,14 +28,14 @@ function display(){
         //display x label
         for(let j = 0; j < XLABELS.length; j++){
             var x = document.createElement("div");
-            x.className = "labelStyle";
+            x.className = "label";
             x.innerHTML = XLABELS[j].toUpperCase();
             gridNum.appendChild(x);
         }
         for(let j = 0; j < grid.boxes.length; j++){
             if(j % 10 == 0){
                 var y = document.createElement("div");
-                y.className = "labelStyle";
+                y.className = "label";
                 y.innerHTML = YLABELS[j/10];
                 gridNum.appendChild(y);
             }

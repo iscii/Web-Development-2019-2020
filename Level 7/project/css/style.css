@@ -19,14 +19,14 @@ body{
     margin: 1%;
 }
 
-.boxStyle{
+.box{
     border: 2px solid rgb(8, 73, 15);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.labelStyle{
+.label{
     border: 2px solid rgb(8, 73, 15);
     color: rgb(255, 72, 72);
     display: flex;

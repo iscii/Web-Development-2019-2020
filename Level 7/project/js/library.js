@@ -11,9 +11,15 @@ function Grid(player){
     }
 }
 
+Grid.prototype.getBox = function(e){ //returns box object in grid from event
+    var array = this.boxes.map(item => item.elem.id == e.target.id);
+    var index = indexesOfArray(array, true);
+    return this.boxes[index];
+}
+
 function Box(letter, number){
     this.occupied = false;
     this.elem = document.createElement("div");
-    this.elem.className = "boxStyle";
-    this.id = [letter, number];
+    this.elem.className = "box";
+    this.elem.id = [letter, number];
 }
