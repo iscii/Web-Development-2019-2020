@@ -46,7 +46,7 @@ function countDuplicatesInArray(array, itm)
         array - the array
         itm - the search item
     Returns: 
-        An array including all of the indices at which the item appears (empty if item is not in the list)
+        An array including all of the indices [in string] at which the item appears (empty if item is not in the list)
 */
 function indexesOfArray(array, itm)
 {

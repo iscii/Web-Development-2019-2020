@@ -1,0 +1,8 @@
+6/20/2020
+To Do:
+    - make ship occupy boxes
+    - check if ship is in an already occupied box
+    - simplify occupy prototype code
+Completed: 
+    - finding id of ship occupation boxes
+    - checking if ship is out of bounds

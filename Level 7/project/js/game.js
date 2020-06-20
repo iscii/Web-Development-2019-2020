@@ -5,16 +5,18 @@ function references(){
     opGrid2 = document.getElementById("divG2");
 }
 function ships(){
-
+    for(item in grid1.ships)
+        grid1.ships[item].occupy();
 }
 function initialize(){
     references();
-    ships();
-
+    
     grid1 = new Grid(USER);
     grid2 = new Grid(CPU);
     console.log(grid1.boxes);
-
+    
+    ships();
+    
     display();
 }
 
