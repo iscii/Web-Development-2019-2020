@@ -4,8 +4,12 @@ function references(){
     opGrid1 = document.getElementById("divG1");
     opGrid2 = document.getElementById("divG2");
 }
+function ships(){
+
+}
 function initialize(){
     references();
+    ships();
 
     grid1 = new Grid(USER);
     grid2 = new Grid(CPU);
@@ -16,7 +20,7 @@ function initialize(){
 
 function react(g, e){
     if(e.target.className == "box"){ //only react if click target was a box
-        console.log(g.getBox(e));
+        console.log(g.getBox(e, true));
     }
 }
 
