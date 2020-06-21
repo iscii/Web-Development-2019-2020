@@ -24,7 +24,7 @@ function initialize(){
 
 function react(g, e){
     if(e.target.className == "box"){ //only react if click target was a box
-        console.log(g.getBox(e, true));
+        console.log(g.getBox(e, true)); //< here
     }
 }
 

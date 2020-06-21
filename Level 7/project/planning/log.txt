@@ -1,3 +1,12 @@
+6/21/2020
+To Do:
+    - rounds and game initialization
+        - click on ships' control box to select
+Completed:
+    - make ships occupy boxes
+    - check if ship is in an already occupied box [needs hotfixes]
+    - simplified occupy prototype code
+
 6/20/2020
 To Do:
     - make ship occupy boxes
