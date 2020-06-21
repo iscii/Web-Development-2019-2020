@@ -1,18 +1,20 @@
-const USER = 1, CPU = 2
+const USER = 1, CPU = 2;
 
 function references(){
     opGrid1 = document.getElementById("divG1");
     opGrid2 = document.getElementById("divG2");
 }
 function ships(){
-    for(item in grid1.ships)
-        grid1.ships[item].occupy();
+    for(i in grids)
+        for(j in grids[i].ships)
+            grids[i].ships[j].occupy();
 }
 function initialize(){
     references();
     
     grid1 = new Grid(USER);
     grid2 = new Grid(CPU);
+    grids = [grid1, grid2];
     console.log(grid1.boxes);
     
     ships();
@@ -45,7 +47,9 @@ function display(){
                 y.innerHTML = YLABELS[j/10];
                 gridNum.appendChild(y);
             }
-            gridNum.appendChild(grid.boxes[j].elem)
+            if(grid.boxes[j].occupied)
+                grid.boxes[j].elem.innerHTML = "X";
+            gridNum.appendChild(grid.boxes[j].elem);
         }
     }
 }

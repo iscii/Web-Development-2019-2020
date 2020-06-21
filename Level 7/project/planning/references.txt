@@ -6,3 +6,6 @@ https://css-tricks.com/snippets/css/complete-guide-grid/
 
 Map!
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map 
+
+Unary Operators (+ true = 1)
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#.2B_%28Unary_Plus%29
