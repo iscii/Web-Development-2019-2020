@@ -1,3 +1,13 @@
+6/22/2020
+To Do:
+    - rounds and game initialization
+        - click on ships' control box to select
+    - figure out why the for() function in react() in if(box.ship) is not being called [the boxes are not becoming vacant].
+Completed:
+    - revamp occupy code for modularity
+    - figure out why occupy() in react is not working
+    - make a choice: make ships' control property array or >object<
+
 6/21/2020
 To Do:
     - rounds and game initialization

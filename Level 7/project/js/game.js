@@ -16,6 +16,9 @@ function initialize(){
     grid2 = new Grid(CPU);
     grids = [grid1, grid2];
     console.log(grid1.boxes);
+
+    selected = null;
+    round = 0;
     
     ships();
     
@@ -23,14 +26,40 @@ function initialize(){
 }
 
 function react(g, e){
-    if(e.target.className == "box"){ //only react if click target was a box
-        console.log(g.getBox(e, true)); //< here
+    if(e.target.className == "box"){ //only react if click target is a box
+        var box = g.getBox(e.target.id);
+        console.log(box);
+
+        if(!round){ //round 0 = setup round
+            if(selected){
+                console.log(selected);
+                selected.control = box; //sets the ship's control as the new box
+                
+                if(!selected.occupy()) return display(); //calls function and receives return value;
+                
+                display();
+                return selected = null;
+            }
+    
+            if(box.ship){
+                selected = box.ship;
+                console.log("rerere");
+                for(item in selected.boxes){
+                    console.log("hellor0");
+                    selected.boxes[item].ship = null; //removes occupancy
+                    console.log(selected.boxes[item].ship);
+                }
+                console.log(selected);
+                display(); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
+            }
+        }
     }
 }
 
 function display(){
     for(let i = USER; i <= CPU; i++){
         var gridNum = eval("opGrid" + i);
+        gridNum.innerHTML = "<div></div>"; //resets gridNum so appendChild() doesn't pile up. The div is for that extra little space in the top left corner
         var grid = eval("grid" + i);
 
         //display x label
@@ -40,6 +69,7 @@ function display(){
             x.innerHTML = XLABELS[j].toUpperCase();
             gridNum.appendChild(x);
         }
+        //display y label
         for(let j = 0; j < grid.boxes.length; j++){
             if(j % 10 == 0){
                 var y = document.createElement("div");
@@ -47,8 +77,10 @@ function display(){
                 y.innerHTML = YLABELS[j/10];
                 gridNum.appendChild(y);
             }
-            if(grid.boxes[j].occupied)
-                grid.boxes[j].elem.innerHTML = "X";
+            if(grid.boxes[j].ship)
+                grid.boxes[j].elem.innerHTML = grid.boxes[j].ship.name[0];
+            else
+                grid.boxes[j].elem.innerHTML = " ";
             gridNum.appendChild(grid.boxes[j].elem);
         }
     }

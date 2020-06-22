@@ -9,3 +9,6 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 Unary Operators (+ true = 1)
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#.2B_%28Unary_Plus%29
+
+Make text unselectable
+https://stackoverflow.com/questions/69430/is-there-a-way-to-make-text-unselectable-on-an-html-page
