@@ -71,10 +71,7 @@ Ship.prototype.occupy = function(){ //maybe parameters for checking but i'm not 
     }
     return true;
 }
-/*
-Ship.prototype.occupy = function(){
-}
-*/
+
 Ship.prototype.deoccupy = function(){
     for(item in this.boxes)
         this.boxes[item].ship = null;
