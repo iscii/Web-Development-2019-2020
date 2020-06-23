@@ -46,51 +46,27 @@ Ship.prototype.occupy = function(){ //maybe parameters for checking but i'm not 
     label = YLABELS;
     if(this.horizontal) label = XLABELS;
     
-    var boxids = [];
+    var boxes = [];
     //find boxes
     var start = indexesOfArray(label, this.control.id[+ !this.horizontal])[0];
     for(let i = start; i < (start + this.size); i++){
         if(this.horizontal)
-            boxids.push(this.grid.getBox([label[i], this.control.id[+ this.horizontal]]));
+            boxes.push(this.grid.getBox([label[i], this.control.id[+ this.horizontal]]));
         else
-            boxids.push(this.grid.getBox([this.control.id[+ !this.horizontal], label[i]]));
+            boxes.push(this.grid.getBox([this.control.id[+ !this.horizontal], label[i]]));
     }
-    console.log(boxids);
+    console.log(boxes);
 
     //check if occupiable
-    for(item in boxids)
-        if(boxids[item] == undefined || boxids[item].ship){
+    for(item in boxes)
+        if(boxes[item] == undefined || boxes[item].ship){
             console.log("cannot occupy");
             return false; 
         }
 
     //occupy
-    for(item in boxids)
-        boxids[item].ship = this;
-    /*
-    //REVAMP CODE [read bottom comments]
-    //split into two? checkifoccupy and occupy
-    var start = indexesOfArray(label, this.control[+ !this.horizontal])[0];
-    console.log(label);
-    console.log(this.control);
-    console.log(this.control[+ !this.horizontal]);
-    console.log(start);
-    for(let i = start; i < (start + this.size); i++){
-        if(this.horizontal){ //horizontal count
-            if(!this.grid.getBox([label[i], this.control[+ this.horizontal]]).ship){
-                this.boxes.push(this.grid.getBox([label[i], this.control[+ this.horizontal]]));
-            }
-            else return console.log(label[i] + ", " + this.control[+ this.horizontal] + " is occupied");
-        }
-        else{ //vertical count
-            if(!this.grid.getBox([this.control[+ this.horizontal], label[i]]).ship){
-                this.boxes.push(this.grid.getBox([label[i], this.control[+ this.horizontal]]));
-            }
-            else return console.log(this.control[+ this.horizontal] + ", " + label[i] + " is occupied");
-        }
-        this.grid.getBox([label[i], this.control[+ this.horizontal]]).ship = this; //only occurs if occupied
-        //Actually, i might go back to the occID array code since it's more practical. I can manage it more easily.
-        //Gonna have to check for all the grids if they're occupied before setting the properties.
+    for(item in boxes){
+        this.boxes.push(boxes[item]);
+        boxes[item].ship = this;
     }
-    */
 }

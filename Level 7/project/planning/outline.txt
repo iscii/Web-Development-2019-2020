@@ -82,7 +82,9 @@ Interface
         - Log rounds and moves corresponding to rounds
         - Log results of each round
     Animations
-        - When the user hovers over grids, highlight it    
+        - When the user hovers over grids, highlight it  
+
+    When attacking, change cursor to a target  
         
 
 Enhancements

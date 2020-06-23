@@ -38,16 +38,16 @@ function react(g, e){
                 if(!selected.occupy()) return display(); //calls function and receives return value;
                 
                 display();
-                return selected = null;
+                selected = null;
+                return console.log(selected);
             }
     
             if(box.ship){
                 selected = box.ship;
-                console.log("rerere");
-                for(item in selected.boxes){
-                    console.log("hellor0");
+                console.log(selected);
+                for(item in box.ship.boxes){
+                    //console.log(selected.boxes[item].ship);
                     selected.boxes[item].ship = null; //removes occupancy
-                    console.log(selected.boxes[item].ship);
                 }
                 console.log(selected);
                 display(); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
