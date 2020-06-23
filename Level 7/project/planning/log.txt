@@ -1,8 +1,12 @@
+
 6/23/2020
 To Do:
     - rounds and game initialization
 Completed:
+    - visual indication of select [trace function] - when selected, hovering over boxes will highlight them and the corresponding boxes of ship.
+        - For now, if cannot occupy, then just set text to "x". 
     - select and move ships
+        - rotation
         - fix selected flag when dropping ship.
         - click on ships' control box to select
     - figure out why the for() function in react() in if(box.ship) is not being called [the boxes are not becoming vacant].

@@ -96,4 +96,7 @@ Enhancements
         have already been called (?) by the opponent
         - A ship that moves has all its hits repaired.
 
+    Self:
+        >X - When selecting a ship, set its control to the box which the mouse is hovering over.
+        - [probably difficult] When selecting a ship, keep its selected box position on mouseclick. store its control relative to the box that is clicked.
 

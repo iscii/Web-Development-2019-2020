@@ -42,8 +42,27 @@ function Ship(name, size, control, grid){
     this.horizontal = true;
 }
 
-Ship.prototype.occupy = function(){ //maybe parameters for checking but i'm not sure
-    label = YLABELS;
+Ship.prototype.occupy = function(check){ //maybe parameters for checking but i'm not sure
+    var boxes = this.getBoxes();
+
+    //check if occupiable
+    for(item in boxes){
+        if(boxes[item] == undefined || boxes[item].ship){
+            return false; 
+        }
+    }
+    //if not checking, occupy.
+    if(!check){
+        for(item in boxes){
+            this.boxes.push(boxes[item]);
+            boxes[item].ship = this;
+        }
+    }
+    return true;
+}
+
+Ship.prototype.getBoxes = function(){
+    var label = YLABELS;
     if(this.horizontal) label = XLABELS;
     
     var boxes = [];
@@ -53,21 +72,37 @@ Ship.prototype.occupy = function(){ //maybe parameters for checking but i'm not 
         if(this.horizontal)
             boxes.push(this.grid.getBox([label[i], this.control.id[+ this.horizontal]]));
         else
-            boxes.push(this.grid.getBox([this.control.id[+ !this.horizontal], label[i]]));
+            boxes.push(this.grid.getBox([this.control.id[+ this.horizontal], label[i]]));
     }
-    console.log(boxes);
+    //console.log(boxes);
+    return boxes;
+}
 
+Ship.prototype.deoccupy = function(){
+    for(item in this.boxes)
+        this.boxes[item].ship = null;
+    this.boxes = [];
+}
+
+/*
     //check if occupiable
-    for(item in boxes){
-        if(boxes[item] == undefined || boxes[item].ship){
-            console.log(true);
-            return false; 
+    if(check){
+        if(this.check(boxes)) return true;
+        return false;
+    }
+    //if not checking, occupy.
+    if(this.check(boxes)){
+        for(item in boxes){
+            this.boxes.push(boxes[item]);
+            boxes[item].ship = this;
         }
     }
+}
 
+Ship.prototype.check = function(boxes){
     for(item in boxes){
-        this.boxes.push(boxes[item]);
-        boxes[item].ship = this;
+        if(boxes[item] == undefined || boxes[item].ship)
+            return false; 
     }
     return true;
 }
@@ -77,3 +112,4 @@ Ship.prototype.deoccupy = function(){
         this.boxes[item].ship = null;
     this.boxes = [];
 }
+*/

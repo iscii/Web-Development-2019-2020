@@ -31,27 +31,42 @@ function react(g, e){
         console.log(box);
 
         if(!round){ //round 0 = setup round
+            if(g == grid2) return; //prevents player from moving cpu ships
             if(selected){
                 console.log(selected);
                 selected.control = box; //sets the ship's control as the new box
                 
-                if(!selected.occupy()) return display();
+                if(!selected.occupy(false)) return display(); //performs both the check and occupancy
 
                 display();
                 return selected = null;
             }
     
             if(box.ship){
+                console.log(box.ship);
                 selected = box.ship;
-                console.log(selected);
                 selected.deoccupy();
-                display(); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
+                selected.control = selected.grid.getBox(e.target.id);
+                display(selected.control.elem); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
             }
         }
     }
 }
+function trace(g, e){ //update display when mousing over grids
+    if(!selected || g == grid2) return; //maybe remove grid2 conditional when working on attack hover animations
+    display(e.target);
+}
+function logKey(e){ //rotate
+    if(!selected) return;
+    if(e.code == "KeyR"){ //e.code since it ignores caps lock
+        selected.horizontal = !selected.horizontal; //toggle
+        console.log("rotate");
+        console.log(selected.control.elem);
+        display(selected.control.elem);
+    }
+}
 
-function display(){
+function display(traceBox){
     for(let i = USER; i <= CPU; i++){
         var gridNum = eval("opGrid" + i);
         gridNum.innerHTML = "<div></div>"; //resets gridNum so appendChild() doesn't pile up. The div is for that extra little space in the top left corner
@@ -79,4 +94,17 @@ function display(){
             gridNum.appendChild(grid.boxes[j].elem);
         }
     }
+    
+    if(traceBox){
+        selected.control = selected.grid.getBox(traceBox.id);
+        var boxes = selected.getBoxes();
+        var text = selected.name[0];//this should be temporary. Represent the ships through colored boxes cos text messes the box sizes.
+        if(!selected.occupy(true)){
+            text = "X";
+            console.log(boxes);
+        }
+        var inBounds = indexesOfArray(boxes.map(item => item != undefined), true);
+        for(item in inBounds)
+            boxes[inBounds[item]].elem.innerHTML = text;
+    } 
 }
