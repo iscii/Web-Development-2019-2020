@@ -61,7 +61,7 @@ Ship.prototype.occupy = function(){ //maybe parameters for checking but i'm not 
     for(item in boxes){
         if(boxes[item] == undefined || boxes[item].ship){
             console.log(true);
-            return false 
+            return false; 
         }
     }
 
