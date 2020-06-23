@@ -35,9 +35,14 @@ function react(g, e){
                 console.log(selected);
                 selected.control = box; //sets the ship's control as the new box
                 
-                if(!selected.occupy()) return display(); //calls function and receives return value;
-                
+                if(!selected.occupy()){
+                    display(); //calls function and receives return value;
+                    console.log("cannot occupy");
+                    return;
+                }
+
                 display();
+                console.log("can occupy");
                 selected = null;
                 return console.log(selected);
             }
