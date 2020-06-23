@@ -45,11 +45,7 @@ function react(g, e){
             if(box.ship){
                 selected = box.ship;
                 console.log(selected);
-                for(item in box.ship.boxes){
-                    //console.log(selected.boxes[item].ship);
-                    selected.boxes[item].ship = null; //removes occupancy
-                }
-                console.log(selected);
+                selected.deoccupy();
                 display(); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
             }
         }

@@ -58,15 +58,22 @@ Ship.prototype.occupy = function(){ //maybe parameters for checking but i'm not 
     console.log(boxes);
 
     //check if occupiable
-    for(item in boxes)
+    for(item in boxes){
         if(boxes[item] == undefined || boxes[item].ship){
             console.log("cannot occupy");
             return false; 
         }
+    }
 
     //occupy
     for(item in boxes){
         this.boxes.push(boxes[item]);
         boxes[item].ship = this;
     }
+}
+
+Ship.prototype.deoccupy = function(){
+    for(item in this.boxes)
+        this.boxes[item].ship = null;
+    this.boxes = [];
 }
