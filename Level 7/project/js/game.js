@@ -21,6 +21,8 @@ function initialize(){
 
     selected = null;
     round = 0;
+    playerturn = true;
+    //salvo = false; //normal or salvo
     
     ships();
 
@@ -29,11 +31,12 @@ function initialize(){
 
 //Event functions
 function react(g, e){
+    if(e.type == "contextmenu") e.preventDefault();
     if(e.target.className == "box"){ //only react if click target is a box
         var box = g.getBox(e.target.id);
         console.log(box);
 
-        if(!round && !(g == grids[CPU])){ //round 0 = setup round
+        if(!round && (g == grids[USER])){ //round 0 = setup round
             if(selected){
                 console.log(selected);
                 selected.control = box; //sets the ship's control as the new box
@@ -52,28 +55,45 @@ function react(g, e){
                 display(selected.control.elem); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
             }
         }
+        else if(playerturn){ //not setup round and clicking cpu box
+            attack(box);
+        }
+        else console.log("it is not your turn");
     }
 }
 function trace(g, e){ //update display when mousing over grids
     if(!selected || g == grids[CPU]) return; //maybe remove grid2 conditional when working on attack hover animations
     display(e.target);
 }
-function logKey(e){ //rotate
+function rotate(e){ //rotate
     if(!selected) return;
-    if(e.code == "KeyR"){ //e.code since it ignores caps lock
+    if(e.code == "KeyR" || e.type == "contextmenu"){ //e.code since it ignores caps lock
+        e.preventDefault();
         selected.horizontal = !selected.horizontal; //toggle
         console.log("[Rotate] " + selected.name);
         display(selected.control.elem);
     }
 }
+
 //Game functions
 function startGame(button){
     button.style.display = "none";
+    opLog.style.display = "inline-block";
     console.log(grids[CPU]);
     for(item in grids[CPU].ships){
         cpuShips(item);
     }
 }
+function attack(box){
+    console.log("attacked");
+    box.hit = true; 
+    if(!box.ship){
+        playerturn = !playerturn;
+        return setTimeout(cpuAttack(), 1000);
+    }
+    box.ship.checkSink();
+}
+//Cpu functions
 function cpuShips(item){ //randomizes cpu ship locations
     var ship = grids[CPU].ships[item];
     ship.deoccupy();
@@ -87,6 +107,9 @@ function cpuShips(item){ //randomizes cpu ship locations
     else{
         cpuShips(item);
     }
+}
+function cpuAttack(){
+    console.log("CPU ATtACKU");
 }
 
 //Display

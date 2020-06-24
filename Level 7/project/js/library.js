@@ -24,8 +24,16 @@ Grid.prototype.getBox = function(id){ //returns box object in grid from event. i
     return this.boxes[indexesOfArray(this.boxes.map(item => item.elem.id == id), true)];
 }
 
+Grid.prototype.checkGame = function(){
+    for(item in this.ships)
+        if(!this.ships[item].sunken) return;
+    
+    console.log("game over!");
+}
+
 function Box(letter, number){
     this.ship = null;
+    this.hit = false;
     this.elem = document.createElement("div");
     this.elem.className = "box";
     this.elem.id = [letter, number]; //note in getBox prototype
@@ -84,6 +92,14 @@ Ship.prototype.deoccupy = function(){
     this.boxes = [];
 }
 
+Ship.prototype.checkSink = function(){
+    for(item in this.boxes)
+        if(!this.boxes[item].hit) return;
+    
+    this.sunken = true;
+    console.log(this.name + " has been sunk!");
+    this.grid.checkGame();
+}
 /*
     //check if occupiable
     if(check){

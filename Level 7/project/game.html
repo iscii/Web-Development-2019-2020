@@ -1,6 +1,6 @@
 <!-- Game -->
 <!DOCTYPE html>
-<html onkeypress = "logKey(event)">
+<html onkeypress = "rotate(event)">
 	<head>
 		<meta charset="utf-8"/>
 		<title></title>
@@ -14,7 +14,7 @@
 		</script>
 	</head>
 	<body onload = "initialize()">
-		<div id = "divG1" onclick = "react(grid0, event)" onmouseover = "trace(grid0, event)" class = "dgrid">
+		<div id = "divG1" onclick = "react(grid0, event)" oncontextmenu = "rotate(event)" onmouseover = "trace(grid0, event)" class = "dgrid">
 		</div>
 		<div id = "divG2" onclick = "react(grid1, event)" class = "dgrid">
 		</div>

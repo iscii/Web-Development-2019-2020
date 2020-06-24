@@ -1,8 +1,21 @@
 6/24/2020
 To Do:
     - rounds and game initialization
+    - cpu attack function
+        - setinterval instead of settimeout
+        - clearinterval when miss ship
                 
 Completed: 
+        - start button
+            - hides and reveals log in its place when clicked
+        - attacking
+            - turns
+            - stay player turn if hit ship
+                - check if ship is sunk
+                - check if all ships are sunk [game over]
+            - cpu attack function
+                - give it an interval/timeout
+        - added rotation by right clicking when a ship is selected
         - enemy random ship occupation
             - loop:
                 - set ship to a random control  

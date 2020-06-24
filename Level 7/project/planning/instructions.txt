@@ -1,0 +1,13 @@
+[menu]
+	choose your gamemode
+		explain gamemodes
+
+[game]
+	[setup]
+		your grid is on the left
+		click a ship to select it
+		while you have a ship selected, press r or right click to rotate
+		ships may not overlap or go out of bounds
+		press start to begin the game
+	[game]
+		explain game
