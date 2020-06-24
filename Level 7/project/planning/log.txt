@@ -1,3 +1,14 @@
+6/24/2020
+To Do:
+    - rounds and game initialization
+                
+Completed: 
+        - enemy random ship occupation
+            - loop:
+                - set ship to a random control  
+                - check if can occupy 
+                    - if can, occupy  
+                    - else, loop
 
 6/23/2020
 To Do:
@@ -11,6 +22,7 @@ Completed:
         - click on ships' control box to select
     - figure out why the for() function in react() in if(box.ship) is not being called [the boxes are not becoming vacant].
         - The box properties are empty
+
 6/22/2020
 To Do:
     - rounds and game initialization

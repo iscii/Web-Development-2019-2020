@@ -74,6 +74,10 @@ Interface
             - Grids should be 11 x 11
                 - A - J along top
                 - 1 - 10 along side 
+    Start Button
+        - Replaces log   
+        - When clicked, hide, and show log
+
     Log
         Properties
             - overflow y

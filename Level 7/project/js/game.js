@@ -1,8 +1,10 @@
-const USER = 1, CPU = 2;
+const USER = 0, CPU = 1;
 
+//Initialization functions
 function references(){
-    opGrid1 = document.getElementById("divG1");
-    opGrid2 = document.getElementById("divG2");
+    opGrid0 = document.getElementById("divG1");
+    opGrid1 = document.getElementById("divG2");
+    opLog = document.getElementById("log");
 }
 function ships(){
     for(i in grids)
@@ -12,31 +14,31 @@ function ships(){
 function initialize(){
     references();
     
-    grid1 = new Grid(USER);
-    grid2 = new Grid(CPU);
-    grids = [grid1, grid2];
-    console.log(grid1.boxes);
+    grid0 = new Grid(USER);
+    grid1 = new Grid(CPU);
+    grids = [grid0, grid1]; //readability and cycling through both grids
+    console.log(grid0.boxes);
 
     selected = null;
     round = 0;
     
     ships();
-    
+
     display();
 }
 
+//Event functions
 function react(g, e){
     if(e.target.className == "box"){ //only react if click target is a box
         var box = g.getBox(e.target.id);
         console.log(box);
 
-        if(!round){ //round 0 = setup round
-            if(g == grid2) return; //prevents player from moving cpu ships
+        if(!round && !(g == grids[CPU])){ //round 0 = setup round
             if(selected){
                 console.log(selected);
                 selected.control = box; //sets the ship's control as the new box
                 
-                if(!selected.occupy(false)) return display(); //performs both the check and occupancy
+                if(!selected.occupy(false)) return display(selected.control.elem); //performs both the check and occupancy
 
                 display();
                 return selected = null;
@@ -53,19 +55,41 @@ function react(g, e){
     }
 }
 function trace(g, e){ //update display when mousing over grids
-    if(!selected || g == grid2) return; //maybe remove grid2 conditional when working on attack hover animations
+    if(!selected || g == grids[CPU]) return; //maybe remove grid2 conditional when working on attack hover animations
     display(e.target);
 }
 function logKey(e){ //rotate
     if(!selected) return;
     if(e.code == "KeyR"){ //e.code since it ignores caps lock
         selected.horizontal = !selected.horizontal; //toggle
-        console.log("rotate");
-        console.log(selected.control.elem);
+        console.log("[Rotate] " + selected.name);
         display(selected.control.elem);
     }
 }
+//Game functions
+function startGame(button){
+    button.style.display = "none";
+    console.log(grids[CPU]);
+    for(item in grids[CPU].ships){
+        cpuShips(item);
+    }
+}
+function cpuShips(item){ //randomizes cpu ship locations
+    var ship = grids[CPU].ships[item];
+    ship.deoccupy();
+    ship.control = grids[CPU].boxes[(getRandomInteger(0, grids[CPU].boxes.length - 1))];
+    ship.horizontal = !!getRandomInteger(0, 1); //sets 0 or 1 to its boolean value
 
+    if(ship.occupy(true)){
+        ship.occupy();
+        display();
+    }
+    else{
+        cpuShips(item);
+    }
+}
+
+//Display
 function display(traceBox){
     for(let i = USER; i <= CPU; i++){
         var gridNum = eval("opGrid" + i);
@@ -101,7 +125,7 @@ function display(traceBox){
         var text = selected.name[0];//this should be temporary. Represent the ships through colored boxes cos text messes the box sizes.
         if(!selected.occupy(true)){
             text = "X";
-            console.log(boxes);
+            //console.log(boxes);
         }
         var inBounds = indexesOfArray(boxes.map(item => item != undefined), true);
         for(item in inBounds)

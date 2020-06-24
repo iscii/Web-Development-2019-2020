@@ -12,3 +12,6 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#.2B_
 
 Make text unselectable
 https://stackoverflow.com/questions/69430/is-there-a-way-to-make-text-unselectable-on-an-html-page
+
+Int to bool [1, 0]
+https://stackoverflow.com/questions/16313222/how-to-convert-1-to-true-or-0-to-false-upon-model-fetch

@@ -14,9 +14,13 @@
 		</script>
 	</head>
 	<body onload = "initialize()">
-		<div id = "divG1" onclick = "react(grid1, event)" onmouseover = "trace(grid1, event)" class = "dgrid">
+		<div id = "divG1" onclick = "react(grid0, event)" onmouseover = "trace(grid0, event)" class = "dgrid">
 		</div>
-		<div id = "divG2" onclick = "react(grid2, event)" class = "dgrid">
+		<div id = "divG2" onclick = "react(grid1, event)" class = "dgrid">
+		</div>
+		<button id = "start" onclick = "startGame(this)">Start</button>
+		<div hidden id = "log">
+			Hello
 		</div>
 	</body>
 </html>
