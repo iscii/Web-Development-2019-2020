@@ -100,32 +100,3 @@ Ship.prototype.checkSink = function(){
     console.log(this.name + " has been sunk!");
     this.grid.checkGame();
 }
-/*
-    //check if occupiable
-    if(check){
-        if(this.check(boxes)) return true;
-        return false;
-    }
-    //if not checking, occupy.
-    if(this.check(boxes)){
-        for(item in boxes){
-            this.boxes.push(boxes[item]);
-            boxes[item].ship = this;
-        }
-    }
-}
-
-Ship.prototype.check = function(boxes){
-    for(item in boxes){
-        if(boxes[item] == undefined || boxes[item].ship)
-            return false; 
-    }
-    return true;
-}
-
-Ship.prototype.deoccupy = function(){
-    for(item in this.boxes)
-        this.boxes[item].ship = null;
-    this.boxes = [];
-}
-*/
