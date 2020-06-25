@@ -94,9 +94,10 @@ Ship.prototype.deoccupy = function(){
 
 Ship.prototype.checkSink = function(){
     for(item in this.boxes)
-        if(!this.boxes[item].hit) return;
+        if(!this.boxes[item].hit) return false;
     
     this.sunken = true;
     console.log(this.name + " has been sunk!");
     this.grid.checkGame();
+    return true;
 }

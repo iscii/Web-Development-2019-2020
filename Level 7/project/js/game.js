@@ -17,14 +17,21 @@ function initialize(){
     grid0 = new Grid(USER);
     grid1 = new Grid(CPU);
     grids = [grid0, grid1]; //readability and cycling through both grids
-    console.log(grid0.boxes);
 
-    selected = null;
     round = 0;
     playerturn = true;
+    selected = null; //ship object
+    cpuInterval = null //interval
+    cpuTarget = null; //box object
+    cpuTrackBox = null; //box object
+    tracking = false;
+    tries = 1;
+    //increment = ["+ 1", "- 1"];
+    direction = [[XLABELS, "-1"],[XLABELS, "+1"],[YLABELS, "-1"],[YLABELS, "+1"]];
     //salvo = false; //normal or salvo
     
     ships();
+    //cpuAttack();
 
     display();
 }
@@ -38,7 +45,7 @@ function react(g, e){
 
         if(!round && (g == grids[USER])){ //round 0 = setup round
             if(selected){
-                console.log(selected);
+                //console.log(selected);
                 selected.control = box; //sets the ship's control as the new box
                 
                 if(!selected.occupy(false)) return display(selected.control.elem); //performs both the check and occupancy
@@ -48,7 +55,7 @@ function react(g, e){
             }
     
             if(box.ship){
-                console.log(box.ship);
+                //console.log(box.ship);
                 selected = box.ship;
                 selected.deoccupy();
                 selected.control = selected.grid.getBox(e.target.id);
@@ -57,6 +64,7 @@ function react(g, e){
         }
         else if(playerturn){ //not setup round and clicking cpu box
             attack(box);
+            display();
         }
         else console.log("it is not your turn");
     }
@@ -77,6 +85,8 @@ function rotate(e){ //rotate
 
 //Game functions
 function startGame(button){
+    if(selected) return; //prevents starting while having a ship selected
+    round++;
     button.style.display = "none";
     opLog.style.display = "inline-block";
     console.log(grids[CPU]);
@@ -85,11 +95,17 @@ function startGame(button){
     }
 }
 function attack(box){
+    if(!playerturn || !round || box.hit) return;
     console.log("attacked");
     box.hit = true; 
     if(!box.ship){
         playerturn = !playerturn;
-        return setTimeout(cpuAttack(), 1000);
+        return cpuInterval = setInterval(function(){
+            cpuAttack(cpuTarget);
+        }, 1000);
+        return setTimeout(function(){
+            cpuAttack();
+        }, 1000);
     }
     box.ship.checkSink();
 }
@@ -108,16 +124,173 @@ function cpuShips(item){ //randomizes cpu ship locations
         cpuShips(item);
     }
 }
-function cpuAttack(){
+function cpuAttack(box){
     console.log("CPU ATtACKU");
+    if(!box){
+        //var box = grids[USER].getBox(['c', 3]);    
+        var available = indexesOfArray(grids[USER].boxes.map(item => item.hit == false), true);
+        var box = grids[USER].boxes[available[getRandomInteger(0, available.length)]];
+    }
+    console.log("Hit: ");
+    console.log(box);
+    if(box.hit){
+        console.log("Already Hit -----");
+        //if(tries == 17) return cpuTrackBox = null;
+        tries++;
+        if(step) nextStep();
+        determineTarget();
+        return display();
+    }
+    box.hit = true;
+    
+    if(box.ship){
+        if(!cpuTrackBox){ //prevents track box from being updated upon every ship hit
+            console.log("No Track Box");
+            cpuTrackBox = box; //the "control" of ship tracking
+            step = getRandomInteger(0, 3);
+            determineTarget();
+            return display();
+        }
+        else{
+            console.log("Track Box");
+            determineTarget(true);
+        }
+        console.log("Hit a ship: ");
+        if(box.ship.checkSink()){
+            cpuTrackBox = null;
+            cpuTarget = null;
+        }
+
+        //determineTarget();
+
+        //determineTarget(step, true, c1, c2); //in a function because it needs to be looped of target grid is out of bounds
+        /*setTimeout(function(){
+            cpuAttack(determineTarget(tracking));
+        }, 1000); */
+    }
+    else if(cpuTrackBox){ //tracking until ship is sunken
+        console.log("Still tracking");
+        //determineTarget(step, true, c1, c2);
+        playerturn = !playerturn;
+        clearInterval(cpuInterval);
+        tries = 1;
+    }
+    else{
+        cpuTarget = null;
+        cpuTrackBox = null;
+        playerturn = !playerturn;
+        clearInterval(cpuInterval);
+        tries = 1;
+    }
+    
+    display();
 }
+function nextStep(){
+    step++;
+    if(step > 3)
+        step = 0;
+}
+function determineTarget(tracking){
+    console.log("--------------------");
+    console.log(direction[step]);
+
+    var target = cpuTrackBox;
+    if(tracking) target = cpuTarget;
+
+    console.log(target);
+
+    var axis = 0;
+
+    console.log("Step: " + step);
+
+    if(step < 2)
+        axis = 1;
+        
+    console.log("Axis: " + axis);
+    console.log(target.id[axis]);
+
+    start = indexesOfArray(direction[step][0], target.id[+ !axis])[0];
+
+    console.log(start);
+    console.log(direction[step][0]);
+    //console.log(direction[step][0][start + eval(direction[step][1])]);
+    console.log(target.id[axis]);
+
+    if(axis)
+        target = grids[USER].getBox([direction[step][0][start + eval(direction[step][1])], target.id[axis]]);
+    else
+        target = grids[USER].getBox([target.id[axis], direction[step][0][start + eval(direction[step][1])]]);
+
+    console.log("Next Target: ");
+    console.log(target);
+
+    if(tries == 5){
+        return cpuTrackBox = null;
+    }
+
+    if(target === undefined || target.hit){
+        nextStep();
+        tries++;
+        return determineTarget();
+    }
+    /*
+    if(!playerturn){
+        setTimeout(function(){
+            cpuAttack(determineTarget(tracking));
+        }, 1000);
+    }
+    */
+    
+    //determineTarget(true, target);
+    cpuTarget = target;
+}
+/*
+function determineTarget(step, tracking, coin, coin2){ //determine cpuTarget
+    //determine x or y label
+    //determine + or - grid index
+    //check if grid is out of bounds. if so, loop
+
+    //determine x/y label and +/- grid index
+    var box = cpuTarget;
+    if(!tracking){
+        var coin = getRandomInteger(0, 1);
+        var coin2 = getRandomInteger(0, 1);
+        box = cpuTrackBox;
+    }
+
+    var start;
+    console.log(coin + " " + increment[coin2]);
+    
+    if(coin){  
+        start = indexesOfArray(XLABELS, cpuTrackBox.id[0])[0];
+        console.log("Start: " + start + " || " + XLABELS[start + eval(increment[coin2])] + ", " + cpuTrackBox.id[1]);
+        cpuTarget = grids[USER].getBox([XLABELS[start + eval(increment[coin2])], cpuTrackBox.id[1]]);
+    }
+    else{
+        start = indexesOfArray(YLABELS, cpuTrackBox.id[1])[0];
+        console.log("Start: " + start + " || " + cpuTrackBox.id[0] + ", " + YLABELS[start + eval(increment[coin2])]);
+        cpuTarget = grids[USER].getBox([cpuTrackBox.id[0], YLABELS[start + eval(increment[coin2])]]);
+    }
+    console.log(cpuTarget);
+
+    if(cpuTarget == undefined){
+        if(tracking){
+            if(step >= 2)
+                return determineTarget(step, true, + !coin, coin2);
+            determineTarget(step, true, coin, + !coin2);
+        }
+        else
+            determineTarget();
+    }
+}
+*/
 
 //Display
 function display(traceBox){
     for(let i = USER; i <= CPU; i++){
         var gridNum = eval("opGrid" + i);
         gridNum.innerHTML = "<div></div>"; //resets gridNum so appendChild() doesn't pile up. The div is for that extra little space in the top left corner
-        var grid = eval("grid" + i);
+        var grid = grids[i];
 
         //display x label
         for(let j = 0; j < XLABELS.length; j++){
@@ -138,6 +311,9 @@ function display(traceBox){
                 grid.boxes[j].elem.innerHTML = grid.boxes[j].ship.name[0];
             else
                 grid.boxes[j].elem.innerHTML = " ";
+
+            if(grid.boxes[j].hit)
+                grid.boxes[j].elem.innerHTML = "X";
             gridNum.appendChild(grid.boxes[j].elem);
         }
     }

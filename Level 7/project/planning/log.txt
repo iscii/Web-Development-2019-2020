@@ -1,9 +1,31 @@
+6/25/2020
+To Do:
+    - log
+
+Completed:
+    - rounds and game initialization
+    - cpu attack function
+        - attack random box
+        - if hit ship, track ship on random side
+            - if miss, track other three sides [next turn]
+            - if hit, keep tracking
+            - if miss, switch to other end [next turn]
+            - keep tracking until ship is destroyed
+        - loop
+        - prevent cpu from hitting already hit box
+        
 6/24/2020
 To Do:
     - rounds and game initialization
     - cpu attack function
-        - setinterval instead of settimeout
-        - clearinterval when miss ship
+        - attack random box
+        - if hit ship, track ship on random side
+            - if miss, track other three sides [next turn]
+            - if hit, keep tracking
+            - if miss, switch to other end [next turn]
+            - keep tracking until ship is destroyed
+        - loop
+        - prevent cpu from hitting already hit box
                 
 Completed: 
         - start button
