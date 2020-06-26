@@ -28,11 +28,8 @@ function initialize(){
     tries = 1;
     stepsTaken = [];
     direction = [[XLABELS, "-1"],[XLABELS, "+1"],[YLABELS, "-1"],[YLABELS, "+1"]];
-    //increment = ["+ 1", "- 1"];
-    //salvo = false; //normal or salvo
     
     ships();
-    //cpuAttack();
 
     display();
 }
@@ -103,9 +100,6 @@ function attack(box){
         playerturn = !playerturn;
         return cpuInterval = setInterval(function(){
             cpuAttack(cpuTarget);
-        }, 1000);
-        return setTimeout(function(){
-            cpuAttack();
         }, 1000);
     }
     box.ship.checkSink();
