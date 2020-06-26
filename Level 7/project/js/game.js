@@ -128,7 +128,6 @@ function cpuShips(item){ //randomizes cpu ship locations
 function cpuAttack(box){
     console.log("CPU ATtACKU");
     if(!box){
-        //var box = grids[USER].getBox(['e', 2]);  
         var available = indexesOfArray(grids[USER].boxes.map(item => item.hit == false), true);
         var box = grids[USER].boxes[available[getRandomInteger(0, available.length - 1)]];
     }
@@ -139,7 +138,6 @@ function cpuAttack(box){
         console.log(cpuTarget);
         if(!cpuTrackBox) return cpuAttack();
         console.log("Already Hit -----");
-        //if(tries == 17) return cpuTrackBox = null;
         tries++;
         if(step) nextStep();
         determineTarget();
@@ -165,17 +163,9 @@ function cpuAttack(box){
             cpuTrackBox = null;
             cpuTarget = null;
         }
-
-        //determineTarget();
-
-        //determineTarget(step, true, c1, c2); //in a function because it needs to be looped of target grid is out of bounds
-        /*setTimeout(function(){
-            cpuAttack(determineTarget(tracking));
-        }, 1000); */
     }
     else if(cpuTrackBox){ //tracking until ship is sunken
         console.log("Still tracking");
-        //determineTarget(step, true, c1, c2);
         playerturn = !playerturn;
         clearInterval(cpuInterval);
         tries = 1;
@@ -228,7 +218,6 @@ function determineTarget(tracking){
 
     console.log(start);
     console.log(direction[step][0]);
-    //console.log(direction[step][0][start + eval(direction[step][1])]);
     console.log(target.id[axis]);
 
     if(axis)
@@ -250,57 +239,8 @@ function determineTarget(tracking){
         console.log("TRIES: " + tries);
         return determineTarget();
     }
-    /*
-    if(!playerturn){
-        setTimeout(function(){
-            cpuAttack(determineTarget(tracking));
-        }, 1000);
-    }
-    */
-    
-    //determineTarget(true, target);
     cpuTarget = target;
 }
-/*
-function determineTarget(step, tracking, coin, coin2){ //determine cpuTarget
-    //determine x or y label
-    //determine + or - grid index
-    //check if grid is out of bounds. if so, loop
-
-    //determine x/y label and +/- grid index
-    var box = cpuTarget;
-    if(!tracking){
-        var coin = getRandomInteger(0, 1);
-        var coin2 = getRandomInteger(0, 1);
-        box = cpuTrackBox;
-    }
-
-    var start;
-    console.log(coin + " " + increment[coin2]);
-    
-    if(coin){  
-        start = indexesOfArray(XLABELS, cpuTrackBox.id[0])[0];
-        console.log("Start: " + start + " || " + XLABELS[start + eval(increment[coin2])] + ", " + cpuTrackBox.id[1]);
-        cpuTarget = grids[USER].getBox([XLABELS[start + eval(increment[coin2])], cpuTrackBox.id[1]]);
-    }
-    else{
-        start = indexesOfArray(YLABELS, cpuTrackBox.id[1])[0];
-        console.log("Start: " + start + " || " + cpuTrackBox.id[0] + ", " + YLABELS[start + eval(increment[coin2])]);
-        cpuTarget = grids[USER].getBox([cpuTrackBox.id[0], YLABELS[start + eval(increment[coin2])]]);
-    }
-    console.log(cpuTarget);
-
-    if(cpuTarget == undefined){
-        if(tracking){
-            if(step >= 2)
-                return determineTarget(step, true, + !coin, coin2);
-            determineTarget(step, true, coin, + !coin2);
-        }
-        else
-            determineTarget();
-    }
-}
-*/
 
 //Display
 function display(traceBox){
