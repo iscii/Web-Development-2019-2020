@@ -18,9 +18,11 @@ function initialize(){
     grid1 = new Grid(CPU);
     grids = [grid0, grid1]; //readability and cycling through both grids
 
-    round = 0;
+    round = 0; //counting a round as turn: every time the turn changes, the round incrememnt increases.
     playerturn = true;
     selected = null; //ship object
+    
+    //cpu vars
     cpuInterval = null //interval
     cpuTarget = null; //box object
     cpuTrackBox = null; //box object
@@ -98,6 +100,7 @@ function attack(box){
     box.hit = true; 
     if(!box.ship){
         playerturn = !playerturn;
+        round++;
         return cpuInterval = setInterval(function(){
             cpuAttack(cpuTarget);
         }, 1000);
@@ -172,7 +175,7 @@ function cpuAttack(box){
         clearInterval(cpuInterval);
         tries = 1;
     }
-    
+    round++;
     display();
 }
 function nextStep(){
@@ -206,12 +209,11 @@ function determineTarget(tracking){
         axis = 1;
         
     console.log("Axis: " + axis);
-    console.log(target.id[axis]);
-
+    
     start = indexesOfArray(direction[step][0], target.id[+ !axis])[0];
-
-    console.log(start);
-    console.log(direction[step][0]);
+    
+    console.log("Start = " + start);
+    console.log("Direction = " + direction[step][0]);
     console.log(target.id[axis]);
 
     if(axis)
@@ -281,4 +283,5 @@ function display(traceBox){
         for(item in inBounds)
             boxes[inBounds[item]].elem.innerHTML = text;
     } 
+    console.log("Round: " + round);
 }

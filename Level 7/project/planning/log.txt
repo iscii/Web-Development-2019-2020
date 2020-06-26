@@ -1,6 +1,8 @@
 6/26/2020
 To Do:
     - Round enforcement
+        - Prevent player from sabotaging themself
+        - Prevent players from playing when game is over
     - Display
     - Log
 Completed:
