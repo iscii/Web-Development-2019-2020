@@ -17,19 +17,19 @@ function initialize(){
     grid0 = new Grid(USER);
     grid1 = new Grid(CPU);
     grids = [grid0, grid1]; //readability and cycling through both grids
-
+    
     round = 0; //counting a round as turn: every time the turn changes, the round incrememnt increases.
     playerturn = true;
     selected = null; //ship object
     
     //cpu vars
-    cpuInterval = null //interval
+    direction = [[XLABELS, "-1"],[XLABELS, "+1"],[YLABELS, "-1"],[YLABELS, "+1"]];
+    cpuInterval = null; //interval
     cpuTarget = null; //box object
     cpuTrackBox = null; //box object
     tracking = false;
     tries = 0;
     stepsTaken = [];
-    direction = [[XLABELS, "-1"],[XLABELS, "+1"],[YLABELS, "-1"],[YLABELS, "+1"]];
     
     ships();
 

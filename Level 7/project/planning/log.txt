@@ -1,11 +1,11 @@
 6/26/2020
 To Do:
     - Round enforcement
-        - Prevent player from sabotaging themself
         - Prevent players from playing when game is over
     - Display
     - Log
 Completed:
+    - Prevent player from sabotaging themself
     - Enhancing cpuAttack()
         - changed nextStep() to make it focus on one axis before moving onto next
 
