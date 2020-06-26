@@ -27,7 +27,7 @@ function initialize(){
     cpuTarget = null; //box object
     cpuTrackBox = null; //box object
     tracking = false;
-    tries = 1;
+    tries = 0;
     stepsTaken = [];
     direction = [[XLABELS, "-1"],[XLABELS, "+1"],[YLABELS, "-1"],[YLABELS, "+1"]];
     
@@ -62,15 +62,15 @@ function react(g, e){
                 display(selected.control.elem); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
             }
         }
-        else if(playerturn){ //not setup round and clicking cpu box
+        else if(playerturn && (g == grids[CPU])){ //not setup round and clicking cpu box
             attack(box);
             display();
         }
-        else console.log("it is not your turn");
+        else console.log("Not your turn / Incorrect grid");
     }
 }
 function trace(g, e){ //update display when mousing over grids
-    if(!selected || g == grids[CPU]) return; //maybe remove grid2 conditional when working on attack hover animations
+    if(!selected || g == grids[CPU] || !(e.target.className == "box")) return; //maybe remove grid2 conditional when working on attack hover animations
     display(e.target);
 }
 function rotate(e){ //rotate
@@ -96,7 +96,7 @@ function startGame(button){
 }
 function attack(box){
     if(!playerturn || !round || box.hit) return;
-    console.log("attacked");
+    console.log("Player Attacked ^^ ");
     box.hit = true; 
     if(!box.ship){
         playerturn = !playerturn;
@@ -124,6 +124,8 @@ function cpuShips(item){ //randomizes cpu ship locations
 }
 function cpuAttack(box){
     console.log("CPU ATtACKU");
+    console.log("CPUTARGET: ");
+    console.log(cpuTarget);
     if(!box){
         var available = indexesOfArray(grids[USER].boxes.map(item => item.hit == false), true);
         var box = grids[USER].boxes[available[getRandomInteger(0, available.length - 1)]];
@@ -144,19 +146,23 @@ function cpuAttack(box){
     
     if(box.ship){
         if(!cpuTrackBox){ //prevents track box from being updated upon every ship hit
-            console.log("No Track Box");
+            console.log("Track Box is now: ");
+            console.log(box);
             cpuTrackBox = box; //the "control" of ship tracking
             step = getRandomInteger(0, 3);
             determineTarget();
             return display();
         }
         else{
-            console.log("Track Box");
+            console.log("Track Box: ");
+            console.log(cpuTrackBox);
+            console.log("Target: ");
             console.log(cpuTarget);
             determineTarget(true);
         }
         console.log("Hit a ship: ");
         if(box.ship.checkSink()){
+            console.log("cputarget & trackbox nulling");
             cpuTrackBox = null;
             cpuTarget = null;
         }
@@ -164,16 +170,20 @@ function cpuAttack(box){
     else if(cpuTrackBox){ //tracking until ship is sunken
         console.log("Still tracking");
         playerturn = !playerturn;
+        determineTarget();
         clearInterval(cpuInterval);
-        tries = 1;
+        stepsTaken = [];
+        tries = 0;
     }
     else{
+        console.log("Randomized");
+        console.log("cputarget & trackbox nulling");
         cpuTarget = null;
         cpuTrackBox = null;
         playerturn = !playerturn;
         stepsTaken = [];
         clearInterval(cpuInterval);
-        tries = 1;
+        tries = 0;
     }
     round++;
     display();
@@ -224,17 +234,21 @@ function determineTarget(tracking){
     console.log("Next Target: ");
     console.log(target);
 
-    if(tries == 5){
-        console.log("NULL");
+    if(tries > 6){
+        console.log("cputarget nulling");
         return cpuTarget = null;
     }
 
     if(target === undefined || target.hit){
+        console.log("No good box");
         nextStep();
         tries++;
         console.log("TRIES: " + tries);
         return determineTarget();
     }
+    console.log("Passed");
+    stepsTaken = [];
+    tries = 0;
     cpuTarget = target;
 }
 
@@ -275,13 +289,11 @@ function display(traceBox){
         selected.control = selected.grid.getBox(traceBox.id);
         var boxes = selected.getBoxes();
         var text = selected.name[0];//this should be temporary. Represent the ships through colored boxes cos text messes the box sizes.
-        if(!selected.occupy(true)){
+        if(!selected.occupy(true))
             text = "X";
-            //console.log(boxes);
-        }
+
         var inBounds = indexesOfArray(boxes.map(item => item != undefined), true);
         for(item in inBounds)
             boxes[inBounds[item]].elem.innerHTML = text;
     } 
-    console.log("Round: " + round);
 }

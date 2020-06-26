@@ -103,4 +103,9 @@ Enhancements
     Self:
         >X - When selecting a ship, set its control to the box which the mouse is hovering over.
         - [probably difficult] When selecting a ship, keep its selected box position on mouseclick. store its control relative to the box that is clicked.
-
+        - In default formation, if the cpu tracks vertically first (say, from b3)
+        and then next turn it destroys Battleship, and later it randomizes
+        to hit a box occupied by A, it will track A until it hits the box that
+        was already hit by the B tracking and then randomize.
+            - Make it so that when tracking and if target.hit, test for the cpuTarget/cpuTrackBox position + 2 instead of + 1 (once all + 1 tries are exhausted
+            (to see if undefined or hit) and if not, hit it instead of randomizing. 
