@@ -26,8 +26,9 @@ function initialize(){
     cpuTrackBox = null; //box object
     tracking = false;
     tries = 1;
-    //increment = ["+ 1", "- 1"];
+    stepsTaken = [];
     direction = [[XLABELS, "-1"],[XLABELS, "+1"],[YLABELS, "-1"],[YLABELS, "+1"]];
+    //increment = ["+ 1", "- 1"];
     //salvo = false; //normal or salvo
     
     ships();
@@ -127,13 +128,16 @@ function cpuShips(item){ //randomizes cpu ship locations
 function cpuAttack(box){
     console.log("CPU ATtACKU");
     if(!box){
-        //var box = grids[USER].getBox(['c', 3]);    
+        //var box = grids[USER].getBox(['e', 2]);  
         var available = indexesOfArray(grids[USER].boxes.map(item => item.hit == false), true);
-        var box = grids[USER].boxes[available[getRandomInteger(0, available.length)]];
+        var box = grids[USER].boxes[available[getRandomInteger(0, available.length - 1)]];
     }
     console.log("Hit: ");
     console.log(box);
     if(box.hit){
+        console.log(cpuTrackBox);
+        console.log(cpuTarget);
+        if(!cpuTrackBox) return cpuAttack();
         console.log("Already Hit -----");
         //if(tries == 17) return cpuTrackBox = null;
         tries++;
@@ -153,6 +157,7 @@ function cpuAttack(box){
         }
         else{
             console.log("Track Box");
+            console.log(cpuTarget);
             determineTarget(true);
         }
         console.log("Hit a ship: ");
@@ -179,6 +184,7 @@ function cpuAttack(box){
         cpuTarget = null;
         cpuTrackBox = null;
         playerturn = !playerturn;
+        stepsTaken = [];
         clearInterval(cpuInterval);
         tries = 1;
     }
@@ -186,6 +192,12 @@ function cpuAttack(box){
     display();
 }
 function nextStep(){
+    console.log(stepsTaken);
+    stepsTaken.push(step);
+    if(step == 1 && !stepsTaken.includes(0)) //fully checks an axis before moving to next
+        return step = 0;
+    if(step == 3 && !stepsTaken.includes(2))
+        return step = 2;
     step++;
     if(step > 3)
         step = 0;
@@ -195,8 +207,11 @@ function determineTarget(tracking){
     console.log(direction[step]);
 
     var target = cpuTrackBox;
-    if(tracking) target = cpuTarget;
-
+    console.log("Target: cpuTrackBox");
+    if(tracking){
+        console.log("Target: cpuTarget"); 
+        target = cpuTarget;
+    }
     console.log(target);
 
     var axis = 0;
@@ -225,12 +240,14 @@ function determineTarget(tracking){
     console.log(target);
 
     if(tries == 5){
-        return cpuTrackBox = null;
+        console.log("NULL");
+        return cpuTarget = null;
     }
 
     if(target === undefined || target.hit){
         nextStep();
         tries++;
+        console.log("TRIES: " + tries);
         return determineTarget();
     }
     /*

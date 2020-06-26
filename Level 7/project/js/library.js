@@ -27,6 +27,7 @@ Grid.prototype.getBox = function(id){ //returns box object in grid from event. i
 Grid.prototype.checkGame = function(){
     for(item in this.ships)
         if(!this.ships[item].sunken) return;
+    clearInterval(cpuInterval);
     
     console.log("game over!");
 }

@@ -1,3 +1,12 @@
+6/26/2020
+To Do:
+    - Round enforcement
+    - Display
+    - Log
+Completed:
+    - Enhancing cpuAttack()
+        - changed nextStep() to make it focus on one axis before moving onto next
+
 6/25/2020
 To Do:
     - log
