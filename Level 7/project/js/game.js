@@ -5,22 +5,38 @@ function references(){
     opGrid0 = document.getElementById("divG1");
     opGrid1 = document.getElementById("divG2");
     opLog = document.getElementById("log");
+    opButton = document.getElementById("start");
 }
 function ships(){
     for(i in grids)
         for(j in grids[i].ships)
             grids[i].ships[j].occupy();
 }
-function initialize(){
-    references();
-    
+function iGrids(){
     grid0 = new Grid(USER);
     grid1 = new Grid(CPU);
+}
+function initialize(resetting){
+    references();
+    if(resetting){
+        //calling grids[CPU] = new Grid(CPU) doesn't seem to reset the boxes' ship properties.
+        //*^ this is because you're not setting grid1 to a new Grid, you're setting grids[1] to a new Grid, which doesn't change grid1. Also, the grids[] array must be declared after both grid1 and 0 have been declared, as the objects within will not update with the new object (hence declaring the grids[] array after declaring all grid objects).
+        grid1 = new Grid(CPU);
+        for(box in grids[USER].boxes)
+            grids[USER].boxes[box].hit = false;
+    }
+    else
+        iGrids();
+        
     grids = [grid0, grid1]; //readability and cycling through both grids
-    
+    ships();
+
     round = 0; //counting a round as turn: every time the turn changes, the round incrememnt increases.
     playerturn = true;
     selected = null; //ship object
+    salvo = false;
+    shots = 0;
+    gameEnd = false;
     
     //cpu vars
     direction = [[XLABELS, "-1"],[XLABELS, "+1"],[YLABELS, "-1"],[YLABELS, "+1"]];
@@ -30,8 +46,6 @@ function initialize(){
     tracking = false;
     tries = 0;
     stepsTaken = [];
-    
-    ships();
 
     display();
 }
@@ -62,11 +76,15 @@ function react(g, e){
                 display(selected.control.elem); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
             }
         }
-        else if(playerturn && (g == grids[CPU])){ //not setup round and clicking cpu box
+        else if(playerturn && (g == grids[CPU]) && !gameEnd){ //not setup round and clicking cpu box
             attack(box);
             display();
         }
-        else console.log("Not your turn / Incorrect grid");
+        else{
+            if(!playerturn) console.log("it's not your turn");
+            if(gameEnd) console.log("the game has ended");
+            if(!round && g == grids[USER] || round && g == grids[CPU]) console.log("wrong grid");
+        }
     }
 }
 function trace(g, e){ //update display when mousing over grids
@@ -84,20 +102,36 @@ function rotate(e){ //rotate
 }
 
 //Game functions
-function startGame(button){
+function startGame(){
     if(selected) return; //prevents starting while having a ship selected
     round++;
-    button.style.display = "none";
-    opLog.style.display = "inline-block";
     console.log(grids[CPU]);
-    for(item in grids[CPU].ships){
+    for(item in grids[CPU].ships)
         cpuShips(item);
-    }
 }
 function attack(box){
     if(!playerturn || !round || box.hit) return;
-    console.log("Player Attacked ^^ ");
     box.hit = true; 
+    if(salvo){
+        shots++; //putting shots after the check will require me to start it off at 1, which is unhealthy for the sequencing of cpuAttack();
+        var shipCount = 0;
+        for(item in grids[USER].ships)
+            if(!grids[USER].ships[item].sunken) shipCount++;
+        console.log("Player Attacks");
+        console.log("Shipcount = " + shipCount);
+        console.log("Shots = " + shots);
+        if(shots == shipCount || box.ship){
+            if(box.ship) box.ship.checkSink();
+            shots = 0;
+            playerturn = !playerturn;
+            round++;
+            return cpuInterval = setInterval(function(){
+                cpuAttack(cpuTarget);
+            }, 1000);
+        }
+        return;
+    }
+    console.log("Player Attacks");
     if(!box.ship){
         playerturn = !playerturn;
         round++;
@@ -126,18 +160,31 @@ function cpuAttack(box){
     console.log("CPU ATtACKU");
     console.log("CPUTARGET: ");
     console.log(cpuTarget);
+
     if(!box){
         var available = indexesOfArray(grids[USER].boxes.map(item => item.hit == false), true);
         var box = grids[USER].boxes[available[getRandomInteger(0, available.length - 1)]];
     }
+    if(salvo){
+        var shipCount = 0;
+        for(item in grids[CPU].ships)
+            if(!grids[CPU].ships[item].sunken) shipCount++;
+
+        console.log("Shipcount: " + shipCount);
+    }
+
     console.log("Hit: ");
     console.log(box);
+
     if(box.hit){
         console.log(cpuTrackBox);
         console.log(cpuTarget);
+
         if(!cpuTrackBox) return cpuAttack();
+
         console.log("Already Hit -----");
         tries++;
+
         if(step) nextStep();
         determineTarget();
         return display();
@@ -148,48 +195,66 @@ function cpuAttack(box){
         if(!cpuTrackBox){ //prevents track box from being updated upon every ship hit
             console.log("Track Box is now: ");
             console.log(box);
+
             cpuTrackBox = box; //the "control" of ship tracking
             step = getRandomInteger(0, 3);
             determineTarget();
-            return display();
+            if(salvo) cpuReset();
+            display();
+            return box.ship.checkSink();
         }
         else{
             console.log("Track Box: ");
             console.log(cpuTrackBox);
             console.log("Target: ");
             console.log(cpuTarget);
+
             determineTarget(true);
         }
         console.log("Hit a ship: ");
+        console.log(box.ship);
+
         if(box.ship.checkSink()){
             console.log("cputarget & trackbox nulling");
+
             cpuTrackBox = null;
             cpuTarget = null;
         }
+        if(salvo) cpuReset();
     }
     else if(cpuTrackBox){ //tracking until ship is sunken
         console.log("Still tracking");
-        playerturn = !playerturn;
+
+        if(!salvo) cpuReset(); else shots++;
+
         determineTarget();
-        clearInterval(cpuInterval);
-        stepsTaken = [];
-        tries = 0;
     }
     else{
         console.log("Randomized");
         console.log("cputarget & trackbox nulling");
+
+        if(!salvo) cpuReset(); else shots++;
+
         cpuTarget = null;
         cpuTrackBox = null;
-        playerturn = !playerturn;
-        stepsTaken = [];
-        clearInterval(cpuInterval);
-        tries = 0;
     }
-    round++;
+    console.log("Shots: " + shots);
+    if(shots == shipCount){
+        cpuReset();
+    }
     display();
+}
+function cpuReset(){
+    clearInterval(cpuInterval);
+    stepsTaken = [];
+    tries = 0;
+    playerturn = !playerturn;
+    round++;
+    shots = 0;
 }
 function nextStep(){
     console.log(stepsTaken);
+
     stepsTaken.push(step);
     if(step == 1 && !stepsTaken.includes(0)) //fully checks an axis before moving to next
         return step = 0;
@@ -204,9 +269,17 @@ function determineTarget(tracking){
     console.log(direction[step]);
 
     var target = cpuTrackBox;
+    
     console.log("Target: cpuTrackBox");
+
     if(tracking){
         console.log("Target: cpuTarget"); 
+        if(cpuTarget == null){
+            console.log("it's null");
+            nextStep();
+            tries++;
+            return determineTarget;
+        }
         target = cpuTarget;
     }
     console.log(target);
@@ -241,12 +314,17 @@ function determineTarget(tracking){
 
     if(target === undefined || target.hit){
         console.log("No good box");
+
         nextStep();
         tries++;
+
         console.log("TRIES: " + tries);
+
         return determineTarget();
     }
+
     console.log("Passed");
+
     stepsTaken = [];
     tries = 0;
     cpuTarget = target;
@@ -296,4 +374,13 @@ function display(traceBox){
         for(item in inBounds)
             boxes[inBounds[item]].elem.innerHTML = text;
     } 
+    if(round){
+        opButton.style.display = "none";
+        opLog.style.display = "inline-block";
+    }
+    else{
+        opButton.style.display = "inline-block";
+        opLog.style.display = "none";
+    }
+    //if(gameEnd){} //show reset button
 }

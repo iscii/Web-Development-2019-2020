@@ -4,12 +4,15 @@ const AIRCRAFT = 0, BATTLESHIP = 1, DESTROYER = 2, SUBMARINE = 3, PATROL = 4;
 
 function Grid(player){
     this.player = player;
+    console.log(this.player);
     this.boxes = [];
+    console.log(this.boxes);
     for(let j = 0; j < YLABELS.length; j++){
         for(let i = 0; i < XLABELS.length; i++){
             this.boxes.push(new Box(XLABELS[i], YLABELS[j]));
         }
     }
+    console.log(this.boxes);
     this.ships = [new Ship("Aircraft Carrier", 5, this.getBox(['a', 1]), this),
                   new Ship("Battleship", 4, this.getBox(['a', 2]), this),
                   new Ship("Destroyer", 3, this.getBox(['a', 3]), this),
@@ -28,7 +31,8 @@ Grid.prototype.checkGame = function(){
     for(item in this.ships)
         if(!this.ships[item].sunken) return;
     clearInterval(cpuInterval);
-    
+
+    gameEnd = true;
     console.log("game over!");
 }
 

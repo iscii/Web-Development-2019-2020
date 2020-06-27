@@ -1,3 +1,15 @@
+6/27/2020
+To Do:
+    - Display
+    - Log
+Completed:
+    - Round enforcement
+        - Prevent players from playing when game is over
+    - Reset
+    - Salvo
+        - Player Salvo
+        - CPU Salvo
+
 6/26/2020
 To Do:
     - Round enforcement

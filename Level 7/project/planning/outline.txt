@@ -67,6 +67,7 @@ Interface
             Game version buttons
                 - Normal
                 - Salvo
+                    - Make the player check a box for salvo. if checked [true], salvo. if not, default to normal
     Game Page
         - 2 Grids [right 1, left 2] 
                 - Grid 1 = user's fleet. [click to setup ships on turn]
@@ -93,7 +94,7 @@ Interface
 
 Enhancements
     Salvo
-        - X shots per turn, no resets on hit.
+        >X- X shots per turn, no resets on hit.
     Move a ship every time a ship is sunk
         - Moving ship would use same interface as setup
         - A shup that moves may not occupy any of the spaces that
