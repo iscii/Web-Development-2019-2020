@@ -18,6 +18,7 @@ Completed:
     - Fixed some cpuAttack() bugs
     - Made it so that hover-over-box feedback ends when not hovering over a box.
     - Set font to monospace so the grids don't shift sizes based on the width of the label characters.
+    - Various other bug fixes
 6/27/2020
 To Do:
     - Display
