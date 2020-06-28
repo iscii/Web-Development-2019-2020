@@ -13,15 +13,15 @@
 			
 		</script>
 	</head>
-	<body onload = "initialize()">
-		<div id = "divG1" onclick = "react(grid0, event)" oncontextmenu = "rotate(event)" onmouseover = "trace(grid0, event)" class = "dgrid">
+	<body onload = "initialize()" onmouseover = "trace(event)" >
+		<div id = "divGrid0" onclick = "react(grid0, event)" oncontextmenu = "rotate(event)" class = "dgrid">
 		</div>
-		<div id = "divG2" onclick = "react(grid1, event)" class = "dgrid">
+		<div id = "divGrid1" onclick = "react(grid1, event)" class = "dgrid">
 		</div>
 		<button id = "start" onclick = "startGame()">Start</button>
 		<div hidden id = "log">
 			Hello
 		</div>
-		<button id = "reset" onclick = "if(playerturn || gameEnd) initialize(true);">Reset</button>
+		<button hidden id = "reset" onclick = "if(playerturn || gameEnd) initialize(true);">Reset</button>
 	</body>
 </html>

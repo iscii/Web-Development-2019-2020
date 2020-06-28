@@ -9,7 +9,7 @@ function Grid(player){
     console.log(this.boxes);
     for(let j = 0; j < YLABELS.length; j++){
         for(let i = 0; i < XLABELS.length; i++){
-            this.boxes.push(new Box(XLABELS[i], YLABELS[j]));
+            this.boxes.push(new Box(XLABELS[i], YLABELS[j], this));
         }
     }
     console.log(this.boxes);
@@ -32,13 +32,15 @@ Grid.prototype.checkGame = function(){
         if(!this.ships[item].sunken) return;
     clearInterval(cpuInterval);
 
+    traceBox = null;
     gameEnd = true;
     console.log("game over!");
 }
 
-function Box(letter, number){
+function Box(letter, number, grid){
     this.ship = null;
     this.hit = false;
+    this.grid = grid;
     this.elem = document.createElement("div");
     this.elem.className = "box";
     this.elem.id = [letter, number]; //note in getBox prototype

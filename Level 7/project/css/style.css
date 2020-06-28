@@ -1,4 +1,6 @@
 body{
+    font-family: monospace;
+    font-size: 125%;
     color: rgb(255, 219, 233);
     background: rgb(17, 17, 17);
     width: 99vw;

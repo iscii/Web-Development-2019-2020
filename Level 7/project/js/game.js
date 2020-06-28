@@ -2,10 +2,11 @@ const USER = 0, CPU = 1;
 
 //Initialization functions
 function references(){
-    opGrid0 = document.getElementById("divG1");
-    opGrid1 = document.getElementById("divG2");
+    opGrid0 = document.getElementById("divGrid0");
+    opGrid1 = document.getElementById("divGrid1");
     opLog = document.getElementById("log");
-    opButton = document.getElementById("start");
+    opStart = document.getElementById("start");
+    opReset = document.getElementById("reset");
 }
 function ships(){
     for(i in grids)
@@ -19,11 +20,14 @@ function iGrids(){
 function initialize(resetting){
     references();
     if(resetting){
-        //calling grids[CPU] = new Grid(CPU) doesn't seem to reset the boxes' ship properties.
-        //*^ this is because you're not setting grid1 to a new Grid, you're setting grids[1] to a new Grid, which doesn't change grid1. Also, the grids[] array must be declared after both grid1 and 0 have been declared, as the objects within will not update with the new object (hence declaring the grids[] array after declaring all grid objects).
+        //*calling grids[CPU] = new Grid(CPU) doesn't seem to reset the boxes' ship properties. This is because you're not setting grid1 to a new Grid, you're setting grids[1] to a new Grid, which doesn't change grid1. Also, the grids[] array must be declared after both grid1 and 0 have been declared, as the objects within will not update with the new object (hence declaring the grids[] array after declaring all grid objects).
         grid1 = new Grid(CPU);
-        for(box in grids[USER].boxes)
+        for(box in grids[USER].boxes){
             grids[USER].boxes[box].hit = false;
+        }
+        for(ship in grids[USER].ships){
+            grids[USER].ships[ship].sunken = false;
+        }
     }
     else
         iGrids();
@@ -47,6 +51,8 @@ function initialize(resetting){
     tries = 0;
     stepsTaken = [];
 
+    traceBox = null;
+
     display();
 }
 
@@ -62,15 +68,16 @@ function react(g, e){
                 //console.log(selected);
                 selected.control = box; //sets the ship's control as the new box
                 
-                if(!selected.occupy(false)) return display(selected.control.elem); //performs both the check and occupancy
+                if(!selected.occupy(false)) return display(); //performs both the check and occupancy
 
-                display();
-                return selected = null;
+                selected = null;
+                return display(); 
             }
     
             if(box.ship){
                 //console.log(box.ship);
                 selected = box.ship;
+                traceBox = box.elem;
                 selected.deoccupy();
                 selected.control = selected.grid.getBox(e.target.id);
                 display(selected.control.elem); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
@@ -87,9 +94,15 @@ function react(g, e){
         }
     }
 }
-function trace(g, e){ //update display when mousing over grids
-    if(!selected || g == grids[CPU] || !(e.target.className == "box")) return; //maybe remove grid2 conditional when working on attack hover animations
-    display(e.target);
+function trace(e){ //update display when mousing over grids
+    var gridNum = e.target.parentNode.id.substring(e.target.parentNode.id.length - 1, e.target.parentNode.id.length); //e.target.parentNode gets the parent element of the target element, and .id.substring(id.length - 1, id.length) takes the last character of its id.
+    if((!round && (gridNum == CPU)) || (round && gridNum == USER) || (selected && e.target.className != "box") || gameEnd) return;
+    if(e.target.className != "box"){
+        traceBox = null;
+        return display();
+    }
+    traceBox = e.target;
+    display();
 }
 function rotate(e){ //rotate
     if(!selected) return;
@@ -105,6 +118,7 @@ function rotate(e){ //rotate
 function startGame(){
     if(selected) return; //prevents starting while having a ship selected
     round++;
+    traceBox = null;
     console.log(grids[CPU]);
     for(item in grids[CPU].ships)
         cpuShips(item);
@@ -127,7 +141,7 @@ function attack(box){
             round++;
             return cpuInterval = setInterval(function(){
                 cpuAttack(cpuTarget);
-            }, 750);
+            }, 750); //set to 100 for testing
         }
         return;
     }
@@ -333,7 +347,7 @@ function determineTarget(tracking){
 }
 
 //Display
-function display(traceBox){
+function display(){
     for(let i = USER; i <= CPU; i++){
         var gridNum = eval("opGrid" + i);
         gridNum.innerHTML = "<div></div>"; //resets gridNum so appendChild() doesn't pile up. The div is for that extra little space in the top left corner
@@ -354,13 +368,20 @@ function display(traceBox){
                 y.innerHTML = YLABELS[j/10];
                 gridNum.appendChild(y);
             }
+            /*// uncomment to reveal enemy ships
+            if(grid.boxes[j].ship)
+                grid.boxes[j].elem.style.background = SHIPCOLORS[indexesOfArray(grid.ships, grid.boxes[j].ship)];
+            else
+                grid.boxes[j].elem.style.background = "none";
+            */
+           //uncomment to hide enemy ships
             if(i == USER){
                 if(grid.boxes[j].ship)
                     grid.boxes[j].elem.style.background = SHIPCOLORS[indexesOfArray(grid.ships, grid.boxes[j].ship)];
                 else
                     grid.boxes[j].elem.style.background = "none";
-                grid.boxes[j].elem.style.border = "2px solid rgb(0, 69, 94)";
             }
+            grid.boxes[j].elem.style.border = "2px solid rgb(0, 69, 94)";
                 
             if(grid.boxes[j].hit){
                 grid.boxes[j].elem.style.background = "rgb(51, 153, 255)"; //making it blue instead of white because ocean
@@ -375,26 +396,33 @@ function display(traceBox){
     }
     
     if(traceBox){
-        selected.control = selected.grid.getBox(traceBox.id);
-        var boxes = selected.getBoxes();
-        var color = SHIPCOLORS[indexesOfArray(selected.grid.ships, selected)];
-
-        var band = "rgb(102, 255, 102)";
-        if(!selected.occupy(true))
-            band = "rgb(255, 0, 0)";
-        
-        var inBounds = indexesOfArray(boxes.map(item => item != undefined), true);
-        for(item in inBounds){
-            boxes[inBounds[item]].elem.style.background = color;
-            boxes[inBounds[item]].elem.style.border = "2px solid " + band;
+        if(!round && selected){
+            selected.control = selected.grid.getBox(traceBox.id);
+            var boxes = selected.getBoxes();
+            var color = SHIPCOLORS[indexesOfArray(selected.grid.ships, selected)];
+            
+            var band = "rgb(102, 255, 102)";
+            if(!selected.occupy(true))
+                band = "rgb(255, 0, 0)";
+            
+            var inBounds = indexesOfArray(boxes.map(item => item != undefined), true);
+            for(item in inBounds){
+                boxes[inBounds[item]].elem.style.background = color;
+                boxes[inBounds[item]].elem.style.border = "2px solid " + band;
+            }
+        }
+        else if(playerturn){
+            traceBox.style.border = "6px solid rgb(255, 77, 77)";
         }
     } 
     if(round){
-        opButton.style.display = "none";
+        opStart.style.display = "none";
+        opReset.style.display = "inline-block";
         opLog.style.display = "inline-block";
     }
     else{
-        opButton.style.display = "inline-block";
+        opStart.style.display = "inline-block";
+        opReset.style.display = "none";
         opLog.style.display = "none";
     }
     //if(gameEnd){} //show reset button

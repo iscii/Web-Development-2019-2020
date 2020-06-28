@@ -1,10 +1,11 @@
 6/28/2020
 To Do:
     - Display
-        - When hovering over any box, expand it
     - Log
+        - Big box, overflow y = scroll;
 Completed:
     - Display
+        - When hovering over any box, expand it
         - hide cpu grid for gameplay
         - replace ship text with color
         - When selected
@@ -15,7 +16,8 @@ Completed:
             - When miss, make the box blue
             - When hit, make the box red
     - Fixed some cpuAttack() bugs
-    
+    - Made it so that hover-over-box feedback ends when not hovering over a box.
+    - Set font to monospace so the grids don't shift sizes based on the width of the label characters.
 6/27/2020
 To Do:
     - Display
