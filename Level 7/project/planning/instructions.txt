@@ -11,3 +11,6 @@
 		press start to begin the game
 	[game]
 		explain game
+		explain display
+	[reset]
+		you maay only reset on your turn

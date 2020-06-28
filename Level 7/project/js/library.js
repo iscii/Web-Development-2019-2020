@@ -1,6 +1,6 @@
 const XLABELS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
 const YLABELS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const AIRCRAFT = 0, BATTLESHIP = 1, DESTROYER = 2, SUBMARINE = 3, PATROL = 4;
+const SHIPCOLORS = ["rgb(0, 102, 24)", "rgb(128, 0, 120)", "rgb(0, 128, 100)", "rgb(153, 0, 77)", "rgb(204, 51, 0)"];
 
 function Grid(player){
     this.player = player;
@@ -31,7 +31,7 @@ Grid.prototype.checkGame = function(){
     for(item in this.ships)
         if(!this.ships[item].sunken) return;
     clearInterval(cpuInterval);
-
+    
     gameEnd = true;
     console.log("game over!");
 }
@@ -53,6 +53,7 @@ function Ship(name, size, control, grid){
     this.boxes = [];
     this.sunken = false;
     this.horizontal = true;
+    //this.color = SHIPCOLORS[indexesOfArray(this.grid.ships, this)];
 }
 
 Ship.prototype.occupy = function(check){ //maybe parameters for checking but i'm not sure
@@ -102,7 +103,7 @@ Ship.prototype.checkSink = function(){
         if(!this.boxes[item].hit) return false;
     
     this.sunken = true;
-    console.log(this.name + " has been sunk!");
+    console.log("player " + this.grid.player + "'s " + this.name + " has been sunk!");
     this.grid.checkGame();
     return true;
 }

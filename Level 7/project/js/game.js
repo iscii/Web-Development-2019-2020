@@ -127,7 +127,7 @@ function attack(box){
             round++;
             return cpuInterval = setInterval(function(){
                 cpuAttack(cpuTarget);
-            }, 1000);
+            }, 750);
         }
         return;
     }
@@ -137,7 +137,7 @@ function attack(box){
         round++;
         return cpuInterval = setInterval(function(){
             cpuAttack(cpuTarget);
-        }, 1000);
+        }, 750);
     }
     box.ship.checkSink();
 }
@@ -162,6 +162,7 @@ function cpuAttack(box){
     console.log(cpuTarget);
 
     if(!box){
+        cpuTrackBox = null;
         var available = indexesOfArray(grids[USER].boxes.map(item => item.hit == false), true);
         var box = grids[USER].boxes[available[getRandomInteger(0, available.length - 1)]];
     }
@@ -196,6 +197,7 @@ function cpuAttack(box){
             console.log("Track Box is now: ");
             console.log(box);
 
+            tries = 0;
             cpuTrackBox = box; //the "control" of ship tracking
             step = getRandomInteger(0, 3);
             determineTarget();
@@ -352,13 +354,22 @@ function display(traceBox){
                 y.innerHTML = YLABELS[j/10];
                 gridNum.appendChild(y);
             }
-            if(grid.boxes[j].ship)
-                grid.boxes[j].elem.innerHTML = grid.boxes[j].ship.name[0];
-            else
-                grid.boxes[j].elem.innerHTML = " ";
-
-            if(grid.boxes[j].hit)
-                grid.boxes[j].elem.innerHTML = "X";
+            if(i == USER){
+                if(grid.boxes[j].ship)
+                    grid.boxes[j].elem.style.background = SHIPCOLORS[indexesOfArray(grid.ships, grid.boxes[j].ship)];
+                else
+                    grid.boxes[j].elem.style.background = "none";
+                grid.boxes[j].elem.style.border = "2px solid rgb(0, 69, 94)";
+            }
+                
+            if(grid.boxes[j].hit){
+                grid.boxes[j].elem.style.background = "rgb(51, 153, 255)"; //making it blue instead of white because ocean
+                grid.boxes[j].elem.style.border = "1px solid rgb(204, 102, 153)";
+                if(grid.boxes[j].ship){
+                    grid.boxes[j].elem.style.background = "rgb(179, 0, 0)";
+                }
+            }
+                
             gridNum.appendChild(grid.boxes[j].elem);
         }
     }
@@ -366,13 +377,22 @@ function display(traceBox){
     if(traceBox){
         selected.control = selected.grid.getBox(traceBox.id);
         var boxes = selected.getBoxes();
-        var text = selected.name[0];//this should be temporary. Represent the ships through colored boxes cos text messes the box sizes.
-        if(!selected.occupy(true))
-            text = "X";
+        var color = SHIPCOLORS[indexesOfArray(selected.grid.ships, selected)];
 
+        var band = "rgb(102, 255, 102)";
+        if(!selected.occupy(true))
+            band = "rgb(255, 0, 0)";
+        
         var inBounds = indexesOfArray(boxes.map(item => item != undefined), true);
-        for(item in inBounds)
-            boxes[inBounds[item]].elem.innerHTML = text;
+        for(item in inBounds){
+            boxes[inBounds[item]].elem.style.background = color;
+            boxes[inBounds[item]].elem.style.border = "2px solid " + band;
+        }
+            
+        /*
+        var text = selected.name[0];//this should be temporary. Represent the ships through colored boxes cos text messes the box sizes.
+
+        */
     } 
     if(round){
         opButton.style.display = "none";

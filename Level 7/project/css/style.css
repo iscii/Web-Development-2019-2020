@@ -1,6 +1,6 @@
 body{
     color: rgb(255, 219, 233);
-    background: rgb(11, 26, 48);
+    background: rgb(17, 17, 17);
     width: 99vw;
     height: 97vh;
     display: flex;
@@ -19,14 +19,14 @@ body{
     margin: 1%;
 }
 .box{
-    border: 2px solid rgb(8, 73, 15);
+    border: 2px solid rgb(0, 69, 94);
     display: flex;
     justify-content: center;
     align-items: center;
     -webkit-user-select: none; /*makes the text unhighlightable*/
 }
 .label{
-    border: 2px solid rgb(8, 73, 15);
+    border: 2px solid rgb(0, 69, 94);
     color: rgb(255, 72, 72);
     display: flex;
     justify-content: center;
@@ -37,6 +37,5 @@ body{
     margin-left: 2.5%;
     width: 15%;
     height: 5%;
-
 }
 
