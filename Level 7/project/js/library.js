@@ -31,7 +31,7 @@ Grid.prototype.checkGame = function(){
     for(item in this.ships)
         if(!this.ships[item].sunken) return;
     clearInterval(cpuInterval);
-    
+
     gameEnd = true;
     console.log("game over!");
 }
@@ -53,7 +53,6 @@ function Ship(name, size, control, grid){
     this.boxes = [];
     this.sunken = false;
     this.horizontal = true;
-    //this.color = SHIPCOLORS[indexesOfArray(this.grid.ships, this)];
 }
 
 Ship.prototype.occupy = function(check){ //maybe parameters for checking but i'm not sure
@@ -88,7 +87,6 @@ Ship.prototype.getBoxes = function(){
         else
             boxes.push(this.grid.getBox([this.control.id[+ this.horizontal], label[i]]));
     }
-    //console.log(boxes);
     return boxes;
 }
 

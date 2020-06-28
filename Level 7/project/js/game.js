@@ -388,11 +388,6 @@ function display(traceBox){
             boxes[inBounds[item]].elem.style.background = color;
             boxes[inBounds[item]].elem.style.border = "2px solid " + band;
         }
-            
-        /*
-        var text = selected.name[0];//this should be temporary. Represent the ships through colored boxes cos text messes the box sizes.
-
-        */
     } 
     if(round){
         opButton.style.display = "none";
