@@ -9,19 +9,17 @@
 		<script src = js/game.js></script>
 		<script src = js/library.js></script>
 		<script src = js/utilities.js></script>
-		<script>
-			
-		</script>
 	</head>
-	<body onload = "initialize()" onmouseover = "trace(event)" >
+	<body onload = initialize(); onmouseover = "trace(event)"> <!--*There may be an error upon page onload if you are moving your mouse. That is because the onmouseover() function is fully called before the initialize() function, so many of the variables are yet to be initialized. I've tried addressing it using a flag set onload on both the body and html, but it seems onmouseover is always detected before the onload is called. I am not sure how else to fix this, as it seems to be a timing issue.-->
 		<div id = "divGrid0" onclick = "react(grid0, event)" oncontextmenu = "rotate(event)" class = "dgrid">
 		</div>
 		<div id = "divGrid1" onclick = "react(grid1, event)" class = "dgrid">
 		</div>
 		<button id = "start" onclick = "startGame()">Start</button>
-		<div hidden id = "log">
-			Hello
+		<div hidden id = "logBox">
+			<div id = "event">Event</div> <!--displays turn and game end-->
+			<div id = "log"></div>
 		</div>
-		<button hidden id = "reset" onclick = "if(playerturn || gameEnd) initialize(true);">Reset</button>
+		<button hidden id = "reset" onclick = "initialize(true);">Reset</button>
 	</body>
 </html>

@@ -4,38 +4,33 @@ const USER = 0, CPU = 1;
 function references(){
     opGrid0 = document.getElementById("divGrid0");
     opGrid1 = document.getElementById("divGrid1");
+    opLogBox = document.getElementById("logBox");
     opLog = document.getElementById("log");
     opStart = document.getElementById("start");
     opReset = document.getElementById("reset");
+    opEvent = document.getElementById("event");
 }
-function ships(){
-    for(i in grids)
-        for(j in grids[i].ships)
-            grids[i].ships[j].occupy();
-}
-function iGrids(){
-    grid0 = new Grid(USER);
-    grid1 = new Grid(CPU);
-}
+
 function initialize(resetting){
     references();
     if(resetting){
         //*calling grids[CPU] = new Grid(CPU) doesn't seem to reset the boxes' ship properties. This is because you're not setting grid1 to a new Grid, you're setting grids[1] to a new Grid, which doesn't change grid1. Also, the grids[] array must be declared after both grid1 and 0 have been declared, as the objects within will not update with the new object (hence declaring the grids[] array after declaring all grid objects).
-        grid1 = new Grid(CPU);
-        for(box in grids[USER].boxes){
+        clearInterval(cpuInterval);
+        for(box in grids[USER].boxes)
             grids[USER].boxes[box].hit = false;
-        }
-        for(ship in grids[USER].ships){
+        for(ship in grids[USER].ships)
             grids[USER].ships[ship].sunken = false;
-        }
     }
     else
-        iGrids();
-        
+        grid0 = new Grid(USER);
+    
+    grid1 = new Grid(CPU);
     grids = [grid0, grid1]; //readability and cycling through both grids
-    ships();
+    for(i in grids)
+        for(j in grids[i].ships)
+            grids[i].ships[j].occupy();
 
-    round = 0; //counting a round as turn: every time the turn changes, the round incrememnt increases.
+    ingame = false;
     playerturn = true;
     selected = null; //ship object
     salvo = false;
@@ -50,9 +45,11 @@ function initialize(resetting){
     tracking = false;
     tries = 0;
     stepsTaken = [];
-
+    
     traceBox = null;
+    opLog.innerHTML = "";
 
+    initialized = true;
     display();
 }
 
@@ -63,7 +60,7 @@ function react(g, e){
         var box = g.getBox(e.target.id);
         console.log(box);
 
-        if(!round && (g == grids[USER])){ //round 0 = setup round
+        if(!ingame && (g == grids[USER])){
             if(selected){
                 //console.log(selected);
                 selected.control = box; //sets the ship's control as the new box
@@ -80,27 +77,27 @@ function react(g, e){
                 traceBox = box.elem;
                 selected.deoccupy();
                 selected.control = selected.grid.getBox(e.target.id);
-                display(selected.control.elem); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
+                display(); //remove letters, add a bunch of highlighted boxes showcasing the position of ship, with a bigger outline box being the control box
             }
         }
-        else if(playerturn && (g == grids[CPU]) && !gameEnd){ //not setup round and clicking cpu box
+        else if(playerturn && (g == grids[CPU]) && !gameEnd){ //not setup and clicking cpu box
             attack(box);
             display();
         }
         else{
             if(!playerturn) console.log("it's not your turn");
             if(gameEnd) console.log("the game has ended");
-            if(!round && g == grids[USER] || round && g == grids[CPU]) console.log("wrong grid");
+            if(!ingame && g == grids[USER] || ingame && g == grids[CPU]) console.log("wrong grid");
         }
     }
 }
 function trace(e){ //update display when mousing over grids
     var gridNum = e.target.parentNode.id.substring(e.target.parentNode.id.length - 1, e.target.parentNode.id.length); //e.target.parentNode gets the parent element of the target element, and .id.substring(id.length - 1, id.length) takes the last character of its id.
-    if((!round && (gridNum == CPU)) || (round && gridNum == USER) || (selected && e.target.className != "box") || gameEnd) return;
-    if(e.target.className != "box"){
+    if(e.target.className != "box" || !ingame && (gridNum == CPU) || (ingame && gridNum == USER) ){
         traceBox = null;
         return display();
     }
+    if(((selected && e.target.className != "box") || gameEnd)) return; 
     traceBox = e.target;
     display();
 }
@@ -110,22 +107,23 @@ function rotate(e){ //rotate
         e.preventDefault();
         selected.horizontal = !selected.horizontal; //toggle
         console.log("[Rotate] " + selected.name);
-        display(selected.control.elem);
+        display();
     }
 }
 
 //Game functions
 function startGame(){
     if(selected) return; //prevents starting while having a ship selected
-    round++;
+    ingame = true;
     traceBox = null;
     console.log(grids[CPU]);
     for(item in grids[CPU].ships)
         cpuShips(item);
 }
 function attack(box){
-    if(!playerturn || !round || box.hit) return;
+    if(!playerturn || !ingame || box.hit) return;
     box.hit = true; 
+    var event = "You sent a torpedo to " + "[" + box.id[0].toUpperCase() + "," + box.id[1] + "]";
     if(salvo){
         shots++; //putting shots after the check will require me to start it off at 1, which is unhealthy for the sequencing of cpuAttack();
         var shipCount = 0;
@@ -135,25 +133,32 @@ function attack(box){
         console.log("Shipcount = " + shipCount);
         console.log("Shots = " + shots);
         if(shots == shipCount || box.ship){
-            if(box.ship) box.ship.checkSink();
+            if(box.ship){
+                event += "<br/> The torpedo hit Cpu's " + box.ship.name;
+                if(box.ship.checkSink()) event += "<br/> <span class = 'bigevent'>Cpu's " + box.ship.name + " has been sunk</span>";
+            }
             shots = 0;
             playerturn = !playerturn;
-            round++;
+            display(event, USER);
             return cpuInterval = setInterval(function(){
                 cpuAttack(cpuTarget);
-            }, 750); //set to 100 for testing
+            }, 10); //set to 100 for testing
         }
-        return;
+        event += "<br/> The torpedo missed";
+        return display(event, USER);
     }
     console.log("Player Attacks");
     if(!box.ship){
         playerturn = !playerturn;
-        round++;
+        event += "<br/> The torpedo missed";
+        display(event, USER);
         return cpuInterval = setInterval(function(){
             cpuAttack(cpuTarget);
-        }, 750);
+        }, 10);
     }
-    box.ship.checkSink();
+    event += "<br/> The torpedo hit Cpu's " + box.ship.name;
+    if(box.ship.checkSink()) event += "<br/> <span class = 'bigevent'>Cpu's " + box.ship.name + " has been sunk</span>";
+    display(event, USER);
 }
 //Cpu functions
 function cpuShips(item){ //randomizes cpu ship locations
@@ -205,8 +210,11 @@ function cpuAttack(box){
         return display();
     }
     box.hit = true;
+
+    var event = "Cpu sent a torpedo to " + "[" + box.id[0].toUpperCase() + "," + box.id[1] + "]"
     
     if(box.ship){
+        event += "<br/> The torpedo hit your " + box.ship.name;
         if(!cpuTrackBox){ //prevents track box from being updated upon every ship hit
             console.log("Track Box is now: ");
             console.log(box);
@@ -216,7 +224,7 @@ function cpuAttack(box){
             step = getRandomInteger(0, 3);
             determineTarget();
             if(salvo) cpuReset();
-            display();
+            display(event, CPU);
             return box.ship.checkSink();
         }
         else{
@@ -233,10 +241,13 @@ function cpuAttack(box){
         if(box.ship.checkSink()){
             console.log("cputarget & trackbox nulling");
 
+            event += "<br/> <span class = 'bigevent'>Your " + box.ship.name + " has been sunk</span>";
+
             cpuTrackBox = null;
             cpuTarget = null;
         }
         if(salvo) cpuReset();
+        return display(event, CPU);
     }
     else if(cpuTrackBox){ //tracking until ship is sunken
         console.log("Still tracking");
@@ -258,14 +269,15 @@ function cpuAttack(box){
     if(shots == shipCount){
         cpuReset();
     }
-    display();
+
+    event += "<br/> The torpedo missed";
+    display(event, CPU);
 }
 function cpuReset(){
     clearInterval(cpuInterval);
     stepsTaken = [];
-    tries = 0;
     playerturn = !playerturn;
-    round++;
+    tries = 0;
     shots = 0;
 }
 function nextStep(){
@@ -347,7 +359,7 @@ function determineTarget(tracking){
 }
 
 //Display
-function display(){
+function display(logEvent, player){
     for(let i = USER; i <= CPU; i++){
         var gridNum = eval("opGrid" + i);
         gridNum.innerHTML = "<div></div>"; //resets gridNum so appendChild() doesn't pile up. The div is for that extra little space in the top left corner
@@ -368,13 +380,13 @@ function display(){
                 y.innerHTML = YLABELS[j/10];
                 gridNum.appendChild(y);
             }
-            /*// uncomment to reveal enemy ships
+            /*//uncomment to reveal enemy ships
             if(grid.boxes[j].ship)
                 grid.boxes[j].elem.style.background = SHIPCOLORS[indexesOfArray(grid.ships, grid.boxes[j].ship)];
             else
                 grid.boxes[j].elem.style.background = "none";
             */
-           //uncomment to hide enemy ships
+            //uncomment to hide enemy ships
             if(i == USER){
                 if(grid.boxes[j].ship)
                     grid.boxes[j].elem.style.background = SHIPCOLORS[indexesOfArray(grid.ships, grid.boxes[j].ship)];
@@ -390,13 +402,12 @@ function display(){
                     grid.boxes[j].elem.style.background = "rgb(179, 0, 0)";
                 }
             }
-                
             gridNum.appendChild(grid.boxes[j].elem);
         }
     }
     
     if(traceBox){
-        if(!round && selected){
+        if(!ingame && selected){
             selected.control = selected.grid.getBox(traceBox.id);
             var boxes = selected.getBoxes();
             var color = SHIPCOLORS[indexesOfArray(selected.grid.ships, selected)];
@@ -414,16 +425,35 @@ function display(){
         else if(playerturn){
             traceBox.style.border = "6px solid rgb(255, 77, 77)";
         }
-    } 
-    if(round){
+    }
+    
+    if(ingame){
         opStart.style.display = "none";
-        opReset.style.display = "inline-block";
-        opLog.style.display = "inline-block";
+        opReset.style.display = "flex";
+        opLogBox.style.display = "inline-block";
     }
     else{
-        opStart.style.display = "inline-block";
+        opStart.style.display = "flex";
         opReset.style.display = "none";
-        opLog.style.display = "none";
+        opLogBox.style.display = "none";
     }
-    //if(gameEnd){} //show reset button
+
+    if(logEvent){
+        if(player == USER)
+            opLog.innerHTML = "<div class = 'playerevent'>" + logEvent + "</div>" + opLog.innerHTML;//inserts element on top. Doing the long way because insertChild() doesn't seem to work, as getFirstChild()/firstChild() [from google] is not a function.
+        else
+            opLog.innerHTML = "<div class = 'cpuevent'>" + logEvent + "</div>" + opLog.innerHTML;
+    }
+
+    if(playerturn)
+        opEvent.innerHTML = "Your Turn";
+    else
+        opEvent.innerHTML = "Cpu's Turn";
+
+    if(gameEnd){
+        if(playerturn)
+            opEvent.innerHTML = "Game Over. Your Victory!";
+        else
+            opEvent.innerHTML = "Game Over. Cpu Victory..."
+    }
 }

@@ -1,3 +1,7 @@
+@font-face{
+    font-family: Lakehurst Gothic;
+    src: url(../fonts/LakehurstGothic.ttf);
+}
 body{
     font-family: monospace;
     font-size: 125%;
@@ -8,8 +12,13 @@ body{
     display: flex;
     justify-content: left;
     align-items: center;
+    /*border: 2px solid white;*/
 }
-
+.label, #event, .logevent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /*Grids*/
 .dgrid{
     display: inline-grid;
@@ -22,22 +31,105 @@ body{
 }
 .box{
     border: 2px solid rgb(0, 69, 94);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     -webkit-user-select: none; /*makes the text unhighlightable*/
 }
 .label{
     border: 2px solid rgb(0, 69, 94);
-    color: rgb(255, 72, 72);
-    display: flex;
+    color: rgb(255, 219, 233);
+}
+
+/*Right side elements*/
+#logBox{
+    border: 4px solid rgba(255, 132, 132);
+    border-radius: 10px;
+    width: 17%;
+    height: 74%;
+    margin-left: .75%;
+    padding: .25%;
+    /*white-space: nowrap; + overflow-x: scroll; for horizontal scrolling*/
+    overflow-y: scroll;
+}
+#event{
+    width: 100%;
+    font-size: 125%;
+    border: 2px solid rgba(255, 132, 132);
+    border-radius: 5px;
+}
+.playerevent, .cpuevent{
+    display: block;
+    padding: 1%;
+    font-size: 85%;
+    border-radius: 5px;
+    margin-bottom: 1%;
+}
+.playerevent{
+    border: 2px solid rgb(251, 138, 255);
+}
+.cpuevent{
+    border: 2px solid rgb(51, 25, 59);
+}
+.bigevent{
+    display: block;
+    color: red;
+}
+
+button{
+    width: 7%;
+    height: 5%;
+    color: rgb(255, 219, 233);
+    font-family: Lakehurst Gothic;
+    font-size: 125%;
+    border: 2px solid rgb(104, 255, 67);
+    border-radius: 50px;
+    background: radial-gradient(#575757, #161616);
+    padding-bottom: .5%;
     justify-content: center;
     align-items: center;
 }
-
-#start{
-    margin-left: 2.5%;
-    width: 15%;
-    height: 5%;
+button:active{
+    background: radial-gradient(#353535, #161616);
+    font-size: 120%;
+    width: 6.5%;
+    height: 4.75%;
 }
-
+button:hover{
+    box-shadow: 0 0 10px white;
+}
+button:focus{
+    outline: 0; /*removes blue focus outline*/
+}
+#start{
+    margin-left: 6.5%;
+    font-family: Lakehurst Gothic;
+}
+#start:active{
+    margin-left: 6.75%;
+}
+#reset{
+    position: absolute;
+    top: 91%;
+    left: 86%;
+}
+#reset:active{
+    top: 91.125%;
+    left: 86.25%;
+}
+::-webkit-scrollbar{ /*scrollbar customization (taken from project 5)*/
+    width: 10px;
+    height: 10px;
+  }
+::-webkit-scrollbar-track{
+    background: #181818;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-thumb{
+    background: #888;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #555;
+}
+::-webkit-scrollbar-corner{
+    background: #181818;
+    border-radius: 15px;
+}

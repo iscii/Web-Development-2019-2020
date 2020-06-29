@@ -1,3 +1,26 @@
+6/29/2020
+To Do:
+    - Instructions
+        - button on bottom left corner
+        - popup Instructions (copy+paste for main menu)
+    - Menu button
+        - top left corner
+        - anchor to menu page
+Completed:
+    - Display
+        - button display
+        - button animation
+    - Log
+        - Big box, overflow y = scroll;
+        - custom scrollwheel
+        - display turn
+        - display grids attacked
+        - display if miss/hit ship
+        - display game end
+        - made it easier to distinguish between player and cpu events
+        - reset when reset
+    - Made it so reset button could be pressed whenever instead of only during player's turn
+
 6/28/2020
 To Do:
     - Display

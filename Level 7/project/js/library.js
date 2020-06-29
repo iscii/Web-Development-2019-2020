@@ -34,7 +34,6 @@ Grid.prototype.checkGame = function(){
 
     traceBox = null;
     gameEnd = true;
-    console.log("game over!");
 }
 
 function Box(letter, number, grid){
@@ -103,7 +102,7 @@ Ship.prototype.checkSink = function(){
         if(!this.boxes[item].hit) return false;
     
     this.sunken = true;
-    console.log("player " + this.grid.player + "'s " + this.name + " has been sunk!");
+    
     this.grid.checkGame();
     return true;
 }
