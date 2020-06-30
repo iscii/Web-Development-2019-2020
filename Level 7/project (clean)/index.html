@@ -1,0 +1,138 @@
+<!-- Menu -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Menu</title>
+		<style>
+			@font-face{
+				font-family: Lakehurst Gothic;
+				src: url(fonts/LakehurstGothic.ttf);
+			}
+			body{
+				background: rgb(17, 17, 17);
+				font-family: Lakehurst Gothic;
+				color: rgb(255, 219, 233);
+				border: 2px solid white;
+				border-radius: 50px;
+				width: 65%;
+				height: 97vh;
+				margin: auto;
+			}
+			h1, h4{
+				text-align: center;
+				color: white;
+				margin: 0 auto;
+			}
+			h4{
+				padding-bottom: 1%;
+				border-bottom: 2px solid white;
+			}
+			#content{
+				margin: auto;
+				height: 80%;
+				padding-left: 1%;
+				padding-right: 1%;
+				padding-top: .5%;
+				padding-bottom: .5%;
+				text-align: left;
+			}
+			.bigtext{
+				font-size: 130%;
+				color: rgb(255, 82, 82);
+			}
+			.medtext{
+				font-size: 120%;
+				color: rgb(57, 255, 103);
+				margin-left: 1%;
+			}
+			.smoltext{
+				font-size: 110%;
+				margin-left: 2%;
+			}
+			#ac{
+				color: rgb(0, 102, 24);
+			}
+			#b{
+				color: rgb(128, 0, 120);
+			}
+			#d{
+				color: rgb(0, 128, 100);
+			}
+			#s{
+				color: rgb(153, 0, 77);
+			}
+			#pb{
+				color: rgb(204, 51, 0);
+			}
+			button{
+				color: white;
+				font-family: Lakehurst Gothic;
+				font-size: 125%;
+				background: none;
+				border: none;
+				padding-bottom: .5%;
+				justify-content: center;
+				align-items: center;
+			}
+			button:hover, a:hover, #classic:hover, #salvo:hover{
+				text-shadow: 0 0 10px white;
+			}
+			button:active, a:active, #classic:active, #salvo:active{ /*if this is put before :hover, :hover overrides the text-shadow style in :active. Sequencing matters in css.*/
+				text-shadow: none;
+			}
+			button:focus{
+				outline: 0; /*removes blue focus outline*/
+			}
+		</style>
+		<script>
+			function reveal(){
+				var opInst = document.getElementById("instructionsbox");
+				if(opInst.style.display == "none")
+					opInst.style.display = "block";
+				else
+					opInst.style.display = "none";
+			}
+			function startGame(bool){
+				window.sessionStorage.clear();
+				window.sessionStorage.setItem("salvo", bool);
+
+				document.location.href = "game.html";
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Battleship</h1>
+		<h4>By Issac Zheng</h4>
+		<div id = "content">
+		<span class = "bigtext">Click on a gamemode to begin<br/></span>
+			<span class = "medtext" id = "classic" onclick = "startGame(false)">[classic]<br/></span>
+				<div class = "smoltext">Players will have one shot on their turn. Hitting a ship will grant them another shot.<br/></div>
+			<span class = "medtext" id = "salvo" onclick = "startGame(true)">[salvo]<br/></span>
+				<div class = "smoltext">
+				Players will have shots equivalent to the number of ships remaining in their fleet.<br/>
+				Hitting a ship will pass the turn to the next player.<br/>
+				</div>
+		<button onclick = "reveal()">Instructions</button><br/>
+		<div style = "display: none;" id = "instructionsbox">
+		<span class = "bigtext">gameplay<br/></span>
+			<span class = "medtext">[setup]<br/></span>
+				<div class = "smoltext">
+				Your grid is on the left.<br/>
+				Click a ship to select it. Press r or right click to rotate.<br/>
+				Ships may not overlap or go out of bounds.<br/>
+				Press start to begin the game.<br/>
+				</div>
+			<span class = "medtext">[game]<br/></span>
+				<div class = "smoltext">
+				The opponent grid is on the right.<br/>
+				Both players have five ships: an <span id = "ac">Aircraft Carrier</span>, a <span id = "b">Battleship</span>, a <span id = "d">Destroyer</span>, a <span id = "s">Submarine</span>, and a <span id = "pb">Patrol Boat</span>.<br/>
+				Your goal in this game is to sink the entirety of the opponent's fleet before they sink yours.<br/>
+				Click on a grid to attack it. If your shot hits, it will turn red. If it misses, it will turn blue.<br/>
+				The log will display events as well as player turns and when the game is over.<br/>
+				</div>		
+		</div>
+		</div>
+		<!-- The inability to form perfect boxes by repositioning the five ships annoys the hell out of me lmao -->
+	</body>
+</html>

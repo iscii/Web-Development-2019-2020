@@ -1,0 +1,25 @@
+
+Event Storage
+    onclick = react(event)
+    react(e)
+        if(array.length < 2)
+            array.push(e)
+        //and then compare the two events
+
+Ship Grid Occupation:
+    give the ships properties:
+        - controller box [its left/top most box occupied - that's its core.] = grid object
+        - grids occupied [array of grid objects] - depends on controller box
+        - its occupied grids are the box# + 5 if horizontal
+        - box letter + 5 if vertical
+            Options:
+                - substitute letters for numbers
+                - array storing letters in order
+                - array storing all the boxes, determine box occupations
+                through arithmetic sequencing using the 'for' function
+                    - + 1 for horizontal, + 5 for vertical
+        
+Box objects:
+    - bool occupied
+        - if true, ship object that occupies it
+    - array id = [letter, number]

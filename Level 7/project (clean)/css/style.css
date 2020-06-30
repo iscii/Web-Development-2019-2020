@@ -1,0 +1,190 @@
+@font-face{
+    font-family: Lakehurst Gothic;
+    src: url(../fonts/LakehurstGothic.ttf);
+}
+body{
+    font-family: monospace;
+    font-size: 125%;
+    color: rgb(255, 219, 233);
+    background: rgb(17, 17, 17);
+    margin: auto;
+    height: 100vh;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.label, #event, .logevent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*Grids*/
+.dgrid{
+    display: inline-grid;
+    grid-template-columns: 5% auto auto auto auto auto auto auto auto auto auto;
+    grid-template-rows: 5% auto auto auto auto auto auto auto auto auto auto;
+    width: 38%;
+    height: 76%;
+    margin: 1%;
+}
+.box{
+    border: 2px solid rgb(0, 69, 94);
+    -webkit-user-select: none; /*makes the text unhighlightable*/
+}
+.label{
+    border: 2px solid rgb(0, 69, 94);
+    color: rgb(255, 219, 233);
+}
+
+/*Right side elements*/
+#logbox{
+    border: 4px solid rgba(255, 132, 132);
+    border-radius: 10px;
+    width: 17%;
+    height: 74%;
+    margin-left: .75%;
+    padding: .25%;
+    overflow-y: scroll;
+}
+#event{
+    width: 100%;
+    height: 7%;
+    font-size: 125%;
+    font-weight: bolder;
+    border: 2px solid rgba(255, 132, 132);
+    border-radius: 5px;
+}
+.playerevent, .cpuevent{
+    display: block;
+    padding: 1%;
+    font-size: 85%;
+    border-radius: 5px;
+    margin-bottom: 1%;
+}
+.playerevent{
+    border: 2px solid rgb(251, 138, 255);
+}
+.cpuevent{
+    border: 2px solid rgb(51, 25, 59);
+}
+.bigevent{
+    display: block;
+    color: red;
+}
+::-webkit-scrollbar{ /*scrollbar customization (taken from project 5)*/
+    width: 10px;
+    height: 10px;
+  }
+::-webkit-scrollbar-track{
+    background: #181818;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-thumb{
+    background: #888;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #555;
+}
+::-webkit-scrollbar-corner{
+    background: #181818;
+    border-radius: 15px;
+}
+/*buttons*/
+button{
+    width: 7%;
+    height: 5%;
+    color: white;
+    font-family: Lakehurst Gothic;
+    font-size: 125%;
+    background: none;
+    border: none;
+    padding-bottom: .5%;
+    justify-content: center;
+    align-items: center;
+}
+button:hover, a:hover{
+    text-shadow: 0 0 10px white;
+}
+button:active, a:active{ /*if this is put before :hover, :hover overrides the text-shadow style in :active. Sequencing matters in css.*/
+    width: 6.5%;
+    height: 4.75%; 
+    text-shadow: none;
+}
+button:focus{
+    outline: 0; /*removes blue focus outline*/
+}
+#start{
+    margin-left: 6.5%;
+    font-family: Lakehurst Gothic;
+}
+#start:active{
+    margin-left: 6.75%;
+}
+#reset{
+    position: absolute;
+    top: 91%;
+    left: 86%;
+}
+#reset:active{
+    top: 91.125%;
+    left: 86.25%;
+}
+#instbutton{
+    position: absolute;
+    top: 90%;
+    left: 4%;
+    z-index: 1;
+}
+a{
+    text-decoration: none;
+    position: absolute;
+    color: white;
+    top: 3%;
+    left: 4%;
+    font-family: Lakehurst Gothic;
+    font-size: 125%;
+}
+/*Instructions*/
+#instructionsbox{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(39, 39, 39, 0.664);
+}
+#instructionscontent{
+    border: 2px solid white;
+    border-radius: 50px;
+    background: rgb(17, 17, 17);
+    font-family: Lakehurst Gothic;
+    margin-left: 20%;
+    padding: 2%;
+    width: 70%;
+}
+.bigtext{
+    font-size: 110%;
+    color: rgb(255, 82, 82);
+}
+.medtext{
+    color: rgb(57, 255, 103);
+    margin-left: 1%;
+}
+.smoltext{
+    font-size: 90%;
+    margin-left: 2%;
+}
+#ac{
+    color: rgb(0, 102, 24);
+}
+#b{
+    color: rgb(128, 0, 120);
+}
+#d{
+    color: rgb(0, 128, 100);
+}
+#s{
+    color: rgb(153, 0, 77);
+}
+#pb{
+    color: rgb(204, 51, 0);
+}

@@ -1,0 +1,55 @@
+<!-- Game -->
+<!DOCTYPE html>
+<html onkeypress = "rotate(event)">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Battleship</title>
+		<link rel = "stylesheet" href = "css/style.css"/>
+		<style></style>
+		<script src = js/script.js></script>
+		<script src = js/library.js></script>
+		<script src = js/utilities.js></script>
+	</head>
+	<body onload = initialize(); id = "body">
+		<div id = "divgrid0" onclick = "react(grid0, event)" oncontextmenu = "rotate(event)" class = "dgrid">
+		</div>
+		<div id = "divgrid1" onclick = "react(grid1, event)" class = "dgrid">
+		</div>
+		<button id = "start" onclick = "startGame()">Start</button>
+		<div hidden id = "logbox">
+			<div id = "event">Event</div> <!--displays turn and game end-->
+			<div id = "log"></div>
+		</div>
+		<button hidden id = "reset" onclick = "initialize(true);">Reset</button>
+		<a href = "index.html" id = "menu">Menu</a>
+		<button id = "instbutton" onclick = "reveal();">Instructions</button>
+		<div style = "display: none;" id = "instructionsbox">
+			<div id = "instructionscontent">
+			<span class = "bigtext">gameplay<br/></span>
+				<span class = "medtext">[setup]<br/></span>
+					<div class = "smoltext">
+					Your grid is on the left.<br/>
+					Click a ship to select it. Press r or right click to rotate.<br/>
+					Ships may not overlap or go out of bounds.<br/>
+					Press start to begin the game.<br/>
+					</div>
+				<span class = "medtext">[game]<br/></span>
+					<div class = "smoltext">
+					The opponent grid is on the right.<br/>
+					Both players have five ships: an <span id = "ac">Aircraft Carrier</span>, a <span id = "b">Battleship</span>, a <span id = "d">Destroyer</span>, a <span id = "s">Submarine</span>, and a <span id = "pb">Patrol Boat</span>.<br/>
+					Your goal in this game is to sink the entirety of the opponent's fleet before they sink yours.<br/>
+					Click on a grid to attack it. If your shot hits, it will turn red. If it misses, it will turn blue.<br/>
+					The log will display events as well as player turns and when the game is over.<br/>
+					</div>		
+			<span class = "bigtext">gamemodes<br/></span>
+			<span class = "medtext" id = "classic">[classic]<br/></span>
+				<div class = "smoltext">Players will have one shot on their turn. Hitting a ship will grant them another shot.<br/></div>
+			<span class = "medtext" id = "salvo">[salvo]<br/></span>
+				<div class = "smoltext">
+				Players will have shots equivalent to the number of ships remaining in their fleet.<br/>
+				Hitting a ship will pass the turn to the next player.<br/>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

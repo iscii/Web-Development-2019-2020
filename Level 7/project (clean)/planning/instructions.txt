@@ -1,0 +1,18 @@
+[menu]
+	choose your gamemode
+		explain gamemodes
+
+[game]
+	[setup]
+		your grid is on the left
+		click a ship to select it
+		while you have a ship selected, press r or right click to rotate
+		ships may not overlap or go out of bounds
+		press start to begin the game
+	[game]
+		explain game
+		explain display
+	[reset]
+		you may only reset on your turn or at the end of the game
+
+I must say, the inability to form perfect boxes by repositioning the five ships annoys the hell out of me

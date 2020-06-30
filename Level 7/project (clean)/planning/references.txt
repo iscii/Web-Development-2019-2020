@@ -1,0 +1,23 @@
+CSS Grids
+https://www.w3schools.com/css/css_grid.asp
+
+More CSS Grids
+https://css-tricks.com/snippets/css/complete-guide-grid/
+
+Map!
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map 
+
+Unary Operators (+ true = 1)
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#.2B_%28Unary_Plus%29
+
+Make text unselectable
+https://stackoverflow.com/questions/69430/is-there-a-way-to-make-text-unselectable-on-an-html-page
+
+Int to bool [1, 0]
+https://stackoverflow.com/questions/16313222/how-to-convert-1-to-true-or-0-to-false-upon-model-fetch
+
+Get Parent Element
+https://stackoverflow.com/questions/27842138/get-id-of-parent-element-on-click
+
+Text gaps
+https://www.geeksforgeeks.org/how-to-insert-spaces-tabs-in-text-using-html-css/

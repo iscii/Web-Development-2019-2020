@@ -1,0 +1,169 @@
+6/30/2020
+To Do:
+    - Clean up
+Completed:
+    - Instructions
+        - button on bottom left corner
+        - popup Instructions (copy+paste for main menu)
+    - Menu
+        - Menu button
+        - top left corner
+        - anchor to menu page
+        - Instructions
+        - Gameplay
+    - Made buttons look cleaner :))
+    - Fixed the onmouseover bug by creating the event listener in initialize();
+    - Fixed bug where event display would say CPU won when player wins.
+
+6/29/2020
+To Do:
+    - Instructions
+        - button on bottom left corner
+        - popup Instructions (copy+paste for main menu)
+    - Menu button
+        - top left corner
+        - anchor to menu page
+Completed:
+    - Display
+        - button display
+        - button animation
+    - Log
+        - Big box, overflow y = scroll;
+        - custom scrollwheel
+        - display turn
+        - display grids attacked
+        - display if miss/hit ship
+        - display game end
+        - made it easier to distinguish between player and cpu events
+        - reset when reset
+    - Made it so reset button could be pressed whenever instead of only during player's turn
+
+6/28/2020
+To Do:
+    - Display
+    - Log
+        - Big box, overflow y = scroll;
+Completed:
+    - Display
+        - When hovering over any box, expand it
+        - hide cpu grid for gameplay
+        - replace ship text with color
+        - When selected
+            - Make outlines green
+            - When the selected ship cannot be placed, make outlines red
+            - highlight the control box
+        - Ingame:
+            - When miss, make the box blue
+            - When hit, make the box red
+    - Fixed some cpuAttack() bugs
+    - Made it so that hover-over-box feedback ends when not hovering over a box.
+    - Set font to monospace so the grids don't shift sizes based on the width of the label characters.
+    - Various other bug fixes
+6/27/2020
+To Do:
+    - Display
+    - Log
+Completed:
+    - Round enforcement
+        - Prevent players from playing when game is over
+    - Reset
+    - Salvo
+        - Player Salvo
+        - CPU Salvo
+    - Fixed some cpuAttack() bugs
+
+6/26/2020
+To Do:
+    - Round enforcement
+        - Prevent players from playing when game is over
+    - Display
+    - Log
+Completed:
+    - Prevent player from sabotaging themself
+    - Enhancing cpuAttack()
+        - changed nextStep() to make it focus on one axis before moving onto next
+
+6/25/2020
+To Do:
+    - log
+Completed:
+    - rounds and game initialization
+    - cpu attack function
+        - attack random box
+        - if hit ship, track ship on random side
+            - if miss, track other three sides [next turn]
+            - if hit, keep tracking
+            - if miss, switch to other end [next turn]
+            - keep tracking until ship is destroyed
+        - loop
+        - prevent cpu from hitting already hit box
+        
+6/24/2020
+To Do:
+    - rounds and game initialization
+    - cpu attack function
+        - attack random box
+        - if hit ship, track ship on random side
+            - if miss, track other three sides [next turn]
+            - if hit, keep tracking
+            - if miss, switch to other end [next turn]
+            - keep tracking until ship is destroyed
+        - loop
+        - prevent cpu from hitting already hit box         
+Completed: 
+        - start button
+            - hides and reveals log in its place when clicked
+        - attacking
+            - turns
+            - stay player turn if hit ship
+                - check if ship is sunk
+                - check if all ships are sunk [game over]
+            - cpu attack function
+                - give it an interval/timeout
+        - added rotation by right clicking when a ship is selected
+        - enemy random ship occupation
+            - loop:
+                - set ship to a random control  
+                - check if can occupy 
+                    - if can, occupy  
+                    - else, loop
+
+6/23/2020
+To Do:
+    - rounds and game initialization
+Completed:
+    - visual indication of select [trace function] - when selected, hovering over boxes will highlight them and the corresponding boxes of ship.
+        - For now, if cannot occupy, then just set text to "x". 
+    - select and move ships
+        - rotation
+        - fix selected flag when dropping ship.
+        - click on ships' control box to select
+    - figure out why the for() function in react() in if(box.ship) is not being called [the boxes are not becoming vacant].
+        - The box properties are empty
+
+6/22/2020
+To Do:
+    - rounds and game initialization
+        - click on ships' control box to select
+    - figure out why the for() function in react() in if(box.ship) is not being called [the boxes are not becoming vacant].
+Completed:
+    - revamp occupy code for modularity
+    - figure out why occupy() in react is not working
+    - make a choice: make ships' control property array or >object<
+6/21/2020
+To Do:
+    - rounds and game initialization
+        - click on ships' control box to select
+Completed:
+    - make ships occupy boxes
+    - check if ship is in an already occupied box [needs hotfixes]
+    - simplified occupy prototype code
+
+6/20/2020
+To Do:
+    - make ship occupy boxes
+    - check if ship is in an already occupied box
+    - simplify occupy prototype code
+Completed: 
+    - finding id of ship occupation boxes
+    - checking if ship is out of bounds
