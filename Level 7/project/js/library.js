@@ -27,13 +27,14 @@ Grid.prototype.getBox = function(id){ //returns box object in grid from event. i
     return this.boxes[indexesOfArray(this.boxes.map(item => item.elem.id == id), true)];
 }
 
-Grid.prototype.checkGame = function(){
+Grid.prototype.checkGame = function(player){
     for(item in this.ships)
         if(!this.ships[item].sunken) return;
-    clearInterval(cpuInterval);
 
     traceBox = null;
     gameEnd = true;
+    display(null, player);
+    console.log("checkgame display");
 }
 
 function Box(letter, number, grid){
@@ -97,12 +98,12 @@ Ship.prototype.deoccupy = function(){
     this.boxes = [];
 }
 
-Ship.prototype.checkSink = function(){
+Ship.prototype.checkSink = function(player){
     for(item in this.boxes)
         if(!this.boxes[item].hit) return false;
     
     this.sunken = true;
     
-    this.grid.checkGame();
+    this.grid.checkGame(player);
     return true;
 }

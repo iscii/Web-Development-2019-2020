@@ -19,3 +19,5 @@ https://stackoverflow.com/questions/16313222/how-to-convert-1-to-true-or-0-to-fa
 Get Parent Element
 https://stackoverflow.com/questions/27842138/get-id-of-parent-element-on-click
 
+Text gaps
+https://www.geeksforgeeks.org/how-to-insert-spaces-tabs-in-text-using-html-css/

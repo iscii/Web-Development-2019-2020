@@ -7,8 +7,8 @@ body{
     font-size: 125%;
     color: rgb(255, 219, 233);
     background: rgb(17, 17, 17);
-    width: 99vw;
-    height: 97vh;
+    margin: auto;
+    height: 100vh;
     display: flex;
     justify-content: left;
     align-items: center;
@@ -39,7 +39,7 @@ body{
 }
 
 /*Right side elements*/
-#logBox{
+#logbox{
     border: 4px solid rgba(255, 132, 132);
     border-radius: 10px;
     width: 17%;
@@ -51,7 +51,9 @@ body{
 }
 #event{
     width: 100%;
+    height: 7%;
     font-size: 125%;
+    font-weight: bolder;
     border: 2px solid rgba(255, 132, 132);
     border-radius: 5px;
 }
@@ -72,28 +74,45 @@ body{
     display: block;
     color: red;
 }
-
+::-webkit-scrollbar{ /*scrollbar customization (taken from project 5)*/
+    width: 10px;
+    height: 10px;
+  }
+::-webkit-scrollbar-track{
+    background: #181818;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-thumb{
+    background: #888;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #555;
+}
+::-webkit-scrollbar-corner{
+    background: #181818;
+    border-radius: 15px;
+}
+/*buttons*/
 button{
     width: 7%;
     height: 5%;
-    color: rgb(255, 219, 233);
+    color: white;
     font-family: Lakehurst Gothic;
     font-size: 125%;
-    border: 2px solid rgb(104, 255, 67);
-    border-radius: 50px;
-    background: radial-gradient(#575757, #161616);
+    background: none;
+    border: none;
     padding-bottom: .5%;
     justify-content: center;
     align-items: center;
 }
-button:active{
-    background: radial-gradient(#353535, #161616);
-    font-size: 120%;
-    width: 6.5%;
-    height: 4.75%;
+button:hover, a:hover{
+    text-shadow: 0 0 10px white;
 }
-button:hover{
-    box-shadow: 0 0 10px white;
+button:active, a:active{ /*if this is put before :hover, :hover overrides the text-shadow style in :active. Sequencing matters in css.*/
+    width: 6.5%;
+    height: 4.75%; 
+    text-shadow: none;
 }
 button:focus{
     outline: 0; /*removes blue focus outline*/
@@ -114,22 +133,61 @@ button:focus{
     top: 91.125%;
     left: 86.25%;
 }
-::-webkit-scrollbar{ /*scrollbar customization (taken from project 5)*/
-    width: 10px;
-    height: 10px;
-  }
-::-webkit-scrollbar-track{
-    background: #181818;
-    border-radius: 15px;
+#instbutton{
+    position: absolute;
+    top: 90%;
+    left: 4%;
+    z-index: 1;
 }
-::-webkit-scrollbar-thumb{
-    background: #888;
-    border-radius: 15px;
+a{
+    text-decoration: none;
+    position: absolute;
+    color: white;
+    top: 3%;
+    left: 4%;
+    font-family: Lakehurst Gothic;
+    font-size: 125%;
 }
-::-webkit-scrollbar-thumb:hover{
-    background: #555;
+/*Instructions*/
+#instructionsbox{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(39, 39, 39, 0.664);
 }
-::-webkit-scrollbar-corner{
-    background: #181818;
-    border-radius: 15px;
+#instructionscontent{
+    border: 2px solid white;
+    border-radius: 50px;
+    background: rgb(17, 17, 17);
+    font-family: Lakehurst Gothic;
+    margin-left: 20%;
+    padding: 2%;
+    width: 70%;
+}
+.bigtext{
+    font-size: 110%;
+    color: rgb(255, 82, 82);
+}
+.medtext{
+    color: rgb(57, 255, 103);
+    margin-left: 1%;
+}
+.smoltext{
+    font-size: 90%;
+    margin-left: 2%;
+}
+#ac{
+    color: rgb(0, 102, 24);
+}
+#b{
+    color: rgb(128, 0, 120);
+}
+#d{
+    color: rgb(0, 128, 100);
+}
+#s{
+    color: rgb(153, 0, 77);
+}
+#pb{
+    color: rgb(204, 51, 0);
 }

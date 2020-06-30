@@ -1,3 +1,20 @@
+6/30/2020
+To Do:
+    - Clean up
+Completed:
+    - Instructions
+        - button on bottom left corner
+        - popup Instructions (copy+paste for main menu)
+    - Menu
+        - Menu button
+        - top left corner
+        - anchor to menu page
+        - Instructions
+        - Gameplay
+    - Made buttons look cleaner :))
+    - Fixed the onmouseover bug by creating the event listener in initialize();
+    - Fixed bug where event display would say CPU won when player wins.
+
 6/29/2020
 To Do:
     - Instructions
