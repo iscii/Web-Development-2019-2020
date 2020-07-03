@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+		<style>
+			.titlecontainer{
+				display: block;
+				text-align: center;
+			}
+			.titlecontent{
+				display: inline;
+				padding: 3px 6px 3px 6px;
+			}
+			body{
+				text-align: center;
+			}
+			#mainimg{
+				height: 500px;
+			}
+			#thumbs img{
+				width: 10%;
+				padding: 5px;
+			}
+		</style>
+		<script>
+			const THUMBS = ["aang.jpg", "batman.jpg", "clara.jpg", "doctor.jpg", "hansolo.jpg", "indianajones.jpg", "kirk.jpg", "moonknight.jpg", "rey.jpg", "rickgrimes.jpg", "ripley.jpg", "uhura.jpg"];
+
+			function initialize(){
+				mainImage = document.getElementById("mainimg");
+				thumbnailContainer = document.getElementById("thumbs");
+				
+				mainImage.src = "images/" + THUMBS[0];
+				buildThumbnailElements();
+			}
+			function buildThumbnailElements(){
+				for(var i in THUMBS){
+					var tmpImg = document.createElement("img");
+					tmpImg.src = "images/" + THUMBS[i];
+
+					tmpImg.addEventListener("click", function(){
+						mainImage.src = this.src;
+					});
+					thumbnailContainer.appendChild(tmpImg);
+				}
+			}
+		</script>
+	</head>
+	<body onload = "initialize()">
+		<h1 class = "titlecontainer"><span class = "titlecontent">Gallery Of Heroes</span></h1>
+		<img id = "mainimg"/>
+		<div id = "thumbs"></div>
+	</body>
+</html>
