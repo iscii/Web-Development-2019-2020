@@ -33,7 +33,7 @@
 			function loadImages(){
 				var imageRequest = new XMLHttpRequest();
 
-				imageRequest.open("GET", "http://localhost:8081/getimages", true);
+				imageRequest.open("GET", "http://localhost:8081/getimages", true); //if it's localhost, only localhost:8081/index.html will work. Not http://127.0.1.1:8081/index.html
 				imageRequest.onreadystatechange = function(){
 					if(imageRequest.readyState == 4){
 						var thumbs = imageRequest.responseText;

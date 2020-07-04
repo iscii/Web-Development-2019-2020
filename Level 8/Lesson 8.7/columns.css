@@ -1,0 +1,78 @@
+/*
+	columns.css
+	
+	This file sets up a template for creating flowing columns on a web page.  In order use this file, you will need to define a column layout built within containers in the format:
+
+		<tag class = "columncontainer">
+			<tag class = "column">
+				<tag class = "colcontent">
+				</tag>
+			</tag>
+		</tag>
+	
+	The tags that you use for your design are unimportant as the css will redefine their styling.  Make sure they have the proper classnames.
+
+	You may include as many columns as you like, or as many rows of columns as you like.  When defining a new row, you have the option of inserting a column divider (usually a styled <hr />).
+*/
+
+/*
+	.columncontainer
+	
+	This class represents the overall container for the entire column layour.
+	
+	The container needs to be a centered block element with all items inside centered.  Setting a custom width for the individual file is encouraged.
+*/
+.columncontainer
+{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+}
+
+/*
+	.column
+	
+	This class defines the basic column.  The inline-block display gives us the flexibility to set a width for it and ensure that our columns will appear side by side in any resolution.  This is set for a 3 column display.
+	
+	The vertical-align brings all of the text within to the top of the column so there isn't a jagged edge up there.
+	
+	The padding of 2% puts a flexible amount of space between the columns so that they will be consistent in various resolutions.
+*/
+.column
+{
+	display:inline-block;
+	width:25%;
+	vertical-align:top;
+	padding:2%;
+}
+
+/*
+	.colcontent
+	
+	This class must be a block element.  It has no defined style because all of that is based on the theme of the web page.
+	
+	This element may be omitted if it's not needed.  It may also be repeated multiple times if your column is split into multiple sections.
+*/
+
+.colcontent
+{
+	display:block;
+}
+
+/*
+	.coldivider
+	
+	It is assumed (though not enforced) that this will be an <hr /> tag.
+
+	Formatting an hr can be a nice way of dressing up the page.  Remember that an hr is a hollow rectangle that has been flattened into a line.  By changing the height, you can open it up and color it with a background color (this does not work in all browsers).  You can also trim it by setting borders.
+	
+	NOTE - THE STYLING OF <hr /> TAGS MAY VARY FROM BROWSER TO BROWSER.
+*/
+.coldivider
+{
+	width:85%;
+	height:2px;
+	background-color:white;
+	border:thick solid black;
+}
