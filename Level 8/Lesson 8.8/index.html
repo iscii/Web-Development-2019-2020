@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+		<style></style>
+		<script>
+			function init(){
+				postForm = document.getElementById("postform");
+			}
+			function postText(){
+				var dataRequest = new XMLHttpRequest();
+
+				var url = "http://localhost:8081/post?title=" + postForm.title.value + "&post=" + postForm.post.value;
+
+				dataRequest.open("GET", url, true);
+				dataRequest.onreadystatechange = function(){
+					if(dataRequest.readyState == 4){
+						postForm.title.value = "";
+						postForm.post.value = "";
+					}
+				}
+				dataRequest.send();
+			}
+		</script>
+	</head>
+	<body onload = "init()">
+		<form id = "postform" method = "post">
+			Title: <input type = "text" name = "title"/>
+			<hr/>
+			<textarea type = "text" name = "post"></textarea><br/><br/>
+			<input type = "submit" onclick = "postText();"/> <!--basically a button with the word "submit" on it.-->
+		</form>
+	</body>
+</html>
