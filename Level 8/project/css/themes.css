@@ -1,0 +1,17 @@
+body{ /*dark theme*/
+    /*text colors can be used for borders*/
+    background:#181818; /*background*/
+    background:#3f3f3f; /*background*/
+    color:#FC3939; /*text*/
+    color:lightcoral; /*text*/
+    color:rgb(99, 99, 241); /*text*/
+    color:rgb(47, 171, 187); /*text*/
+    color:rgba(255, 56, 56, 0.801); /*reset button*/
+    font: Andalus; /*Basic*/
+    font: Aharoni; /*Smooth*/
+    font: Tw Cen Mt; /*Smooth*/
+
+    box-shadow: -5px -5px 10px #fff, -5px -5px 20px rgb(190, 190, 190), -5px -5px 30px rgb(119, 119, 119), -5px -5px 40px rgb(73, 73, 73), -5px -5px 50px rgb(37, 37, 37), -5px -5px 60px black; /*black neon lights on top-left*/
+    box-shadow: 0 0 10px #fff, 0 0 20px rgb(190, 190, 190), 0 0 30px rgb(119, 119, 119), 0 0 40px rgb(73, 73, 73), 0 0 50px rgb(37, 37, 37), 0 0 60px black; /*black neon lights all around element*/
+    box-shadow: 5px 5px 10px #fff, 5px 5px 20px rgb(190, 190, 190), 5px 5px 30px rgb(119, 119, 119), 5px 5px 40px rgb(73, 73, 73), 5px 5px 50px rgb(37, 37, 37), 5px 5px 60px black; /*black neon lights on bottom-right*/
+}
