@@ -2,5 +2,6 @@
 To Do:
     - Set the correct image correspondent to picked pet
 Completed:
-    - Basic layout
+    - Basic structure
     - Server getdata basics [frame.json]
+    - Little note: ctrl + d selects word in vscode

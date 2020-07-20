@@ -1,9 +1,15 @@
 function init(){
     //refs
     opPet = document.getElementById("petimg");
+    opMenu = document.getElementById("petmenuset");
+    opSel = document.getElementById("newselectionset");
 
     getData("petbase");
 }
+function createNew(type){
+
+}
+
 function getData(pathname){
     var request = new XMLHttpRequest();
 
@@ -16,4 +22,18 @@ function getData(pathname){
         }
     }
     request.send();
+}
+
+function togglePop(type){
+    if(type == "menu") var target = opMenu;
+    if(type == "create") var target = opSel;
+
+    if(target.style.display == "none")
+        return target.style.display = "block";
+    target.style.display = "none";
+    
+    if(type == "menu" && opSel.style.display == "block") opSel.style.display = "none";
+}
+function display(){
+
 }

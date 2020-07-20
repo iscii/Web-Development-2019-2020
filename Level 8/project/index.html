@@ -7,16 +7,27 @@
 		<script src = 'js/script.js'></script>
 	</head>
 	<body onload = 'init()'>
-		<div id = 'left'>left
-
+		<div id = 'left'>
+			<button id = "menubtn" onclick = "togglePop('menu')">Pets</button>
 		</div>
 			
 		<div id = 'middle'>
 			<img id = "petimg"/>
 		</div>
 
-		<div id = 'right'>right
+		<div id = 'right'>
 			
+		</div>
+
+		<div id = "petmenuset" style = "display: none;">
+			<div id = "petmenu">
+				<button id = "createbtn" onclick = "togglePop('create')">New Pet</button>
+			</div>
+		</div>
+		<div id = "newselectionset" style = "display: none;">
+			<div id = "newselection">
+				
+			</div>
 		</div>
 	</body>
 </html>

@@ -1,6 +1,6 @@
-
+/*general*/
 body{
-    background:#0064d6; /*background*/
+    background:#004492; /*background*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,11 +9,12 @@ body{
 }
 div{
     display: inline-block;
-    border: 2px solid white;
     color: white;
-    height: 99%;
+    height: 80%;
     text-align: center;
 }
+
+/*formatting*/
 #left{
     width: 10%;
 }
@@ -26,6 +27,31 @@ div{
 #right{
     width: 30%;
 }
+#left, #middle, #right{
+    border: 2px solid white;
+}
+
+/*specifics*/
 #petimg{
     width: 80%;
+}
+#menubtn, #createbtn{
+    position: absolute;
+    z-index: 1;
+}
+
+/*popups*/
+#petmenuset, #newselectionset{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(128, 128, 128, 0.541);
+}
+#petmenu{
+    background: rgb(0, 66, 11);
+    width: 70%;
+    height: 90%;
+}
+#newselection{
+
 }
