@@ -1,0 +1,45 @@
+[{
+    "type": "boomer",
+    "basic": {
+        "image": "images/boomer.png",
+        "lifespan": 7,
+        "appenergy": 6
+    },
+    "name": null,
+    "health": 100,
+    "spirit": 100,
+    "hunger": 10,
+    "fatigue": 10,
+    "age": 0,
+    "remaining": 7
+},
+{
+    "type": "clipper",
+    "basic": {
+        "image": "images/clipper.png",
+        "lifespan": 15,
+        "appenergy": 2
+    },
+    "name": null,
+    "health": 100,
+    "spirit": 100,
+    "hunger": 10,
+    "fatigue": 10,
+    "age": 0,
+    "remaining": 15
+},
+{
+    "type": "drupper",
+    "basic": {
+        "image": "images/drupper.png",
+        "lifespan": 30,
+        "appenergy": 4
+    },
+    "name": null,
+    "health": 100,
+    "spirit": 100,
+    "hunger": 10,
+    "fatigue": 10,
+    "age": 0,
+    "remaining": 30
+}]

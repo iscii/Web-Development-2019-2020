@@ -1,0 +1,93 @@
+Level 8 - Virtual Pet
+
+Functionality
+
+    - Pets:
+        - Name
+        - 3 Pet types (choose one):
+            - Boomer, Clipper, Drupper
+            - Pet jsons in a text/json file
+        - Properties:
+            - Health [100] [0-100]
+            - Spirit [100] [0-100]
+            - Hunger [10] [10-100]
+            - Fatigue [10] [10-100]
+            - Age [0] [0-x]
+            ?- Cleanliness [80] [0-100]
+            ?- Weight []
+            - Unique: 
+                - Boomer:
+                    - Lifespan: 7d
+                    - Appetite: 6hr
+                    - Energy: 6hr
+                - Clipper:
+                    - Lifespan: 15d
+                    - Appetite: 2hr
+                    - Energy: 2hr
+                - Drupper:
+                    - Lifespan: 30d
+                    - Appetite: 4hr
+                    - Energy: 4hr
+        -Control Panel
+            - Feed [Hunger -]
+            - Play [Spirit -] [Fatigue +]
+            - Sleep [Fatigue -]
+    
+    - Player can make multiple pets
+        - Store each of them in a pets folder
+        - Properties and stats are updated per hour (server must be kept up?)
+            - Per hour relative to irl time or relative to pet creation time?
+    
+    - Keep track of the # hours since last played, fed, slept
+    - Appetite
+        - Every hour, hunger + (hunger *(.1 * appetite)) //Each hour, the pet’s hunger will increase by 10% of its current value multiplied by its appetite.
+        - Whenever pet is fed:
+            - Hunger = 10, Health * 1.05 (cap 100)
+            - If current Hunger < 20, Health * .95
+    - Energy
+        - Every hour, fatigue + (fatigue * .05 * energy)
+            - Every hour past the pet's unique energy count, its spirit * .9
+        - Whenever pet is played with:
+            - If time between last play session is less than energy count, its fatigue * 1.2
+    - Sleep
+        - Pet cannot sleep unless fatigue >= 40
+        - Pet sleeps for energy duration * 2
+            - Cannot be interacted with while sleeping
+        - When wakes up:
+            - Fatigue = 10
+            - Spirit * 1.5
+            - health * 1.1
+
+    - Stats (Called every hour)
+        - If hunger > 50, health *= 0.9, fatigue *= 1.1
+        - If health < 50, health *= 0.9, fatigue *= 1.1
+        - If spirit < 50, health *= 0.9, fatigue *= 1.1
+        - If fatigue > 50, health *= 0.9
+    - For each day past pet's lifespan, MAX health -= 10
+
+    - (call every update) If health < 10, the pet dies.
+    
+Interface
+
+    - Take influence from somma those pet games on mobile
+
+    Middle:
+        - Pet png
+    Right:
+        - Pet control panel
+            - Stats [name, type, health, spirit, hunger, fatigue, cleanliness, age, weight]
+    Left:
+        - "Pets" button - opens a menu showing all current pets [png, type, name]
+            - Menu is like old games' instruction popup - takes up whole screen, grays out background
+            - "Make new pet" button
+    - Pets have three states(draw them)
+        - Happy
+        - Slightly droopy
+        - On the ground
+        - (Maybe) Per state:
+            - Appetite:
+                - Make it skinnier or smtn
+            - Energy/Sleep:
+                - Make it droopier
+    
+Enhancements

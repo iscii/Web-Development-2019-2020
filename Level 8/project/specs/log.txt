@@ -1,0 +1,6 @@
+7/20/2020
+To Do:
+    - Set the correct image correspondent to picked pet
+Completed:
+    - Basic layout
+    - Server getdata basics [frame.json]

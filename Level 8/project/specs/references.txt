@@ -1,0 +1,8 @@
+Status codes
+https://www.npmjs.com/package/http-status-codes
+
+Date.now()
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
+
+Forever
+https://stackoverflow.com/questions/12701259/how-to-make-a-node-js-application-run-permanently

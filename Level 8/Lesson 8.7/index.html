@@ -51,9 +51,11 @@
 				dataRequests.onreadystatechange = function(){
 					if(dataRequests.readyState == 4){
 						data = dataRequests.responseText.split(";");
+						console.log(data);
 						for(var i in data){
 							data[i] = JSON.parse(data[i]);
 						}
+						console.log(data);
 
 						setThumbnails();
 						display();

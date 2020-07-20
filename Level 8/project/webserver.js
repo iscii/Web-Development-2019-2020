@@ -15,10 +15,10 @@ http.createServer(function(request, response){
         pathname = "index.html";
     console.log("Request for " + pathname + " received.");
 
-    var ext = pathname.substring(pathname.indexOf(".") + 1); //takes pathname, returns the string after the "." character (filetype)
+    var ext = pathname.substring(pathname.indexOf(".") + 1); //takes pathname, returns the string after the "." character (filetype). ext = extension
     
     if(ext == pathname)
-        response.end(client.getClientData(pathname));
+        response.end(client.getClientData(pathname)); //calls the clientdata function
     else{
         fs.readFile(pathname, function(err, data){
             var contentType = content.getFileTypeObject(ext);
@@ -43,4 +43,4 @@ http.createServer(function(request, response){
     }
 }).listen(8081);
 
-console.log("Server running at http://localhost:8081");
+console.log("Server running at http://localhost:8081")

@@ -1,0 +1,31 @@
+
+body{
+    background:#0064d6; /*background*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: auto;
+}
+div{
+    display: inline-block;
+    border: 2px solid white;
+    color: white;
+    height: 99%;
+    text-align: center;
+}
+#left{
+    width: 10%;
+}
+#middle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+#right{
+    width: 30%;
+}
+#petimg{
+    width: 80%;
+}
