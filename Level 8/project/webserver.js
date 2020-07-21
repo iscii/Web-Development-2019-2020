@@ -13,7 +13,7 @@ http.createServer(function(request, response){
     var pathname = url.parse(request.url).pathname.substring(1);
     if(pathname == "") //automatically loads index.html without having to put it in the pathname
         pathname = "index.html";
-    console.log("Request for " + pathname + " received.");
+    //console.log("Request for " + pathname + " received.");
 
     var ext = pathname.substring(pathname.indexOf(".") + 1); //takes pathname, returns the string after the "." character (filetype). ext = extension
     
@@ -22,7 +22,7 @@ http.createServer(function(request, response){
     else{
         fs.readFile(pathname, function(err, data){
             var contentType = content.getFileTypeObject(ext);
-            console.log("File type is " + contentType.type + "/" + contentType.extension);
+            //console.log("File type is " + contentType.type + "/" + contentType.extension);
             
             if(err){
                 console.log(err);

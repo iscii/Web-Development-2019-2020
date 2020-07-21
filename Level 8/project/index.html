@@ -23,23 +23,23 @@
 			<div id = "petmenu">
 				<button id = "menubtn" onclick = "togglePop('create')">New Pet</button>
 			</div>
-			<div id = "newselection" style = "display: none;">
+			<div id = "createmenu" style = "display: none;">
 				<div class = "newpetdesc">
-					<img id = "newboomer" class = "newpetimg" src = "images/boomer.png"/>
+					<img id = "new0" class = "newpetimg" src = "images/boomer.png" onclick = "createSelect('boomer')"/>
 					Boomer <br/> Lifespan: 7 Days <br/> Appetite & Energy: 6 Hours
 				</div>
 				<div class = "newpetdesc">
-					<img id = "newclipper" class = "newpetimg" src = "images/clipper.png"/>
+					<img id = "new1" class = "newpetimg" src = "images/clipper.png" onclick = "createSelect('clipper')"/>
 					Clipper <br/> Lifespan: 15 Days <br/> Appetite & Energy: 2 Hours
 				</div>
 				<div class = "newpetdesc">
-					<img id = "newdrupper" class = "newpetimg" src = "images/drupper.png"/>
+					<img id = "new2" class = "newpetimg" src = "images/drupper.png" onclick = "createSelect('drupper')"/>
 					Drupper <br/> Lifespan: 30 Days <br/> Appetite & Energy: 4 Hours
 				</div>
-				<form id = "nameform">
+				<form id = "nameform" method = "post">
 					<input type = "text" name = "name" placeholder = "Name" style = "text-align: center;"/> <br/>
-					<input type = "submit" onclick = "createNew()"/> <!--type submit instantly uses qs or smtn-->
 				</form>
+				<button onclick = "createNew()">Create</button><!--type submit instantly uses qs or smtn-->
 			</div>
 		</div>
 	</body>

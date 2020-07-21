@@ -40,7 +40,7 @@ div{
 }
 
 /*popups*/
-#petmenuset, #newselection{
+#petmenuset, #createmenu{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,7 +55,7 @@ div{
     width: 70%;
     height: 90%;
 }
-#newselection{
+#createmenu{
     align-items: flex-start;
     border: 2px solid black;
     width: 50%;
@@ -63,7 +63,7 @@ div{
 }
 .newpetimg{
     width: 250px;
-    padding: 40px;
+    padding: 30px;
 }
 #nameform{
     position: absolute;

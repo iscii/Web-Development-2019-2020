@@ -3,7 +3,9 @@ To Do:
     - Set the correct image correspondent to picked pet
 Completed:
     - bettered structure
-    - createnew layoud
+    - createnew layout
+    - some qdata stuff
+    - selected pet during create
 
 7/20/2020
 To Do:
