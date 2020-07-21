@@ -8,7 +8,6 @@ body{
     margin: auto;
 }
 div{
-    display: inline-block;
     color: white;
     height: 80%;
     text-align: center;
@@ -41,17 +40,32 @@ div{
 }
 
 /*popups*/
-#petmenuset, #newselectionset{
+#petmenuset, #newselection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     width: 100vw;
     height: 100vh;
     background: rgba(128, 128, 128, 0.541);
 }
 #petmenu{
+    text-align: left;
     background: rgb(0, 66, 11);
     width: 70%;
     height: 90%;
 }
 #newselection{
-
+    align-items: flex-start;
+    border: 2px solid black;
+    width: 50%;
+    height: 55%;
+}
+.newpetimg{
+    width: 250px;
+    padding: 40px;
+}
+#nameform{
+    position: absolute;
+    top: 80%;
 }

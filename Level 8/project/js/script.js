@@ -2,12 +2,13 @@ function init(){
     //refs
     opPet = document.getElementById("petimg");
     opMenu = document.getElementById("petmenuset");
-    opSel = document.getElementById("newselectionset");
+    opSel = document.getElementById("newselection");
 
-    getData("petbase");
+    getData("petframe");
 }
 function createNew(type){
-
+    getData("create");
+    display();
 }
 
 function getData(pathname){
@@ -16,9 +17,10 @@ function getData(pathname){
     request.open("GET", "http://localhost:8081/" + pathname, true)
     request.onreadystatechange = function(){
         if(request.readyState == 4){
-            data = request.responseText;
-            petBase = JSON.parse(data);
-            console.log(petBase);
+            var data = request.responseText;
+
+            if(pathname == "petframe")
+                return petBase = JSON.parse(data);
         }
     }
     request.send();
@@ -29,10 +31,10 @@ function togglePop(type){
     if(type == "create") var target = opSel;
 
     if(target.style.display == "none")
-        return target.style.display = "block";
+        return target.style.display = "flex";
     target.style.display = "none";
     
-    if(type == "menu" && opSel.style.display == "block") opSel.style.display = "none";
+    if(type == "menu" && opSel.style.display == "flex") opSel.style.display = "none";
 }
 function display(){
 

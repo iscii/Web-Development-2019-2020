@@ -21,12 +21,25 @@
 
 		<div id = "petmenuset" style = "display: none;">
 			<div id = "petmenu">
-				<button id = "createbtn" onclick = "togglePop('create')">New Pet</button>
+				<button id = "menubtn" onclick = "togglePop('create')">New Pet</button>
 			</div>
-		</div>
-		<div id = "newselectionset" style = "display: none;">
-			<div id = "newselection">
-				
+			<div id = "newselection" style = "display: none;">
+				<div class = "newpetdesc">
+					<img id = "newboomer" class = "newpetimg" src = "images/boomer.png"/>
+					Boomer <br/> Lifespan: 7 Days <br/> Appetite & Energy: 6 Hours
+				</div>
+				<div class = "newpetdesc">
+					<img id = "newclipper" class = "newpetimg" src = "images/clipper.png"/>
+					Clipper <br/> Lifespan: 15 Days <br/> Appetite & Energy: 2 Hours
+				</div>
+				<div class = "newpetdesc">
+					<img id = "newdrupper" class = "newpetimg" src = "images/drupper.png"/>
+					Drupper <br/> Lifespan: 30 Days <br/> Appetite & Energy: 4 Hours
+				</div>
+				<form id = "nameform">
+					<input type = "text" name = "name" placeholder = "Name" style = "text-align: center;"/> <br/>
+					<input type = "submit" onclick = "createNew()"/> <!--type submit instantly uses qs or smtn-->
+				</form>
 			</div>
 		</div>
 	</body>

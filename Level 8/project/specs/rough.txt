@@ -1,0 +1,7 @@
+- menu: for all files in js/pets, display
+
+- createpet:
+    - select an image
+        - onclick, set selected = type
+    - have a textbox
+    - button to submit

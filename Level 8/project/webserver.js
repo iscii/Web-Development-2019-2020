@@ -18,7 +18,7 @@ http.createServer(function(request, response){
     var ext = pathname.substring(pathname.indexOf(".") + 1); //takes pathname, returns the string after the "." character (filetype). ext = extension
     
     if(ext == pathname)
-        response.end(client.getClientData(pathname)); //calls the clientdata function
+        response.end(client.getClientData(pathname, request)); //calls the clientdata function
     else{
         fs.readFile(pathname, function(err, data){
             var contentType = content.getFileTypeObject(ext);
