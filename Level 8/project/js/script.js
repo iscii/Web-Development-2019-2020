@@ -6,7 +6,16 @@ function init(){
 
     getData("petframe");
 }
-function createNew(type){
+function createNew(){
+    //take selected
+    //take name
+    //uhh apple pen
+    //getdata
+    //appendfile
+    //redirect back to normal link?
+        //if not, every pet will have their own querystring url
+    //display pet depending on qdata
+
     getData("create");
     display();
 }
@@ -19,8 +28,10 @@ function getData(pathname){
         if(request.readyState == 4){
             var data = request.responseText;
 
-            if(pathname == "petframe")
-                return petBase = JSON.parse(data);
+            if(pathname == "petframe"){
+                petBase = JSON.parse(data);
+                return display();
+            }
         }
     }
     request.send();
@@ -37,5 +48,5 @@ function togglePop(type){
     if(type == "menu" && opSel.style.display == "flex") opSel.style.display = "none";
 }
 function display(){
-
+    opPet.src = petBase[0].basic.image;
 }

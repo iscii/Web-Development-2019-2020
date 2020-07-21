@@ -5,3 +5,12 @@
         - onclick, set selected = type
     - have a textbox
     - button to submit
+
+    //take selected
+    //take name
+    //uhh apple pen
+    //getdata
+    //appendfile
+    //redirect back to normal link?
+        //if not, every pet will have their own querystring url
+    //display pet depending on qdata

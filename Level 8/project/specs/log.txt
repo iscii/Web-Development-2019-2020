@@ -1,8 +1,9 @@
 7/21/2020
 To Do:
-
+    - Set the correct image correspondent to picked pet
 Completed:
-    
+    - bettered structure
+    - createnew layoud
 
 7/20/2020
 To Do:
