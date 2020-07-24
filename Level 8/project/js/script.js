@@ -4,31 +4,24 @@ const BOOMER = 0, CLIPPER = 1, DRUPPER = 2;
 function init(){
     //refs
     opPet = document.getElementById("petimg");
-    opMenu = document.getElementById("petmenuset");
+    opMenuSet = document.getElementById("petmenuset");
+    opMenu = document.getElementById("petmenu");
     opCreate = document.getElementById("createmenu");
     nameForm = document.getElementById("nameform");
 
     selected = null;
+    currentPet = null;
 
     getData("petframe");
 }
 function createNew(){
-    //take selected
-    //take name
-    //uhh apple pen
-    //getdata
-    //appendfile
-    //redirect back to normal link?
-        //if not, every pet will have their own querystring url
-    //display pet depending on qdata
-
     getData("pet");
-    //display();
+    getData("filecount");
 }
+
 function createSelect(type){
     selected = type.toUpperCase();
     display();
-    console.log(selected);
 }
 
 function getData(pathname){
@@ -51,15 +44,21 @@ function getData(pathname){
 
             if(pathname == "petframe"){
                 petBase = JSON.parse(data);
-                return display();
             }
+            if(pathname == "pet"){
+                currentPet = JSON.parse(data);
+            }
+            if(pathname == "filecount"){
+                petcount = data;
+            }
+            display();
         }
     }
     request.send();
 }
 
 function togglePop(type){
-    if(type == "menu") var target = opMenu;
+    if(type == "menu") var target = opMenuSet;
     if(type == "create") var target = opCreate;
 
     if(target.style.display == "none")
@@ -69,7 +68,14 @@ function togglePop(type){
     if(type == "menu" && opCreate.style.display == "flex") opCreate.style.display = "none";
 }
 function display(){
-    opPet.src = petBase[0].basic.image;
+    //currentpet
+    if(currentPet)
+        opPet.src = currentPet.basic.image;
+
+    //petsmenu
+
+
+    //createnew
     for(item in NEWPETS){
         document.getElementById(NEWPETS[item]).style.border = "2px solid black";
         if(item == eval(selected)) document.getElementById(NEWPETS[item]).style.border = "2px solid white";

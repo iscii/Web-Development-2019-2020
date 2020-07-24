@@ -1,8 +1,8 @@
-var http = require("http");
-var fs = require("fs");
-var url = require("url");
-var content = require("./content");
-var client = require("./clientdata");
+const http = require("http");
+const fs = require("fs");
+const url = require("url");
+const content = require("./content");
+const client = require("./clientdata");
 
 http.createServer(function(request, response){
     response.setHeader("Access-Control-Allow-Origin", "*");

@@ -6,6 +6,8 @@
     - have a textbox
     - button to submit
 
+    - when created, set currentpet to created pet
+
     //take selected
     //take name
     //uhh apple pen

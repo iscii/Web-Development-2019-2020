@@ -1,5 +1,21 @@
+7/24/2020
+To Do:
+    - display all pets in petmenu
+        - getdata filecount
+Completed:
+    - Set the correct image correspondent to picked pet
+    - Copying frame stats to new file
+    - New pets' name = qdata.name
+
+7/23/2020
+To Do:
+    - Set the correct image correspondent to picked pet
+Completed:
+    - Get the file creation to work first
+
 7/21/2020
 To Do:
+    - Get the file creation to work first
     - Set the correct image correspondent to picked pet
 Completed:
     - bettered structure

@@ -21,7 +21,7 @@
 
 		<div id = "petmenuset" style = "display: none;">
 			<div id = "petmenu">
-				<button id = "menubtn" onclick = "togglePop('create')">New Pet</button>
+				<button id = "createbtn" onclick = "togglePop('create')">New Pet</button>
 			</div>
 			<div id = "createmenu" style = "display: none;">
 				<div class = "newpetdesc">
@@ -39,7 +39,7 @@
 				<form id = "nameform" method = "post">
 					<input type = "text" name = "name" placeholder = "Name" style = "text-align: center;"/> <br/>
 				</form>
-				<button onclick = "createNew()">Create</button><!--type submit instantly uses qs or smtn-->
+				<button id = "submitbtn" onclick = "createNew()">Create</button>
 			</div>
 		</div>
 	</body>
