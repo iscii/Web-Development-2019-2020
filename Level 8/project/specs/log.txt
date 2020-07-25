@@ -1,3 +1,10 @@
+7/25/2020
+To Do:
+Completed:
+    - display all pets in petmenu
+        - gets an array of all the objects in the files in a directory
+    - optimized? some of server-side code
+
 7/24/2020
 To Do:
     - display all pets in petmenu

@@ -1,19 +1,25 @@
 const fs = require("fs");
 const qs = require("qs"); //had to first run npm install --save qs on cmd prompt
 const url = require("url");
-const script = require("./js/script");
-const { count } = require("console");
 
 exports.getClientData = function(pathname, request){
     console.log("pathname = " + pathname);
     switch(pathname){
-        case "petframe":
-            var data = fs.readFileSync("frame.json"); //reads data as binary buffer
-            return data.toString(); //convert buffer to string to be split in getData() function
+        case "pets":
+            var pets = fs.readdirSync("./js/Pets");
+            var petdata = [];
+            for(item in pets){
+                petdata.push(fs.readFileSync("js/Pets/" + pets[item]).toString()); //turns the object into a string
+            }
+            console.log(petdata);
+            return JSON.stringify(petdata); //turns the array into a string. Apparently only strings can be returned in AJAX? I always get a JSON error
+        /*
+        case "petdata":
+            var qdata = parseQueryString(request);
+            var data = fs.readFileSync("./js/Pets/" + qdata.type + "_" + qdata.name + ".json");
+            return data.toString(); */
     
-        case "pet":
-            console.log("got it");
-    
+        case "create":
             var qdata = parseQueryString(request);
             var frames = JSON.parse(fs.readFileSync("frame.json").toString());
             
@@ -30,10 +36,6 @@ exports.getClientData = function(pathname, request){
                 console.log("Created " + qdata.name + " of " + qdata.type);
             });
             return stats;
-        
-        case "filecount":
-            return count;
-
     }
     /*
     if(pathname == "petframe"){

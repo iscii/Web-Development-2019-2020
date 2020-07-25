@@ -10,31 +10,29 @@ function init(){
     nameForm = document.getElementById("nameform");
 
     selected = null;
-    currentPet = null;
-
-    getData("petframe");
+    initialize = true;
+    
+    ajax("pets"); //this ajax call must be first in order to create the pets variable for display()
 }
-function createNew(){
-    getData("pet");
-    getData("filecount");
-}
-
 function createSelect(type){
     selected = type.toUpperCase();
     display();
 }
 
-function getData(pathname){
-    console.log("getting data from " + pathname);
+function ajax(tag){
+    console.log("getting data from " + tag);
     var request = new XMLHttpRequest();
     var url = "http://localhost:8081/";
-    if(pathname == "pet"){
-        url += "pet?type=" + selected.toLowerCase() + "&name=" + nameForm.name.value;
+    if(tag == "create"){
+        url += "create?type=" + selected.toLowerCase() + "&name=" + nameForm.name.value;
+    }
+    else if(tag == "petdata"){
+        url += "pet?type=" + type + "&name=" + name;
     }
     else{
-        url += pathname;
+        url += tag;
     }
-
+    
     console.log(url);
 
     request.open("GET", url, true)
@@ -42,14 +40,19 @@ function getData(pathname){
         if(request.readyState == 4){
             var data = request.responseText;
 
-            if(pathname == "petframe"){
-                petBase = JSON.parse(data);
+            if(tag == "pets"){
+                pets = JSON.parse(data);
+                for(item in pets){
+                    pets[item] = JSON.parse(pets[item]);
+                }
+                if(initialize) currentPet = pets[0];
+                initialize = false;
+                console.log(pets);
             }
-            if(pathname == "pet"){
+            if(tag == "create"){
                 currentPet = JSON.parse(data);
-            }
-            if(pathname == "filecount"){
-                petcount = data;
+                togglePop("create");
+                ajax("pets");
             }
             display();
         }
@@ -68,12 +71,17 @@ function togglePop(type){
     if(type == "menu" && opCreate.style.display == "flex") opCreate.style.display = "none";
 }
 function display(){
-    //currentpet
-    if(currentPet)
-        opPet.src = currentPet.basic.image;
-
     //petsmenu
-
+    if(pets[0]){
+        opPet.src = currentPet.basic.image;
+        opMenu.innerHTML = "";
+        for(item in pets){
+            var image = document.createElement("img");
+            image.className = "menuimages";
+            image.src = pets[item].basic.image;
+            opMenu.appendChild(image);
+        }
+    }
 
     //createnew
     for(item in NEWPETS){

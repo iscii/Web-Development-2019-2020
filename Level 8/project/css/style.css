@@ -38,8 +38,12 @@ div{
     position: absolute;
     z-index: 1;
 }
+#createbtn{
+    top: 90%;
+}
 
 /*popups*/
+    /*menu*/
 #petmenuset, #createmenu{
     display: flex;
     align-items: center;
@@ -55,6 +59,11 @@ div{
     width: 70%;
     height: 90%;
 }
+.menuimages{
+    width: 250px;
+
+}
+    /*create*/
 #createmenu{
     align-items: flex-start;
     border: 2px solid black;

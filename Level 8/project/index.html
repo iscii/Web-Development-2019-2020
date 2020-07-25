@@ -20,8 +20,8 @@
 		</div>
 
 		<div id = "petmenuset" style = "display: none;">
+			<button id = "createbtn" onclick = "togglePop('create')">New Pet</button>
 			<div id = "petmenu">
-				<button id = "createbtn" onclick = "togglePop('create')">New Pet</button>
 			</div>
 			<div id = "createmenu" style = "display: none;">
 				<div class = "newpetdesc">
@@ -39,7 +39,7 @@
 				<form id = "nameform" method = "post">
 					<input type = "text" name = "name" placeholder = "Name" style = "text-align: center;"/> <br/>
 				</form>
-				<button id = "submitbtn" onclick = "createNew()">Create</button>
+				<button id = "submitbtn" onclick = "ajax('create')">Create</button>
 			</div>
 		</div>
 	</body>
