@@ -3,8 +3,7 @@
 - getData (tag, type, name)
     - getData(pets, filename.split("_")[0], filename.split("_")[1])
 
-- select a main pet which will be the default pet whenever you log in?
-
+- when updating a pet, just update currentPet.
 
 >X - createpet:
     - select an image

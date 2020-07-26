@@ -1,0 +1,15 @@
+{
+    "type": "drupper",
+    "basic": {
+        "image": "images/drupper.png",
+        "lifespan": 30,
+        "appenergy": 4
+    },
+    "name": "gea",
+    "health": 100,
+    "spirit": 100,
+    "hunger": 10,
+    "fatigue": 10,
+    "age": 0,
+    "remaining": 30
+}

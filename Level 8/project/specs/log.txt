@@ -1,3 +1,12 @@
+
+7/26/2020
+To Do:
+    
+Completed:
+    - data.json
+    - getdata path
+    - select currentpet from menu
+
 7/25/2020
 To Do:
 Completed:
