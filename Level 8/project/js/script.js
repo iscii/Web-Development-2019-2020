@@ -9,8 +9,16 @@ function init(){
     opCreate = document.getElementById("createmenu");
     nameForm = document.getElementById("nameform");
 
+    nameform.onkeypress = function(e){
+        if(e.keyCode == 13){
+            e.preventDefault();
+        }
+    }
+
     selected = null;
     initialize = true;
+    pets = [];
+    currentPet = null;
     
     ajax("getpets"); //this ajax call must be first in order to create the pets variable for display()
     ajax("getdata");
@@ -21,25 +29,34 @@ function createSelect(type){
 }
 
 function selectPet(filename){
-    console.log("select");
-    ajax("writedata", "data", "currentPet", filename);
+    console.log("selected " + filename);
     togglePop("menu");
+    ajax("writedata", "data", "currentPet", filename);
+}
+function disownPet(filename){
+    if(filename == currentPet.type + "_" + currentPet.name) return console.log("You cannot disown your current pet");
+    ajax("delete", filename)
 }
 
 function ajax(tag, file, property, value){
     console.log("getting data from " + tag);
     var request = new XMLHttpRequest();
     var url = "http://localhost:8081/";
-    if(tag == "create"){
-        url += "create?type=" + selected.toLowerCase() + "&name=" + nameForm.name.value;
+
+    switch(tag){
+        case "writedata":
+            url += "writedata?file=" + file + "&property=" + property + "&value=" + value; //file = pet json or data json
+        break;
+        case "create":
+            url += "create?type=" + selected.toLowerCase() + "&name=" + nameForm.name.value;
+        break;
+        case "delete":
+            url += "delete?file=" + file;
+        break;
+        default:
+            url += tag;
     }
-    else if (tag == "writedata"){
-        url += "writedata?file=" + file + "&property=" + property + "&value=" + value; //file = pet json or data json
-    }
-    else{
-        url += tag;
-    }
-    
+
     console.log(url);
 
     request.open("GET", url, true)
@@ -47,33 +64,40 @@ function ajax(tag, file, property, value){
         if(request.readyState == 4){
             var data = request.responseText;
 
-            if(tag == "getdata"){
-                gamedata = JSON.parse(data);
-                for(item in pets){
-                    if(pets[item].type + "_" + pets[item].name == gamedata.currentPet){
-                        currentPet = pets[item];
+            switch(tag){
+                case "getdata":
+                    gamedata = JSON.parse(data);
+                    if(!pets[0]) ajax("writedata", "data", "currentPet", null);
+                    for(item in pets){
+                        if(pets[item].type + "_" + pets[item].name == gamedata.currentPet){
+                            currentPet = pets[item];
+                        }
                     }
-                }
-                console.log(gamedata);
-                displayPet();
-            }
-            if(tag == "writedata"){
-                if(file == "data") ajax("getdata");
-                else ajax("getpets");
-            }
-            if(tag == "getpets"){
-                pets = JSON.parse(data);
-                for(item in pets){
-                    pets[item] = JSON.parse(pets[item]);
-                }
-                console.log(pets);
-                displayMenu();
-            }
-            if(tag == "create"){
-                if(!currentPet) ajax("writedata", "data", "currentPet", JSON.parse(data).type + "_" + JSON.parse(data).name);
-                togglePop("create");
-                ajax("getpets");
-                displayMenu();
+                    console.log(gamedata);
+                    displayPet();
+                break;
+                case "writedata":
+                    if(file == "data"){
+                        ajax("getdata");
+                    }
+                    else ajax("getpets");
+                break;
+                case "getpets":
+                    pets = JSON.parse(data);
+                    for(item in pets){
+                        pets[item] = JSON.parse(pets[item]);
+                    }
+                    console.log(pets);
+                    displayMenu();
+                break;
+                case "create":
+                    if(!currentPet) ajax("writedata", "data", "currentPet", JSON.parse(data).type + "_" + JSON.parse(data).name);
+                    togglePop("create");
+                    ajax("getpets");
+                break;
+                case "delete":
+                    ajax("getpets");
+                break;
             }
         }
     }
@@ -100,8 +124,12 @@ function displayMenu(){
             image.className = "menuimages";
             image.id = pets[item].type + "_" + pets[item].name;
             image.src = pets[item].basic.image;
-            image.onclick = function(){
+            image.onclick = function(e){
                 selectPet(this.id);
+            }
+            image.oncontextmenu = function(e){
+                e.preventDefault();
+                disownPet(this.id);
             }
             opMenu.appendChild(image);
         }

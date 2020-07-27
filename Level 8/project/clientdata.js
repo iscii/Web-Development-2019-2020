@@ -14,6 +14,7 @@ exports.getClientData = function(pathname, request){
             if(qdata.file = "data"){
                 var data = JSON.parse(fs.readFileSync("./js/data.json").toString());
                 var prevdata = data[qdata.property];
+                if(qdata.value == "null") qdata.value = null;
                 data[qdata.property] = qdata.value;
                 console.log(data);
                 fs.writeFileSync("./js/data.json", JSON.stringify(data, null, 4), function(err){
@@ -50,6 +51,14 @@ exports.getClientData = function(pathname, request){
                 console.log("Created " + qdata.name + " of " + qdata.type);
             });
             return stats;
+
+        case "delete":
+            var qdata = parseQueryString(request);
+            fs.unlink("./js/Pets/" + qdata.file + ".json", (err) =>{
+                if(err)
+                    throw err;
+                console.log(qdata.file + " deleted");
+            });
     }
     return "";
 }

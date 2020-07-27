@@ -67,6 +67,8 @@ Functionality
 
     - (call every update) If health < 10, the pet dies.
     
+    - Cannot delete currentPet
+
 Interface
 
     - Take influence from somma those pet games on mobile

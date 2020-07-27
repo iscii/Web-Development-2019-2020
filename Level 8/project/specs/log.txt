@@ -1,4 +1,11 @@
 
+7/27/2020
+To Do:
+    - make petmenu display names
+Completed:
+    - optimized code a bit
+    - disown pet basics
+
 7/26/2020
 To Do:
     

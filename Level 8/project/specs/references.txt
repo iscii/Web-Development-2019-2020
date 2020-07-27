@@ -12,3 +12,6 @@ https://stackoverflow.com/questions/10685998/how-to-update-a-value-in-a-json-fil
 
 Accessing property of object through variable
 https://stackoverflow.com/questions/4244896/dynamically-access-object-property-using-variable?rq=1
+
+Deleting files
+https://nodejs.org/api/fs.html#fs_fs_unlink_path_callback
