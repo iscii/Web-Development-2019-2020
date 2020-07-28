@@ -59,9 +59,10 @@ div{
     width: 70%;
     height: 90%;
 }
-.menuimages{
-    width: 250px;
-
+.menupet{
+    display: inline-block;
+    width: 20%;
+    height: 30%;
 }
     /*create*/
 #createmenu{

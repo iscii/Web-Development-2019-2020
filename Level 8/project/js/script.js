@@ -67,7 +67,7 @@ function ajax(tag, file, property, value){
             switch(tag){
                 case "getdata":
                     gamedata = JSON.parse(data);
-                    if(!pets[0]) ajax("writedata", "data", "currentPet", null);
+                    //if(!pets[0]) ajax("writedata", "data", "currentPet", null);
                     for(item in pets){
                         if(pets[item].type + "_" + pets[item].name == gamedata.currentPet){
                             currentPet = pets[item];
@@ -77,6 +77,7 @@ function ajax(tag, file, property, value){
                     displayPet();
                 break;
                 case "writedata":
+                    //if(gamedata.currentPet == null) break;
                     if(file == "data"){
                         ajax("getdata");
                     }
@@ -120,18 +121,8 @@ function displayMenu(){
     if(pets[0]){
         opMenu.innerHTML = "";
         for(item in pets){
-            var image = document.createElement("img");
-            image.className = "menuimages";
-            image.id = pets[item].type + "_" + pets[item].name;
-            image.src = pets[item].basic.image;
-            image.onclick = function(e){
-                selectPet(this.id);
-            }
-            image.oncontextmenu = function(e){
-                e.preventDefault();
-                disownPet(this.id);
-            }
-            opMenu.appendChild(image);
+            var pet = new Menupet(pets[item]);
+            opMenu.appendChild(pet.div);
         }
     }
 

@@ -1,0 +1,15 @@
+{
+    "type": "clipper",
+    "basic": {
+        "image": "images/clipper.png",
+        "lifespan": 15,
+        "appenergy": 2
+    },
+    "name": "asd",
+    "health": 100,
+    "spirit": 100,
+    "hunger": 10,
+    "fatigue": 10,
+    "age": 0,
+    "remaining": 15
+}
