@@ -9,7 +9,17 @@
 	</head>
 	<body onload = 'init()'>
 		<div id = 'left'>
-			<button id = "menubtn" onclick = "popMenu(true, 'menu')">Pets</button>
+			<div id = "menubtnholder">
+				<button id = "menubtn" onclick = "popMenu(true, 'menu')">Pets</button> <br/>
+			</div>
+
+			<div id = "actionpanel">
+				<button id = "feedbtn" onclick = "">Feed</button> <br/>
+				<button id = "playbtn" onclick = "">Play</button>
+				<input type = "range" name = "playtime" id = "playtime" value = "1" min = "1" max = "10"/> 
+				<span id = "playtimespan">1 hr</span> <br/>
+				<button id = "sleepbtn" onclick = "">Sleep</button> <br/>
+			</div>
 		</div>
 			
 		<div id = 'middle'>
@@ -17,7 +27,10 @@
 		</div>
 
 		<div id = 'right'>
-			
+			<div id = "petinfo"></div>
+			<div id = "statspanel">
+
+			</div>
 		</div>
 
 		<div id = "petmenuset" style = "display: none;" onclick = "if(event.target == event.currentTarget) popMenu(false)">
@@ -26,19 +39,19 @@
 			</div>
 			<div id = "createmenu" style = "display: none;">
 				<div class = "newpetdesc">
-					<img id = "new0" class = "newpetimg" src = "images/boomer.png" onclick = "createSelect('boomer')"/>
+					<img id = "new0" class = "newpetimg" src = "images/boomer.png" onclick = "createSelect('boomer')"/> <br/>
 					Boomer <br/> Lifespan: 7 Days <br/> Appetite & Energy: 6 Hours
 				</div>
 				<div class = "newpetdesc">
-					<img id = "new1" class = "newpetimg" src = "images/clipper.png" onclick = "createSelect('clipper')"/>
+					<img id = "new1" class = "newpetimg" src = "images/clipper.png" onclick = "createSelect('clipper')"/> <br/>
 					Clipper <br/> Lifespan: 15 Days <br/> Appetite & Energy: 2 Hours
 				</div>
 				<div class = "newpetdesc">
-					<img id = "new2" class = "newpetimg" src = "images/drupper.png" onclick = "createSelect('drupper')"/>
+					<img id = "new2" class = "newpetimg" src = "images/drupper.png" onclick = "createSelect('drupper')"/> <br/>
 					Drupper <br/> Lifespan: 30 Days <br/> Appetite & Energy: 4 Hours
 				</div>
 				<form id = "nameform" method = "post" autocomplete = "off">
-					<input type = "text" name = "name" placeholder = "Name" style = "text-align: center;"/> <br/>
+					<input id = "nameforminp" type = "text" name = "name" placeholder = "Name" style = "text-align: center;"/> <br/>
 				</form>
 				<button id = "submitbtn" onclick = "createPet()">Create</button>
 			</div>

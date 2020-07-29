@@ -29,7 +29,7 @@ exports.getClientData = function(pathname, request){
             var pets = fs.readdirSync("./js/Pets");
             var petdata = [];
             for(item in pets){
-                petdata.push(fs.readFileSync("js/Pets/" + pets[item]).toString()); //turns the object into a string
+                petdata.push(fs.readFileSync("./js/Pets/" + pets[item]).toString()); //turns the object into a string
             }
             console.log(petdata);
             return JSON.stringify(petdata); //turns the array into a string. Apparently only strings can be returned in AJAX? I always get a JSON error
@@ -46,8 +46,8 @@ exports.getClientData = function(pathname, request){
             var frames = JSON.parse(fs.readFileSync("./js/frame.json").toString());
             
             for(item in frames){
-                if(frames[item].type == qdata.type){
-                    frames[item].name = qdata.name;
+                if(frames[item].info.type == qdata.type){
+                    frames[item].info.name = qdata.name;
                     var stats = JSON.stringify(frames[item], null, 4);
                 }
             }

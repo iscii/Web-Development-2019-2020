@@ -1,10 +1,18 @@
 7/29/2020
 To Do:
-    - display stats
+    - display type, name, lifespan, appetite, energy
+    - update stats by time
+        - per real-time hour
+        - when app is exited, store time and date in data.json
+        - when app is reopened, find time diff and update accordingly
+        - maybe track age and lifespan by the minute
 Completed:
+    - updated frame.json and code to better match display
+    - display stats
+    - immproved interface
     - place limits on pet creation name/type and count
         - name, type, and already exist
-    - clicking outside of petmenu will close it
+    - clicking outside of the menus will close it
 
 7/28/2020
 To Do:

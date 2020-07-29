@@ -5,7 +5,7 @@ Functionality
     - Pets:
         - Name
         - 3 Pet types (choose one):
-            - Boomer, Clipper, Drupper
+            - Boomer, Clipper, Drupper [Dog, Cat, Rabbit]
             - Pet jsons in a text/json file
         - Properties:
             - Health [100] [0-100]

@@ -1,11 +1,11 @@
 [{
-    "type": "boomer",
-    "basic": {
-        "image": "images/boomer.png",
+    "info": {
+        "type":"boomer",
+        "name": null,
         "lifespan": 7,
         "appenergy": 6
     },
-    "name": null,
+    "image": "images/boomer.png",
     "health": 100,
     "spirit": 100,
     "hunger": 10,
@@ -14,13 +14,13 @@
     "remaining": 7
 },
 {
-    "type": "clipper",
-    "basic": {
-        "image": "images/clipper.png",
+    "info": {
+        "type": "clipper",
+        "name": null,
         "lifespan": 15,
         "appenergy": 2
     },
-    "name": null,
+    "image": "images/clipper.png",
     "health": 100,
     "spirit": 100,
     "hunger": 10,
@@ -29,13 +29,13 @@
     "remaining": 15
 },
 {
-    "type": "drupper",
-    "basic": {
-        "image": "images/drupper.png",
+    "info": {
+        "type": "drupper",
+        "name": null,
         "lifespan": 30,
         "appenergy": 4
     },
-    "name": null,
+    "image": "images/drupper.png",
     "health": 100,
     "spirit": 100,
     "hunger": 10,

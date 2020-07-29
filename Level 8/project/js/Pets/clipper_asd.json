@@ -1,11 +1,11 @@
 {
-    "type": "clipper",
-    "basic": {
-        "image": "images/clipper.png",
+    "info": {
+        "type": "clipper",
+        "name": "asd",
         "lifespan": 15,
         "appenergy": 2
     },
-    "name": "asd",
+    "image": "images/clipper.png",
     "health": 100,
     "spirit": 100,
     "hunger": 10,

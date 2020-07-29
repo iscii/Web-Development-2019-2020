@@ -8,12 +8,20 @@ function init(){
     opMenu = document.getElementById("petmenu");
     opCreate = document.getElementById("createmenu");
     nameForm = document.getElementById("nameform");
+    playTime = document.getElementById("playtime");
+    opPlayTime = document.getElementById("playtimespan");
+    opStats = document.getElementById("statspanel");
+    opPetName = document.getElementById("petinfo")
 
     //events
     nameform.onkeypress = function(e){
         if(e.keyCode == 13){
             e.preventDefault();
         }
+    }
+    playTime.oninput = function(){
+        opPlayTime.innerHTML = this.value + " hr";
+        if(this.value > 1) opPlayTime.innerHTML += "s";
     }
 
     selected = null;
@@ -33,7 +41,7 @@ function createPet(){
     ajax('create');
 }
 function disownPet(filename){
-    if(filename == currentPet.type + "_" + currentPet.name) return console.log("You cannot disown your current pet");
+    if(filename == currentPet.info.type + "_" + currentPet.info.name) return console.log("You cannot disown your current pet");
     ajax("delete", filename)
 }
 
@@ -68,7 +76,8 @@ function ajax(tag, file, property, value){
                     var gamedata = JSON.parse(data);
                     //if(!pets[0]) ajax("writedata", "data", "currentPet", null);
                     for(item in pets){
-                        if(pets[item].type + "_" + pets[item].name == gamedata.currentPet){
+                        console.log(pets);
+                        if(pets[item].info.type + "_" + pets[item].info.name == gamedata.currentPet){
                             currentPet = pets[item];
                         }
                     }
@@ -87,15 +96,16 @@ function ajax(tag, file, property, value){
                     for(item in pets){
                         pets[item] = JSON.parse(pets[item]);
                     }
-                    console.log(pets);
                     displayMenu();
                 break;
                 case "create":
                     var response = JSON.parse(data);
-                    if(!currentPet) ajax("writedata", "data", "currentPet", response.type + "_" + response.name);
+                    if(!currentPet) ajax("writedata", "data", "currentPet", response.info.type + "_" + response.info.name);
                     if(response === false) return console.log("already exists");
+
                     selected = null;
                     nameForm.name.value = "";
+
                     popMenu(false, 'create', true);
                     ajax("getpets");
                 break;
@@ -141,5 +151,32 @@ function displayMenu(){
     }
 }
 function displayPet(){
-    opPet.src = currentPet.basic.image;
+    //pet
+    console.log(currentPet);
+    opPet.src = currentPet.image;
+    opPetName.innerHTML = currentPet.info.name;
+
+
+    //stats
+    opStats.innerHTML = "";
+    for(item in currentPet){
+        if(item == "info" || item == "image") continue;
+
+        //stats
+        var x = capitalize(item);
+
+        opStats.innerHTML += x + ": " + currentPet[item];
+        
+        //unit
+        if(item == "health" || item == "spirit" || item == "hunger" || item == "fatigue"){
+            opStats.innerHTML += " %";
+        }
+        if(item == "age" || item == "remaining")
+            opStats.innerHTML += " days";
+
+        opStats.innerHTML += "<br/>";
+    }
+}
+function capitalize(str){
+    return str.substr(0, 1).toUpperCase() + str.substr(1, str.length - 1);
 }

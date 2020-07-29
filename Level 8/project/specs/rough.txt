@@ -1,9 +1,9 @@
-- menu: for all files in js/pets, display
-
-- getData (tag, type, name)
-    - getData(pets, filename.split("_")[0], filename.split("_")[1])
 
 - when updating a pet, just update currentPet.
+
+- gray out action buttons when they are not recommended
+
+- change color and image depending on pet's state
 
 >X - createpet:
     - select an image
@@ -13,3 +13,7 @@
 
     - when created, set currentpet to created pet
 
+>X - getData (tag, type, name)
+    - getData(pets, filename.split("_")[0], filename.split("_")[1])
+
+>X - menu: for all files in js/pets, display

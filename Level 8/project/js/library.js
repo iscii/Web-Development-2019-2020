@@ -2,7 +2,7 @@
 function Menupet(pet){
     this.div = document.createElement("div");
     this.div.className = "menupet";
-    this.div.id = pet.type + "_" + pet.name;
+    this.div.id = pet.info.type + "_" + pet.info.name;
     this.div.onclick = function(){
         if(opCreate.style.display == "flex") return;
         ajax("writedata", "data", "currentPet", this.id);
@@ -15,9 +15,10 @@ function Menupet(pet){
     }
     
     this.img = document.createElement("img");
-    this.img.src = pet.basic.image;
+    this.img.src = pet.image;
     this.img.style.width = "70%"; //100% of div
+    this.img.className = "menupetimg";
     
     this.div.appendChild(this.img);
-    this.div.innerHTML += "<br/>" + pet.name;
+    this.div.innerHTML += "<br/>" + pet.info.name;
 }
