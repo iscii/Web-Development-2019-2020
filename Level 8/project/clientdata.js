@@ -36,6 +36,13 @@ exports.getClientData = function(pathname, request){
     
         case "create":
             var qdata = parseQueryString(request);
+
+            //check if pet already exists
+            var pets = fs.readdirSync("./js/Pets");
+            for(item in pets)
+                if(pets[item] == qdata.type + "_" + qdata.name + ".json")
+                    return "false";
+
             var frames = JSON.parse(fs.readFileSync("./js/frame.json").toString());
             
             for(item in frames){

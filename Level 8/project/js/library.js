@@ -3,8 +3,11 @@ function Menupet(pet){
     this.div = document.createElement("div");
     this.div.className = "menupet";
     this.div.id = pet.type + "_" + pet.name;
-    this.div.onclick = function(e){
-        selectPet(this.id);
+    this.div.onclick = function(){
+        if(opCreate.style.display == "flex") return;
+        ajax("writedata", "data", "currentPet", this.id);
+        console.log("selected " + this.id);
+        popMenu(false);
     }
     this.div.oncontextmenu = function(e){
         e.preventDefault();

@@ -9,6 +9,7 @@ function init(){
     opCreate = document.getElementById("createmenu");
     nameForm = document.getElementById("nameform");
 
+    //events
     nameform.onkeypress = function(e){
         if(e.keyCode == 13){
             e.preventDefault();
@@ -27,11 +28,9 @@ function createSelect(type){
     selected = type.toUpperCase();
     displayMenu();
 }
-
-function selectPet(filename){
-    console.log("selected " + filename);
-    togglePop("menu");
-    ajax("writedata", "data", "currentPet", filename);
+function createPet(){
+    if(!selected || !nameForm.name.value) return console.log("invalid creation"); //also check if the pet of same type & name's been made already
+    ajax('create');
 }
 function disownPet(filename){
     if(filename == currentPet.type + "_" + currentPet.name) return console.log("You cannot disown your current pet");
@@ -66,7 +65,7 @@ function ajax(tag, file, property, value){
 
             switch(tag){
                 case "getdata":
-                    gamedata = JSON.parse(data);
+                    var gamedata = JSON.parse(data);
                     //if(!pets[0]) ajax("writedata", "data", "currentPet", null);
                     for(item in pets){
                         if(pets[item].type + "_" + pets[item].name == gamedata.currentPet){
@@ -92,8 +91,12 @@ function ajax(tag, file, property, value){
                     displayMenu();
                 break;
                 case "create":
-                    if(!currentPet) ajax("writedata", "data", "currentPet", JSON.parse(data).type + "_" + JSON.parse(data).name);
-                    togglePop("create");
+                    var response = JSON.parse(data);
+                    if(!currentPet) ajax("writedata", "data", "currentPet", response.type + "_" + response.name);
+                    if(response === false) return console.log("already exists");
+                    selected = null;
+                    nameForm.name.value = "";
+                    popMenu(false, 'create', true);
                     ajax("getpets");
                 break;
                 case "delete":
@@ -105,17 +108,22 @@ function ajax(tag, file, property, value){
     request.send();
 }
 
-function togglePop(type){
-    console.log("pop! " + type);
-    if(type == "menu") var target = opMenuSet;
-    if(type == "create") var target = opCreate;
-
-    if(target.style.display == "none")
-        return target.style.display = "flex";
-    target.style.display = "none";
-    
-    if(type == "menu" && opCreate.style.display == "flex") opCreate.style.display = "none";
+function popMenu(open, type, nreset){
+    if(open){ //open
+        if(type == "menu") opMenuSet.style.display = "flex";
+        else opCreate.style.display = "flex";
+    }
+    else{ //close
+        if(type != "create") opMenuSet.style.display = "none"; //when both are open, close only the create menu
+        opCreate.style.display = "none";
+        if(!nreset){
+            selected = null;
+            nameForm.name.value = "";
+        }
+    }
+    displayMenu();
 }
+
 function displayMenu(){
     //petsmenu
     if(pets[0]){

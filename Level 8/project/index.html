@@ -9,7 +9,7 @@
 	</head>
 	<body onload = 'init()'>
 		<div id = 'left'>
-			<button id = "menubtn" onclick = "togglePop('menu')">Pets</button>
+			<button id = "menubtn" onclick = "popMenu(true, 'menu')">Pets</button>
 		</div>
 			
 		<div id = 'middle'>
@@ -20,9 +20,9 @@
 			
 		</div>
 
-		<div id = "petmenuset" style = "display: none;">
-			<button id = "createbtn" onclick = "togglePop('create')">New Pet</button>
-			<div id = "petmenu">
+		<div id = "petmenuset" style = "display: none;" onclick = "if(event.target == event.currentTarget) popMenu(false)">
+			<button id = "createbtn" onclick = "if(opCreate.style.display == 'flex') popMenu(false, 'create'); else popMenu(true, 'create');">New Pet</button>
+		<div id = "petmenu" onclick = "if(opCreate.style.display == 'flex') popMenu(false, 'create');">
 			</div>
 			<div id = "createmenu" style = "display: none;">
 				<div class = "newpetdesc">
@@ -40,7 +40,7 @@
 				<form id = "nameform" method = "post" autocomplete = "off">
 					<input type = "text" name = "name" placeholder = "Name" style = "text-align: center;"/> <br/>
 				</form>
-				<button id = "submitbtn" onclick = "ajax('create')">Create</button>
+				<button id = "submitbtn" onclick = "createPet()">Create</button>
 			</div>
 		</div>
 	</body>

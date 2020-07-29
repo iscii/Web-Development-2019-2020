@@ -1,3 +1,11 @@
+7/29/2020
+To Do:
+    - display stats
+Completed:
+    - place limits on pet creation name/type and count
+        - name, type, and already exist
+    - clicking outside of petmenu will close it
+
 7/28/2020
 To Do:
     - place limits on pet creation name/type and count

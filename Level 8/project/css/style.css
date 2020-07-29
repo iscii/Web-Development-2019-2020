@@ -36,7 +36,6 @@ div{
 }
 #menubtn, #createbtn{
     position: absolute;
-    z-index: 1;
 }
 #createbtn{
     top: 90%;
