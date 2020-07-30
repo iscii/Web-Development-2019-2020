@@ -11,7 +11,8 @@ function init(){
     playTime = document.getElementById("playtime");
     opPlayTime = document.getElementById("playtimespan");
     opStats = document.getElementById("statspanel");
-    opPetName = document.getElementById("petinfo")
+    opInfo1 = document.getElementById("petinfo1");
+    opInfo2 = document.getElementById("petinfo2");
 
     //events
     nameform.onkeypress = function(e){
@@ -32,9 +33,11 @@ function init(){
     ajax("getpets"); //this ajax call must be first in order to create the pets variable for display()
     ajax("getdata");
 }
+
+//general
 function createSelect(type){
     selected = type.toUpperCase();
-    displayMenu();
+    display("menu");
 }
 function createPet(){
     if(!selected || !nameForm.name.value) return console.log("invalid creation"); //also check if the pet of same type & name's been made already
@@ -44,7 +47,37 @@ function disownPet(filename){
     if(filename == currentPet.info.type + "_" + currentPet.info.name) return console.log("You cannot disown your current pet");
     ajax("delete", filename)
 }
+window.onbeforeunload = function(){
+    
+}
 
+//pet
+function timediff(){
+    var date = new Date(); //date is static
+    console.log(date);
+    console.log(date.getSeconds());
+
+    //seconds till next minute; begins the minutely updates
+    if(date.getSeconds() == 0){
+        updateMin();
+    }
+    else{
+        setTimeout(function(){
+            updateMin();
+        }, (59 - date.getSeconds()) * 1000);
+    }
+
+    //mintes from last session
+}
+function updateMin(){
+    var date = new Date();
+    console.log(date.getMinutes());
+    setTimeout(function(){
+        updateMin();
+    }, 60000);
+}
+
+//server
 function ajax(tag, file, property, value){
     console.log("getting data from " + tag);
     var request = new XMLHttpRequest();
@@ -74,7 +107,6 @@ function ajax(tag, file, property, value){
             switch(tag){
                 case "getdata":
                     var gamedata = JSON.parse(data);
-                    //if(!pets[0]) ajax("writedata", "data", "currentPet", null);
                     for(item in pets){
                         console.log(pets);
                         if(pets[item].info.type + "_" + pets[item].info.name == gamedata.currentPet){
@@ -82,10 +114,12 @@ function ajax(tag, file, property, value){
                         }
                     }
                     console.log(gamedata);
-                    displayPet();
+                    if(currentPet){
+                        timediff();
+                        display("pet");
+                    }
                 break;
                 case "writedata":
-                    //if(gamedata.currentPet == null) break;
                     if(file == "data"){
                         ajax("getdata");
                     }
@@ -96,7 +130,7 @@ function ajax(tag, file, property, value){
                     for(item in pets){
                         pets[item] = JSON.parse(pets[item]);
                     }
-                    displayMenu();
+                    display("menu");
                 break;
                 case "create":
                     var response = JSON.parse(data);
@@ -118,6 +152,7 @@ function ajax(tag, file, property, value){
     request.send();
 }
 
+//display
 function popMenu(open, type, nreset){
     if(open){ //open
         if(type == "menu") opMenuSet.style.display = "flex";
@@ -131,50 +166,70 @@ function popMenu(open, type, nreset){
             nameForm.name.value = "";
         }
     }
-    displayMenu();
+    display("menu");
 }
-
-function displayMenu(){
-    //petsmenu
-    if(pets[0]){
-        opMenu.innerHTML = "";
-        for(item in pets){
-            var pet = new Menupet(pets[item]);
-            opMenu.appendChild(pet.div);
+function display(str){
+    if(str == "menu"){
+        //petsmenu
+        if(pets[0]){
+            opMenu.innerHTML = "";
+            for(item in pets){
+                var pet = new Menupet(pets[item]);
+                opMenu.appendChild(pet.div);
+            }
         }
-    }
-
-    //createnew
-    for(item in NEWPETS){
-        document.getElementById(NEWPETS[item]).style.border = "2px solid black";
-        if(item == eval(selected)) document.getElementById(NEWPETS[item]).style.border = "2px solid white";
-    }
-}
-function displayPet(){
-    //pet
-    console.log(currentPet);
-    opPet.src = currentPet.image;
-    opPetName.innerHTML = currentPet.info.name;
-
-
-    //stats
-    opStats.innerHTML = "";
-    for(item in currentPet){
-        if(item == "info" || item == "image") continue;
-
-        //stats
-        var x = capitalize(item);
-
-        opStats.innerHTML += x + ": " + currentPet[item];
         
-        //unit
-        if(item == "health" || item == "spirit" || item == "hunger" || item == "fatigue"){
-            opStats.innerHTML += " %";
+        //createnew
+        for(item in NEWPETS){
+            document.getElementById(NEWPETS[item]).style.border = "2px solid black";
+            if(item == eval(selected)) document.getElementById(NEWPETS[item]).style.border = "2px solid white";
         }
-        if(item == "age" || item == "remaining")
-            opStats.innerHTML += " days";
-
-        opStats.innerHTML += "<br/>";
+    }
+    if(str == "pet"){
+        //img
+        console.log(currentPet);
+        opPet.src = currentPet.image;
+        
+        opInfo1.innerHTML = "";
+        opInfo2.innerHTML = "";
+        //info
+        for(item in currentPet.info){
+            var x = capitalize(item);
+            var y = currentPet.info[item];
+            var unit = " hours";
+        
+            if(item == "lifespan") unit = " days";
+        
+            var sec = opInfo2;
+            if(item == "type" || item == "name"){
+                sec = opInfo1;
+                y = capitalize(currentPet.info[item]);
+                unit = "";
+            }
+            
+            sec.innerHTML += x + ": " + y + unit;
+            sec.innerHTML += "<br/>";
+        }
+        
+        //stats
+        opStats.innerHTML = "";
+        for(item in currentPet){
+            if(item == "info" || item == "image") continue;
+        
+            //stats
+            var x = capitalize(item);
+        
+            opStats.innerHTML += x + ": " + currentPet[item];
+            
+            //unit
+            if(item == "health" || item == "spirit" || item == "hunger" || item == "fatigue"){
+                opStats.innerHTML += " %";
+            }
+            if(item == "age" || item == "remaining")
+                opStats.innerHTML += " days";
+        
+            opStats.innerHTML += "<br/>";
+        }
     }
 }
 function capitalize(str){

@@ -3,7 +3,8 @@
         "type":"boomer",
         "name": null,
         "lifespan": 7,
-        "appenergy": 6
+        "appetite": 6,
+        "energy": 6
     },
     "image": "images/boomer.png",
     "health": 100,
@@ -18,7 +19,8 @@
         "type": "clipper",
         "name": null,
         "lifespan": 15,
-        "appenergy": 2
+        "appetite": 2,
+        "energy": 2
     },
     "image": "images/clipper.png",
     "health": 100,
@@ -33,7 +35,8 @@
         "type": "drupper",
         "name": null,
         "lifespan": 30,
-        "appenergy": 4
+        "appetite": 4,
+        "energy": 4
     },
     "image": "images/drupper.png",
     "health": 100,

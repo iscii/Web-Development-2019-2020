@@ -52,7 +52,6 @@ div{
         width: 20%;
         margin-top: 4vh;
         margin-bottom: 4vh;
-        border: 2px solid white;
     }
     /*left*/
     #actionpanel{ 
@@ -74,9 +73,25 @@ div{
     }
     /*right*/
     #petinfo{
+        display: flex;
+        align-items: flex-start;
+        width: 90%;
+    }
+    #petinfo1, #petinfo2{
+        display: inline-block;
+        text-align: left;
+        line-height: 3vh;
+    }
+    #petinfo1{
+        margin-left: 8%;
+    }
+    #petinfo2{
+        margin-left: 35%;
     }
     #statspanel{
-
+        text-align: left;
+        padding-left: 5%;
+        line-height: 10vh;
     }
 
 /*popups*/
