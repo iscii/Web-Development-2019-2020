@@ -47,7 +47,7 @@ exports.getClientData = function(pathname, request){
             
             for(item in frames){
                 if(frames[item].info.type == qdata.type){
-                    frames[item].info.name = qdata.name;
+                    frames[item].info.name = qdata.name.substr(0, 1).toUpperCase() + qdata.name.substr(1, qdata.name.length - 1);
                     var stats = JSON.stringify(frames[item], null, 4);
                 }
             }

@@ -51,7 +51,7 @@ window.onbeforeunload = function(){
     
 }
 
-//pet
+//time
 function timediff(){
     var date = new Date(); //date is static
     console.log(date);
@@ -64,7 +64,7 @@ function timediff(){
     else{
         setTimeout(function(){
             updateMin();
-        }, (59 - date.getSeconds()) * 1000);
+        }, (60 - date.getSeconds()) * 1000);
     }
 
     //mintes from last session
@@ -75,6 +75,23 @@ function updateMin(){
     setTimeout(function(){
         updateMin();
     }, 60000);
+    updatePets();
+}
+
+//pet
+function updatePets(){
+    for(item in pets){
+        
+    }
+}
+function feedPet(){
+
+}
+function playPet(){
+
+}
+function sleepPet(){
+
 }
 
 //server
@@ -212,22 +229,24 @@ function display(str){
         }
         
         //stats
-        opStats.innerHTML = "";
         for(item in currentPet){
             if(item == "info" || item == "image") continue;
-        
+            
             //stats
             var x = capitalize(item);
         
             opStats.innerHTML += x + ": " + currentPet[item];
             
-            //unit
+            //unit + bars
             if(item == "health" || item == "spirit" || item == "hunger" || item == "fatigue"){
-                opStats.innerHTML += " %";
+                opStats.innerHTML += "%";
+                var bar = new Bar(currentPet[item], item);
+                opStats.appendChild(bar.bar);
             }
-            if(item == "age" || item == "remaining")
+            if(item == "age" || item == "remaining"){
                 opStats.innerHTML += " days";
-        
+            }
+            
             opStats.innerHTML += "<br/>";
         }
     }

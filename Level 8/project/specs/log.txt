@@ -1,5 +1,28 @@
+7/31/2020
+To Do:
+    - update all pets at once
+        - one timestamp for all pets; updating real-time
+        - every minute, check for all pets stats and if they decrease or if pet dies.
+    
+    - update stats by time
+        - per real-time minute
+        - when app is exited, store time and date in data.json
+        - when app is reopened, find time diff and update accordingly
+        - maybe track age and lifespan by the minute
+    
+     -since all stats are updated per hour, maybe instead of minutes do updateHour();
+
+Completed:
+    - statbars using progress element
+    - lots of css for statbars
+    - lots of wasted time with input and statbar css. nng it's so limited
+
 7/30/2020
 To Do:
+    - update all pets at once
+        - one timestamp for all pets; updating real-time
+        - every minute, check for all pets stats and if they decrease or if pet dies.
+    
     - update stats by time
         - per real-time minute
         - when app is exited, store time and date in data.json
@@ -10,9 +33,6 @@ To Do:
         - cannot be modified
         - remove the knob
 
-    - update all pets at once
-        - one timestamp for all pets; updating real-time
-        - every minute, check for all pets stats and if they decrease or if pet dies.
 Completed:
     - display type, name, lifespan, appetite, energy
     - update stats

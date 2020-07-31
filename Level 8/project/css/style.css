@@ -93,7 +93,27 @@ div{
         padding-left: 5%;
         line-height: 10vh;
     }
-
+    .statbar{
+        float: right;
+        margin-top: 7%;
+        margin-right: 7%;
+        width: 70%;
+        height: 5%;
+    }
+    .statbar[value]{
+        -webkit-appearance: none;
+        appearance: none;
+    }
+    .statbar[value]::-webkit-progress-bar{
+        background: rgb(254,76,76);
+        background: linear-gradient(90deg, rgba(254,76,76,1) 19%, rgba(225,228,122,1) 50%, rgba(18,255,0,1) 83%);
+        border-radius: 10px;
+    }
+    .statbar[value]::-webkit-progress-value{
+        background: rgba(255, 255, 255, 0);
+        border: 3px solid black;
+        border-radius: 10px;
+    }
 /*popups*/
     /*menu*/
     #petmenuset, #createmenu{

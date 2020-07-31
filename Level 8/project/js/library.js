@@ -22,3 +22,11 @@ function Menupet(pet){
     this.div.appendChild(this.img);
     this.div.innerHTML += "<br/>" + pet.info.name;
 }
+
+function Bar(value){
+    this.bar = document.createElement("progress");
+    this.bar.className = "statbar";
+    this.bar.min = 0;
+    this.bar.max = 10;
+    this.bar.value = value/10;
+}

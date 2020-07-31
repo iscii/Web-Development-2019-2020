@@ -1,0 +1,16 @@
+{
+    "info": {
+        "type": "drupper",
+        "name": "Dsa",
+        "lifespan": 30,
+        "appetite": 4,
+        "energy": 4
+    },
+    "image": "images/drupper.png",
+    "health": 100,
+    "spirit": 100,
+    "hunger": 10,
+    "fatigue": 10,
+    "age": 0,
+    "remaining": 30
+}
