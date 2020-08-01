@@ -53,11 +53,11 @@ window.onbeforeunload = function(){
 
 //time
 function timediff(){
+    //ajax for data.json lastsession date. if there is none, it's probably first session, so create new date and stuff.
     var date = new Date(); //date is static
-    console.log(date);
     console.log(date.getSeconds());
 
-    //seconds till next minute; begins the minutely updates
+    //seconds till next minute
     if(date.getSeconds() == 0){
         updateMin();
     }
@@ -67,30 +67,61 @@ function timediff(){
         }, (60 - date.getSeconds()) * 1000);
     }
 
-    //mintes from last session
+    //minutes from last session
 }
 function updateMin(){
     var date = new Date();
     console.log(date.getMinutes());
-    setTimeout(function(){
+
+    setTimeout(function(){ //for testing
         updateMin();
     }, 60000);
+    updatePets();
+    /*
+    //minutes till next hour; beings the hourly updates
+    if(date.getMinutes() == 0){
+        updateHour();
+    }
+    else{
+        setTimeout(function(){
+            updateHour();
+        }, (60 - date.getMinutes()) * 60000);
+        console.log((60 - date.getMinutes()) * 60000);
+    }
+    */
+}
+function updateHour(){
+    var date = new Date();
+    console.log(date.getHours());
+    setTimeout(function(){
+        updateHour();
+    }, 3600000);
     updatePets();
 }
 
 //pet
 function updatePets(){
     for(item in pets){
+        var p = pets[item];
+        //appetite
+        p.hunger = Math.round(p.hunger + (p.hunger * (.1 * p.info.appetite)));
+        if(p.hunger > 100) p.hunger = 100;
         
+        //fatigue
+        p.fatigue = Math.round(p.fatigue + (p.fatigue * (.5 * p.info.energy)));
+        if(p.fatigue > 100) p.fatigue = 100;
+
+        //age
+
+        //writedata
+        for(item in p){
+            if(item == "info") continue;
+            ajax("writedata", p.info.type + "_" + p.info.name, item, p[item]);
+        }
     }
+    //no need to display - writedata will display
 }
-function feedPet(){
-
-}
-function playPet(){
-
-}
-function sleepPet(){
+function actionPet(action){
 
 }
 
@@ -125,15 +156,19 @@ function ajax(tag, file, property, value){
                 case "getdata":
                     var gamedata = JSON.parse(data);
                     for(item in pets){
-                        console.log(pets);
+                        //console.log(pets);
                         if(pets[item].info.type + "_" + pets[item].info.name == gamedata.currentPet){
                             currentPet = pets[item];
+                            display("pet");
                         }
                     }
-                    console.log(gamedata);
-                    if(currentPet){
-                        timediff();
-                        display("pet");
+                    //console.log(gamedata);
+                    if(initialize){
+                        if(currentPet){
+                            timediff();
+                        }
+                        
+                        initialize = false;
                     }
                 break;
                 case "writedata":
@@ -147,7 +182,8 @@ function ajax(tag, file, property, value){
                     for(item in pets){
                         pets[item] = JSON.parse(pets[item]);
                     }
-                    display("menu");
+                    if(!initialize) display("pet");
+                    display("menu")
                 break;
                 case "create":
                     var response = JSON.parse(data);
@@ -204,13 +240,14 @@ function display(str){
     }
     if(str == "pet"){
         //img
-        console.log(currentPet);
-        opPet.src = currentPet.image;
+        opPet.src = currentPet.info.image;
         
         opInfo1.innerHTML = "";
         opInfo2.innerHTML = "";
         //info
         for(item in currentPet.info){
+            if(item == "image" || item == "lastload") continue;
+
             var x = capitalize(item);
             var y = currentPet.info[item];
             var unit = " hours";
@@ -229,8 +266,9 @@ function display(str){
         }
         
         //stats
+        opStats.innerHTML = "";
         for(item in currentPet){
-            if(item == "info" || item == "image") continue;
+            if(item == "info") continue;
             
             //stats
             var x = capitalize(item);
@@ -238,9 +276,14 @@ function display(str){
             opStats.innerHTML += x + ": " + currentPet[item];
             
             //unit + bars
+            //this looks super inefficient, so if there is a way to revise this code please tell me ;-;
             if(item == "health" || item == "spirit" || item == "hunger" || item == "fatigue"){
                 opStats.innerHTML += "%";
-                var bar = new Bar(currentPet[item], item);
+                
+                var name = "ltrstatbar"
+                if(item == "hunger" || item == "fatigue") name = "rtlstatbar"
+                
+                var bar = new Bar(currentPet[item], name);
                 opStats.appendChild(bar.bar);
             }
             if(item == "age" || item == "remaining"){

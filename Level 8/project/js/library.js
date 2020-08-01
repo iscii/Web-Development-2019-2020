@@ -15,17 +15,18 @@ function Menupet(pet){
     }
     
     this.img = document.createElement("img");
-    this.img.src = pet.image;
+    this.img.src = pet.info.image;
     this.img.style.width = "70%"; //100% of div
     this.img.className = "menupetimg";
     
     this.div.appendChild(this.img);
-    this.div.innerHTML += "<br/>" + pet.info.name;
+    this.div.innerHTML += "<br/>" + capitalize(pet.info.name);
 }
 
-function Bar(value){
+function Bar(value, name){
     this.bar = document.createElement("progress");
-    this.bar.className = "statbar";
+    this.bar.className = name;
+    this.bar.className += " statbar"; //or do classList.add
     this.bar.min = 0;
     this.bar.max = 10;
     this.bar.value = value/10;

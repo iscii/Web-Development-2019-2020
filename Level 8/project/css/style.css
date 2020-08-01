@@ -104,9 +104,14 @@ div{
         -webkit-appearance: none;
         appearance: none;
     }
-    .statbar[value]::-webkit-progress-bar{
+    .ltrstatbar[value]::-webkit-progress-bar{
         background: rgb(254,76,76);
         background: linear-gradient(90deg, rgba(254,76,76,1) 19%, rgba(225,228,122,1) 50%, rgba(18,255,0,1) 83%);
+        border-radius: 10px;
+    }
+    .rtlstatbar[value]::-webkit-progress-bar{
+        background: rgba(18,255,0,1);
+        background: linear-gradient(90deg, rgba(18,255,0,1) 19%, rgba(225,228,122,1) 50%, rgba(254,76,76,1) 83%);
         border-radius: 10px;
     }
     .statbar[value]::-webkit-progress-value{

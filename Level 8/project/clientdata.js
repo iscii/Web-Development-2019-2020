@@ -11,16 +11,28 @@ exports.getClientData = function(pathname, request){
 
         case "writedata":
             var qdata = parseQueryString(request);
-            if(qdata.file = "data"){
+            console.log("writing to " + qdata.file);
+            if(qdata.file == "data"){
                 var data = JSON.parse(fs.readFileSync("./js/data.json").toString());
                 var prevdata = data[qdata.property];
                 if(qdata.value == "null") qdata.value = null;
                 data[qdata.property] = qdata.value;
-                console.log(data);
+                //console.log(data);
                 fs.writeFileSync("./js/data.json", JSON.stringify(data, null, 4), function(err){
                     if(err)
                         throw err;
                     console.log("Updated " + qdata.file + "'s from [" + prevdata + "] to [" + qdata.value + "]");
+                });
+            }
+            else{
+                var data = JSON.parse(fs.readFileSync("./js/Pets/" + qdata.file + ".json").toString());
+                var prevdata = data[qdata.property];
+                data[qdata.property] = JSON.parse(qdata.value);
+                //console.log(data);
+                fs.writeFileSync("./js/Pets/" + qdata.file + ".json", JSON.stringify(data, null, 4), function(err){
+                    if(err)
+                        throw err;
+                        console.log("Updated " + qdata.file + "'s from [" + prevdata + "] to [" + qdata.value + "]");
                 });
             }
         break;
@@ -31,7 +43,7 @@ exports.getClientData = function(pathname, request){
             for(item in pets){
                 petdata.push(fs.readFileSync("./js/Pets/" + pets[item]).toString()); //turns the object into a string
             }
-            console.log(petdata);
+            //console.log(petdata);
             return JSON.stringify(petdata); //turns the array into a string. Apparently only strings can be returned in AJAX? I always get a JSON error
     
         case "create":
@@ -47,7 +59,7 @@ exports.getClientData = function(pathname, request){
             
             for(item in frames){
                 if(frames[item].info.type == qdata.type){
-                    frames[item].info.name = qdata.name.substr(0, 1).toUpperCase() + qdata.name.substr(1, qdata.name.length - 1);
+                    frames[item].info.name = qdata.name;
                     var stats = JSON.stringify(frames[item], null, 4);
                 }
             }
