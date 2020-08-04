@@ -1,3 +1,13 @@
+8/4/2020
+To Do:
+    - update stats by time
+        - when app is exited, store time and date in data.json
+        - when app is reopened, find time diff and update accordingly
+        - maybe track age and lifespan by the minute
+    - statchecks
+Completed:
+    -spent hours figuring out a bug to fix it by adding & currentPet to getpet's if !init display pet...
+
 8/1/2020
 To Do:
     - update stats by time

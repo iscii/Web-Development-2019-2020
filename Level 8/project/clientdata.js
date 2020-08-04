@@ -32,7 +32,7 @@ exports.getClientData = function(pathname, request){
                 fs.writeFileSync("./js/Pets/" + qdata.file + ".json", JSON.stringify(data, null, 4), function(err){
                     if(err)
                         throw err;
-                        console.log("Updated " + qdata.file + "'s from [" + prevdata + "] to [" + qdata.value + "]");
+                    console.log("Updated " + qdata.file + "'s from [" + prevdata + "] to [" + qdata.value + "]");
                 });
             }
         break;

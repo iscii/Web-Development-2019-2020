@@ -1,3 +1,19 @@
 {
-	"folders": []
+	"folders": [
+		{
+			"path": "C:/Users/Issac/Downloads/Projects/Web-Development-2019-2020/Level 8/project",
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "chrome",
+				"request": "launch",
+				"name": "Launch Chrome against localhost",
+				"url": "http://localhost:8081",
+				"webRoot": "${workspaceFolder}/js"
+			}
+		]
+	}
 }

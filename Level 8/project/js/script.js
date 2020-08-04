@@ -155,8 +155,8 @@ function ajax(tag, file, property, value){
             switch(tag){
                 case "getdata":
                     var gamedata = JSON.parse(data);
+                    //console.log(pets);
                     for(item in pets){
-                        //console.log(pets);
                         if(pets[item].info.type + "_" + pets[item].info.name == gamedata.currentPet){
                             currentPet = pets[item];
                             display("pet");
@@ -167,7 +167,6 @@ function ajax(tag, file, property, value){
                         if(currentPet){
                             timediff();
                         }
-                        
                         initialize = false;
                     }
                 break;
@@ -182,16 +181,15 @@ function ajax(tag, file, property, value){
                     for(item in pets){
                         pets[item] = JSON.parse(pets[item]);
                     }
-                    if(!initialize) display("pet");
+                    if(!initialize && currentPet) display("pet");
                     display("menu")
                 break;
                 case "create":
                     var response = JSON.parse(data);
+                    console.log(currentPet);
                     if(!currentPet) ajax("writedata", "data", "currentPet", response.info.type + "_" + response.info.name);
-                    if(response === false) return console.log("already exists");
 
-                    selected = null;
-                    nameForm.name.value = "";
+                    if(response === false) return console.log("already exists");
 
                     popMenu(false, 'create', true);
                     ajax("getpets");
@@ -222,6 +220,8 @@ function popMenu(open, type, nreset){
     display("menu");
 }
 function display(str){
+    console.trace();
+    console.log("display " + str);
     if(str == "menu"){
         //petsmenu
         if(pets[0]){
