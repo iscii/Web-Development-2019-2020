@@ -30,8 +30,8 @@ function init(){
     pets = [];
     currentPet = null;
     
-    ajax("getpets"); //this ajax call must be first in order to create the pets variable for display()
-    ajax("getdata");
+    ajax(true, "getpets"); //this ajax call must be first in order to create the pets variable for display()
+    ajax(true, "getdata");
 }
 
 //general
@@ -41,11 +41,11 @@ function createSelect(type){
 }
 function createPet(){
     if(!selected || !nameForm.name.value) return console.log("invalid creation"); //also check if the pet of same type & name's been made already
-    ajax('create');
+    ajax(true, 'create');
 }
 function disownPet(filename){
     if(filename == currentPet.info.type + "_" + currentPet.info.name) return console.log("You cannot disown your current pet");
-    ajax("delete", filename)
+    ajax(true, "delete", filename)
 }
 window.onbeforeunload = function(){
     
@@ -64,7 +64,7 @@ function timediff(){
     else{
         setTimeout(function(){
             updateMin();
-        }, (60 - date.getSeconds()) * 1000);
+        }, (10 - (10 - date.getSeconds())) * 1000);
     }
 
     //minutes from last session
@@ -75,7 +75,7 @@ function updateMin(){
 
     setTimeout(function(){ //for testing
         updateMin();
-    }, 60000);
+    }, 10000);
     updatePets();
     /*
     //minutes till next hour; beings the hourly updates
@@ -104,11 +104,11 @@ function updatePets(){
     for(item in pets){
         var p = pets[item];
         //appetite
-        p.hunger = Math.round(p.hunger + (p.hunger * (.1 * p.info.appetite)));
+        p.hunger += 1;//Math.round(p.hunger + (p.hunger * (.1 * p.info.appetite)));
         if(p.hunger > 100) p.hunger = 100;
         
         //fatigue
-        p.fatigue = Math.round(p.fatigue + (p.fatigue * (.5 * p.info.energy)));
+        p.fatigue += 1;//Math.round(p.fatigue + (p.fatigue * (.5 * p.info.energy)));
         if(p.fatigue > 100) p.fatigue = 100;
 
         //age
@@ -116,7 +116,8 @@ function updatePets(){
         //writedata
         for(item in p){
             if(item == "info") continue;
-            ajax("writedata", p.info.type + "_" + p.info.name, item, p[item]);
+            ajax(true, "writedata", p.info.type + "_" + p.info.name, item, p[item]);
+            ajax(true, "getdata");
         }
     }
     //no need to display - writedata will display
@@ -126,7 +127,7 @@ function actionPet(action){
 }
 
 //server
-function ajax(tag, file, property, value){
+function ajax(async, tag, file, property, value){
     console.log("getting data from " + tag);
     var request = new XMLHttpRequest();
     var url = "http://localhost:8081/";
@@ -147,7 +148,7 @@ function ajax(tag, file, property, value){
 
     console.log(url);
 
-    request.open("GET", url, true)
+    request.open("GET", url, async);
     request.onreadystatechange = function(){
         if(request.readyState == 4){
             var data = request.responseText;
@@ -172,9 +173,9 @@ function ajax(tag, file, property, value){
                 break;
                 case "writedata":
                     if(file == "data"){
-                        ajax("getdata");
+                        ajax(true, "getdata");
                     }
-                    else ajax("getpets");
+                    else ajax(true, "getpets");
                 break;
                 case "getpets":
                     pets = JSON.parse(data);
@@ -187,15 +188,17 @@ function ajax(tag, file, property, value){
                 case "create":
                     var response = JSON.parse(data);
                     console.log(currentPet);
-                    if(!currentPet) ajax("writedata", "data", "currentPet", response.info.type + "_" + response.info.name);
-
+                    if(!currentPet){
+                        ajax(true, "writedata", "data", "currentPet", response.info.type + "_" + response.info.name);
+                        timediff();
+                    }
                     if(response === false) return console.log("already exists");
 
                     popMenu(false, 'create', true);
-                    ajax("getpets");
+                    ajax(true, "getpets");
                 break;
                 case "delete":
-                    ajax("getpets");
+                    ajax(true, "getpets");
                 break;
             }
         }
@@ -220,8 +223,8 @@ function popMenu(open, type, nreset){
     display("menu");
 }
 function display(str){
-    console.trace();
-    console.log("display " + str);
+    //console.trace();
+    //console.log("display " + str);
     if(str == "menu"){
         //petsmenu
         if(pets[0]){
@@ -281,8 +284,7 @@ function display(str){
                 opStats.innerHTML += "%";
                 
                 var name = "ltrstatbar"
-                if(item == "hunger" || item == "fatigue") name = "rtlstatbar"
-                
+                if(item == "hunger" || item == "fatigue") name = "rtlstatbar";
                 var bar = new Bar(currentPet[item], name);
                 opStats.appendChild(bar.bar);
             }

@@ -1,3 +1,23 @@
+8/6/2020
+To Do:
+    - update stats by time
+        - when app is exited, store time and date in data.json
+        - when app is reopened, find time diff and update accordingly
+        - maybe track age and lifespan by the minute
+    - statchecks
+Completed:
+    -actually squashed the bug where stats don't update
+        - the problem was that currentPet was not updated
+        along with the pet info, and display uses currentPet
+        so I just added an ajax getdata after writedata to update currentPet
+    - gave xmlhttprequest a synchronous option
+        - generates a warning
+
+8/5/2020
+To Do:
+Completed:
+    -[DID NOT] squash some bugs
+        -(8/6/2020) the bug squashing created more bugs
 8/4/2020
 To Do:
     - update stats by time
