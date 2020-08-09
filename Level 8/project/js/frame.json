@@ -7,11 +7,12 @@
         "energy": 6,
         "image": "images/boomer.png"
     },
-    "health": 100,
+    "health": [100, 100],
     "spirit": 100,
     "hunger": 10,
     "fatigue": 10,
-    "age": [0, 0]
+    "age": [0, 0],
+    "played": 0
 },
 {
     "info": {
@@ -22,11 +23,12 @@
         "energy": 2,
         "image": "images/clipper.png"
     },
-    "health": 100,
+    "health": [100, 100],
     "spirit": 100,
     "hunger": 10,
     "fatigue": 10,
-    "age": [0, 0]
+    "age": [0, 0],
+    "played": 0
 },
 {
     "info": {
@@ -37,9 +39,10 @@
         "energy": 4,
         "image": "images/drupper.png"
     },
-    "health": 100,
+    "health": [100, 100],
     "spirit": 100,
     "hunger": 10,
     "fatigue": 10,
-    "age": [0, 0]
+    "age": [0, 0],
+    "played": 0
 }]

@@ -1,7 +1,10 @@
 8/8/2020
 To Do:
-    - 
+    - action buttons
+    - statchecks & all the stat stuff
 Completed:
+    - max health and spirit update prep
+    - pets[item].played
 
 8/7/2020
 To Do:

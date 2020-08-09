@@ -1,0 +1,22 @@
+{
+    "info": {
+        "type": "clipper",
+        "name": "asd",
+        "lifespan": 15,
+        "appetite": 2,
+        "energy": 2,
+        "image": "images/clipper.png"
+    },
+    "health": [
+        100,
+        100
+    ],
+    "spirit": 42,
+    "hunger": 10,
+    "fatigue": 70,
+    "age": [
+        12,
+        2
+    ],
+    "played": 60
+}

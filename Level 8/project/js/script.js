@@ -83,7 +83,7 @@ function timediff(){
     else{
         setTimeout(function(){
             updateMin();
-        }, (date.getSeconds()/10 * 1000)); //60  - date.getseconds
+        }, 10000); //60  - date.getseconds
         console.log("time left: " + (date.getSeconds()/10));
     }
 
@@ -134,23 +134,40 @@ function updateHour(){
 function updatePets(){
     for(item in pets){
         var p = pets[item];
-        //appetite
-        p.hunger += 1;//Math.round(p.hunger + (p.hunger * (.1 * p.info.appetite)));
-        if(p.hunger > 100) p.hunger = 100;
+        //last played
+        p.played += 1;
+
+        //spirit
+        if(p.played > p.info.energy){
+            p.spirit -= 1; //Math.round(p.spirit *= 0.9);
+            
+        }
+
+        //hunger
+        p.hunger[0] += 1;//Math.round(p.hunger + (p.hunger * (.1 * p.info.appetite)));
+        if(p.hunger[0] > p.hunger[1]) p.hunger[0] = p.hunger[1];
         
         //fatigue
         p.fatigue += 1;//Math.round(p.fatigue + (p.fatigue * (.05 * p.info.energy)));
         if(p.fatigue > 100) p.fatigue = 100;
 
+        //health
+        
         //age. [0] = hour, [1] = day.
         p.age[0] += 1;
         if(p.age[0] == 24){
             p.age[0] = 0;
             p.age[1] += 1;
         }
-        if(p.age[1] == (p.info.lifespan)){ //make an option for well-being; && p.age[0] > p.wellbeing. Wellbeing serves as extra hours of life and decreases slowly per hour unhealthy.
+        
+        if(p.age[1] >= (p.info.lifespan)){
+
+        }
+        
+        if(p.health[0] < 10){
             //death
         }
+
     }
 }
 function actionPet(action){
@@ -159,6 +176,12 @@ function actionPet(action){
 
         break;
         case "play":
+            for(item in pets){
+                if(pets[item].info.type + "_" + pets[item].info.name == currentPet.info.type + "_" + currentPet.info.name){
+                    pets[item].played = 0;
+                    break;
+                }
+            }
 
         break;
         case "sleep":
@@ -313,24 +336,27 @@ function display(str){
         //stats
         opStats.innerHTML = "";
         for(item in currentPet){
-            if(item == "info") continue;
+            if(item == "info" || item == "played") continue;
             
             //stats
             var x = capitalize(item);
+            var y = currentPet[item];
 
             if(item == "age"){
-                opStats.innerHTML += x + ": " + currentPet[item][1] + " days " + currentPet[item][0] + " hour";
-                if(currentPet[item][0] > 1) opStats.innerHTML += "s";
+                opStats.innerHTML += x + ": " + y[1] + " days " + y[0] + " hour";
+                if(y[0] > 1 || currentPet[0] == 0) opStats.innerHTML += "s";
             }
             else{
-                opStats.innerHTML += x + ": " + currentPet[item];
+                if(item == "health") y = y[0];
+
+                opStats.innerHTML += x + ": " + y;
                 opStats.innerHTML += "%";
                 
-                var name = "ltrstatbar"
+                var name = "ltrstatbar";
                 if(item == "hunger" || item == "fatigue") name = "rtlstatbar";
-                var bar = new Bar(currentPet[item], name);
-                opStats.appendChild(bar.bar);
 
+                var bar = new Bar(y, name);
+                opStats.appendChild(bar.bar);
             }
             
             opStats.innerHTML += "<br/>";
