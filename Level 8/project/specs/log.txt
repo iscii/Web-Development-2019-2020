@@ -1,8 +1,24 @@
+8/8/2020
+To Do:
+    - 
+Completed:
+
+8/7/2020
+To Do:
+    - action buttons
+    - statchecks & all the stat stuff
+Completed:
+    - update stats by time
+        - store last session date
+        - when app is reopened, find time diff and update accordingly
+    - added option to update all of a pet at once
+
 8/6/2020
 To Do:
     - update stats by time
         - when app is exited, store time and date in data.json
         - when app is reopened, find time diff and update accordingly
+            - if there is data, set date to that instead of new Date();
         - maybe track age and lifespan by the minute
     - statchecks
 Completed:

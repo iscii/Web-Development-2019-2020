@@ -25,15 +25,24 @@ exports.getClientData = function(pathname, request){
                 });
             }
             else{
-                var data = JSON.parse(fs.readFileSync("./js/Pets/" + qdata.file + ".json").toString());
-                var prevdata = data[qdata.property];
-                data[qdata.property] = JSON.parse(qdata.value);
-                //console.log(data);
-                fs.writeFileSync("./js/Pets/" + qdata.file + ".json", JSON.stringify(data, null, 4), function(err){
-                    if(err)
-                        throw err;
-                    console.log("Updated " + qdata.file + "'s from [" + prevdata + "] to [" + qdata.value + "]");
-                });
+                if(qdata.property = "all"){
+                    fs.writeFileSync("./js/Pets/" + qdata.file + ".json", JSON.stringify(JSON.parse(qdata.value), null, 4), function(err){
+                        if(err)
+                            throw err;
+                        console.log("Updated " + qdata.file);
+                    });
+                }
+                else{
+                    var data = JSON.parse(fs.readFileSync("./js/Pets/" + qdata.file + ".json").toString());
+                    var prevdata = data[qdata.property];
+                    data[qdata.property] = JSON.parse(qdata.value);
+                    //console.log(data);
+                    fs.writeFileSync("./js/Pets/" + qdata.file + ".json", JSON.stringify(data, null, 4), function(err){
+                        if(err)
+                            throw err;
+                        console.log("Updated " + qdata.file + "'s from [" + prevdata + "] to [" + qdata.value + "]");
+                    });
+                }
             }
         break;
 

@@ -5,14 +5,13 @@
         "lifespan": 7,
         "appetite": 6,
         "energy": 6,
-        "image": "images/boomer.png",
-        "lastload": null
+        "image": "images/boomer.png"
     },
     "health": 100,
     "spirit": 100,
     "hunger": 10,
     "fatigue": 10,
-    "age": 0
+    "age": [0, 0]
 },
 {
     "info": {
@@ -21,14 +20,13 @@
         "lifespan": 15,
         "appetite": 2,
         "energy": 2,
-        "image": "images/clipper.png",
-        "lastload": null
+        "image": "images/clipper.png"
     },
     "health": 100,
     "spirit": 100,
     "hunger": 10,
     "fatigue": 10,
-    "age": 0
+    "age": [0, 0]
 },
 {
     "info": {
@@ -37,12 +35,11 @@
         "lifespan": 30,
         "appetite": 4,
         "energy": 4,
-        "image": "images/drupper.png",
-        "lastload": null
+        "image": "images/drupper.png"
     },
     "health": 100,
     "spirit": 100,
     "hunger": 10,
     "fatigue": 10,
-    "age": 0
+    "age": [0, 0]
 }]
