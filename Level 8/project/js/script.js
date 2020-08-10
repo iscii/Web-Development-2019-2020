@@ -65,14 +65,10 @@ function timediff(){
         console.log(hoursFLS);
     }
     for(let i = 0; i < hoursFLS; i++){
-        updatePets();
+        updateStats();
     }
 
-    //write
-    for(item in pets){
-        ajax(true, "writedata", pets[item].info.type + "_" + pets[item].info.name, "all", JSON.stringify(pets[item]));
-        ajax(true, "getdata");
-    }
+    updatePets();
 
     console.log(date.getSeconds());
 
@@ -96,12 +92,8 @@ function updateMin(){
     setTimeout(function(){ //for testing
         updateMin();
     }, 10000);
+    updateStats();
     updatePets();
-
-    for(item in pets){
-        ajax(true, "writedata", pets[item].info.type + "_" + pets[item].info.name, "all", JSON.stringify(pets[item]));
-        ajax(true, "getdata");
-    }
     /*
     //minutes till next hour; beings the hourly updates
     if(date.getMinutes() == 0){
@@ -121,17 +113,13 @@ function updateHour(){
     setTimeout(function(){
         updateHour();
     }, 3600000);
-    updatePets();
+    updateStats();
 
-    //write
-    for(item in pets){
-        ajax(true, "writedata", pets[item].info.type + "_" + pets[item].info.name, "all", JSON.stringify(pets[item]));
-        ajax(true, "getdata");
-    }
+    updatePets();
 }
 
 //pet
-function updatePets(){
+function updateStats(){
     for(item in pets){
         var p = pets[item];
         //last played
@@ -140,16 +128,13 @@ function updatePets(){
         //spirit
         if(p.played > p.info.energy){
             p.spirit -= 1; //Math.round(p.spirit *= 0.9);
-            
         }
 
         //hunger
-        p.hunger[0] += 1;//Math.round(p.hunger + (p.hunger * (.1 * p.info.appetite)));
-        if(p.hunger[0] > p.hunger[1]) p.hunger[0] = p.hunger[1];
+        p.hunger += 1;//Math.round(p.hunger + (p.hunger * (.1 * p.info.appetite)));
         
         //fatigue
         p.fatigue += 1;//Math.round(p.fatigue + (p.fatigue * (.05 * p.info.energy)));
-        if(p.fatigue > 100) p.fatigue = 100;
 
         //health
         
@@ -159,35 +144,72 @@ function updatePets(){
             p.age[0] = 0;
             p.age[1] += 1;
         }
-        
-        if(p.age[1] >= (p.info.lifespan)){
-
-        }
-        
-        if(p.health[0] < 10){
-            //death
-        }
-
+        capStats(p);
     }
+
+    checkDeath();
 }
 function actionPet(action){
+    for(item in pets){
+        if(pets[item].info.type + "_" + pets[item].info.name == currentPet.info.type + "_" + currentPet.info.name){
+            var p = pets[item];
+        }
+    }
     switch(action){
         case "feed":
+            if(p.hunger < 20){
+                p.health *= 0.95;
+            }
+            else{
+                p.health *= 1.05;
+                if(p.health > 100) p.health = 100;
+            }
+            p.hunger = 10;
 
+            checkDeath();
         break;
         case "play":
-            for(item in pets){
-                if(pets[item].info.type + "_" + pets[item].info.name == currentPet.info.type + "_" + currentPet.info.name){
-                    pets[item].played = 0;
-                    break;
-                }
+            if(p.played < p.info.energy){
+                p.fatigue += 0.2; //Math.round(p.fatigue *= 1.2);
             }
-
+            p.played = 0;
         break;
         case "sleep":
+            if(p.fatigue < 40) return console.log(p.info.name + " is not tired");
 
         break;
     }
+    updatePets();
+}
+function updatePets(){
+    for(item in pets){
+        ajax(true, "writedata", pets[item].info.type + "_" + pets[item].info.name, "all", JSON.stringify(pets[item]));
+        ajax(true, "getdata");
+    }
+}
+function checkDeath(){
+    for(item in pets){
+        if(pets[item].age[1] >= (pets[item].info.lifespan)){
+            
+        }
+        
+        if(pets[item].health[0] < 10){
+            //death
+        }
+    }
+}
+function capStats(p){
+    //health
+    if(phealth[0] > phealth[1]) phealth[0] = p.health[1];
+    //spirit
+    if(p.spirit > 100) p.spirit = 100;
+    if(p.spirit < 0) p.spirit = 0;
+    //hunger
+    if(p.hunger > 100) p.hunger = 100;
+    if(p.hunger < 10) p.hunger = 10;
+    //fatigue
+    if(p.fatigue > 100) p.fatigue = 100;
+    if(p.fatigue < 10) p.fatigue = 10;
 }
 
 //server
@@ -336,7 +358,7 @@ function display(str){
         //stats
         opStats.innerHTML = "";
         for(item in currentPet){
-            if(item == "info" || item == "played") continue;
+            if(item == "info" || item == "played" || item == "sleep") continue;
             
             //stats
             var x = capitalize(item);

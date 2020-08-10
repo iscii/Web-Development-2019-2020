@@ -12,7 +12,8 @@
     "hunger": 10,
     "fatigue": 10,
     "age": [0, 0],
-    "played": 0
+    "played": 0,
+    "sleep": [false, 0]
 },
 {
     "info": {
@@ -28,7 +29,8 @@
     "hunger": 10,
     "fatigue": 10,
     "age": [0, 0],
-    "played": 0
+    "played": 0,
+    "sleep": [false, 0]
 },
 {
     "info": {
@@ -44,5 +46,6 @@
     "hunger": 10,
     "fatigue": 10,
     "age": [0, 0],
-    "played": 0
+    "played": 0,
+    "sleep": [false, 0]
 }]

@@ -1,3 +1,21 @@
+8/9/2020
+To Do:
+    - action buttons
+        - sleep
+    - statchecks & all the stat stuff
+        - health
+    - pet death
+Completed:
+    - action buttons
+        - feed
+        - play
+    - statchecks & all the stat stuff
+        - spirit
+        - hunger
+        - fatigue
+    - checkdeath function
+    - stat cap function
+
 8/8/2020
 To Do:
     - action buttons
