@@ -1,3 +1,15 @@
+8/10/2020
+To Do:
+    - action buttons
+        - sleep
+    - statchecks & all the stat stuff
+        - health
+    - pet death
+Completed:
+    - some bug fixes regarding health
+    - made cap work properly
+    - playing now increases spirit
+    - Math.ceil instead of tofixed or math.round
 8/9/2020
 To Do:
     - action buttons

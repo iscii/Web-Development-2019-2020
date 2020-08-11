@@ -127,14 +127,14 @@ function updateStats(){
 
         //spirit
         if(p.played > p.info.energy){
-            p.spirit -= 1; //Math.round(p.spirit *= 0.9);
+            p.spirit -= 1; //p.spirit *= 0.9;
         }
 
         //hunger
-        p.hunger += 1;//Math.round(p.hunger + (p.hunger * (.1 * p.info.appetite)));
+        p.hunger += 1;//p.hunger + (p.hunger * (.1 * p.info.appetite));
         
         //fatigue
-        p.fatigue += 1;//Math.round(p.fatigue + (p.fatigue * (.05 * p.info.energy)));
+        p.fatigue += 1;//p.fatigue + (p.fatigue * (.05 * p.info.energy));
 
         //health
         
@@ -157,28 +157,33 @@ function actionPet(action){
     }
     switch(action){
         case "feed":
+            if(p.hunger == 10) return console.log(p.info.name + " is full!");
             if(p.hunger < 20){
-                p.health *= 0.95;
+                p.health[0] *= 0.95;
             }
             else{
-                p.health *= 1.05;
-                if(p.health > 100) p.health = 100;
+                p.health[0] *= 1.05;
             }
             p.hunger = 10;
 
             checkDeath();
         break;
         case "play":
+            if(p.played == 0) console.log(p.info.name + " does not want to play.");
             if(p.played < p.info.energy){
-                p.fatigue += 0.2; //Math.round(p.fatigue *= 1.2);
+                p.fatigue += 0.2; //p.fatigue *= 1.2;
             }
             p.played = 0;
+            p.spirit += 10;
         break;
         case "sleep":
             if(p.fatigue < 40) return console.log(p.info.name + " is not tired");
 
         break;
     }
+    capStats(p);
+    checkDeath();
+
     updatePets();
 }
 function updatePets(){
@@ -193,14 +198,21 @@ function checkDeath(){
             
         }
         
-        if(pets[item].health[0] < 10){
+        if(pets[item].health[0] <= 10){
             //death
+            console.log("death");
         }
     }
 }
 function capStats(p){
+    //round
+    p.health[0] = Math.ceil(p.health[0])
+    p.spirit = Math.ceil(p.spirit);
+    p.hunger = Math.ceil(p.hunger);
+    p.fatigue = Math.ceil(p.fatigue);
+
     //health
-    if(phealth[0] > phealth[1]) phealth[0] = p.health[1];
+    if(p.health[0] > p.health[1]) p.health[0] = p.health[1];
     //spirit
     if(p.spirit > 100) p.spirit = 100;
     if(p.spirit < 0) p.spirit = 0;
@@ -210,6 +222,7 @@ function capStats(p){
     //fatigue
     if(p.fatigue > 100) p.fatigue = 100;
     if(p.fatigue < 10) p.fatigue = 10;
+    
 }
 
 //server

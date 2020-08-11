@@ -1,0 +1,26 @@
+{
+    "info": {
+        "type": "clipper",
+        "name": "asdas",
+        "lifespan": 15,
+        "appetite": 2,
+        "energy": 2,
+        "image": "images/clipper.png"
+    },
+    "health": [
+        100,
+        100
+    ],
+    "spirit": 75,
+    "hunger": 54,
+    "fatigue": 100,
+    "age": [
+        13,
+        6
+    ],
+    "played": 27,
+    "sleep": [
+        false,
+        0
+    ]
+}
