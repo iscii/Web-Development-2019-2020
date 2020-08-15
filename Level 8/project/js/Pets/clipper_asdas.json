@@ -11,14 +11,14 @@
         100,
         100
     ],
-    "spirit": 75,
-    "hunger": 54,
+    "spirit": 87,
+    "hunger": 100,
     "fatigue": 100,
     "age": [
-        13,
-        6
+        18,
+        15
     ],
-    "played": 27,
+    "played": 15,
     "sleep": [
         false,
         0

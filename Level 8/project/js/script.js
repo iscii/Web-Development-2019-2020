@@ -137,6 +137,24 @@ function updateStats(){
         p.fatigue += 1;//p.fatigue + (p.fatigue * (.05 * p.info.energy));
 
         //health
+        switch(true){
+            //separating these since I think they are meant to stack
+            case p.hunger > 50:
+                p.health *= 0.9;
+                p.fatigue *= 1.1;
+            break;
+            case p.health < 50:
+                p.health *= 0.9;
+                p.fatigue *= 1.1;
+            break;
+            case p.spirit < 50:
+                p.health *= 0.9;
+                p.fatigue *= 1.1;
+            break;
+            case p.fatigue > 50:
+                p.health *= 0.9;    
+            break;
+        }
         
         //age. [0] = hour, [1] = day.
         p.age[0] += 1;

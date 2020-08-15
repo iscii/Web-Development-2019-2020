@@ -24,8 +24,6 @@ function Menupet(pet){
 }
 
 function Bar(value, name){
-    console.log("value: " + value);
-    console.log("name: " + name);
     this.bar = document.createElement("progress");
     this.bar.className = name;
     this.bar.className += " statbar"; //or do classList.add

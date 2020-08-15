@@ -11,7 +11,7 @@ exports.getClientData = function(pathname, request){
 
         case "writedata":
             var qdata = parseQueryString(request);
-            console.log("writing to " + qdata.file);
+            //console.log("writing to " + qdata.file);
             if(qdata.file == "data"){
                 var data = JSON.parse(fs.readFileSync("./js/data.json").toString());
                 var prevdata = data[qdata.property];
@@ -21,7 +21,7 @@ exports.getClientData = function(pathname, request){
                 fs.writeFileSync("./js/data.json", JSON.stringify(data, null, 4), function(err){
                     if(err)
                         throw err;
-                    console.log("Updated " + qdata.file + "'s from [" + prevdata + "] to [" + qdata.value + "]");
+                    //console.log("Updated " + qdata.file + "'s from [" + prevdata + "] to [" + qdata.value + "]");
                 });
             }
             else{
@@ -40,7 +40,7 @@ exports.getClientData = function(pathname, request){
                     fs.writeFileSync("./js/Pets/" + qdata.file + ".json", JSON.stringify(data, null, 4), function(err){
                         if(err)
                             throw err;
-                        console.log("Updated " + qdata.file + "'s from [" + prevdata + "] to [" + qdata.value + "]");
+                        //console.log("Updated " + qdata.file + "'s from [" + prevdata + "] to [" + qdata.value + "]");
                     });
                 }
             }
