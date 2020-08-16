@@ -1,0 +1,26 @@
+{
+    "info": {
+        "type": "drupper",
+        "name": "asd",
+        "lifespan": 30,
+        "appetite": 4,
+        "energy": 4,
+        "image": "images/drupper.png"
+    },
+    "health": [
+        9,
+        100
+    ],
+    "spirit": 40,
+    "hunger": 68,
+    "fatigue": 100,
+    "age": [
+        15,
+        6
+    ],
+    "played": 148,
+    "busy": [
+        false,
+        0
+    ]
+}

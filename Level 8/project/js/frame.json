@@ -13,7 +13,7 @@
     "fatigue": 10,
     "age": [0, 0],
     "played": 0,
-    "sleep": [false, 0]
+    "busy": [false, 0]
 },
 {
     "info": {
@@ -30,7 +30,7 @@
     "fatigue": 10,
     "age": [0, 0],
     "played": 0,
-    "sleep": [false, 0]
+    "busy": [false, 0]
 },
 {
     "info": {
@@ -47,5 +47,5 @@
     "fatigue": 10,
     "age": [0, 0],
     "played": 0,
-    "sleep": [false, 0]
+    "busy": [false, 0]
 }]

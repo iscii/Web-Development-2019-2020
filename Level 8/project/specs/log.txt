@@ -1,3 +1,16 @@
+8/16/2020
+To Do:
+    - pet death
+    - make sleep and play take time
+
+    - css :(
+Completed:
+    - action buttons
+        - sleep [instant, for now]
+    - statchecks & all the stat stuff
+        - health
+    - for each day past the pet’s lifespan, its maximum health will drop by 10
+
 8/15/2020
 Completed:
     - health stats

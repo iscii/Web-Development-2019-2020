@@ -140,19 +140,19 @@ function updateStats(){
         switch(true){
             //separating these since I think they are meant to stack
             case p.hunger > 50:
-                p.health *= 0.9;
+                p.health[0] *= 0.9;
                 p.fatigue *= 1.1;
             break;
-            case p.health < 50:
-                p.health *= 0.9;
+            case p.health[0] < 50:
+                p.health[0] *= 0.95;
                 p.fatigue *= 1.1;
-            break;
+            break; 
             case p.spirit < 50:
-                p.health *= 0.9;
+                p.health[0] *= 0.9;
                 p.fatigue *= 1.1;
             break;
             case p.fatigue > 50:
-                p.health *= 0.9;    
+                p.health[0] *= 0.9;    
             break;
         }
         
@@ -161,6 +161,10 @@ function updateStats(){
         if(p.age[0] == 24){
             p.age[0] = 0;
             p.age[1] += 1;
+
+            if(p.age[1] >= (p.info.lifespan)){
+                p.health[1] -= 10;
+            }
         }
         capStats(p);
     }
@@ -182,7 +186,7 @@ function actionPet(action){
             else{
                 p.health[0] *= 1.05;
             }
-            p.hunger = 10;
+            p.hunger -= 30; //allow the user to feed the pet multiple times 'cause the health < 50 causing the health to deplete further makes it very difficult to make the pet healthy again
 
             checkDeath();
         break;
@@ -191,14 +195,24 @@ function actionPet(action){
             if(p.played < p.info.energy){
                 p.fatigue += 0.2; //p.fatigue *= 1.2;
             }
+
+            //duration = 1-3 hrs (slider value)
+
+            //call this at the end
             p.played = 0;
-            p.spirit += 10;
+            p.spirit += 30; // * duration
         break;
         case "sleep":
             if(p.fatigue < 40) return console.log(p.info.name + " is not tired");
-
+            
+            //duration = p.energy * 2
+            p.fatigue = 10;
+            p.spirit *= 1.5;
+            p.health[0] *= 1.1;
+            console.log(p.health[0]);
         break;
     }
+
     capStats(p);
     checkDeath();
 
@@ -212,10 +226,6 @@ function updatePets(){
 }
 function checkDeath(){
     for(item in pets){
-        if(pets[item].age[1] >= (pets[item].info.lifespan)){
-            
-        }
-        
         if(pets[item].health[0] <= 10){
             //death
             console.log("death");
@@ -301,7 +311,7 @@ function ajax(async, tag, file, property, value){
                         pets[item] = JSON.parse(pets[item]);
                     }
                     if(!initialize && currentPet) display("pet");
-                    display("menu")
+                    display("menu");
                 break;
                 case "create":
                     var response = JSON.parse(data);
@@ -389,7 +399,7 @@ function display(str){
         //stats
         opStats.innerHTML = "";
         for(item in currentPet){
-            if(item == "info" || item == "played" || item == "sleep") continue;
+            if(item == "info" || item == "played" || item == "busy") continue;
             
             //stats
             var x = capitalize(item);
@@ -397,7 +407,7 @@ function display(str){
 
             if(item == "age"){
                 opStats.innerHTML += x + ": " + y[1] + " days " + y[0] + " hour";
-                if(y[0] > 1 || currentPet[0] == 0) opStats.innerHTML += "s";
+                if(y[0] > 1 || y[0] == 0) opStats.innerHTML += "s";
             }
             else{
                 if(item == "health") y = y[0];

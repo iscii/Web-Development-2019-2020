@@ -67,6 +67,9 @@ div{
         width: 100%;
         height: 100%;
     }
+    #actionpanel input{
+        width: 20%;
+    }
     /*middle*/
     #petimg{
         width: 80%;

@@ -1,0 +1,26 @@
+{
+    "info": {
+        "type": "boomer",
+        "name": "asd",
+        "lifespan": 7,
+        "appetite": 6,
+        "energy": 6,
+        "image": "images/boomer.png"
+    },
+    "health": [
+        9,
+        100
+    ],
+    "spirit": 0,
+    "hunger": 100,
+    "fatigue": 100,
+    "age": [
+        20,
+        6
+    ],
+    "played": 164,
+    "busy": [
+        false,
+        0
+    ]
+}
