@@ -122,38 +122,63 @@ function updateHour(){
 function updateStats(){
     for(item in pets){
         var p = pets[item];
-        //last played
-        p.played += 1;
 
-        //spirit
-        if(p.played > p.info.energy){
-            p.spirit -= 1; //p.spirit *= 0.9;
+        if(!(p.busy[0] == p.info.energy * 2)){ //if sleeping, don't update stats
+        
+            //spirit
+            if(p.busy[0]){
+                p.spirit += 30;
+            }
+            else{
+                //last played
+                p.played += 1;
+            }
+
+            if(p.played > p.info.energy){
+                p.spirit *= 0.9;
+            }
+
+            //hunger
+            p.hunger = p.hunger + (p.hunger * (.1 * p.info.appetite));
+            
+            //fatigue
+            p.fatigue = p.fatigue + (p.fatigue * (.05 * p.info.energy));
+
+            //health
+            switch(true){
+                //separating these since I think they are meant to stack
+                case p.hunger > 50:
+                    p.health[0] *= 0.9;
+                    p.fatigue *= 1.1;
+                break;
+                case p.health[0] < 50:
+                    p.health[0] *= 0.95;
+                    p.fatigue *= 1.1;
+                break; 
+                case p.spirit < 50:
+                    p.health[0] *= 0.9;
+                    p.fatigue *= 1.1;
+                break;
+                case p.fatigue > 50:
+                    p.health[0] *= 0.9;    
+                break;
+            }
         }
 
-        //hunger
-        p.hunger += 1;//p.hunger + (p.hunger * (.1 * p.info.appetite));
-        
-        //fatigue
-        p.fatigue += 1;//p.fatigue + (p.fatigue * (.05 * p.info.energy));
-
-        //health
-        switch(true){
-            //separating these since I think they are meant to stack
-            case p.hunger > 50:
-                p.health[0] *= 0.9;
-                p.fatigue *= 1.1;
-            break;
-            case p.health[0] < 50:
-                p.health[0] *= 0.95;
-                p.fatigue *= 1.1;
-            break; 
-            case p.spirit < 50:
-                p.health[0] *= 0.9;
-                p.fatigue *= 1.1;
-            break;
-            case p.fatigue > 50:
-                p.health[0] *= 0.9;    
-            break;
+        //busy
+        if(p.busy[0]){
+            p.busy[1]++;
+            console.log(p.busy);
+            if(p.busy[1] == p.busy[0]){
+                if(p.busy[0] === p.info.energy * 2){ //if was sleeping
+                    p.fatigue = 10;
+                    p.spirit *= 1.5;
+                    p.health[0] *= 1.1;
+                }
+                p.busy[0] = 0;
+                p.busy[1] = 0;
+                alert("pet has finished doing whatever it was doing"); //if need difference b/t sleep n play, just use busy[1] and check if = p.info.energy*2
+            }
         }
         
         //age. [0] = hour, [1] = day.
@@ -172,11 +197,8 @@ function updateStats(){
     checkDeath();
 }
 function actionPet(action){
-    for(item in pets){
-        if(pets[item].info.type + "_" + pets[item].info.name == currentPet.info.type + "_" + currentPet.info.name){
-            var p = pets[item];
-        }
-    }
+    var p = getCurrent();
+    if(p.busy[0]) return alert("the pet is busy");
     switch(action){
         case "feed":
             if(p.hunger == 10) return console.log(p.info.name + " is full!");
@@ -187,35 +209,42 @@ function actionPet(action){
                 p.health[0] *= 1.05;
             }
             p.hunger -= 30; //allow the user to feed the pet multiple times 'cause the health < 50 causing the health to deplete further makes it very difficult to make the pet healthy again
-
-            checkDeath();
         break;
         case "play":
-            if(p.played == 0) console.log(p.info.name + " does not want to play.");
+            if(p.played == 0) return console.log(p.info.name + " does not want to play.");
             if(p.played < p.info.energy){
                 p.fatigue += 0.2; //p.fatigue *= 1.2;
             }
 
-            //duration = 1-3 hrs (slider value)
-
-            //call this at the end
-            p.played = 0;
-            p.spirit += 30; // * duration
+            occupyPet(true);
         break;
         case "sleep":
             if(p.fatigue < 40) return console.log(p.info.name + " is not tired");
             
-            //duration = p.energy * 2
-            p.fatigue = 10;
-            p.spirit *= 1.5;
-            p.health[0] *= 1.1;
-            console.log(p.health[0]);
+            occupyPet(false);
         break;
     }
 
     capStats(p);
     checkDeath();
 
+    updatePets();
+}
+function occupyPet(play){
+    var p = getCurrent();
+    /* set busy to true. busy: [length, timelapsed]. length also serves as indication of whether busy
+    if a pet is busy, you cannot interact with them
+    if a pet is sleeping, their stats (other than age) freeze */
+
+    if(play){
+        p.busy[0] = parseInt(document.getElementById("playtime").value);
+        p.played = 0;
+        alert("this pet is now playing");
+    }
+    else{ //sleep
+        p.busy[0] = p.info.energy * 2;
+        alert("this pet is now sleepin");
+    }
     updatePets();
 }
 function updatePets(){
@@ -251,6 +280,13 @@ function capStats(p){
     if(p.fatigue > 100) p.fatigue = 100;
     if(p.fatigue < 10) p.fatigue = 10;
     
+}
+function getCurrent(){
+    for(item in pets){
+        if(pets[item].info.type + "_" + pets[item].info.name == currentPet.info.type + "_" + currentPet.info.name){
+            return pets[item];
+        }
+    }
 }
 
 //server

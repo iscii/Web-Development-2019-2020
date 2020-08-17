@@ -1,3 +1,18 @@
+8/17/2020
+To Do:
+    - pet death
+
+    - css :(
+        - pet sleeping/playing indication 
+        - draw pet playing/sleeping for each pet
+        - event box for "cannot do x" events
+    - draw pets!!
+Completed:
+    - make sleep and play take time
+        - set busy to true. busy: [length, timelapsed]. length also serves as indication of whether busy
+        - if a pet is busy, you cannot interact with them
+        - if a pet is sleeping, their stats (other than age) freeze
+
 8/16/2020
 To Do:
     - pet death
