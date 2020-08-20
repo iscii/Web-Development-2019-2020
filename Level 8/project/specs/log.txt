@@ -1,7 +1,25 @@
+Note: This is the most spaghetti code I've ever made and I am not proud of it.
+
+8/20/2020
+To Do:
+    - css :(
+        - pet sleeping/playing indication 
+        - draw pet playing/sleeping for each pet
+        - event box for "cannot do x" events
+    - draw pets!!
+Completed:
+    - pet death
+        - instead of deleting the file, remove all its properties
+        and replace image with a gravestone. make it uninteractable
+        - alive flag - if alive, then display stats. if not, set image to gravestone
+        and don't display stats.
+        - it is with great regret that many virtual pets had been sacrificed
+        to get this program working
+        - bug: replaces entire pet json with "false" instead of only the alive property
+
+
 8/17/2020
 To Do:
-    - pet death
-
     - css :(
         - pet sleeping/playing indication 
         - draw pet playing/sleeping for each pet

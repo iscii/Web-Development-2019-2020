@@ -11,6 +11,7 @@ exports.getClientData = function(pathname, request){
 
         case "writedata":
             var qdata = parseQueryString(request);
+            console.log(qdata.property);
             //console.log("writing to " + qdata.file);
             if(qdata.file == "data"){
                 var data = JSON.parse(fs.readFileSync("./js/data.json").toString());
@@ -25,7 +26,7 @@ exports.getClientData = function(pathname, request){
                 });
             }
             else{
-                if(qdata.property = "all"){
+                if(qdata.property == "all"){
                     fs.writeFileSync("./js/Pets/" + qdata.file + ".json", JSON.stringify(JSON.parse(qdata.value), null, 4), function(err){
                         if(err)
                             throw err;
@@ -36,6 +37,13 @@ exports.getClientData = function(pathname, request){
                     var data = JSON.parse(fs.readFileSync("./js/Pets/" + qdata.file + ".json").toString());
                     var prevdata = data[qdata.property];
                     data[qdata.property] = JSON.parse(qdata.value);
+                    if(qdata.property == "alive" && !JSON.parse(qdata.value)){
+                        data.info.image = "images/gravestone.png";
+                        data.health = [0, 0];
+                        data.spirit = 0;
+                        data.hunger = 0;
+                        data.fatigue = 0;
+                    }
                     //console.log(data);
                     fs.writeFileSync("./js/Pets/" + qdata.file + ".json", JSON.stringify(data, null, 4), function(err){
                         if(err)

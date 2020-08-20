@@ -32,10 +32,8 @@ function init(){
     lastsession = null;
     pets = [];
     
-    console.log(new Date().getMinutes() - new Date("Fri Aug 07 2020 11:08:43 GMT-0400 (Eastern Daylight Time)").getMinutes());
-
-    ajax(true, "getpets"); //this ajax call must be first in order to create the pets variable for display()
-    ajax(true, "getdata");
+    ajax("getpets"); //this ajax call must be first in order to create the pets variable for display()
+    ajax("getdata");
 }
 
 //general
@@ -45,32 +43,34 @@ function createSelect(type){
 }
 function createPet(){
     if(!selected || !nameForm.name.value) return console.log("invalid creation"); //also check if the pet of same type & name's been made already
-    ajax(true, 'create');
+    ajax('create');
 }
 function disownPet(filename){
     if(filename == currentPet.info.type + "_" + currentPet.info.name) return console.log("You cannot disown your current pet");
-    ajax(true, "delete", filename)
+    ajax("delete", filename)
 }
+
 window.onbeforeunload = function(e){
-    ajax(true, "writedata", "data", "lastsession", new Date());
-    console.log("unload");
+    e.preventDefault();
+    e.returnValue = "";
+    ajax("writedata", "data", "lastsession", new Date());
 }
 
 //time
 function timediff(){
     //ajax for data.json lastsession date. if there is none, it's probably first session, so create new date and stuff.
     var date = new Date(); //date is static
+    
     if(lastsession){
-        var hoursFLS = date.getHours() - new Date(lastsession).getHours(); //FLS = from last session 
+        var hoursFLS = parseInt(Math.abs((date - new Date(lastsession)) / (1000 * 60 * 60) % 24)); //FLS = from last session 
         console.log(hoursFLS);
     }
+    var hoursFLS = 0;
     for(let i = 0; i < hoursFLS; i++){
         updateStats();
     }
-
-    updatePets();
-
-    console.log(date.getSeconds());
+    if(hoursFLS)
+        updatePets();
 
     //seconds till next minute
     if(date.getSeconds() == 0){
@@ -79,21 +79,25 @@ function timediff(){
     else{
         setTimeout(function(){
             updateMin();
-        }, 10000); //60  - date.getseconds
-        console.log("time left: " + (date.getSeconds()/10));
+        }, 10000);
+        /*(60 - date.getSeconds()) * 10000);
+        console.log((60 - date.getSeconds()));*/
     }
 
     //minutes from last session
 }
 function updateMin(){
+    console.log("update");
     var date = new Date();
-    console.log(date.getMinutes());
-
-    setTimeout(function(){ //for testing
+//
+    setTimeout(function(){
         updateMin();
     }, 10000);
+
     updateStats();
+
     updatePets();
+//
     /*
     //minutes till next hour; beings the hourly updates
     if(date.getMinutes() == 0){
@@ -103,13 +107,13 @@ function updateMin(){
         setTimeout(function(){
             updateHour();
         }, (60 - date.getMinutes()) * 60000);
-        console.log((60 - date.getMinutes()) * 60000);
+        console.log((60 - date.getMinutes()));
     }
     */
 }
 function updateHour(){
     var date = new Date();
-    console.log(date.getHours());
+    console.log(date);
     setTimeout(function(){
         updateHour();
     }, 3600000);
@@ -122,9 +126,11 @@ function updateHour(){
 function updateStats(){
     for(item in pets){
         var p = pets[item];
+        if(!p.alive) continue
+        if((p.busy[0] == p.info.energy * 2)) console.log("sleeping");
+        if((p.busy[0] && p.busy[0] != p.info.energy * 2)) console.log("playing");
 
         if(!(p.busy[0] == p.info.energy * 2)){ //if sleeping, don't update stats
-        
             //spirit
             if(p.busy[0]){
                 p.spirit += 30;
@@ -144,6 +150,8 @@ function updateStats(){
             //fatigue
             p.fatigue = p.fatigue + (p.fatigue * (.05 * p.info.energy));
 
+        }
+        if(!p.busy[0]){ //if busy, don't update health
             //health
             switch(true){
                 //separating these since I think they are meant to stack
@@ -164,20 +172,22 @@ function updateStats(){
                 break;
             }
         }
-
-        //busy
+            
+        //busy. the ifs are arranged redundantly intentionally due to sequencing and stat stacking
         if(p.busy[0]){
             p.busy[1]++;
             console.log(p.busy);
             if(p.busy[1] == p.busy[0]){
+                let sleeping = false;
                 if(p.busy[0] === p.info.energy * 2){ //if was sleeping
+                    sleeping = true;
                     p.fatigue = 10;
                     p.spirit *= 1.5;
                     p.health[0] *= 1.1;
                 }
                 p.busy[0] = 0;
                 p.busy[1] = 0;
-                alert("pet has finished doing whatever it was doing"); //if need difference b/t sleep n play, just use busy[1] and check if = p.info.energy*2
+                if(sleeping) alert("pet has awooken"); else alert("pet has finished playing");
             }
         }
         
@@ -193,8 +203,6 @@ function updateStats(){
         }
         capStats(p);
     }
-
-    checkDeath();
 }
 function actionPet(action){
     var p = getCurrent();
@@ -226,15 +234,14 @@ function actionPet(action){
     }
 
     capStats(p);
-    checkDeath();
 
     updatePets();
 }
 function occupyPet(play){
     var p = getCurrent();
-    /* set busy to true. busy: [length, timelapsed]. length also serves as indication of whether busy
-    if a pet is busy, you cannot interact with them
-    if a pet is sleeping, their stats (other than age) freeze */
+    //set busy to true. busy: [length, timelapsed]. length also serves as indication of whether busy
+    //if a pet is busy, you cannot interact with them
+    //if a pet is sleeping, their stats (other than age) freeze
 
     if(play){
         p.busy[0] = parseInt(document.getElementById("playtime").value);
@@ -249,24 +256,29 @@ function occupyPet(play){
 }
 function updatePets(){
     for(item in pets){
-        ajax(true, "writedata", pets[item].info.type + "_" + pets[item].info.name, "all", JSON.stringify(pets[item]));
-        ajax(true, "getdata");
+        if(!pets[item].alive) continue;
+
+        ajax("writedata", pets[item].info.type + "_" + pets[item].info.name, "all", JSON.stringify(pets[item]));
     }
+    checkDeath();
 }
 function checkDeath(){
     for(item in pets){
+        if(!pets[item].alive) continue;
+
         if(pets[item].health[0] <= 10){
             //death
-            console.log("death");
+            alert("your pet's health has dropped below 10 and has ceased to breathe.");
+            ajax("writedata", pets[item].info.type + "_" + pets[item].info.name, "alive", false);
         }
     }
 }
 function capStats(p){
     //round
-    p.health[0] = Math.ceil(p.health[0])
-    p.spirit = Math.ceil(p.spirit);
-    p.hunger = Math.ceil(p.hunger);
-    p.fatigue = Math.ceil(p.fatigue);
+    p.health[0] = Math.round(p.health[0])
+    p.spirit = Math.round(p.spirit);
+    p.hunger = Math.round(p.hunger);
+    p.fatigue = Math.round(p.fatigue);
 
     //health
     if(p.health[0] > p.health[1]) p.health[0] = p.health[1];
@@ -279,7 +291,6 @@ function capStats(p){
     //fatigue
     if(p.fatigue > 100) p.fatigue = 100;
     if(p.fatigue < 10) p.fatigue = 10;
-    
 }
 function getCurrent(){
     for(item in pets){
@@ -289,8 +300,9 @@ function getCurrent(){
     }
 }
 
+
 //server
-function ajax(async, tag, file, property, value){
+function ajax(tag, file, property, value){
     console.log("getting data from " + tag);
     var request = new XMLHttpRequest();
     var url = "http://localhost:8081/";
@@ -311,7 +323,7 @@ function ajax(async, tag, file, property, value){
 
     console.log(url);
 
-    request.open("GET", url, async);
+    request.open("GET", url, true);
     request.onreadystatechange = function(){
         if(request.readyState == 4){
             var data = request.responseText;
@@ -323,6 +335,7 @@ function ajax(async, tag, file, property, value){
                     for(item in pets){
                         if(pets[item].info.type + "_" + pets[item].info.name == gamedata.currentPet){
                             currentPet = pets[item];
+                            //console.log("display pet");
                             display("pet");
                         }
                     }
@@ -330,16 +343,21 @@ function ajax(async, tag, file, property, value){
                     if(initialize){
                         if(currentPet){
                             lastsession = gamedata.lastsession;
+                            /*
+                            setTimeout(function(){
+                                updateStats();
+                                updatePets();
+                            }, 5000);
+                            */
                             timediff();
                         }
                         initialize = false;
                     }
                 break;
                 case "writedata":
-                    if(file == "data"){
-                        ajax(true, "getdata");
-                    }
-                    else ajax(true, "getpets");
+                    ajax("getdata");
+                    if(file != "data")
+                        ajax("getpets");
                 break;
                 case "getpets":
                     pets = JSON.parse(data);
@@ -351,18 +369,25 @@ function ajax(async, tag, file, property, value){
                 break;
                 case "create":
                     var response = JSON.parse(data);
-                    console.log(currentPet);
+                    console.log(response);
                     if(!currentPet){
-                        ajax(true, "writedata", "data", "currentPet", response.info.type + "_" + response.info.name);
+                        console.log("no current pet");
+                        ajax("writedata", "data", "currentPet", response.info.type + "_" + response.info.name);
                         timediff();
+                        /*
+                        setTimeout(function(){
+                            updateStats();
+                            updatePets();
+                        }, 5000);
+                        */
                     }
                     if(response === false) return console.log("already exists");
 
                     popMenu(false, 'create', true);
-                    ajax(true, "getpets");
+                    ajax("getpets");
                 break;
                 case "delete":
-                    ajax(true, "getpets");
+                    ajax("getpets");
                 break;
             }
         }
@@ -435,15 +460,14 @@ function display(str){
         //stats
         opStats.innerHTML = "";
         for(item in currentPet){
-            if(item == "info" || item == "played" || item == "busy") continue;
+            if(item == "info" || item == "played" || item == "busy" || item == "alive") continue;
             
             //stats
             var x = capitalize(item);
             var y = currentPet[item];
 
             if(item == "age"){
-                opStats.innerHTML += x + ": " + y[1] + " days " + y[0] + " hour";
-                if(y[0] > 1 || y[0] == 0) opStats.innerHTML += "s";
+                opStats.innerHTML += x + ": " + y[1] + " day(s) " + y[0] + " hour(s)";
             }
             else{
                 if(item == "health") y = y[0];

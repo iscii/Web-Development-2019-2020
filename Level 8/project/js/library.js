@@ -5,7 +5,7 @@ function Menupet(pet){
     this.div.id = pet.info.type + "_" + pet.info.name;
     this.div.onclick = function(){
         if(opCreate.style.display == "flex") return;
-        ajax(true, "writedata", "data", "currentPet", this.id);
+        ajax("writedata", "data", "currentPet", this.id);
         console.log("selected " + this.id);
         popMenu(false);
     }
