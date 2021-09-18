@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Thirty One</title>
+		<link rel = "stylesheet" href = "css/style.css" />
+		<script src = "js/script.js"></script>
+		<script src = "js/utilities.js"></script>
+		<script src = "js/library.js"></script>
+	</head>
+	<body onload = "initialize();">
+		<button id = "instbutton" onclick = "toggleInstructions()">Instructions</button>
+		<h1>Thirty One</h1>
+		<div id = "roundinfo"></div>
+		<div id = "tallies"></div>
+		<div id = "gamedisplay">
+			<div id = "p2-3Holder">
+				<div class = "playerlabel" id = "p4label">P4 <br/>Strikes: <span id = "p4strikes"></span></div>
+				<div class = "playerlabel" id = "p3label">P3 <br/>Strikes: <span id = "p3strikes"></span></div>
+				<div class = "playerlabel" id = "p2label">P2 <br/>Strikes: <span id = "p2strikes"></span></div>
+				<div class = "playerhand" id = "p3disp"></div>
+			</div>
+			<div id = "middle">
+				<div class = "playerhand" id = "p2disp"></div>
+				<span id = "drawpiles">
+					<div class = "eventsabsolute" style = "margin-top: -2%">
+						<div id = "playerevents" class = "eventsrelative"></div>
+					</div>
+					<span id = "discardpile"> <!--.appendChild this one-->
+						<span id = "discardpilelabel" class = "pilelabel">Discard</span><br/>
+						<span id = "topdiscardanim"><img id = "topdiscardcard" src = "images/cards/empty.png" onclick = "players[p1].drawCards(1, discardpile, true);"/></span><!--todo: make this not have a transform when hovered and clicked-->
+						<img id = "bottomdiscardcard" src = "images/cards/empty.png"/> <!--!Use z-index-->
+					</span>
+					<span id = "knockblock">
+						<span id = "knocklabel" class = "pilelabel">Knock</span><br/>
+						<button id = "knockbutton" onclick = "players[p1].knockTurn(true);"></button><br/>
+					</span>
+					<span id = "deckpile">
+						<span id = "deckpilelabel" class = "pilelabel">Deck</span><br/>
+						<span id = "topdeckanim"><img id = "topdeckcard" src = "images/cards/back-red-75-3.png" onclick = "players[p1].drawCards(1, deckpile, true);"/> </span><!--todo: make this have a transform when hovered and clicked-->
+						<img id = "bottomdeckcard" src = "images/cards/back-red-75-3.png" />
+					</span>
+					<div class = "eventsabsolute" style = "margin-top: 3%;">
+						<div id = "gameevents" class = "eventsrelative">A player has already knocked</div>
+					</div>
+				</span>
+				<div class = "playerhand" id = "p4disp"></div>
+			</div>
+			<div id = "p1-4Holder">
+				<div class = "playerhand" id = "p1disp"></div>
+				<div class = "playerlabel" id = "p1label">P1 <br/>Strikes: <span id = "p1strikes"></span></div>
+			</div>
+			<div id = "rcHolder"> <button id = "reStart" onclick = "if(!round) startRound(); else initialize();"></button> <img hidden id = "roundController" src = "images/arrow.png" onclick = "startRound();"/></div>
+		</div>
+		<!--credits to Steven for popup idea-->
+		<div id = "instmain" style = "display: none;"> <!--if I put display: none in the css file, it won't be recognized as display: none in js-->
+			<div id = "instblock">
+				<h1>Welcome to <span style = "font-family: akaPosse;">Thirty One!</span></h1> <br/>
+				<h4 style =>Issac Zheng</h4>
+				<div id = "instcontent1">
+					<span class = "instheader">Information</span><br/>
+					<span id = "inquote">"The game of Thirty One is a Rummy style card game where players compete to build a 3 card hand of the highest value."</span> <br/>
+					- You are player 1. <br/>
+					- At the beginning of every match, the dealer is chosen at random. <br/>
+					- The initial turn of each round will be the player after the dealer, clockwise. <br/>
+					<span class = "instheader">Gameplay</span><br/>
+					- To start a match, click the Start button on the bottom left. <br/>
+					- On your turn, you may: <br/> <!-- should probably make use of spans instead of spamming &nbsp -->
+					<span class = "innote">- Knock, to end your turn and initiate the end of the round, which will occur upon your next turn.</span> <br/>
+					<span class = "innote">You may not knock after drawing.</span> <br/>
+					<span class = "innote">- or draw, from either the deck or the discard pile.</span>  <br/>
+					<span class = "innote">&nbsp &nbsp &nbsp &nbsp - If you draw, you must then discard a card from your hand, which will be added to the discard pile.</span>  <br/>
+					- After each round, you may choose to reset the entire game or to proceed to the next round. <br/>
+					- The game will continue, even if you're out. <br/>
+					- A knock may only occur once per round. <br/>
+					- After each round, the next dealer will be the next available player after the dealer, clockwise. <br/>
+					- If, on the last round in which both remaining players have one strike left and the round ends up a tie, all players gain back a strike and the game continues. <br/>
+					- The last player remaining is the winner. To proceed to the next game, click the Reset button on the bottom left. <br/>
+					<span class = "instheader">Scoring</span><br/>
+					- Scores are tallied upon the end of each round. <br/>
+					<span class = "innote">- Every player with the lowest score receives a strike.</span>  <br/>
+					<span class = "innote">- If the player who knocked has the lowest score, they will receive an additional strike.</span>  <br/>
+					- The value of your hand is determined by the sum of the value of the cards of the same suit. Each suit group in your hand will have different values, and the greatest value of which will be your score. <br/>
+					<span class = "innote">- If a player's hand contains three cards of the same rank, regardless of suit, its value is automatically 30.</span>  <br/>
+					<span class = "innote">- If a player's hand's value adds up to 31, the round ends and all other players receive a strike.</span>  <br/>
+					<span class = "innote">- Note: players will only have 3 cards in their hand upon tally.</span>  <br/>
+					- Each player has 3 strikes. If all 3 strikes are used up, you're out. <br/>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

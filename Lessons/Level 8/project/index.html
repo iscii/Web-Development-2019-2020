@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+		<link rel = 'stylesheet' href = 'css/style.css'/>
+		<link rel = "shortcut icon" type = "image/icon" href = "images/favicon.ico"/>
+		<script src = 'js/script.js'></script>
+		<script src = 'js/library.js'></script>
+	</head>
+	<body onload = 'init()'>
+		<div id = 'left'>
+			<div id = "menubtnholder">
+				<button id = "menubtn" onclick = "popMenu(true, 'menu')">Pets</button> <br/>
+			</div>
+
+			<div id = "actionpanel">
+				<button id = "feedbtn" onclick = "actionPet('feed')">Feed</button> <br/>
+				<button id = "playbtn" onclick = "actionPet('play')">Play</button>
+				<input type = "range" name = "playtime" id = "playtime" value = "1" min = "1" max = "3"/> 
+				<span id = "playtimespan">1 hr</span> <br/>
+				<button id = "sleepbtn" onclick = "actionPet('sleep')">Sleep</button> <br/>
+			</div>
+			
+		</div>
+			
+		<div id = 'middle'>
+			<img id = "petimg"/>
+		</div>
+
+		<div id = 'right'>
+			<div id = "petinfo">
+				<span id = "petinfo1"></span>
+				<span id = "petinfo2"></span>
+			</div>
+			<div id = "statspanel"></div>
+		</div>
+
+		<div id = "petmenuset" style = "display: none;" onclick = "if(event.target == event.currentTarget) popMenu(false)">
+			<button id = "createbtn" onclick = "if(opCreate.style.display == 'flex') popMenu(false, 'create'); else popMenu(true, 'create');">New Pet</button>
+		<div id = "petmenu" onclick = "if(opCreate.style.display == 'flex') popMenu(false, 'create');">
+			</div>
+			<div id = "createmenu" style = "display: none;">
+				<div class = "newpetdesc">
+					<img id = "new0" class = "newpetimg" src = "images/boomer.png" onclick = "createSelect('boomer')"/> <br/>
+					Boomer <br/> Lifespan: 7 Days <br/> Appetite & Energy: 6 Hours
+				</div>
+				<div class = "newpetdesc">
+					<img id = "new1" class = "newpetimg" src = "images/clipper.png" onclick = "createSelect('clipper')"/> <br/>
+					Clipper <br/> Lifespan: 15 Days <br/> Appetite & Energy: 2 Hours
+				</div>
+				<div class = "newpetdesc">
+					<img id = "new2" class = "newpetimg" src = "images/drupper.png" onclick = "createSelect('drupper')"/> <br/>
+					Drupper <br/> Lifespan: 30 Days <br/> Appetite & Energy: 4 Hours
+				</div>
+				<form id = "nameform" method = "post" autocomplete = "off">
+					<input id = "nameforminp" type = "text" name = "name" placeholder = "Name" style = "text-align: center;"/> <br/>
+				</form>
+				<button id = "submitbtn" onclick = "createPet()">Create</button>
+			</div>
+		</div>
+	</body>
+</html>

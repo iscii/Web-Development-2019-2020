@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+		
+		</title>
+		<link rel = "stylesheet" href = "css/game.css"/>
+		<script src = "js/utilities.js"></script>
+		<script src = "js/game.js"></script>
+	</head>
+	<body onload = "initialize();">
+		<button id = "reset" onclick = "reset();">Reset</button>
+		
+		<div id = "moveSelect">
+			Choose your character <br/>
+			<img src = "images/x.png" style = "width: 30%;" onclick = "chooseMove(0, 1);"/>
+			<img src = "images/o.png" style = "width: 30%;" onclick = "chooseMove(1, 0);"/>
+		</div>
+		
+		<a id = "instructions" href = "instructions.html">Instructions</a>
+		
+		<div id = "board">
+			<span class = "gridBox">
+				<img src = "images/g1.png" id = "g1" onclick = "play(0);" style = "width: 20%;"/>
+				<img src = "images/lock.png" hidden class = "lock" style = "width: 20%;" id = "l1" />
+			</span>
+			<span class = "gridBox">
+				<img src = "images/g2.png" id = "g2" onclick = "play(1);" style = "width: 20%;"/>
+				<img src = "images/lock.png" hidden class = "lock" style = "width: 20%;" id = "l2" />
+			</span>
+			<span class = "gridBox">
+				<img src = "images/g3.png" id = "g3" onclick = "play(2);" style = "width: 20%;"/> 
+				<img src = "images/lock.png" hidden class = "lock" style = "width: 20%;" id = "l3" /> <br/>
+			</span>
+			<span class = "gridBox">
+				<img src = "images/g4.png" id = "g4" onclick = "play(3);" style = "width: 20%;"/>
+				<img src = "images/lock.png" hidden class = "lock" style = "width: 20%;" id = "l4" />
+			</span>
+			<span class = "gridBox">
+				<img src = "images/g5.png" id = "g5" onclick = "play(4);" style = "width: 20%;"/>
+				<img src = "images/lock.png" hidden class = "lock" style = "width: 20%;" id = "l5" />
+			</span>
+			<span class = "gridBox">
+				<img src = "images/g6.png" id = "g6" onclick = "play(5);" style = "width: 20%;"/> 
+				<img src = "images/lock.png" hidden class = "lock" style = "width: 20%;" id = "l6" /> <br/>
+			</span>
+			<span class = "gridBox">
+				<img src = "images/g7.png" id = "g7" onclick = "play(6);" style = "width: 20%;"/>
+				<img src = "images/lock.png" hidden class = "lock" style = "width: 20%;" id = "l7" />
+			</span>
+			<span class = "gridBox">
+				<img src = "images/g8.png" id = "g8" onclick = "play(7);" style = "width: 20%;"/>
+				<img src = "images/lock.png" hidden class = "lock" style = "width: 20%;" id = "l8" />
+			</span>
+			<span class = "gridBox">
+				<img src = "images/g9.png" id = "g9" onclick = "play(8);" style = "width: 20%;"/>
+				<img src = "images/lock.png" hidden class = "lock" style = "width: 20%;" id = "l9" />
+			</span>
+		</div>
+		<div id = "eventDisplay"></div>
+	</body>
+</html>

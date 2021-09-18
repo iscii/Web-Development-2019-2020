@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+
+    </title>
+    <style>
+
+        body
+        {
+            background-color: #181818;
+            text-align: center;
+            line-height: 42px;
+        }
+
+        h1
+        {
+            color: #FC3939;
+            text-align: center;
+            font-family: Andalus;
+        }
+
+        div#matchBox
+        {
+            background-color: #181818;
+            border-radius: 50px;
+            border: 2px solid #FC3939;
+            margin: auto;
+            text-align: center;
+            line-height: 20px;
+            width: 675px;
+        }
+
+        div#scoreText
+        {
+            color: #FC3939;
+            font-family: Andalus;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        button#reset
+        {
+            color: #FC3939;
+            outline-color: black;
+            font-family: Bastion;
+            font-size: 30px;
+            background-color: #181818;
+            border: #181818;
+        }
+
+        a#htp
+        {
+            color: #FC9DF8;
+            font-family: Bastion;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+    </style>
+    <script>
+
+        function assignIDs()
+        {
+            //card IDs
+            op1 = document.getElementById("img1.1");
+            op2 = document.getElementById("img1.2");
+            op3 = document.getElementById("img1.3");
+            op4 = document.getElementById("img1.4");
+            op5 = document.getElementById("img2.1");
+            op6 = document.getElementById("img2.2");
+            op7 = document.getElementById("img2.3");
+            op8 = document.getElementById("img2.4");
+            op9 = document.getElementById("img3.1");
+            op10 = document.getElementById("img3.2");
+            op11 = document.getElementById("img3.3");
+            op12 = document.getElementById("img3.4");
+            op13 = document.getElementById("img4.1");
+            op14 = document.getElementById("img4.2");
+            op15 = document.getElementById("img4.3");
+            op16 = document.getElementById("img4.4");
+
+            opScore = document.getElementById("scoreText");
+        }
+
+        function start()
+        {
+            //assign IDs to make it slightly more organized
+            assignIDs();
+
+            //image references
+            c1 = "images/tanjiro.png";
+            c2 = "images/nezuko.png";
+            c3 = "images/zenitsu.png";
+            c4 = "images/inosuke.png";
+            c5 = "images/tomioka.png";
+            c6 = "images/rengoku.png";
+            c7 = "images/shinobu.png";
+            c8 = "images/kanroji.png";
+
+            //variables
+            cardVar = "0";
+            clickedImg = "0";
+            clickedImgA = "0";
+            clickedImgB = "0";
+            flippedImgF = "0";
+            flippedImgB = "images/logo.png";
+            imgNum = 0;
+            flipNum = 0;
+            score = 0;
+
+            //arrays
+            assigned = [];
+            cardPair = [];
+            flipPair = [];
+            imgIdPair = [];
+            matched = [];
+            imgVars = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
+
+            pair1 = [];
+            pair2 = [];
+            pair3 = [];
+            pair4 = [];
+            pair5 = [];
+            pair6 = [];
+            pair7 = [];
+            pair8 = [];
+            pairs = ['pair1', 'pair2', 'pair3', 'pair4', 'pair5', 'pair6', 'pair7', 'pair8'];
+
+            //initial functions
+            shuffle();
+            displayScore();
+        }
+
+        //----------------------------------------------------------------------------- CARD SHUFFLER -----------------------------------------------------------------------------
+
+        function shuffle()
+        {
+            srcVars = ['op1', 'op2', 'op3', 'op4', 'op5', 'op6', 'op7', 'op8', 'op9', 'op10', 'op11', 'op12', 'op13', 'op14', 'op15', 'op16'];
+            var tempVar = srcVars[Math.floor(Math.random() * 16)]
+
+            assignCardVars(tempVar);
+        }
+
+        function assignCardVars(string)
+        {
+            //if the array already includes the temp variable and the length is still less than 16, reassign card variable and redo. Loops until all card variables and pairs are assigned.
+            if (assigned.includes(string))
+            {
+                if (assigned.length <= 15)
+                {
+                    shuffle();
+                }
+            }
+            else
+            {
+                //console.log("pushing");
+                cardPair.push(string);
+
+                if (cardPair.length == 2)
+                {
+                    //console.log("assigntoimg");
+                    assignToImg();
+                }
+
+                assigned.push(string);
+                shuffle();
+            }
+        }
+
+        //when assigning an array variable to the img tags, make sure it assigns to two imgs and then moving on to the next two. perhaps you can use a for each or a simple variable to lock it.
+        function assignToImg()
+        {
+            if (imgNum < 8)
+            {
+                eval(pairs[imgNum]).push(cardPair[0], cardPair[1], imgVars[imgNum]);
+                flipToBack();
+
+                console.log("[" + pairs[imgNum] + "]" + " " + eval(pairs[imgNum]));
+
+                imgNum++;
+            }
+
+            cardPair = [];
+        }
+
+        function flipToBack()
+        {
+            clickedImgA = cardPair[0];
+            clickedImgB = cardPair[1];
+
+            displayBack();
+        }
+
+        function resetCards()
+        {
+            for (pairNum in pairs)
+            {
+                //modified the length: cannot use eval(pairs[pairNum]) = []; since you can't assign an evaluated variable.
+                eval(pairs[pairNum]).length = 0;
+                //console.log(eval(pairs[pairNum]));
+            }
+
+            assigned = [];
+            imgNum = 0;
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        function flip(imgid)
+        {
+            //console.log(imgIdPair.length);
+            if (!(imgIdPair.includes(imgid)) && !(matched.includes(imgid)))
+            {
+                var img = eval(findImgPairNum(imgid)[2]);
+                //console.log(eval(findImgPairNum(imgid)[2]));
+
+                if (imgIdPair.length < 2)
+                {
+                    imgIdPair.push(imgid);
+                    score++;
+                }
+
+                checkFlip(imgid, img);
+
+                displayFront();
+                displayScore();
+            }
+        }
+
+        function findImgPairNum(img)
+        {
+            var temp;
+
+            //looks for which pair contains the img id and returns that pair# for match checking.
+            for (itemA in pairs)
+            {
+                //**console.log("checking itemA " + itemA);
+                for (itemB in eval(pairs[itemA]))
+                {
+                    //**console.log("checking itemB " + eval(pairs[itemA])[itemB]);
+
+                    if (img == eval(pairs[itemA])[itemB])
+                    {
+                        flipPair.push(pairs[itemA]);
+
+                        //**console.log("image in [" + pairs[itemA] + "]");
+                        return eval(pairs[itemA]);
+                    }
+                }
+            }
+        }
+
+        function checkFlip(imgid, img)
+        {
+            flipNum++;
+
+            if (flipNum <= 2)
+            {
+                clickedImg = imgid;
+                flippedImgF = img;
+                console.log("image id: " + clickedImg);
+            }
+
+            if (flipNum == 2)
+            {
+                checkForMatch(imgid);
+                return;
+            }
+        }
+
+        function checkForMatch(imgid)
+        {
+            if (flipPair[0] == flipPair[1])
+            {
+                console.log("match");
+                //prevents clicking already matched cards and having them be flipped back if the two overrides don't match and stuff.
+                matched.push(imgIdPair[0], imgIdPair[1]);
+                //**console.log("matched cards: " + matched.toString());
+            }
+            else
+            {
+                noMatch(imgid);
+            }
+
+            setTimeout("resetTrackVars();", 1000);
+        }
+
+        function noMatch(imgid)
+        {
+            console.log("no match");
+            clickedImgA = imgIdPair[0];
+            clickedImgB = imgIdPair[1];
+
+            setTimeout("displayBack();", 1000);
+        }
+
+        //resets tracker variables. needed in function for setTimeout.
+        function resetTrackVars()
+        {
+            flipNum = 0;
+            flipPair = [];
+            imgIdPair = [];
+        }
+
+        function reset()
+        {
+            resetCards();
+            shuffle();
+
+            matched = [];
+            score = 0;
+            displayScore();
+        }
+
+        function displayBack()
+        {
+            eval(clickedImgA).src = flippedImgB;
+            eval(clickedImgB).src = flippedImgB;
+        }
+
+        function displayFront()
+        {
+            eval(clickedImg).src = flippedImgF;
+        }
+
+        function displayScore()
+        {
+            opScore.innerHTML = "<b> Score: " + "[ " + score + " ] </b>";
+        }
+
+
+/**/</script>
+</head>
+<body onload="start();">
+
+    <h1>
+        <b>Match Game</b>
+    </h1>
+
+    <div id="matchBox">
+
+        <br />
+
+        <img src="images/logo.png" id="img1.1" onclick="flip('op1')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img1.2" onclick="flip('op2')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img1.3" onclick="flip('op3')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img1.4" onclick="flip('op4')" width=150 height=150 />
+
+        <br />
+
+        <img src="images/logo.png" id="img2.1" onclick="flip('op5')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img2.2" onclick="flip('op6')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img2.3" onclick="flip('op7')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img2.4" onclick="flip('op8')" width=150 height=150 />
+
+        <br />
+
+        <img src="images/logo.png" id="img3.1" onclick="flip('op9')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img3.2" onclick="flip('op10')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img3.3" onclick="flip('op11')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img3.4" onclick="flip('op12')" width=150 height=150 />
+
+        <br />
+
+        <img src="images/logo.png" id="img4.1" onclick="flip('op13')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img4.2" onclick="flip('op14')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img4.3" onclick="flip('op15')" width=150 height=150 /> &nbsp
+        <img src="images/logo.png" id="img4.4" onclick="flip('op16')" width=150 height=150 />
+
+        <br />
+
+    </div>
+
+    <button id = "reset" onclick="reset();"> Reset </button>
+
+    <br />
+
+    <div id="scoreText"></div>
+
+    <br />
+
+    <a id = "htp" href="Instructions-dark.html"> How To Play </a>
+
+</body>
+</html>

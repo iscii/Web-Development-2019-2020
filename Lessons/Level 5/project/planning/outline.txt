@@ -1,0 +1,145 @@
+Notes:
+	-since money is in base 10 (100 cents = 1 dollar), just add it the way it is - unlike time, there is no need
+	to check for specific values.
+
+Level 5 Fast Food Cashier
+	General
+		>X-Constants:
+			//Currency
+			-B20 = 0, B10 = 1, B5 = 2, B1 = 3, Q = 4, D = 5, N = 6, P = 7
+			-VALUES = [20, 10, 5, 1, 0.25, 0.10, 0.05, 0.01]
+			-TAX = 1.08875
+
+			//Food
+			-Entrees = [Hamburger;1.99, Chicken_Sandwich;1.99, Veggie_Sandwich;2.29]
+			-Sides = [French_Fries;0.99, Salad;1.39, Cheese_Sticks;1.49, Rice;1.19]
+			-Desserts = [Ice_Cream;1.89, Pie;1.69, Cookie;0.89]
+			-Drinks = [Soda;1.19, Bottled_Water;1.25, Juice;1.69]
+			-foodTypes = [Entrees, Sides, Desserts, Drinks] //use eval to evaulate the values of each item
+			//YOU ARE HERE 1/24 8:08PM constants for food -- write function draft for tax and total and such
+
+		>X-Variables:
+			-order
+			-subTotal
+			-orderTax
+			-orderTotal
+			-cashTotal
+			-numSales
+			-numCashSales
+			-numElecSales
+			-registerTotal
+			-numOrder
+			-log
+
+		>X-Starting cash
+			-100 pennies, 40 nickels, 50 dimes, 40 quarters, 42 one bills, 4 five bills, 2 ten bills
+			-register = [0, 2, 4, 42, 30, 50, 40, 100]
+				-//[count;value, count;value, count;value]
+
+	mega pseudocode
+	Functions --making everything a seperate function to increase flexibility. Just trying it out
+		Note: heavily revised during the coding process
+		>X-/* Basic change functionality
+			-Be able to calculate exact change and return pennies/dimes/nickels/quarters etc.. based on
+			a given whole bill.
+				-Have an array (cents) that includes the values [20, 10, 5 ,1, 0.25, 0.10, 0.5, 0.1] and check each item starting
+				from largest to smallest. */
+		>X-randomTime
+			-return random 1-5 minutes from 3 hrs (180 mins)
+			-in function: timeLeft - determineTime(nextcustomer);
+			-0-2 minute break
+		>X-randomOrder
+			-returns the order
+			-order = orderitems.join(";")
+			-numOrder++
+		>X-costSub
+			-adds up the subtotal costs
+			-sets subTotal to the subtotal
+		>X-applyTax
+			-set orderTotal to the subTotal and multiplies it by TAX
+			-set orderTax to orderTotal - subTotal
+		>X-randomizePayment
+			-var x = getrandomInt(1,10)
+			-if(x < 4) 
+				x = getrandomInt(1, 10)
+				if(x == 1)
+					var cash = orderTotal
+				else //HERE WORK ON THIS -- cashpayment already updates the register. what do to here?
+					var cash = cashPayment();
+					
+			-else numElec++;
+		>X-cashPayment -- keep in mind short changes. consider enhancement
+			-determineCash()
+			//figure out the bills first, then the change.
+			-var lower = 0
+			-var upper = 3;
+			-var tempchange = total;
+			-for i = 0, i < 2; i++ //first cycle subtracts the bills. second cycle subtracts the change
+				for i = 0, i <= 3; i++
+					for x = 0, x < register[i], x++
+						if(tempchange - values[i] > 0 && register[i] > 0)
+							register[i]--;
+							tempchange -= values[i]
+				lower = 4
+				upper = 7
+		>X-determineCash()
+			-cash = [1, getrandomInt[0, 2], getrandomInt[0, 3], getrandomInt[0, 5]]
+			-cashTotal = for... cash[i] * VALUES[i]
+		>X-determineRegister()
+			-for i... registerTotal += register[i] * VALUES[i]
+		>X-printReceipt()
+			-log
+			-make it look like a receipt (../images/receipt_example.jpg)
+		>X-simulate() -- button function	
+			-runs this whole thing again
+		>X-totalAverages()
+			-enhancement 2: averages the totals
+
+	Interface
+		>X-Log(<parameter cash>)
+			XX-Make it an expandable tab? Every time a new receipt comes in, contract the previous tab
+			>X-Include:
+				>-Each Item + Each Price
+				>-Subtotal
+				>-Tax
+				>-Total
+				>-Payment Method
+					>-If cash, display Payment
+				>-Change
+			>X-After many trials, make it so that the spans for each simulation are created in JS and have their own unique ID so that they are individually writable.
+			The IDs cannot be the same, and I cannot use class or both spans are modified. Make a variable for the new span -- set it to a string that represents it, with the 
+			simNum, and then evaluate that string into the object.
+		>X-Results
+			-Total # sales
+				-Total Cash sales
+				-Total Electronic sales
+			-Register balance
+				-Over (>100), Under (<100), Even(=100)
+			-Each item
+				-Total sales in quantity and revenue			
+
+	Enhancements
+		>X-Coin and bill drops
+			-If the cashier runs low on a particular denomination, it can drop larger bills for lower bills and coins
+			-A roll of pennies is 50 cents. (50)
+			-A roll of nickels is $2. (40)
+			-A roll of dimes is $5. (50)
+			-A roll of quarters is $10. (40)
+		//INCLUDE THIS INDEFINITELY vv
+		>X-Allow the user to run the simulation multiple times. 
+		Keep the totals for each shift and determine averages over the course of several shifts.
+		-My Own
+			-Have an input box that'd run the simulation a specified number of times
+			-You'd have to use settimeout loops (see ../references)
+
+
+
+
+
+
+
+
+
+
+
+

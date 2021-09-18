@@ -1,0 +1,83 @@
+        body
+        {
+            /*background-color: white;*/
+            background-color: #181818;
+        }
+
+        div#p1A
+        {
+            /*border: 3px solid black;*/
+            border: 3px solid #FC3939;
+            border-radius: 30px;
+            width: 500px;
+			height: 150px;
+            margin-top: 2%;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 25px;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        div#p2A
+        {
+            /*border: 3px solid black;*/
+            border: 3px solid #FC3939;
+            border-radius: 30px;
+            width: 500px;
+			height: 150px;
+            margin-top: 5%;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 25px;
+            text-align: center;
+            line-height: 20px;
+            float: none;
+        }
+
+        div#cUIBox
+        {
+            /*border: 2px solid black;*/
+            text-align: left;
+            padding: 0px 0px 0px 20px;
+            margin-right: 30%;
+            margin-top: 2%;
+
+            float: right;
+
+            width: 325px;
+            height: 100px;
+            padding: 25px;
+        }
+        div#cUIText1
+        {
+            /*border: 2px solid black;*/
+            /*color: darkred;*/
+            color: lightcoral;
+            font-family: Aharoni;
+            font-size: 100px;
+            margin-top: 4%;
+            margin-left: 28%;
+            
+            float: left;
+
+            width: 100px;
+            height: 100px;
+            padding: 25px;
+        }
+        div#cUIText2
+        {
+            border: 2px solid #FC20A0;
+            border-radius: 50px;
+            color: lightcoral;
+            font-family: Aharoni;
+            text-align: center;
+            font-size: 100px;
+            display: block;
+            margin-top: 20%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 400px;
+            height: 40px;
+            padding: 10px 0px 60px 0px;
+        }

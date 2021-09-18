@@ -1,0 +1,27 @@
+{
+    "info": {
+        "type": "clipper",
+        "name": "asda",
+        "lifespan": 15,
+        "appetite": 2,
+        "energy": 2,
+        "image": "images/gravestone.png"
+    },
+    "health": [
+        0,
+        0
+    ],
+    "spirit": 0,
+    "hunger": 0,
+    "fatigue": 0,
+    "age": [
+        7,
+        1
+    ],
+    "played": 31,
+    "busy": [
+        false,
+        0
+    ],
+    "alive": false
+}

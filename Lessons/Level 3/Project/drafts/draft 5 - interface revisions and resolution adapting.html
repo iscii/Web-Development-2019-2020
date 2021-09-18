@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    </title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+        body
+        {
+            /*background-color: white;*/
+            background-color: #181818;
+        }
+
+        /*keep the images set to 25% of screen width*/
+        img
+        {
+            width: 25%;
+        }
+
+        div#p2A
+        {
+            border: 3px solid #FC3939;
+            border-radius: 30px;
+            width: 30%;
+            margin-top: 3%;
+            margin-right: auto;
+            margin-left: auto;
+            padding: .5%;
+            text-align: center;
+            
+        }
+
+        div#p1A
+        {
+            border: 3px solid #FC3939;
+            border-radius: 30px;
+            width: 30%;
+            margin-right: auto;
+            margin-left: auto;
+            padding: .5%;
+            text-align: center;
+            
+        }
+
+        div#c
+        {
+            /*border: 2px solid black;*/
+            margin: 0 auto;
+            width: 30%;
+            padding: 2% 0 2% 0;
+            text-align: center;
+            /*line-height: 50px;*/
+            
+        }
+        span#cUIText1
+        {
+           /*border: 2px solid black;*/
+            color: lightcoral;
+            font-family: Aharoni;
+            font-size: 600%;    
+            vertical-align: middle;      
+            padding-left: 6%;
+
+            /*
+            color: lightcoral;
+            font-family: Aharoni;
+            font-size: 100pt;
+            border: 2px solid black;
+            text-align: center;
+            */
+        }
+        
+        img#cBox1
+        {
+            border: 2px solid red;
+            border-radius: 30px;
+            display: inline;
+            vertical-align: middle;
+
+        }
+        img#cBox2
+        {
+            border: 2px solid red;
+            border-radius: 30px;
+            display: inline;
+            vertical-align: middle;
+        }
+
+        div#cUIText2
+        {
+            border: 2px solid #FC20A0;
+            border-radius: 50px;
+            color: lightcoral;
+            font-family: Aharoni;
+            text-align: center;
+            font-size: 500%;
+            margin-top: 10%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+        }
+
+        table#log
+        {
+            color: rgb(143, 143, 255);
+            border: 2px solid rgb(139, 133, 133);
+            border-radius: 20px;
+
+            padding: 0.5%;
+
+            float: right;
+            margin-right: 2%;
+        }
+        td
+        {
+            border: 2px solid rgb(211, 99, 99);
+            border-radius: 5px; /*set it to % to make it look weird; the curve starts further inward or smthn*/ 
+        }
+        
+
+    </style>
+    <script src="js/utilities.js"></script>
+    <script>
+
+        function initialize()
+        {
+            iReferences();
+            iVars();
+            iDisplayVars();
+            iFunctions();
+        }
+        function iReferences()
+        {
+            opp1A = document.getElementById("p1A");
+            opp2A = document.getElementById("p2A");
+            opcB1 = document.getElementById("cBox1");
+            opcB2 = document.getElementById("cBox2");
+            opcUIT1 = document.getElementById("cUIText1");
+            opcUIT2 = document.getElementById("cUIText2");
+        }
+        function iVars()
+        {
+            p1play = "";
+            p2play = "";
+            sResult = "";
+			p1PrevPlay = "";
+			p2PrevPlay = "";
+			prevResult = "";
+			
+            arsenal = ["rock", "paper", "scissor"];
+			p1Arsenal = [5, 5, 5]; //[0] = Rock, [1] = Paper, [2] = Scissor//
+			p2Arsenal = [5, 5, 5];
+			
+			p1PlayInRowCount = 1;
+			p2PlayInRowCount = 1;
+			turn = 1;
+			tieNum = 1;
+			roundNum = 0;
+			
+			canPlay = true;
+        }
+        function iDisplayVars()
+        {
+            opcB1src = "";
+            opcB2src = "";
+            opcUIT1src = "";
+            opcUIT2src = "&nbsp";
+        }
+        function iFunctions()
+        {
+            
+        }
+
+//---------------------------------------------------------------------------------------------------
+
+        //main controller; manages turns and selections and calls other functions
+        function play(pick)
+        {
+            if (canPlay)
+            {
+                p1play = pick;
+
+				if(isPlayable(pick))
+                {
+                    setTimeout(p2Move, 1000);
+                    canPlay = false;
+
+                    checkForWBreak(p1play, "p1");
+                    updateCenterPlayer1();
+                }
+                else
+                {
+                    //YOU ARE HERE (11/16)
+                    //if no more weapons in arsenal, game over. lock the image onclicks.
+                    //also, make a reset button, and prevent the arsenal weapon counts from falling below 0.
+                    if(p1Arsenal[0] <= 0 && p1Arsenal[1] <= 0 && p1Arsenal[2] <= 0)
+                    {
+                        updateCenterGame("P2");
+                    }
+                }
+            }
+        }
+
+        //basic cpu function - random move
+        function p2Move()
+        {
+            //remember to parseInt cos getRandomInteger returns a string
+            var temp = parseInt(getRandomInteger(0, 2));
+            p2play = arsenal[temp];
+
+            if(isPlayable(p2play))
+            {
+                sResult = shoot(p1play);
+                
+                checkForWBreak(p2play, "p2");
+				wTransfer();
+                
+                roundNum++;
+                console.log("round " + roundNum);
+                
+                updateCenterPlayer2();
+            }
+            else
+            {
+                if(p2Arsenal[0] >= 0 || p2Arsenal[1] >= 0 || p2Arsenal[2] >= 0)
+                    p2Move();
+                else
+                    updateCenterGame("P1");
+            }
+        }
+
+        function isPlayable(pick)
+        {
+            if(canPlay)
+            {
+                if(p1Arsenal[aWeaponPosition(pick)] <= 0)
+                {
+                    console.log("no [p1] " + p1Arsenal[aWeaponPosition(pick)] + " [" + pick + "]");
+                    return false;
+                }
+                else
+                {
+                    console.log("yes [p1] " + p1Arsenal[aWeaponPosition(pick)] + " [" + pick + "]");
+                    return true;
+                }
+            }
+            else
+            {
+                if(p2Arsenal[aWeaponPosition(pick)] <= 0)
+                {
+                    console.log("no [p2] " + p2Arsenal[aWeaponPosition(pick)] + " [" + pick + "]");
+                    return false;
+                }
+                else
+                {
+                    console.log("yes [p2] " + p2Arsenal[aWeaponPosition(pick)] + " [" + pick + "]");
+                    return true;
+                }
+            }
+        }
+		
+		//check for weapon break if played thrice in a row
+		function checkForWBreak(pick, checkTurn)
+		{
+			if(checkTurn == "p1")
+			{
+				
+				if(pick == p1PrevPlay)
+				{
+					p1PlayInRowCount++;
+					
+					if(p1PlayInRowCount >= 3)
+					{
+						p1Arsenal[aWeaponPosition(pick)]--;
+						
+						console.log("p1 " + pick + " break " + "[" + p1PlayInRowCount + "]");
+						//set to 0 since it occurs after p1PlayInRowCount++;
+						p1PlayInRowCount = 0;
+					}
+				}
+				else
+				{
+					p1PlayInRowCount = 1;
+				}
+				
+				p1PrevPlay = p1play;
+			}
+			if(checkTurn == "p2")
+			{	
+				if(pick == p2PrevPlay)
+				{
+					p2PlayInRowCount++;
+					
+					if(p2PlayInRowCount >= 3)
+					{
+						p2Arsenal[aWeaponPosition(pick)]--;		
+						
+						console.log("p2 " + pick + " break " + "[" + p2PlayInRowCount + "]");
+						
+						p2PlayInRowCount = 0;
+					}
+				}
+				else
+				{
+					p2PlayInRowCount = 1;
+				}
+				
+				p2PrevPlay = pick;
+			}
+		}
+		
+		//weapon transfer to winner
+		function wTransfer()
+		{
+			console.log("wtransfer");
+			if(sResult == "tie")
+			{
+				checkForTieBreak();
+			}
+			if(sResult == "P1 win")
+			{
+				p1Arsenal[aWeaponPosition(p2play)]++;
+				p2Arsenal[aWeaponPosition(p2play)]--;
+				console.log("transfer: item# " + aWeaponPosition(p2play) + " - " + p2Arsenal + " p2");
+                //display both the consolelog and both players' arsenals in the log 
+			}
+			if(sResult == "P2 win")
+			{
+				p2Arsenal[aWeaponPosition(p1play)]++;
+				p1Arsenal[aWeaponPosition(p1play)]--;
+                console.log("transfer: item# " + aWeaponPosition(p2play) + " - " + p1Arsenal + " p1");
+			}
+			
+			prevResult = sResult;
+		}
+		
+		function checkForTieBreak()
+		{
+			//tieNum starts at 1 since the function is called during a tie.
+			if(prevResult != "")
+			{
+				if(prevResult == sResult)
+				{
+					tieNum++;
+					
+					if(tieNum >= 3)
+					{
+                        tieBreaker();
+					}
+				}
+				else
+				{
+					tieNum = 1;
+				}
+			}
+			console.log("tieNum = " + tieNum);
+		}
+        
+        function tieBreaker()
+        {
+            var temp = getRandomInteger(0, 2);
+            p1Arsenal[temp]--;
+            console.log("tiebreaker: item# " + temp + " - " + p1Arsenal + " p1");
+            temp = getRandomInteger(0, 2);
+            p2Arsenal[temp]--;
+            console.log("tiebreaker: item# " + temp + " - " + p2Arsenal + " p2");
+        }
+
+//---------------------------------------------------------------------------------------------------------		
+		
+        //returns winner of round
+        function shoot(pick)
+        {
+            var result;
+
+            if (p1play == p2play)
+            {
+                result = "tie";
+            }
+            else if (p2play == hierarchy(pick))
+            {
+                result = "P2 win";
+            }
+            else
+            {
+                result = "P1 win";
+            }
+
+            return result;
+        }
+
+        //returns rock-paper-scissor heirarchy according to first player's pick to check if player 2 beat player 1
+        function hierarchy(rps)
+        {
+            var winner;
+
+            if (rps == "rock")
+            {
+                winner = "paper";
+            }
+            if (rps == "paper")
+            {
+                winner = "scissor";
+            }
+            if (rps == "scissor")
+            {
+                winner = "rock";
+            }
+
+            return winner;
+        }
+		
+        /*yeah this is also badly named. It's supposed to return the position of a pick from the arsenal in order to 
+        subtract the weapon counts.*/
+		function aWeaponPosition(pick)
+		{
+			if(pick == "rock")
+				return 0;
+			if(pick == "paper")
+				return 1;
+			if(pick == "scissor")
+				return 2;
+		}
+		
+//--------------------------------------------------------------------------------------------------------
+
+        //sorry i'm really bad at naming things
+        function updateCenterPlayer1()
+        {
+            opcB1src = "images/" + p1play + ".png";
+            opcUIT1src = "P2";
+            opcB2src = opcB2.src;
+          
+            display();
+        }
+        function updateCenterPlayer2()
+        {
+			opcB2src = "images/" + p2play + ".png";
+			
+			setTimeout(updateCenterRound, 500);
+			
+			setTimeout(autoReset, 1500);
+			
+			display();
+		}
+		function updateCenterRound()
+		{
+			opcUIT2src = sResult;
+			
+			display();
+		}
+        function updateCenterGame(player)
+        {
+            /*create a div, maybe in the log, maybe hidden, and set this statement equal to the innerHTML and
+            maybe set style.display to block.*/
+            console.log("Game Over. " + player + " wins.");
+
+            display();
+        }
+            
+        function autoReset()
+        {
+            opcB1src = "images/empty.png";
+            opcB2src = "images/empty.png";
+
+            canPlay = true;
+			p1play = "";
+			p2play = "";
+
+            opcUIT1src = "P1";
+            opcUIT2src = "&nbsp";
+
+            display();
+        }
+        function display()
+        {
+            opcB1.src = opcB1src;
+            opcB2.src = opcB2src;
+            opcUIT1.innerHTML = opcUIT1src;
+            opcUIT2.innerHTML = opcUIT2src;
+        }
+
+    </script>
+</head>
+<body onload="initialize();">
+    
+    
+    <div id="p2A">
+        <img src="images/rock.png" width=150 /> &nbsp &nbsp
+        <img src="images/paper.png" width=150 /> &nbsp &nbsp
+        <img src="images/scissor.png" width=150 />
+    </div>
+    
+    <table id = "log">
+        <tr>
+            <td id = "lRound"> Round 1 </td>
+            <td> Winner: </td>
+            <td id = "lRWinner"> Player 1 </td>
+        </tr>
+        <tr>
+            <td> Player 1 </td>
+            <td> Rock </td>
+            <td> Arsenal: r3, s6, p5</td>
+        </tr>
+        <tr>
+            <td> Player 2 </td>
+            <td> Scissor </td>
+            <td> Arsenal: r5, s6, p2</td>
+        </tr>
+        <tr>
+                <td> Player 2 </td>
+                <td> Scissor </td>
+                <td> Arsenal: r5, s6, p2</td>
+            </tr>
+            <tr>
+                    <td> Player 2 </td>
+                    <td> Scissor </td>
+                    <td> Arsenal: r5, s6, p2</td>
+                </tr>
+    </table>
+
+    <div id="c">
+        <span id="cUIText1">P1</span>
+
+        <img src="images/empty.png" id="cBox1" /> &nbsp &nbsp
+        <img src="images/empty.png" id="cBox2" />
+
+        <div id="cUIText2">&nbsp</div>
+    </div>
+	
+    <div id="p1A">
+        <img src="images/rock.png" onclick="play('rock')" /> &nbsp &nbsp
+        <img src="images/paper.png" onclick="play('paper')" />  &nbsp &nbsp
+        <img src="images/scissor.png" onclick="play('scissor')" />
+    </div>
+    
+	<div hidden id="endText"></div>
+    
+</body>
+</html>

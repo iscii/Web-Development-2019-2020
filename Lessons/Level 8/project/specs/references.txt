@@ -1,0 +1,23 @@
+Status codes
+https://www.npmjs.com/package/http-status-codes
+
+Forever
+https://stackoverflow.com/questions/12701259/how-to-make-a-node-js-application-run-permanently
+
+writeFile
+https://stackoverflow.com/questions/10685998/how-to-update-a-value-in-a-json-file-and-save-it-through-node-js
+
+Accessing property of object through variable
+https://stackoverflow.com/questions/4244896/dynamically-access-object-property-using-variable?rq=1
+
+Deleting files
+https://nodejs.org/api/fs.html#fs_fs_unlink_path_callback
+
+Input range
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
+
+Time
+https://www.w3schools.com/js/js_date_methods.asp
+
+Beforeunload
+https://stackoverflow.com/questions/20853142/trying-to-detect-browser-close-event/20853978

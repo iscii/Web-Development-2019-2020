@@ -1,0 +1,48 @@
+Continue/Break out of a nested for loop
+https://stackoverflow.com/questions/183161/whats-the-best-way-to-break-from-nested-loops-in-javascript
+
+Flag variables
+http://www.javascriptkit.com/javatutors/valid2.shtml
+
+While loop
+https://www.w3schools.com/js/js_loop_while.asp
+
+List styling
+https://www.w3schools.com/css/css_list.asp
+
+Div scrollbar // Overflow
+https://stackoverflow.com/questions/42825869/how-to-make-a-scroll-bar-in-separate-div-in-body-of-html
+
+Custom scrollbar
+https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp
+
+Set width of element equal to content
+https://stackoverflow.com/questions/20383622/width-equal-to-content
+
+Editing class styles from javascript
+https://stackoverflow.com/questions/9436123/javascript-changing-a-class-style
+
+CSS Glow
+https://www.w3schools.com/howto/howto_css_glowing_text.asp
+
+CSS shadows under surrounding elements
+https://blog.dudak.me/2014/css-shadows-under-adjacent-elements/
+
+Clip-Path Polygon shapes
+https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+
+Centering element within div
+https://stackoverflow.com/questions/7560832/how-to-center-a-button-within-a-div
+
+Cloning Arrays
+https://davidwalsh.name/javascript-clone-array
+
+(Maybe) Settimeout For
+https://stackoverflow.com/questions/5226285/settimeout-in-for-loop-does-not-print-consecutive-values
+https://stackoverflow.com/questions/22154129/javascript-settimeout-loops
+
+Input Placeholders 
+https://www.w3schools.com/howto/howto_css_placeholder.asp
+
+Prevent Keyboard Inputs in Forms
+https://stackoverflow.com/questions/23263886/is-there-a-way-to-only-allow-input-using-the-spinner-controls-on-an-input-type

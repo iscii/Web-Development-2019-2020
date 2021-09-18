@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+            Main Menu
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel = "stylesheet" href = "css/menu.css" />
+		<script src = "js/menu.js"></script>
+	</head>
+	<body onload = "initialize()">
+        <div id = "heading">Main Menu</div>
+        <div id = "gameDiv">    
+            <button id = "playButton" onclick = "options()">Play</button>
+            <div id = "optionsDiv">
+                <form hidden id = "inputform">
+                    <div id = "enemy">Enemy</div> <br/>
+                    <img src = "images/rock.png" > <input id = "p2Ari" type = "number" min = "1" max = "25"/>
+                    <img src = "images/paper.png" > <input id = "p2Api" type = "number" min = "1" max = "25"/>
+                    <img src = "images/scissor.png" > <input id = "p2Asi" type = "number" min = "1" max = "25"/>
+
+                    <div id = "player">Player</div> <br/>
+                    <img src = "images/rock.png" > <input id = "p1Ari" type = "number" min = "1" max = "25"/>
+                    <img src = "images/paper.png" > <input id = "p1Api" type = "number" min = "1" max = "25"/>
+                    <img src = "images/scissor.png" > <input id = "p1Asi" type = "number" min = "1" max = "25"/>
+                </form> <br/>
+                <button hidden id = "submit" onclick = "submit()">Set</button> <br/>
+            </div>
+        </div>
+        <div id = "howToDiv">
+            <a id = "howTo" href = "instructions.html">How To Play</a> <br/>
+        </div>
+                
+    </body>
+</html>

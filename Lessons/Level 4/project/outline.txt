@@ -1,0 +1,73 @@
+Outline
+				
+Functionality:
+	>XBasic Tic Tac Toe Functions
+		XX-Start with two player to get a good sense as to how to work the cpu functions
+		>X-click a square to place X or O
+		>X-Player turns alternate every play (play = !play;)
+		>X-Win/Loss system (might not implement yet)
+	>X2-Layer Functions
+		>X-Overriding opponent's plays
+		>X-Delay before cpu play so player can process what is going on and not be spamming
+		>X-Lock a box when a player uses two turns on it
+		>X-A box can be overridden as many times, as long as it's not locked.
+			>X-Make an array holding a value for each grid. The values could be boolean or int (or maybe something fancy with strings lmao)
+				-When a player locks a grid (by playing on it after holding it already), 
+				Make the grid value on the array = false.
+				-Plays can only be made on grids that have a value of true
+			>X-CheckifPlayable function - if not, return.
+		>X-winChecks account for occupied unlocked grids as well.
+		>X-no "tag backs"
+	>XReset Button(s)
+		>X-Reset Game
+			XX-Back to Menu
+	XXMain menu
+		>X-Let player choose to play as X or O (X always starts first).
+			Note: the code for this is messy because I didn't read through the project description properly and include this in the planning. eep
+			
+	
+
+Interface:
+	XXMain Menu
+		>-How to button
+		XX-Play button
+	>XGame Interface
+		>X-Dark
+			-Make sure css values are used in %s so that they are resolution adaptive.
+		XX-Button to Main Menu
+	>XBasic Tic Tac Toe UI
+		>X-3x3 Box
+		>X-X and O
+		>X-Make some kind of indication of wins
+		XX-Chess - like grid coding? (A1, A2, A3, B1, B2, B3, etc...) for the log
+		XX(might require jquery)-images overlay each other
+		>X-Interface that displays who's turn it is
+	>X2-Layer UI
+		>X-Indicate a locked grid - maybe reveal a small lock image.
+	XXLog
+		XX-Log each play
+		XX-Log gridlocks
+
+Enhancements:
+	>>>My Own
+		>>>-Give the player a choice to pass their turn
+		>>>-Tiebreaker: When a tie occurs... (when there is only one unlocked grid left and it's a constant back and forth)
+			-Unlock a random grid, or
+			-Unlock all grids
+	>Intelligent CPU
+		>Aggro:
+			-Prioritize locking
+		>XPassive:
+			-Prioritize taking over player grid plays
+		>Strategic:
+			-Prioritize wins (Specific grid movements)
+
+		>X-(1/10) XX1/3 chance to take over one of your grids
+		>X-(7/10) XX1/3 chance to lock a grid
+		>X-(2/10) XX1/3 chance to play a new grid
+		
+	
+Notes:
+	>X-Name the grid IDs (choose one)
+		XX-by gridCode (A1, B1, C2, etc...)
+		>X-by array number (g1,g2,g3,g4...)

@@ -1,0 +1,156 @@
+body
+{
+    /*background-color: white;*/
+    background-color: #181818;
+}
+
+/*keep the images set to 25% of screen width*/
+img
+{
+    width: 25%;
+}
+.p1dWCounts
+{
+    margin: 0 auto;
+    color: red;
+    width: 100%;
+    font-size: 150%;
+}
+.p2dWCounts
+{
+    margin: 0 auto;
+    color: red;
+    width: 100%;
+    font-size: 150%;
+}
+
+div#p2A
+{
+    border: 3px solid #FC3939;
+    border-radius: 30px;
+    width: 30%;
+    margin-top: 2.25%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: .5%;
+    text-align: center;
+}
+div#p1A
+{
+    position: relative;
+    border: 3px solid #FC3939;
+    border-radius: 30px;
+    width: 30%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: .5%;
+    text-align: center;
+}
+div#c
+{
+    margin: 0 auto;
+    width: 30%;
+    padding: 2% 0 2% 0;
+    text-align: center;
+    
+}
+span#cUIText1
+{
+    color: lightcoral;
+    font-family: Aharoni;
+    font-size: 600%;    
+    vertical-align: middle;      
+    padding-left: 6%;
+}
+img#cBox1
+{
+    border: 2px solid red;
+    border-radius: 30px;
+    display: inline;
+    vertical-align: middle;
+}
+img#cBox2
+{
+    border: 2px solid red;
+    border-radius: 30px;
+    display: inline;
+    vertical-align: middle;
+}
+div#cUIText2
+{
+    color: lightcoral;
+    font-family: Aharoni;
+    text-align: center;
+    font-size: 500%;
+    margin: 0 auto;
+    margin-top: 10%;
+    width: 100%;
+}
+table#log
+{
+    color: rgb(143, 143, 255);
+    border: 2px solid rgb(139, 133, 133);
+    border-radius: 20px;
+    
+    width: 25%;
+
+    padding: 0.5%;
+
+    float: right;
+    margin-right: 2%;
+}
+td
+{
+    border: 2px solid rgb(211, 99, 99);
+    border-radius: 5px;
+    padding-left: 2%;
+    padding-right: 4%;
+    text-align: center;
+}
+div#resetDiv
+{
+    float: right;
+    width: 30%;
+    text-align: center;
+    color: rgba(255, 56, 56, 0.801);
+    font-size: 200%;
+
+}
+button#resetGame
+{
+    color: rgba(255, 56, 56, 0.801);
+    font-family: Tahoma;
+    background: none;
+    border: 1.5px solid rgb(255, 0, 0);
+    border-radius: 10px;
+}
+button#resetLog
+{
+    color: rgba(255, 56, 56, 0.801);
+    font-family: Tahoma;
+    background: none;
+    border: 1.5px solid rgb(255, 0, 0);
+    border-radius: 10px;
+}
+button#resetBoth
+{
+    color: rgba(255, 56, 56, 0.801);
+    font-family: Tahoma;
+    background: none;
+    border: 1.5px solid rgb(255, 0, 0);
+    border-radius: 10px;
+}
+div#indexDiv
+{
+    float: left;
+    width: 30%;
+    text-align: left;
+}
+a#mainMenu
+{
+    color: rgb(99, 99, 241);
+    font-family: Tahome;
+    font-size: 100%;
+    text-decoration: none;
+    padding: 3px;
+}

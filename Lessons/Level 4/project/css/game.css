@@ -1,0 +1,75 @@
+body
+{
+    background-color: #181818;
+}
+
+div#board
+{
+    margin: 0 auto;
+    margin-top: 5%; 
+    width: 45%;
+    text-align: center;
+    padding: 2%;
+}
+.gridBox
+{
+    position: relative;
+}
+.lock
+{
+    position: absolute;
+    bottom: 560%;
+    right: 3%;
+}
+
+div#eventDisplay
+{
+    /* border: 2px solid white; */
+    font-family: Aharoni;
+    font-size: 300%;
+    color: lightcoral;
+    margin: 0 auto;
+    width: 20%;
+    text-align: center;
+}
+
+div#moveSelect
+{
+    /*
+    margin-top: 10.5%;
+    margin-left: 6%;
+    float: left;
+    */
+    margin: 0 auto;
+    margin-top: 15%;
+    text-align: center;
+    width: 20%;
+    color: lightcoral;
+    font-family: Aharoni;
+    font-size: 300%;
+}
+
+button#reset
+{
+    float: right;
+    margin-right: 5%;
+    font-family: Aharoni;
+    font-size: 150%;
+    color: rgb(255, 92, 92);
+    border: 4px solid rgb(255, 92, 92);
+    padding: 0.25%;
+    border-radius: 25%;
+    background: none;
+}
+
+a#instructions
+{
+    margin: 0 auto;
+    width: 45%;
+    text-align: center;
+    margin-top: 15%;
+    font-family: Aharoni;
+    font-size: 150%;
+    color: lightcoral;
+    text-decoration: none;
+}

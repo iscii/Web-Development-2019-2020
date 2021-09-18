@@ -1,0 +1,17 @@
+align text in div (since there are extra elements to include)
+https://www.w3schools.com/css/css_align.asp
+
+adaptive to screen resolution (kinda)
+https://www.smashingmagazine.com/2009/06/smart-fixes-for-fluid-layouts/
+
+assinging multiple style attributes to an html element
+https://stackoverflow.com/questions/31202996/assigning-multiple-styles-on-an-html-element
+
+removing input scroll from forms
+https://css-tricks.com/snippets/css/turn-off-number-input-spinners/
+
+calling href from onclick function
+https://stackoverflow.com/questions/20784560/how-to-call-onclick-and-a-href-in-the-same-time
+
+more of sessionStorage
+https://www.w3schools.com/jsref/prop_win_sessionstorage.asp

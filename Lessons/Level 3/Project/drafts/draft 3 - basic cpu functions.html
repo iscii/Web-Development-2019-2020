@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    </title>
+    <style>
+        body
+        {
+            /*background-color: white;*/
+            background-color: #181818;
+        }
+
+        div#p2A
+        {
+            /*border: 3px solid black;*/
+            border: 3px solid #FC3939;
+            border-radius: 30px;
+            width: 500px;
+			height: 150px;
+            margin-top: 2%;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 25px;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        div#p1A
+        {
+            /*border: 3px solid black;*/
+            border: 3px solid #FC3939;
+            border-radius: 30px;
+            width: 500px;
+			height: 150px;
+            margin-top: 5%;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 25px;
+            text-align: center;
+            line-height: 20px;
+            float: none;
+        }
+
+        div#cUIBox
+        {
+            /*border: 2px solid black;*/
+            text-align: left;
+            padding: 0px 0px 0px 20px;
+            margin-right: 30%;
+            margin-top: 2%;
+
+            float: right;
+
+            width: 325px;
+            height: 100px;
+            padding: 25px;
+        }
+        div#cUIText1
+        {
+            /*border: 2px solid black;*/
+            /*color: darkred;*/
+            color: lightcoral;
+            font-family: Aharoni;
+            font-size: 100px;
+            margin-top: 4%;
+            margin-left: 28%;
+            
+            float: left;
+
+            width: 100px;
+            height: 100px;
+            padding: 25px;
+        }
+        div#cUIText2
+        {
+            border: 2px solid #FC20A0;
+            border-radius: 50px;
+            color: lightcoral;
+            font-family: Aharoni;
+            text-align: center;
+            font-size: 100px;
+            display: block;
+            margin-top: 20%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 400px;
+            height: 40px;
+            padding: 0px 0px 80px 0px;
+        }
+
+    </style>
+    <script src="js/utilities.js"></script>
+    <script>
+
+        function initialize()
+        {
+            iReferences();
+            iVars();
+            iDisplayVars();
+            iFunctions();
+        }
+        function iReferences()
+        {
+            opp1A = document.getElementById("p1A");
+            opp2A = document.getElementById("p2A");
+            opcB1 = document.getElementById("cBox1");
+            opcB2 = document.getElementById("cBox2");
+            opcUIT1 = document.getElementById("cUIText1");
+            opcUIT2 = document.getElementById("cUIText2");
+        }
+        function iVars()
+        {
+            p1play = "";
+            p2play = "";
+            sResult = "";
+            turn = 1;
+            canPlay = true;
+            arsenal = ["rock", "paper", "scissor"];
+        }
+        function iDisplayVars()
+        {
+            opcB1src = "";
+            opcB2src = "";
+            opcUIT1src = "";
+            opcUIT2src = "";
+        }
+        function iFunctions()
+        {
+            
+        }
+        
+        //main controller; manages turns and selections and calls other functions
+        function play(pick)
+        {
+            if (canPlay)
+            {
+                p1play = pick;
+                setTimeout(cpuMove, 1000);
+                canPlay = false;
+            }
+
+            /* 2-player functions
+            //turn remains between 1 and 2.
+            if (turn == 1)
+            {
+                p1play = pick;
+                console.log("p1 " + "[" + p1play + "]");
+                turn++;
+            }
+            else
+            {
+                p2play = pick;
+                console.log("p2 " + "[" + p2play + "]");
+                sResult = shoot(p1play);
+                turn--;
+            }
+            */
+			
+            //disables and enables image onclicks based on turn
+            updateCenterPlayer();
+        }
+
+        //basic cpu function - random move
+        function cpuMove()
+        {
+            //remember to parseInt cos getRandomInteger returns a string
+            var temp = parseInt(getRandomInteger(0, 2));
+            p2play = arsenal[temp];
+			sResult = shoot(p1play);
+			
+			updateCenterCPU();
+            //console.log(temp);
+            //console.log(arsenal[temp]);
+        }
+
+        //returns winner of round
+        function shoot(pick)
+        {
+            var result;
+
+            if (p1play == p2play)
+            {
+                result = "tie";
+                //console.log("tie");
+            }
+            else if (p2play == hierarchy(pick))
+            {
+                result = "P2 win";
+                //console.log("p2 win");
+            }
+            else
+            {
+                result = "P1 win";
+                //console.log("p1 win");
+            }
+
+            //p1play = "";
+            //p2play = "";
+
+            return result;
+        }
+
+        //returns rock-paper-scissor heirarchy according to first player's pick to check if player 2 beat player 1
+        function hierarchy(rps)
+        {
+            var winner;
+
+            if (rps == "rock")
+            {
+                //console.log("rock");
+                winner = "paper";
+            }
+            if (rps == "paper")
+            {
+                //console.log("paper");
+                winner = "scissor";
+            }
+            if (rps == "scissor")
+            {
+                //console.log("scissor");
+                winner = "rock";
+            }
+
+            return winner;
+        }
+
+        //sorry i'm really bad at naming things
+        function updateCenterPlayer()
+        {
+            opcB1src = "images/" + p1play + ".png";
+            opcUIT1src = "P2";
+            opcB2src = opcB2.src;
+            
+            /*
+            //updates image src
+            //check if turn == 2 since player 1 would have gone by the time this is updated
+            if (turn == 2)
+            {
+                opcB1src = "images/" + pick + ".png";
+                opcUIT1src = "P2";
+                //to keep the empty box there since it would set opcB2.src to null without this.
+                opcB2src = opcB2.src;
+                //console.log(opcB1src);
+            }
+            else
+            {
+                opcB2src = "images/" + pick + ".png";
+                opcUIT2src = sResult;
+
+                canPlay = false;
+
+                setTimeout(autoReset, 1000);
+            }
+            */
+
+            display();
+        }
+        function updateCenterCPU()
+        {
+			opcB2src = "images/" + p2play + ".png";
+			console.log(p2play);
+			
+			setTimeout(updateCenterNotif, 500);
+			
+			setTimeout(autoReset, 1500);
+			
+			display();
+		}
+		function updateCenterNotif()
+		{
+			opcUIT2src = sResult;
+			
+			display();
+		}
+            
+        //I feel like I can squeeze this into updateCenter() but I want to use setTimeout and it's more simplified like this
+        function autoReset()
+        {
+            opcB1src = "images/empty.png";
+            opcB2src = "images/empty.png";
+
+            canPlay = true;
+			p1play = "";
+			p2play = "";
+
+            opcUIT1src = "P1";
+            opcUIT2src = "";
+
+            display();
+        }
+
+        function display()
+        {
+            opcB1.src = opcB1src;
+			//console.log(opcB1src);
+            opcB2.src = opcB2src;
+			//console.log(opcB2src);
+            opcUIT1.innerHTML = opcUIT1src;
+            opcUIT2.innerHTML = opcUIT2src;
+        }
+
+    </script>
+</head>
+<body onload="initialize();">
+
+    <div id="p2A">
+        <img src="images/rock.png" width=150 /> &nbsp &nbsp
+        <img src="images/paper.png" width=150 /> &nbsp &nbsp
+        <img src="images/scissor.png" width=150 />
+    </div>
+
+    <div id="cUIText1"> P1 </div>
+    <div id="cUIBox">
+        <img src="images/empty.png" id="cBox1" width="150" /> &nbsp &nbsp
+        <img src="images/empty.png" id="cBox2" width="150" />
+    </div>
+
+    <div id="cUIText2"></div>
+
+    <div id="p1A">
+        <img src="images/rock.png" onclick="play('rock')" width=150 /> &nbsp &nbsp
+        <img src="images/paper.png" onclick="play('paper')" width=150 />  &nbsp &nbsp
+        <img src="images/scissor.png" onclick="play('scissor')" width=150 />
+    </div>
+
+</body>
+</html>

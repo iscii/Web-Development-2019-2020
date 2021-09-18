@@ -1,0 +1,2 @@
+address a situation where the last two players both have two 5's in their hand.
+This is rare but would result in an infinitely long game.

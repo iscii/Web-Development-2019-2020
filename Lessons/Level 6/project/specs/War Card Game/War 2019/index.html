@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>War</title>
+		<link rel = "stylesheet" href = "columns.css" />
+		<link rel = "stylesheet" href = "war.css" />
+		<style></style>
+		<script src = "utilities.js"></script>
+		<script src = "card deck.js"></script>
+		<script src = "war.js"></script>
+		<script>
+			const PLAYER = 0, COMPUTER = 1, WAR = 2;
+			
+			/*
+				initialize
+			*/
+			function initialize()
+			{
+				numPlayerCardsOut = document.getElementById("mycards");
+				numCompCardsOut = document.getElementById("compcards");
+				playerCardImg = document.getElementById("myimg");
+				compCardImg = document.getElementById("compimg");
+				runRoundButton = document.getElementById("roundbtn");
+				logDisplay = document.getElementById("logout");
+				
+				startGame();
+			}
+			
+			/*
+				startGame
+				
+				This function sets up the 2 decks and empties out the log.
+			*/
+			function startGame()
+			{
+				playerDeck = shuffleDeck(generateStandardDeck());
+				computerDeck = playerDeck.splice(0, playerDeck.length / 2);
+				log = "";
+				display();
+			}
+			
+			/*
+				updateLog
+				
+				Generates a string entry for the log based on the result of the round.
+				
+				Parameters
+					result - tells the function what happened.
+					
+				Returns
+					A string that describes the result.
+			*/
+			function updateLog(result)
+			{
+				if (result == PLAYER)
+					return "The left player won the round.";
+					
+				if (result == COMPUTER)
+					return "The right player won the round.";
+					
+				return "There was a war.";
+			}
+
+			/*
+				runRound
+				
+				This function runs a round of the game, drawing a card for each player, comparing their ranks, and handling any wars.
+			*/
+			function runRound()
+			{
+				/*
+					The cards played in the round will be stored in these temporary arrays.  Arrays are necessary in case there are wars.
+				*/
+				var pCards = [], cCards = [];
+				
+				pCards.push(dealCard(playerDeck));
+				cCards.push(dealCard(computerDeck));
+				
+				var tmpLog = "";
+				
+				/*
+					A do...while works the same as a regular while loop except that the code inside the loop will always happen at least once because the condition is not checked until the end of the loop.
+				*/
+				do
+				{
+					tmpLog += "The left player played the " + pCards[pCards.length - 1].cardString + " and the right player played the " + cCards[cCards.length - 1].cardString + ".<br />";
+					
+					//Check the 2 played cards.
+					var result = checkCards(pCards[pCards.length - 1], cCards[cCards.length - 1]);
+					tmpLog += updateLog(result) + "<br />";
+					
+					/*
+						If the cards are of the same rank and the result is a WAR, then each player will deal out 4 more cards, comparing each of their last cards to see who won the war.  If either player does not have enough cards to finish the war, then that player's last card played will be used to determine the outcome.
+					*/
+					if (result == WAR)
+					{
+						for (var i = 0; i < 4; i++)
+						{
+							if (playerDeck.length > 0)
+								pCards.push(dealCard(playerDeck));
+								
+							if (computerDeck.length > 0)
+								cCards.push(dealCard(computerDeck));
+						}
+					}
+				} while(result == WAR);
+				
+				log = tmpLog + "<hr />" + log;
+				display(pCards, cCards);
+				awardCards(result, pCards, cCards);
+				if (checkWinner() >= 0)
+				{
+					log = "THE GAME HAS ENDED<hr />" + log;
+					runRoundButton.disabled = true;
+					display();
+				}
+			}
+			
+			/*
+				display
+				
+				This function handles all of the front end output for the game.
+				
+				Parameters:
+					pCards - the array of cards played by the left player this round.
+					cCards - the array of cards played by the right player this round.
+			*/
+			function display(pCards, cCards)
+			{
+				playerCardImg.innerHTML = "";
+				compCardImg.innerHTML = "";
+				
+				numPlayerCardsOut.innerHTML = playerDeck.length;
+				numCompCardsOut.innerHTML = computerDeck.length;
+				
+				displayCards(pCards, playerCardImg);
+				displayCards(cCards, compCardImg);
+				
+				logDisplay.innerHTML = log;
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<div class = "log">
+			Log
+			<hr />
+			<span id = "logout"></span>
+		</div>
+		
+		<h1>I Declare War</h1>
+		<h1>
+			<button id = "roundbtn" onclick = "runRound()">Run Round</button> 
+			<button onclick = "startGame();">Reset</button>
+		</h1>
+		
+		<div class = "columncontainer">
+			<div class = "column">
+				Cards: <span id = "mycards">26</span><br /> 
+				<img src = "cardimages/back-red-75-3.png" /> 
+				<div id = "myimg"></div>
+			</div>
+
+			<div class = "column">
+				Cards: <span id = "compcards">26</span><br />
+				<img src = "cardimages/back-red-75-3.png" /> 
+				<div id = "compimg"></div>
+			</div>
+		</div>
+	</body>
+</html>

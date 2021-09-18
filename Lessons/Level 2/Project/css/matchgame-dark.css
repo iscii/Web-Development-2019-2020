@@ -1,0 +1,84 @@
+
+body
+{
+    background-color: #181818;
+    text-align: center;
+    line-height: 42px;
+    border-radius: 25px;
+    border: 2px solid #FC3939;
+    width: 1040px;
+    margin: 5px 400px 0px 400px;
+}
+
+h1
+{
+    color: #FC3939;
+    text-align: center;
+    font-family: Andalus;
+}
+
+div#matchBox
+{
+    background-color: #181818;
+    border-radius: 50px;
+    border: 2px solid #FC3939;
+    margin: auto;
+    text-align: center;
+    line-height: 20px;
+    width: 675px;
+    padding: 0px 0px 15px 0px;
+}
+
+button#reset
+{
+    color: #FC3939;
+    background-color: #181818;
+    font-family: Bastion;
+    font-size: 30px;
+    border: white;
+}
+
+div#scoreText
+{
+    color: #FC3939;
+    font-family: Andalus;
+    font-size: 50px;
+    text-align: center;
+    border-bottom: solid;
+    width: 300px;
+    margin: auto;
+    padding: 0px 0px 25px 0px;
+}
+
+div#cpuComment
+{
+    color: #FC3939;
+    border-top: solid #FC3939;
+    font-family: Andalus;
+    font-size: 30px;
+    position: absolute;
+    left: 10px;
+    top: 400px;
+    text-align: left;
+    padding: 20px 0px 10px 20px;
+    width: 350px;
+}
+
+a#mode
+{
+    color: #FC9DF8;
+    font-family: Bastion;
+    font-size: 20px;
+    text-decoration: none;
+    position: absolute;
+    left: 30px;
+    top: 300px;
+}
+
+a#htp
+{
+    color: #FC9DF8;
+    font-family: Bastion;
+    font-size: 18px;
+    text-decoration: none;
+}

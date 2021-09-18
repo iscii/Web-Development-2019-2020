@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+
+    </title>
+	<link rel = "stylesheet" href = "css/2-player style.css"/>
+    <style>
+	
+	</style>
+    <script src="js/utilities.js"></script>
+    <script>
+
+        function initialize()
+        {
+            iReferences();
+            iVars();
+            iDisplayVars();
+            iFunctions();
+        }
+        function iReferences()
+        {
+            opp1A = document.getElementById("p1A");
+            opp2A = document.getElementById("p2A");
+            opcB1 = document.getElementById("cBox1");
+            opcB2 = document.getElementById("cBox2");
+            opcUIT1 = document.getElementById("cUIText1");
+            opcUIT2 = document.getElementById("cUIText2");
+        }
+        function iVars()
+        {
+            p1play = "";
+            p2play = "";
+            sResult = "";
+            turn = 1;
+            canPlay = true;
+        }
+        function iDisplayVars()
+        {
+            opcB1src = "";
+            opcB2src = "";
+            opcUIT1src = "";
+            opcUIT2src = "";
+        }
+        function iFunctions()
+        {
+            setTurn();
+        }
+
+    </script>
+    <script src="js/2-player functions.js"></script>
+</head>
+	<body onload="initialize();">
+
+        <div id="p1A">
+            <img src="images/rock.png" onclick="play('rock')" width=150 /> &nbsp &nbsp
+            <img src="images/paper.png" onclick="play('paper')" width=150 /> &nbsp &nbsp
+            <img src="images/scissor.png" onclick="play('scissor')" width=150 />
+        </div>
+
+        <div id="cUIText1"> P1 </div>
+        <div id="cUIBox">
+            <img src="images/empty.png" id="cBox1" width="150" /> &nbsp &nbsp
+            <img src="images/empty.png" id="cBox2" width="150" />
+        </div>
+
+        <div id="cUIText2"></div>
+
+        <!--disable onclick when vs cpu-->
+        <div id="p2A">
+            <img src="images/rock.png" onclick="play('rock')" width=150 /> &nbsp &nbsp 
+            <img src="images/paper.png" onclick="play('paper')" width=150 />  &nbsp &nbsp 
+            <img src="images/scissor.png" onclick="play('scissor')" width=150 />
+        </div>
+
+	</body>
+</html>

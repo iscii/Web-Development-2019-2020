@@ -1,0 +1,53 @@
+body
+{
+    margin: 0 auto;
+    background-color: #181818;
+    border: 2px solid lightcoral;
+    border-radius: 25px;
+    width: 55%;
+    text-align: center;
+    color: #FC9D9D;
+    padding: 2%;
+}
+
+h1
+{
+    border-bottom: 2px solid lightcoral;
+    width: 55%;
+    margin: 0 auto;
+}
+
+h4
+{
+    border-bottom: 2px solid lightcoral;
+    width: 15%;
+    margin: 0 auto;
+    margin-top: 2%;
+}
+
+div#bodyDiv
+{
+    width: 100%;
+    border-top: 2px solid lightcoral;
+    border-bottom: 2px solid lightcoral;
+    padding-top: 2%;
+    margin-top: 5%;
+    text-align: left;
+    font-family: Aharoni;
+    font-size: 120%;
+    line-height: 240%;
+    color: rgb(47, 171, 187);
+}
+
+.miniHeaders
+{
+    font-size: 150%;
+    color: lightcoral;
+}
+
+a#back
+{
+    color: lightcoral;
+    text-decoration: none;
+    font-family: Aharoni;
+}

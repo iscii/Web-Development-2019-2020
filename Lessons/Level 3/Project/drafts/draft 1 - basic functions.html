@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>	
+		
+		</title>
+		<style>
+
+		    div#p1A{
+                border:3px solid black;
+                border-radius:30px;
+                width:500px;
+                margin-top:5%;
+                margin-right:auto;
+                margin-left:auto;
+                padding:25px 25px 25px 25px;
+                text-align:center;
+                line-height:20px;
+		    }
+            div#p2A{
+                border:3px solid black;
+                border-radius:30px;
+                width:500px;
+                margin-top:20%;
+                margin-right:auto;
+                margin-left:auto;
+                padding:25px 25px 25px 25px;
+                text-align:center;
+                line-height:20px; 
+            }
+
+		</style>
+        <script src="js/utilities.js"></script>
+		<script>
+
+            function initialize()
+            {
+                opp1A = document.getElementById("p1A");
+                opp2A = document.getElementById("p2A");
+                opr1 = document.getElementById("rock1");
+                opp1 = document.getElementById("paper1");
+                ops1 = document.getElementById("scissor1");
+                opr2 = document.getElementById("rock2");
+                opp2 = document.getElementById("paper2");
+                ops2 = document.getElementById("scissor2");
+
+
+                p1play = "";
+                p2play = "";
+                turn = 1;
+                arsenal = ["rock", "paper", "scissor"];
+                
+				/* rps idea #1
+                rock = 1
+                paper = 2
+                scissor = [0, 3];
+				*/
+
+                setTurn();
+            }
+
+            //-------------------------------------------------------------------------
+            //bool to determine if starting or not
+            function setTurn()
+            {
+                if (turn == 1)
+                {
+                    opp1A.style.pointerEvents = 'auto';
+                    opp2A.style.pointerEvents = 'none';
+
+                    console.log("p1's turn");
+                }
+                else if (turn == 2)
+                {
+                    opp2A.style.pointerEvents = 'auto';
+                    opp1A.style.pointerEvents = 'none';
+
+                    console.log("p2's turn");
+                }
+            }
+
+            /*
+            //single-use functions for simplification -- enables/disables image onclicks *TRASHED*
+            function p1turn()
+            {
+                opp1A.style.pointerEvents = 'auto';
+
+                opp2A.style.pointerEvents = 'none';
+
+                ditched cos no workie
+                opr2.onclick = null;
+                opp2.onclick = null;
+                ops2.onclick = null;
+
+                opr1.onclick = "play('rock')";
+                opp1.onclick = "play('paper')";
+                ops1.onclick = "play('scissor')";
+                
+            }
+            
+            function p2turn()
+            {
+                opp2A.style.pointerEvents = 'auto';
+
+                opp1A.style.pointerEvents = 'none';
+
+                
+                opr1.onclick = null;
+                opp1.onclick = null;
+                ops1.onclick = null;
+
+                opr2.onclick = "play('rock')";
+                opp2.onclick = "play('paper')";
+                ops2.onclick = "play('scissor')";
+                
+            }
+            */
+            //--------------------------------------------------------------------------
+
+            function play(pick)
+            {
+                //turn remains between 1 and 2.
+                if (turn == 1)
+                {
+                    p1play = pick;
+                    console.log("p1 " + "[" + p1play + "]");
+                    turn++;
+                }
+                else
+                {
+                    p2play = pick;
+                    console.log("p2 " + "[" + p2play + "]");
+                    shoot(p1play);
+                    turn--;
+                }
+
+                setTurn();
+            }
+
+            function shoot(pick)
+            {
+                var result;
+                //arsenal[1] 
+
+                if (p1play == p2play)
+                {
+                    result = "tie";
+                    console.log("tie");
+                }
+                else if (p2play == hierarchy(pick))
+                {
+                    result = "p2 win";
+                    console.log("p2 win");
+                }
+                else
+                {
+                    result = "p1 win";
+                    console.log("hierarchy = " + hierarchy(pick));
+                    //console.log("p1 " + "[" + p2play + "]");
+                    //console.log("p2 " + "[" + p1play + "]");
+                    console.log("p1 win");
+                }
+
+                p1play = "";
+                p2play = "";
+
+                return result;
+            }
+			
+			function hierarchy(rps)
+			{
+				var result;
+				
+				if(rps == "rock")
+				{
+                    //console.log("rock");
+                    result = "paper";
+				}
+				if(rps == "paper")
+				{
+                    //console.log("paper");
+                    result = "scissor";
+				}
+				if(rps == "scissor")
+				{
+                    //console.log("scissor");
+                    result = "rock";
+                }
+
+                return result;
+			}
+
+		</script>
+	</head>
+	<body onload="initialize();">
+
+        <div id="p1A">
+            <img src="images/rock.png" id="rock1" onclick="play('rock')" width=150 /> &nbsp &nbsp
+            <img src="images/paper.png" id="paper1" onclick="play('paper')" width=150 /> &nbsp &nbsp
+            <img src="images/scissor.png" id="scissor1" onclick="play('scissor')" width=150 />
+        </div>
+
+        <br/><br/>
+
+        <!--disable onclick when vs cpu-->
+        <div id="p2A">
+            <img src="images/rock.png" id="rock2" onclick="play('rock')" width=150 /> &nbsp &nbsp 
+            <img src="images/paper.png" id="paper2" onclick="play('paper')" width=150 />  &nbsp &nbsp 
+            <img src="images/scissor.png" id="scissor2" onclick="play('scissor')" width=150 />
+        </div>
+
+	</body>
+</html>

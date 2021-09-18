@@ -1,0 +1,35 @@
+body
+{
+    background-color: #181818;
+}
+
+div#board
+{
+    /*border: 2px solid white;*/
+    margin: 0 auto;
+    margin-top: 6%; 
+    width: 45%;
+    text-align: center;
+    padding: 2%;
+    /*position: relative;*/
+}
+/*
+.grids
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+*/
+.gridBox
+{
+    position: relative;
+    /*border: 2px solid white;*/
+}
+
+.lock
+{
+    position: absolute;
+    bottom: -2px;
+    right: 2px;
+}
