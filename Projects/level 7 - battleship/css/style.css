@@ -78,6 +78,8 @@ body{
 ::-webkit-scrollbar-track{
     background: #181818;
     border-radius: 15px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 ::-webkit-scrollbar-thumb{
     background: #888;
@@ -157,9 +159,12 @@ a{
     border-radius: 50px;
     background: rgb(17, 17, 17);
     font-family: Lakehurst Gothic;
+    overflow-y: scroll;
     margin-left: 20%;
+    margin-top: 25px;
     padding: 2%;
     width: 70%;
+    height: 85%;
 }
 .bigtext{
     font-size: 110%;

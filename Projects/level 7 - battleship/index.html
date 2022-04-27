@@ -36,6 +36,7 @@
 				padding-top: .5%;
 				padding-bottom: .5%;
 				text-align: left;
+				overflow-y: scroll;
 			}
 			.bigtext{
 				font-size: 130%;
@@ -83,6 +84,27 @@
 			}
 			button:focus{
 				outline: 0; /*removes blue focus outline*/
+			}
+			::-webkit-scrollbar{ /*scrollbar customization (taken from project 5)*/
+				width: 10px;
+				height: 10px;
+			}
+			::-webkit-scrollbar-track{
+				background: #181818;
+				border-radius: 15px;
+				margin-top: 25px;
+				margin-bottom: 25px;
+			}
+			::-webkit-scrollbar-thumb{
+				background: #888;
+				border-radius: 15px;
+			}
+			::-webkit-scrollbar-thumb:hover{
+				background: #555;
+			}
+			::-webkit-scrollbar-corner{
+				background: #181818;
+				border-radius: 15px;
 			}
 		</style>
 		<script>
