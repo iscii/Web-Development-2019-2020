@@ -1,4 +1,4 @@
-const arsenal = ["Rock", "Paper", "Scissor"];
+const arsenal = ["rock", "paper", "scissor"];
 
 function initialize()
 {
@@ -427,15 +427,15 @@ function hierarchy(rps)
 {
     var winner;
 
-    if (rps == "Rock")
+    if (rps == "rock")
     {
         winner = "Paper";
     }
-    if (rps == "Paper")
+    if (rps == "paper")
     {
         winner = "Scissor";
     }
-    if (rps == "Scissor")
+    if (rps == "scissor")
     {
         winner = "Rock";
     }
@@ -446,11 +446,11 @@ function hierarchy(rps)
 /*Returns the position of a pick from the arsenal in order to subtract the weapon counts.*/
 function aWeaponPosition(pick)
 {
-    if(pick == "Rock")
+    if(pick == "rock")
         return 0;
-    if(pick == "Paper")
+    if(pick == "paper")
         return 1;
-    if(pick == "Scissor")
+    if(pick == "scissor")
         return 2;
 }
 
